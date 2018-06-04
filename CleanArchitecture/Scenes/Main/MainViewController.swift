@@ -17,6 +17,16 @@ final class MainViewController: UIViewController, BindableType {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configView()
+    }
+    
+    private func configView() {
+        tableView.do {
+            $0.estimatedRowHeight = 550
+            $0.rowHeight = UITableViewAutomaticDimension
+            $0.register(cellType: MenuCell.self)
+            $0.delegate = self
+        }
     }
 
     deinit {
@@ -24,8 +34,24 @@ final class MainViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
-        let input = MainViewModel.Input()
+        let input = MainViewModel.Input(
+            loadTrigger: Driver.just(()),
+            selectMenuTrigger: tableView.rx.itemSelected.asDriver()
+        )
         let output = viewModel.transform(input)
+        output.menuList
+            .drive(tableView.rx.items) { tableView, index, menu in
+                return tableView.dequeueReusableCell(
+                    for: IndexPath(row: index, section: 0),
+                    cellType: MenuCell.self)
+                    .then {
+                        $0.configView(with: menu)
+                }
+            }
+            .disposed(by: rx.disposeBag)
+        output.selectedMenu
+            .drive()
+            .disposed(by: rx.disposeBag)
     }
 
 }
@@ -34,3 +60,11 @@ final class MainViewController: UIViewController, BindableType {
 extension MainViewController: StoryboardSceneBased {
     static var sceneStoryboard = Storyboards.main
 }
+
+// MARK: - UITableViewDelegate
+extension MainViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+

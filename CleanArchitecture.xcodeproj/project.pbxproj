@@ -42,6 +42,9 @@
 		172DC29620C53E5D009FC881 /* AppUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172DC29320C53E5D009FC881 /* AppUseCaseMock.swift */; };
 		172DC29820C53FF4009FC881 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172DC29720C53FF4009FC881 /* Storyboards.swift */; };
 		172DC29A20C5477F009FC881 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172DC29920C5477F009FC881 /* Main.storyboard */; };
+		172DC2A120C555A1009FC881 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172DC29F20C555A1009FC881 /* MenuCell.swift */; };
+		172DC2A220C555A1009FC881 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 172DC2A020C555A1009FC881 /* MenuCell.xib */; };
+		172DC2A420C55674009FC881 /* MenuCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172DC2A320C55674009FC881 /* MenuCellTests.swift */; };
 		3A2E02F187E8710B78B5E231 /* Pods_CleanArchitectureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5FD8603288973AA5E739DF2 /* Pods_CleanArchitectureTests.framework */; };
 		47C2C4AB2C7FDC58DF2C2E07 /* Pods_CleanArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD71CA6A0F61765728AEC51B /* Pods_CleanArchitecture.framework */; };
 /* End PBXBuildFile section */
@@ -98,6 +101,9 @@
 		172DC29320C53E5D009FC881 /* AppUseCaseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUseCaseMock.swift; sourceTree = "<group>"; };
 		172DC29720C53FF4009FC881 /* Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 		172DC29920C5477F009FC881 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		172DC29F20C555A1009FC881 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		172DC2A020C555A1009FC881 /* MenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
+		172DC2A320C55674009FC881 /* MenuCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCellTests.swift; sourceTree = "<group>"; };
 		1B56A7B3E25D78F505421566 /* Pods-CleanArchitectureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitectureTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitectureTests/Pods-CleanArchitectureTests.release.xcconfig"; sourceTree = "<group>"; };
 		24453F7014456B10492E9F99 /* Pods-CleanArchitecture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitecture.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitecture/Pods-CleanArchitecture.release.xcconfig"; sourceTree = "<group>"; };
 		5E4085BD6F7B046C5AF86A7D /* Pods-CleanArchitectureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitectureTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitectureTests/Pods-CleanArchitectureTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -158,6 +164,7 @@
 		172DC22720C4DDF9009FC881 /* CleanArchitecture */ = {
 			isa = PBXGroup;
 			children = (
+				172DC29B20C54FF3009FC881 /* Entities */,
 				172DC24820C51987009FC881 /* Architecture */,
 				172DC27220C5333F009FC881 /* Scenes */,
 				172DC22820C4DDF9009FC881 /* AppDelegate.swift */,
@@ -265,6 +272,7 @@
 		172DC27A20C53D74009FC881 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				172DC29E20C5554D009FC881 /* View */,
 				172DC27E20C53DB1009FC881 /* MainNavigator.swift */,
 				172DC27D20C53DB0009FC881 /* MainUseCase.swift */,
 				172DC27B20C53DB0009FC881 /* MainViewController.swift */,
@@ -299,9 +307,26 @@
 				172DC28C20C53E4F009FC881 /* MainNavigatorMock.swift */,
 				172DC28A20C53E4F009FC881 /* MainUseCaseMock.swift */,
 				172DC28920C53E4F009FC881 /* MainViewControllerTests.swift */,
+				172DC2A320C55674009FC881 /* MenuCellTests.swift */,
 				172DC28B20C53E4F009FC881 /* MainViewModelTests.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		172DC29B20C54FF3009FC881 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		172DC29E20C5554D009FC881 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				172DC29F20C555A1009FC881 /* MenuCell.swift */,
+				172DC2A020C555A1009FC881 /* MenuCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		AB3DC3B869CF06A149B17C0D /* Pods */ = {
@@ -401,6 +426,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				172DC2A220C555A1009FC881 /* MenuCell.xib in Resources */,
 				172DC23320C4DDFA009FC881 /* LaunchScreen.storyboard in Resources */,
 				172DC29A20C5477F009FC881 /* Main.storyboard in Resources */,
 				172DC23020C4DDFA009FC881 /* Assets.xcassets in Resources */,
@@ -542,6 +568,7 @@
 				172DC28520C53DFA009FC881 /* UIViewController+Debug.swift in Sources */,
 				172DC25F20C51987009FC881 /* ActivityIndicator.swift in Sources */,
 				172DC26220C51987009FC881 /* Page.swift in Sources */,
+				172DC2A120C555A1009FC881 /* MenuCell.swift in Sources */,
 				172DC25D20C51987009FC881 /* ErrorTracker.swift in Sources */,
 				172DC26320C51987009FC881 /* DelegateTransporter.m in Sources */,
 				172DC27020C51C8A009FC881 /* EmptyDataView.swift in Sources */,
@@ -564,6 +591,7 @@
 				172DC28E20C53E4F009FC881 /* MainUseCaseMock.swift in Sources */,
 				172DC28D20C53E4F009FC881 /* MainViewControllerTests.swift in Sources */,
 				172DC29420C53E5D009FC881 /* AppViewModelTests.swift in Sources */,
+				172DC2A420C55674009FC881 /* MenuCellTests.swift in Sources */,
 				172DC29520C53E5D009FC881 /* AppNavigatorMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
