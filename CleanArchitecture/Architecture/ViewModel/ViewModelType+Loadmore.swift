@@ -61,7 +61,7 @@ extension ViewModelType {
                 .withLatestFrom(loadingOrLoadingMore)
                 .filter { !$0 }
                 .withLatestFrom(pageSubject.asDriverOnErrorJustComplete())
-                .filter { !$0.items.isEmpty }
+                .filter { _ in !pageSubject.value.items.isEmpty }
                 .map { $0.page }
                 .flatMapLatest { page in
                     loadMoreItems(page + 1)

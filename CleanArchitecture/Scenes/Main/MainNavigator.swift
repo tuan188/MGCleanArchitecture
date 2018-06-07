@@ -9,6 +9,7 @@
 protocol MainNavigatorType {
     func toLogin()
     func toProducts()
+    func toSectionedProducts()
 }
 
 struct MainNavigator: MainNavigatorType {
@@ -22,4 +23,10 @@ struct MainNavigator: MainNavigatorType {
         let navigator = ProductsNavigator(navigationController: navigationController)
         navigator.toProducts()
     }
+    
+    func toSectionedProducts() {
+        let navigator = SectionedProductsNavigator(navigationController: navigationController)
+        navigator.toSectionedProducts()
+    }
 }
+

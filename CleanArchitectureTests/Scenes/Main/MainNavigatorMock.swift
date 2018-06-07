@@ -22,5 +22,11 @@ final class MainNavigatorMock: MainNavigatorType {
         toProducts_Called = true
     }
     
+    // MARK: - toSectionedProducts
+    var toSectionedProducts_Called = false
+    func toSectionedProducts() {
+        toSectionedProducts_Called = true
+    }
+    
 }
 

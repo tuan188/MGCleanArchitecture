@@ -41,6 +41,8 @@ struct MainViewModel: ViewModelType {
                     self.navigator.toLogin()
                 case .products:
                     self.navigator.toProducts()
+                case .sectionedProducts:
+                    self.navigator.toSectionedProducts()
                 }
             })
             .mapToVoid()
@@ -55,6 +57,7 @@ extension MainViewModel {
     enum Menu: Int, CustomStringConvertible {
         case login
         case products
+        case sectionedProducts
         
         var description: String {
             switch self {
@@ -62,9 +65,11 @@ extension MainViewModel {
                 return "Login"
             case .products:
                 return "Product list"
+            case .sectionedProducts:
+                return "Sectioned product list"
             }
         }
         
-        static var all: [Menu] = [.login, .products]
+        static var all: [Menu] = [.login, .products, .sectionedProducts]
     }
 }
