@@ -8,7 +8,7 @@ class TableLoadingView: UIView, NibLoadable {
     
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     
-    var isLoading = Variable(false)
+    var isLoading = BehaviorRelay(value: false)
     
     override func awakeFromNib() {
         super.awakeFromNib()

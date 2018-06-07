@@ -36,7 +36,7 @@ DEPENDENCIES:
   - ActionSheetPicker-3.0 (~> 2.3)
   - MBProgressHUD (~> 1.1)
   - "NSObject+Rx (~> 4.3)"
-  - ObjectMapper (~> 3.0)
+  - ObjectMapper (~> 3.2)
   - OrderedSet (= 3.0)
   - Reusable (~> 4.0)
   - RxAlamofire (~> 4.2)
@@ -85,6 +85,6 @@ SPEC CHECKSUMS:
   Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
   Validator: bf211c1d71b3f910d230c09c70e62429d0fef63a
 
-PODFILE CHECKSUM: 21b9c61dfe70a9ec9ff27710898770ef6f18667a
+PODFILE CHECKSUM: e5734a4b2474418b838c84dae9806d2e6c516d8f
 
 COCOAPODS: 1.5.0

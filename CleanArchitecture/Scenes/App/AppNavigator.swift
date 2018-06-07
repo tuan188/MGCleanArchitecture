@@ -14,12 +14,12 @@ struct AppNavigator: AppNavigatorType {
     unowned let window: UIWindow
     
     func toMain() {
-        let navigator = MainNavigator()
+        let vc = MainViewController.instantiate()
+        let nav = UINavigationController(rootViewController: vc)
+        let navigator = MainNavigator(navigationController: nav)
         let useCase = MainUseCase()
         let vm = MainViewModel(navigator: navigator, useCase: useCase)
-        let vc = MainViewController.instantiate()
         vc.bindViewModel(to: vm)
-        let nav = UINavigationController(rootViewController: vc)
         window.rootViewController = nav
     }
 }

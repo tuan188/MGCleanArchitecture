@@ -22,8 +22,7 @@ final class MainViewController: UIViewController, BindableType {
     
     private func configView() {
         tableView.do {
-            $0.estimatedRowHeight = 550
-            $0.rowHeight = UITableViewAutomaticDimension
+            $0.rowHeight = 60
             $0.register(cellType: MenuCell.self)
             $0.delegate = self
         }

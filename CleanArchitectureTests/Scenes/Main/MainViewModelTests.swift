@@ -48,15 +48,15 @@ final class MainViewModelTests: XCTestCase {
         XCTAssertEqual(menuList??.count, MainViewModel.Menu.all.count)
     }
     
-    func test_selectMenuTriggerInvoked_() {
-        // arrange
-        
-        
+    func test_selectMenuTriggerInvoked_toProductList() {
         // act
-        
+        loadTrigger.onNext(())
+        let index = MainViewModel.Menu.products.rawValue
+        let indexPath = IndexPath(row: index, section: 0)
+        selectMenuTrigger.onNext(indexPath)
         
         // assert
-        XCTAssert(true)
+        XCTAssert(navigator.toProducts_Called)
     }
     
 }

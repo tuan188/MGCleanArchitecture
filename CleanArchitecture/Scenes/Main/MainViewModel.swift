@@ -15,7 +15,7 @@ struct MainViewModel: ViewModelType {
     
     struct Output {
         let menuList: Driver<[MenuModel]>
-        let selectedMenu: Driver<MenuModel>
+        let selectedMenu: Driver<Void>
     }
     
     struct MenuModel {
@@ -30,9 +30,23 @@ struct MainViewModel: ViewModelType {
             .map {
                 Menu.all.map { MenuModel(menu: $0) }
             }
+        let selectedMenu = input.selectMenuTrigger
+            .withLatestFrom(menuList) { indexPath, menuList in
+                menuList[indexPath.row]
+            }
+            .map { $0.menu }
+            .do(onNext: { menu in
+                switch menu {
+                case .login:
+                    self.navigator.toLogin()
+                case .products:
+                    self.navigator.toProducts()
+                }
+            })
+            .mapToVoid()
         return Output(
             menuList: menuList,
-            selectedMenu: Driver.empty()
+            selectedMenu: selectedMenu
         )
     }
 }

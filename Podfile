@@ -2,7 +2,7 @@ platform :ios, '9.0'
 
 def pods
     # Core
-    pod 'ObjectMapper', '~> 3.0'
+    pod 'ObjectMapper', '~> 3.2'
     pod 'Reusable', '~> 4.0'
     pod 'Then', '~> 2.3'
     

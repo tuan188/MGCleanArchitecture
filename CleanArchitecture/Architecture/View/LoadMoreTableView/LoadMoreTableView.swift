@@ -23,7 +23,7 @@ final class LoadMoreTableView: BaseLoadMoreTableView {
     
     var loadingMore: Binder<Bool> {
         return Binder(self) { tableView, loading in
-            tableView.loadingMoreView.isLoading.value = loading
+            tableView.loadingMoreView.isLoading.accept(loading)
         }
     }
     

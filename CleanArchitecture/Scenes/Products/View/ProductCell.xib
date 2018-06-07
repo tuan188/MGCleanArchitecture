@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="77" id="KGk-i7-Jjw" customClass="ProductCell" customModule="CleanArchitecture" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="286" height="76.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PTZ-T8-NFY">
+                        <rect key="frame" x="24" y="14" width="204" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6p-a9-5fe">
+                        <rect key="frame" x="24" y="43" width="35" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Awh-N5-nNg">
+                        <rect key="frame" x="236" y="23" width="40" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="WBZ-9I-IsP"/>
+                            <constraint firstAttribute="height" constant="30" id="YGE-qd-yyG"/>
+                        </constraints>
+                        <state key="normal" title="Edit"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Awh-N5-nNg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="1so-lD-KW0"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Awh-N5-nNg" secondAttribute="trailing" constant="2" id="5IW-3Y-srb"/>
+                    <constraint firstItem="c6p-a9-5fe" firstAttribute="leading" secondItem="PTZ-T8-NFY" secondAttribute="leading" id="iGf-ZH-c8g"/>
+                    <constraint firstItem="c6p-a9-5fe" firstAttribute="top" secondItem="PTZ-T8-NFY" secondAttribute="bottom" constant="8" id="pSk-6z-Nqs"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="c6p-a9-5fe" secondAttribute="bottom" constant="5" id="sDw-fP-JCr"/>
+                    <constraint firstItem="Awh-N5-nNg" firstAttribute="leading" secondItem="PTZ-T8-NFY" secondAttribute="trailing" constant="8" id="tJF-fu-24A"/>
+                    <constraint firstItem="PTZ-T8-NFY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="uv2-AA-adq"/>
+                    <constraint firstItem="PTZ-T8-NFY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="w8g-qq-fGf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="editButton" destination="Awh-N5-nNg" id="lw4-p2-Ars"/>
+                <outlet property="nameLabel" destination="PTZ-T8-NFY" id="BOL-sV-eV8"/>
+                <outlet property="priceLabel" destination="c6p-a9-5fe" id="qc8-Mp-Qj0"/>
+            </connections>
+            <point key="canvasLocation" x="38" y="70.5"/>
+        </tableViewCell>
+    </objects>
+</document>
