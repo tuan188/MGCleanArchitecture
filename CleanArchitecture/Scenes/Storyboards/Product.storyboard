@@ -72,6 +72,37 @@
             </objects>
             <point key="canvasLocation" x="825" y="910"/>
         </scene>
+        <!--Product Detail-->
+        <scene sceneID="PEw-QL-IYP">
+            <objects>
+                <viewController storyboardIdentifier="ProductDetailViewController" id="cet-T2-eCA" customClass="ProductDetailViewController" customModule="CleanArchitecture" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Tse-iU-Shx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="EKi-DJ-2us">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="EKi-DJ-2us" firstAttribute="leading" secondItem="WI8-lC-fOI" secondAttribute="leading" id="dgj-dI-IZ2"/>
+                            <constraint firstItem="EKi-DJ-2us" firstAttribute="top" secondItem="WI8-lC-fOI" secondAttribute="top" id="gQA-KC-HJ3"/>
+                            <constraint firstItem="WI8-lC-fOI" firstAttribute="trailing" secondItem="EKi-DJ-2us" secondAttribute="trailing" id="jaM-Zb-xeD"/>
+                            <constraint firstItem="WI8-lC-fOI" firstAttribute="bottom" secondItem="EKi-DJ-2us" secondAttribute="bottom" id="plX-Fe-MUo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WI8-lC-fOI"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Product Detail" id="up4-sQ-Kea"/>
+                    <connections>
+                        <outlet property="tableView" destination="EKi-DJ-2us" id="QZI-Va-Dum"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P6x-jN-D1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="825" y="1635"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="1Oe-MR-n7h">
             <objects>
@@ -107,6 +138,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HtN-Pn-pAh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-119" y="910"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="puN-Kk-Ksl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kAV-6O-heN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DKt-O1-o4h">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="cet-T2-eCA" kind="relationship" relationship="rootViewController" id="IxQ-qF-zwA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HBm-AA-hdQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-114" y="1635"/>
         </scene>
     </scenes>
 </document>

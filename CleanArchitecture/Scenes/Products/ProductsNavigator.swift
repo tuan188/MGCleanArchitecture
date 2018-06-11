@@ -13,6 +13,7 @@ protocol ProductsNavigatorType {
 
 struct ProductsNavigator: ProductsNavigatorType {
     unowned let navigationController: UINavigationController
+    
     func toProducts() {
         let vc = ProductsViewController.instantiate()
         let vm = ProductsViewModel(navigator: self, useCase: ProductsUseCase())
@@ -21,7 +22,12 @@ struct ProductsNavigator: ProductsNavigatorType {
     }
 
     func toProductDetail(product: Product) {
-
+        let navigator = ProductDetailNavigator()
+        let useCase = ProductDetailUseCase()
+        let vm = ProductDetailViewModel(navigator: navigator, useCase: useCase, product: product)
+        let vc = ProductDetailViewController.instantiate()
+        vc.bindViewModel(to: vm)
+        navigationController.pushViewController(vc, animated: true)
     }
 }
 
