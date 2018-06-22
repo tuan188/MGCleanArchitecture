@@ -22,7 +22,8 @@ struct SectionedProductsNavigator: SectionedProductsNavigatorType {
     }
 
     func toProductDetail(product: Product) {
-
+        let navigator = StaticProductDetailNavigator(navigationController: navigationController)
+        navigator.toStaticProductDetail(product: product)
     }
 }
 

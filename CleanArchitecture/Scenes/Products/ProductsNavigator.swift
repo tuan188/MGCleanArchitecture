@@ -22,12 +22,8 @@ struct ProductsNavigator: ProductsNavigatorType {
     }
 
     func toProductDetail(product: Product) {
-        let navigator = ProductDetailNavigator()
-        let useCase = ProductDetailUseCase()
-        let vm = ProductDetailViewModel(navigator: navigator, useCase: useCase, product: product)
-        let vc = ProductDetailViewController.instantiate()
-        vc.bindViewModel(to: vm)
-        navigationController.pushViewController(vc, animated: true)
+        let navigator = ProductDetailNavigator(navigationController: navigationController)
+        navigator.toProductDetail(product: product)
     }
 }
 
