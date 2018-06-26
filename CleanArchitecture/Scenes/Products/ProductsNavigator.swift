@@ -9,6 +9,7 @@
 protocol ProductsNavigatorType {
     func toProducts()
     func toProductDetail(product: Product)
+    func toEditProduct(_ product: Product) -> Driver<EditProductDelegate>
 }
 
 struct ProductsNavigator: ProductsNavigatorType {
@@ -24,6 +25,20 @@ struct ProductsNavigator: ProductsNavigatorType {
     func toProductDetail(product: Product) {
         let navigator = ProductDetailNavigator(navigationController: navigationController)
         navigator.toProductDetail(product: product)
+    }
+    
+    func toEditProduct(_ product: Product) -> Driver<EditProductDelegate> {
+        let vc = EditProductViewController.instantiate()
+        let nav = UINavigationController(rootViewController: vc)
+        let navigator = EditProductNavigator(navigationController: nav)
+        let delegate = PublishSubject<EditProductDelegate>()
+        let vm = EditProductViewModel(navigator: navigator,
+            useCase: EditProductUseCase(),
+            product: product,
+            delegate: delegate)
+        vc.bindViewModel(to: vm)
+        navigationController.present(nav, animated: true, completion: nil)
+        return delegate.asDriverOnErrorJustComplete()
     }
 }
 

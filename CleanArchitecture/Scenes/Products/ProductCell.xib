@@ -39,6 +39,9 @@
                             <constraint firstAttribute="height" constant="30" id="YGE-qd-yyG"/>
                         </constraints>
                         <state key="normal" title="Edit"/>
+                        <connections>
+                            <action selector="edit:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Da7-Po-z4G"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

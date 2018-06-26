@@ -12,6 +12,7 @@ struct ProductsViewModel: ViewModelType {
         let reloadTrigger: Driver<Void>
         let loadMoreTrigger: Driver<Void>
         let selectProductTrigger: Driver<IndexPath>
+        let editProductTrigger: Driver<IndexPath>
     }
 
     struct Output {
@@ -22,6 +23,7 @@ struct ProductsViewModel: ViewModelType {
         let fetchItems: Driver<Void>
         let productList: Driver<[ProductModel]>
         let selectedProduct: Driver<Void>
+        let editedProduct: Driver<Void>
         let isEmptyData: Driver<Bool>
     }
 
@@ -57,6 +59,26 @@ struct ProductsViewModel: ViewModelType {
                 self.navigator.toProductDetail(product: product.product)
             })
             .mapToVoid()
+        
+        let editedProduct = input.editProductTrigger
+            .withLatestFrom(productList) { indexPath, products -> Product in
+                return products[indexPath.row].product
+            }
+            .flatMapLatest { product -> Driver<EditProductDelegate> in
+                self.navigator.toEditProduct(product)
+            }
+            .do(onNext: { delegate in
+                switch delegate {
+                case .updatedProduct(let product):
+                    let productList = page.value.items
+                    if let index = productList.index(of: product) {
+                        productList[index] = product
+                        let updatedPage = PagingInfo(page: page.value.page, items: productList)
+                        page.accept(updatedPage)
+                    }
+                }
+            })
+            .mapToVoid()
 
         let isEmptyData = Driver.combineLatest(productList, loading)
             .filter { !$0.1 }
@@ -70,6 +92,7 @@ struct ProductsViewModel: ViewModelType {
             fetchItems: fetchItems,
             productList: productList,
             selectedProduct: selectedProduct,
+            editedProduct: editedProduct,
             isEmptyData: isEmptyData
         )
     }

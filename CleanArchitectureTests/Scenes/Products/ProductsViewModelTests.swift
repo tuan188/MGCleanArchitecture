@@ -22,6 +22,7 @@ final class ProductsViewModelTests: XCTestCase {
     private let reloadTrigger = PublishSubject<Void>()
     private let loadMoreTrigger = PublishSubject<Void>()
     private let selectProductTrigger = PublishSubject<IndexPath>()
+    private let editProductTrigger = PublishSubject<IndexPath>()
 
     override func setUp() {
         super.setUp()
@@ -33,7 +34,8 @@ final class ProductsViewModelTests: XCTestCase {
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete(),
             reloadTrigger: reloadTrigger.asDriverOnErrorJustComplete(),
             loadMoreTrigger: loadMoreTrigger.asDriverOnErrorJustComplete(),
-            selectProductTrigger: selectProductTrigger.asDriverOnErrorJustComplete()
+            selectProductTrigger: selectProductTrigger.asDriverOnErrorJustComplete(),
+            editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete()
         )
         output = viewModel.transform(input)
         output.error.drive().disposed(by: disposeBag)
@@ -44,6 +46,7 @@ final class ProductsViewModelTests: XCTestCase {
         output.productList.drive().disposed(by: disposeBag)
         output.selectedProduct.drive().disposed(by: disposeBag)
         output.isEmptyData.drive().disposed(by: disposeBag)
+        output.editedProduct.drive().disposed(by: disposeBag)
     }
 
     func test_loadTriggerInvoked_getProductList() {
@@ -199,6 +202,15 @@ final class ProductsViewModelTests: XCTestCase {
 
         // assert
         XCTAssert(navigator.toProductDetail_Called)
+    }
+    
+    func test_editProductTriggerInvoked_editProduct() {
+        // act
+        loadTrigger.onNext(())
+        editProductTrigger.onNext(IndexPath(row: 0, section: 0))
+
+        // assert
+        XCTAssert(navigator.toEditProduct_Called)
     }
 }
 

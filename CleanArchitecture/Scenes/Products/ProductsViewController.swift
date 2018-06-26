@@ -12,6 +12,8 @@ import Reusable
 final class ProductsViewController: UIViewController, BindableType {
     @IBOutlet weak var tableView: LoadMoreTableView!
     var viewModel: ProductsViewModel!
+    
+    fileprivate var editProductTrigger = PublishSubject<IndexPath>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +38,20 @@ final class ProductsViewController: UIViewController, BindableType {
             loadTrigger: Driver.just(()),
             reloadTrigger: tableView.refreshTrigger,
             loadMoreTrigger: tableView.loadMoreTrigger,
-            selectProductTrigger: tableView.rx.itemSelected.asDriver()
+            selectProductTrigger: tableView.rx.itemSelected.asDriver(),
+            editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete()
         )
         let output = viewModel.transform(input)
         output.productList
-            .drive(tableView.rx.items) { tableView, index, product in
+            .drive(tableView.rx.items) { [unowned self] tableView, index, product in
                 return tableView.dequeueReusableCell(
                     for: IndexPath(row: index, section: 0),
                     cellType: ProductCell.self)
                     .then {
                         $0.configView(with: product)
+                        $0.editProductAction = {
+                            self.editProductTrigger.onNext(IndexPath(row: index, section: 0))
+                        }
                     }
             }
             .disposed(by: rx.disposeBag)
@@ -68,6 +74,9 @@ final class ProductsViewController: UIViewController, BindableType {
             .drive()
             .disposed(by: rx.disposeBag)
         output.isEmptyData
+            .drive()
+            .disposed(by: rx.disposeBag)
+        output.editedProduct
             .drive()
             .disposed(by: rx.disposeBag)
     }

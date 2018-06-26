@@ -12,6 +12,8 @@ final class ProductCell: UITableViewCell, NibReusable {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
+    
+    var editProductAction: (() -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,5 +33,10 @@ final class ProductCell: UITableViewCell, NibReusable {
             priceLabel.text = ""
         }
     }
+    
+    @IBAction func edit(_ sender: Any) {
+        editProductAction?()
+    }
+    
 }
 
