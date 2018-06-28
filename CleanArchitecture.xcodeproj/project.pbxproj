@@ -12,6 +12,19 @@
 		1706D2B520E213D4001798FB /* EditProductViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1706D2B120E213D3001798FB /* EditProductViewModelTests.swift */; };
 		1706D2B620E213D4001798FB /* EditProductViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1706D2B220E213D4001798FB /* EditProductViewControllerTests.swift */; };
 		1721726C20E47909007D33A5 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721726B20E47909007D33A5 /* ValidationError.swift */; };
+		1721727020E49038007D33A5 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721726F20E49038007D33A5 /* Repo.swift */; };
+		1721727820E49245007D33A5 /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721727320E49243007D33A5 /* ReposViewController.swift */; };
+		1721727920E49245007D33A5 /* ReposNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721727420E49243007D33A5 /* ReposNavigator.swift */; };
+		1721727A20E49245007D33A5 /* ReposViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721727520E49244007D33A5 /* ReposViewModel.swift */; };
+		1721727B20E49245007D33A5 /* ReposUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721727620E49244007D33A5 /* ReposUseCase.swift */; };
+		1721728220E492DD007D33A5 /* RepoCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721727D20E492DC007D33A5 /* RepoCellTests.swift */; };
+		1721728320E492DD007D33A5 /* ReposViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721727E20E492DD007D33A5 /* ReposViewControllerTests.swift */; };
+		1721728420E492DD007D33A5 /* ReposViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721727F20E492DD007D33A5 /* ReposViewModelTests.swift */; };
+		1721728520E492DD007D33A5 /* ReposNavigatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721728020E492DD007D33A5 /* ReposNavigatorMock.swift */; };
+		1721728620E492DD007D33A5 /* ReposUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721728120E492DD007D33A5 /* ReposUseCaseMock.swift */; };
+		1721728920E4964B007D33A5 /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721728720E4964B007D33A5 /* RepoCell.swift */; };
+		1721728A20E4964B007D33A5 /* RepoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1721728820E4964B007D33A5 /* RepoCell.xib */; };
+		1721728C20E49A81007D33A5 /* Repo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1721728B20E49A81007D33A5 /* Repo.storyboard */; };
 		172DC22920C4DDF9009FC881 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172DC22820C4DDF9009FC881 /* AppDelegate.swift */; };
 		172DC23020C4DDFA009FC881 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172DC22F20C4DDFA009FC881 /* Assets.xcassets */; };
 		172DC23320C4DDFA009FC881 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172DC23120C4DDFA009FC881 /* LaunchScreen.storyboard */; };
@@ -123,6 +136,19 @@
 		1706D2B120E213D3001798FB /* EditProductViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProductViewModelTests.swift; sourceTree = "<group>"; };
 		1706D2B220E213D4001798FB /* EditProductViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProductViewControllerTests.swift; sourceTree = "<group>"; };
 		1721726B20E47909007D33A5 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
+		1721726F20E49038007D33A5 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
+		1721727320E49243007D33A5 /* ReposViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
+		1721727420E49243007D33A5 /* ReposNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposNavigator.swift; sourceTree = "<group>"; };
+		1721727520E49244007D33A5 /* ReposViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposViewModel.swift; sourceTree = "<group>"; };
+		1721727620E49244007D33A5 /* ReposUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposUseCase.swift; sourceTree = "<group>"; };
+		1721727D20E492DC007D33A5 /* RepoCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCellTests.swift; sourceTree = "<group>"; };
+		1721727E20E492DD007D33A5 /* ReposViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposViewControllerTests.swift; sourceTree = "<group>"; };
+		1721727F20E492DD007D33A5 /* ReposViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposViewModelTests.swift; sourceTree = "<group>"; };
+		1721728020E492DD007D33A5 /* ReposNavigatorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposNavigatorMock.swift; sourceTree = "<group>"; };
+		1721728120E492DD007D33A5 /* ReposUseCaseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposUseCaseMock.swift; sourceTree = "<group>"; };
+		1721728720E4964B007D33A5 /* RepoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
+		1721728820E4964B007D33A5 /* RepoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepoCell.xib; sourceTree = "<group>"; };
+		1721728B20E49A81007D33A5 /* Repo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Repo.storyboard; sourceTree = "<group>"; };
 		172DC22520C4DDF9009FC881 /* CleanArchitecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanArchitecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172DC22820C4DDF9009FC881 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		172DC22F20C4DDFA009FC881 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -271,6 +297,7 @@
 		1721726920E478EF007D33A5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1721726D20E487FD007D33A5 /* API */,
 				1721726A20E478F9007D33A5 /* Validation */,
 			);
 			path = Services;
@@ -282,6 +309,38 @@
 				1721726B20E47909007D33A5 /* ValidationError.swift */,
 			);
 			path = Validation;
+			sourceTree = "<group>";
+		};
+		1721726D20E487FD007D33A5 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		1721727120E49234007D33A5 /* Repos */ = {
+			isa = PBXGroup;
+			children = (
+				1721727420E49243007D33A5 /* ReposNavigator.swift */,
+				1721727620E49244007D33A5 /* ReposUseCase.swift */,
+				1721727320E49243007D33A5 /* ReposViewController.swift */,
+				1721727520E49244007D33A5 /* ReposViewModel.swift */,
+				1721728720E4964B007D33A5 /* RepoCell.swift */,
+				1721728820E4964B007D33A5 /* RepoCell.xib */,
+			);
+			path = Repos;
+			sourceTree = "<group>";
+		};
+		1721727C20E492D0007D33A5 /* Repos */ = {
+			isa = PBXGroup;
+			children = (
+				1721727D20E492DC007D33A5 /* RepoCellTests.swift */,
+				1721728020E492DD007D33A5 /* ReposNavigatorMock.swift */,
+				1721728120E492DD007D33A5 /* ReposUseCaseMock.swift */,
+				1721727E20E492DD007D33A5 /* ReposViewControllerTests.swift */,
+				1721727F20E492DD007D33A5 /* ReposViewModelTests.swift */,
+			);
+			path = Repos;
 			sourceTree = "<group>";
 		};
 		172DC21C20C4DDF9009FC881 = {
@@ -399,6 +458,7 @@
 		172DC27220C5333F009FC881 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				1721727120E49234007D33A5 /* Repos */,
 				17D80D2320DF9898009E68F0 /* EditProduct */,
 				17EC214D20DCE52D00F793FE /* StaticProductDetail */,
 				177982D720CE5FCA0095CCA8 /* ProductDetail */,
@@ -437,6 +497,7 @@
 		172DC28620C53E2E009FC881 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				1721727C20E492D0007D33A5 /* Repos */,
 				1706D2AE20E213BF001798FB /* EditProduct */,
 				17D80D1420DF908B009E68F0 /* StaticProductDetail */,
 				177982E020CE6B140095CCA8 /* ProductDetail */,
@@ -475,6 +536,7 @@
 			isa = PBXGroup;
 			children = (
 				172DC2AE20C62A01009FC881 /* Product.swift */,
+				1721726F20E49038007D33A5 /* Repo.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -510,6 +572,7 @@
 				172DC29720C53FF4009FC881 /* Storyboards.swift */,
 				172DC2EC20C67EAA009FC881 /* Product.storyboard */,
 				172DC29920C5477F009FC881 /* Main.storyboard */,
+				1721728B20E49A81007D33A5 /* Repo.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -700,9 +763,11 @@
 				172DC23320C4DDFA009FC881 /* LaunchScreen.storyboard in Resources */,
 				177982EC20CE6F590095CCA8 /* ProductNameCell.xib in Resources */,
 				17A4E5E920C90BF9003DE0EA /* SectionedProductCell.xib in Resources */,
+				1721728C20E49A81007D33A5 /* Repo.storyboard in Resources */,
 				172DC2ED20C67EAA009FC881 /* Product.storyboard in Resources */,
 				172DC2B420C62AEE009FC881 /* ProductCell.xib in Resources */,
 				172DC29A20C5477F009FC881 /* Main.storyboard in Resources */,
+				1721728A20E4964B007D33A5 /* RepoCell.xib in Resources */,
 				177982F020CE6F6B0095CCA8 /* ProductPriceCell.xib in Resources */,
 				172DC23020C4DDFA009FC881 /* Assets.xcassets in Resources */,
 				172DC26F20C51C8A009FC881 /* EmptyDataView.xib in Resources */,
@@ -850,6 +915,8 @@
 				172DC2C520C676F6009FC881 /* ProductCell.swift in Sources */,
 				17A4E5EB20C90C08003DE0EA /* SectionedProductCell.swift in Sources */,
 				172DC2AF20C62A01009FC881 /* Product.swift in Sources */,
+				1721727920E49245007D33A5 /* ReposNavigator.swift in Sources */,
+				1721727020E49038007D33A5 /* Repo.swift in Sources */,
 				172DC25F20C51987009FC881 /* ActivityIndicator.swift in Sources */,
 				172DC26220C51987009FC881 /* Page.swift in Sources */,
 				17D80D2920DF98D7009E68F0 /* EditProductViewModel.swift in Sources */,
@@ -861,7 +928,10 @@
 				17EC213320DCD5D800F793FE /* ProductDetailUseCase.swift in Sources */,
 				172DC25D20C51987009FC881 /* ErrorTracker.swift in Sources */,
 				17EC215320DCE58800F793FE /* StaticProductDetailNavigator.swift in Sources */,
+				1721728920E4964B007D33A5 /* RepoCell.swift in Sources */,
+				1721727B20E49245007D33A5 /* ReposUseCase.swift in Sources */,
 				17D80D2A20DF98D7009E68F0 /* EditProductUseCase.swift in Sources */,
+				1721727A20E49245007D33A5 /* ReposViewModel.swift in Sources */,
 				17EC214B20DCDEE700F793FE /* ProductNameCell.swift in Sources */,
 				17EC212E20DCD50700F793FE /* ProductDetailViewModel.swift in Sources */,
 				172DC26320C51987009FC881 /* DelegateTransporter.m in Sources */,
@@ -879,6 +949,7 @@
 				172DC2D620C678DD009FC881 /* ProductsNavigator.swift in Sources */,
 				172DC26820C51987009FC881 /* Observable+.swift in Sources */,
 				17D80D2B20DF98D7009E68F0 /* EditProductViewController.swift in Sources */,
+				1721727820E49245007D33A5 /* ReposViewController.swift in Sources */,
 				17EC214C20DCDEE700F793FE /* ProductPriceCell.swift in Sources */,
 				172DC26120C51987009FC881 /* HasID.swift in Sources */,
 				172DC2D720C678DD009FC881 /* ProductsViewController.swift in Sources */,
@@ -889,6 +960,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1721728620E492DD007D33A5 /* ReposUseCaseMock.swift in Sources */,
+				1721728220E492DD007D33A5 /* RepoCellTests.swift in Sources */,
 				172DC29620C53E5D009FC881 /* AppUseCaseMock.swift in Sources */,
 				177982CA20CE1B830095CCA8 /* SectionedProductCellTests.swift in Sources */,
 				17EC214320DCD86600F793FE /* ProductDetailViewModelTests.swift in Sources */,
@@ -897,6 +970,7 @@
 				17D80D2220DF94A7009E68F0 /* StaticProductDetailViewControllerTests.swift in Sources */,
 				177982CB20CE1B830095CCA8 /* SectionedProductsNavigatorMock.swift in Sources */,
 				17EC214220DCD86600F793FE /* ProductDetailViewControllerTests.swift in Sources */,
+				1721728520E492DD007D33A5 /* ReposNavigatorMock.swift in Sources */,
 				172DC2C320C67034009FC881 /* ProductCellTests.swift in Sources */,
 				172DC28E20C53E4F009FC881 /* MainUseCaseMock.swift in Sources */,
 				172DC28D20C53E4F009FC881 /* MainViewControllerTests.swift in Sources */,
@@ -914,8 +988,10 @@
 				172DC2EA20C67E6A009FC881 /* ProductsUseCaseMock.swift in Sources */,
 				17EC214820DCDC1600F793FE /* ProductDetailCellsTests.swift in Sources */,
 				1706D2B620E213D4001798FB /* EditProductViewControllerTests.swift in Sources */,
+				1721728320E492DD007D33A5 /* ReposViewControllerTests.swift in Sources */,
 				172DC2EB20C67E6A009FC881 /* ProductsViewModelTests.swift in Sources */,
 				177982D620CE5A980095CCA8 /* SectionedProductsViewModelTests.swift in Sources */,
+				1721728420E492DD007D33A5 /* ReposViewModelTests.swift in Sources */,
 				172DC29520C53E5D009FC881 /* AppNavigatorMock.swift in Sources */,
 				172DC2E820C67E6A009FC881 /* ProductsNavigatorMock.swift in Sources */,
 				17D80D2020DF9415009E68F0 /* StaticProductDetailViewModelTests.swift in Sources */,

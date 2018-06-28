@@ -28,5 +28,11 @@ final class MainNavigatorMock: MainNavigatorType {
         toSectionedProducts_Called = true
     }
     
+    // MARK: - toRepos
+    var toRepos_Called = false
+    func toRepos() {
+        toRepos_Called = true
+    }
+    
 }
 

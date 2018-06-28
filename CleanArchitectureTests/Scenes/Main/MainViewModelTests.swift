@@ -59,5 +59,27 @@ final class MainViewModelTests: XCTestCase {
         XCTAssert(navigator.toProducts_Called)
     }
     
+    func test_selectMenuTriggerInvoked_toSectionedProductList() {
+        // act
+        loadTrigger.onNext(())
+        let index = MainViewModel.Menu.sectionedProducts.rawValue
+        let indexPath = IndexPath(row: index, section: 0)
+        selectMenuTrigger.onNext(indexPath)
+        
+        // assert
+        XCTAssert(navigator.toSectionedProducts_Called)
+    }
+    
+    func test_selectMenuTriggerInvoked_toRepoList() {
+        // act
+        loadTrigger.onNext(())
+        let index = MainViewModel.Menu.repos.rawValue
+        let indexPath = IndexPath(row: index, section: 0)
+        selectMenuTrigger.onNext(indexPath)
+        
+        // assert
+        XCTAssert(navigator.toRepos_Called)
+    }
+    
 }
 
