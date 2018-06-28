@@ -14,7 +14,9 @@ final class EditProductViewController: UITableViewController, BindableType {
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var updateButton: UIBarButtonItem!
     @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var nameValidationLabel: UILabel!
     @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet weak var priceValidationLabel: UILabel!
 
     var viewModel: EditProductViewModel!
 
@@ -74,20 +76,28 @@ final class EditProductViewController: UITableViewController, BindableType {
 extension EditProductViewController {
     var nameValidatorBinding: Binder<ValidationResult> {
         return Binder(self) { vc, validation in
-            if validation.isValid {
+            switch validation {
+            case .valid:
                 vc.nameTextField.backgroundColor = UIColor.white
-            } else {
+                vc.nameValidationLabel.text = " "
+            case .invalid(let errors):
                 vc.nameTextField.backgroundColor = UIColor.yellow
+                let errorText = errors.map { $0.localizedDescription }.joined(separator: "\n")
+                vc.nameValidationLabel.text = errorText
             }
         }
     }
     
     var priceValidatorBinding: Binder<ValidationResult> {
         return Binder(self) { vc, validation in
-            if validation.isValid {
+            switch validation {
+            case .valid:
                 vc.priceTextField.backgroundColor = UIColor.white
-            } else {
+                vc.priceValidationLabel.text = " "
+            case .invalid(let errors):
                 vc.priceTextField.backgroundColor = UIColor.yellow
+                let errorText = errors.map { $0.localizedDescription }.joined(separator: "\n")
+                vc.priceValidationLabel.text = errorText
             }
         }
     }

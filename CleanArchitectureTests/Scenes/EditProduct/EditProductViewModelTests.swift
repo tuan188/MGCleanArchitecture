@@ -131,6 +131,19 @@ final class EditProductViewModelTests: XCTestCase {
         XCTAssertEqual(updateEnable, true)
     }
     
+    func test_updateTriggerInvoked_notUpdateProduct() {
+        // arrange
+        useCase.validateName_ReturnValue = ValidationResult.invalid([TestError()])
+        
+        // act
+        nameTrigger.onNext("foo")
+        priceTrigger.onNext("10")
+        updateTrigger.onNext(())
+        
+        // assert
+        XCTAssertFalse(useCase.update_Called)
+    }
+    
     func test_updateTriggerInvoked_updateProduct() {
         // act
         nameTrigger.onNext("foo")

@@ -15,10 +15,15 @@ protocol EditProductUseCaseType {
 struct EditProductUseCase: EditProductUseCaseType {
     
     func validate(name: String) -> ValidationResult {
-        return ValidationResult.valid
+        let minLengthRule = ValidationRuleLength(min: 5, error: ValidationError.productNameMinLength)
+        return name.validate(rule: minLengthRule)
     }
     
     func validate(price: String) -> ValidationResult {
+        let priceNumber: Double = Double(price) ?? 0.0
+        if priceNumber <= 0 {
+            return ValidationResult.invalid([ValidationError.productPriceMinValue])
+        }
         return ValidationResult.valid
     }
     

@@ -77,6 +77,8 @@ struct EditProductViewModel: ViewModelType {
             .startWith(true)
         
         let updatedProduct = input.updateTrigger
+            .withLatestFrom(updateEnable)
+            .filter { $0 }
             .withLatestFrom(Driver.combineLatest(
                 input.nameTrigger,
                 input.priceTrigger
