@@ -17,7 +17,14 @@ struct ReposUseCase: ReposUseCaseType {
     }
 
     func loadMoreRepoList(page: Int) -> Observable<PagingInfo<Repo>> {
-        return Observable.empty()
+        let input = API.GetRepoListInput(page: page)
+        return API.shared.getRepoList(input)
+            .map { output in
+                guard let repos = output.repos else {
+                    throw APIInvalidResponseError()
+                }
+                return PagingInfo<Repo>(page: page, items: OrderedSet<Repo>(sequence: repos))
+            }
     }
 }
 
