@@ -85,7 +85,7 @@ struct EditProductViewModel: ViewModelType {
             ))
             .flatMapLatest { params -> Driver<Product> in
                 let (name, price) = params
-                let product = Product().with {
+                let product = self.product.with {
                     $0.name = name
                     $0.price = Double(price) ?? 0.0
                 }

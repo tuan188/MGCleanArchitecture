@@ -344,8 +344,8 @@
 				172172A120E4D248007D33A5 /* APIInput.swift */,
 				172172A320E4D48C007D33A5 /* APIOutput.swift */,
 				172172A520E4D559007D33A5 /* APIError.swift */,
-				172172A720E4D6A0007D33A5 /* API+Repo.swift */,
 				172172A920E4D706007D33A5 /* APIUrls.swift */,
+				172172A720E4D6A0007D33A5 /* API+Repo.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";

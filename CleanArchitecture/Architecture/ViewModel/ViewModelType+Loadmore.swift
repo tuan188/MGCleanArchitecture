@@ -60,20 +60,17 @@ extension ViewModelType {
             let loadMoreItems = loadMoreTrigger
                 .withLatestFrom(loadingOrLoadingMore)
                 .filter { !$0 }
-                .withLatestFrom(pageSubject.asDriverOnErrorJustComplete())
                 .filter { _ in !pageSubject.value.items.isEmpty }
-                .map { $0.page }
-                .flatMapLatest { page in
-                    loadMoreItems(page + 1)
+                .flatMapLatest { _ -> Driver<PagingInfo<T>> in
+                    let page = pageSubject.value.page
+                    return loadMoreItems(page + 1)
                         .trackError(errorTracker)
                         .trackActivity(loadingMoreActivityIndicator)
                         .asDriverOnErrorJustComplete()
                 }
                 .filter { !$0.items.isEmpty }
-                .withLatestFrom(pageSubject.asDriverOnErrorJustComplete()) {
-                    ($0, $1)
-                }
-                .do(onNext: { page, currentPage in
+                .do(onNext: { page in
+                    let currentPage = pageSubject.value
                     let items: OrderedSet<T> = currentPage.items + page.items
                     let newPage = PagingInfo<T>(page: page.page, items: items)
                     pageSubject.accept(newPage)

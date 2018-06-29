@@ -1,11 +1,3 @@
-//
-//  UIViewController+Rx.swift
-//  Knot
-//
-//  Created by Tuan Truong on 1/19/18.
-//  Copyright © 2018 Framgia. All rights reserved.
-//
-
 import UIKit
 import MBProgressHUD
 
