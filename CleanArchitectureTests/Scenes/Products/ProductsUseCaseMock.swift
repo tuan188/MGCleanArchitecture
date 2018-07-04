@@ -38,4 +38,15 @@ final class ProductsUseCaseMock: ProductsUseCaseType {
         loadMoreProductList_Called = true
         return loadMoreProductList_ReturnValue
     }
+    
+    // MARK: - deleteProduct
+    var deleteProduct_Called = false
+    var deleteProduct_ReturnValue: Observable<Void> = Observable.empty()
+    
+    func deleteProduct(id: Int) -> Observable<Void> {
+        deleteProduct_Called = true
+        return deleteProduct_ReturnValue
+    }
 }
+
+

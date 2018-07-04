@@ -9,6 +9,7 @@
 protocol ProductsUseCaseType {
     func getProductList() -> Observable<PagingInfo<Product>>
     func loadMoreProductList(page: Int) -> Observable<PagingInfo<Product>>
+    func deleteProduct(id: Int) -> Observable<Void>
 }
 
 struct ProductsUseCase: ProductsUseCaseType {
@@ -33,5 +34,10 @@ struct ProductsUseCase: ProductsUseCaseType {
             return Disposables.create()
         }
     }
+    
+    func deleteProduct(id: Int) -> Observable<Void> {
+        return Observable.just(())
+    }
+
 }
 

@@ -14,6 +14,7 @@ final class ProductsViewController: UIViewController, BindableType {
     var viewModel: ProductsViewModel!
     
     fileprivate var editProductTrigger = PublishSubject<IndexPath>()
+    fileprivate var deleteProductTrigger = PublishSubject<IndexPath>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,8 @@ final class ProductsViewController: UIViewController, BindableType {
             reloadTrigger: tableView.refreshTrigger,
             loadMoreTrigger: tableView.loadMoreTrigger,
             selectProductTrigger: tableView.rx.itemSelected.asDriver(),
-            editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete()
+            editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete(),
+            deleteProductTrigger: deleteProductTrigger.asDriverOnErrorJustComplete()
         )
         let output = viewModel.transform(input)
         output.productList
@@ -51,6 +53,9 @@ final class ProductsViewController: UIViewController, BindableType {
                         $0.configView(with: product)
                         $0.editProductAction = {
                             self.editProductTrigger.onNext(IndexPath(row: index, section: 0))
+                        }
+                        $0.deleteProductAction = {
+                            self.deleteProductTrigger.onNext(IndexPath(row: index, section: 0))
                         }
                     }
             }
@@ -77,6 +82,9 @@ final class ProductsViewController: UIViewController, BindableType {
             .drive()
             .disposed(by: rx.disposeBag)
         output.editedProduct
+            .drive()
+            .disposed(by: rx.disposeBag)
+        output.deletedProduct
             .drive()
             .disposed(by: rx.disposeBag)
     }

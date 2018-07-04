@@ -10,7 +10,7 @@ func == <K, V>(left: [K:V], right: [K:V]) -> Bool {
 typealias JSONDictionary = [String: Any]
 
 class APIBase {
-    
+   
     var manager: Alamofire.SessionManager
     
     init() {

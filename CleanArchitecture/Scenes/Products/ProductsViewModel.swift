@@ -13,6 +13,7 @@ struct ProductsViewModel: ViewModelType {
         let loadMoreTrigger: Driver<Void>
         let selectProductTrigger: Driver<IndexPath>
         let editProductTrigger: Driver<IndexPath>
+        let deleteProductTrigger: Driver<IndexPath>
     }
 
     struct Output {
@@ -25,6 +26,7 @@ struct ProductsViewModel: ViewModelType {
         let selectedProduct: Driver<Void>
         let editedProduct: Driver<Void>
         let isEmptyData: Driver<Bool>
+        let deletedProduct: Driver<Void>
     }
 
     struct ProductModel {
@@ -35,6 +37,9 @@ struct ProductsViewModel: ViewModelType {
     let useCase: ProductsUseCaseType
 
     func transform(_ input: Input) -> Output {
+        let activityIndicator = ActivityIndicator()
+        let errorTracker = ErrorTracker()
+        
         let loadMoreOutput = setupLoadMorePaging(
             loadTrigger: input.loadTrigger,
             getItems: useCase.getProductList,
@@ -83,6 +88,29 @@ struct ProductsViewModel: ViewModelType {
         let isEmptyData = Driver.combineLatest(productList, loading)
             .filter { !$0.1 }
             .map { $0.0.isEmpty }
+        
+        let deletedProduct = input.deleteProductTrigger
+            .withLatestFrom(productList) { indexPath, productList in
+                return productList[indexPath.row].product
+            }
+            .flatMapLatest { product -> Driver<Product> in
+                return self.navigator.confirmDeleteProduct(product)
+                    .map { product }
+            }
+            .flatMapLatest { product -> Driver<Product> in
+                return self.useCase.deleteProduct(id: product.id)
+                    .trackActivity(activityIndicator)
+                    .trackError(errorTracker)
+                    .map { _ in product }
+                    .asDriverOnErrorJustComplete()
+            }
+            .do(onNext: { product in
+                let productList = page.value.items
+                productList.remove(product)
+                let updatedPage = PagingInfo(page: page.value.page, items: productList)
+                page.accept(updatedPage)
+            })
+            .mapToVoid()
 
         return Output(
             error: loadError,
@@ -93,7 +121,8 @@ struct ProductsViewModel: ViewModelType {
             productList: productList,
             selectedProduct: selectedProduct,
             editedProduct: editedProduct,
-            isEmptyData: isEmptyData
+            isEmptyData: isEmptyData,
+            deletedProduct: deletedProduct
         )
     }
 }

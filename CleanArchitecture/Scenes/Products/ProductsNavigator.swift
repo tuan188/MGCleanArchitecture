@@ -10,6 +10,7 @@ protocol ProductsNavigatorType {
     func toProducts()
     func toProductDetail(product: Product)
     func toEditProduct(_ product: Product) -> Driver<EditProductDelegate>
+    func confirmDeleteProduct(_ product: Product) -> Driver<Void>
 }
 
 struct ProductsNavigator: ProductsNavigatorType {
@@ -39,6 +40,33 @@ struct ProductsNavigator: ProductsNavigatorType {
         vc.bindViewModel(to: vm)
         navigationController.present(nav, animated: true, completion: nil)
         return delegate.asDriverOnErrorJustComplete()
+    }
+    
+    func confirmDeleteProduct(_ product: Product) -> Driver<Void> {
+        return Observable<Void>.create({ (observer) -> Disposable in
+            let alert = UIAlertController(
+                title: "Delete product: " + product.name,
+                message: "Are you sure?",
+                preferredStyle: .alert)
+            let okAction = UIAlertAction(
+                title: "Delete",
+                style: .destructive) { _ in
+                    observer.onNext(())
+                    observer.onCompleted()
+            }
+            alert.addAction(okAction)
+            
+            let cancel = UIAlertAction(title: "Cancel",
+                                       style: UIAlertActionStyle.cancel) { (_) in
+                                        observer.onCompleted()
+            }
+            alert.addAction(cancel)
+            self.navigationController.present(alert, animated: true, completion: nil)
+            return Disposables.create {
+                alert.dismiss(animated: true, completion: nil)
+            }
+        })
+        .asDriverOnErrorJustComplete()
     }
 }
 
