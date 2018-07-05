@@ -443,6 +443,7 @@
 				172DC24820C51987009FC881 /* Architecture */,
 				172DC27220C5333F009FC881 /* Scenes */,
 				172DC22820C4DDF9009FC881 /* AppDelegate.swift */,
+				172DC2BB20C62CFD009FC881 /* Utils.swift */,
 				172DC22F20C4DDFA009FC881 /* Assets.xcassets */,
 				172DC23120C4DDFA009FC881 /* LaunchScreen.storyboard */,
 				172DC23420C4DDFA009FC881 /* Info.plist */,
@@ -468,7 +469,6 @@
 				172DC24F20C51987009FC881 /* Model */,
 				172DC25220C51987009FC881 /* View */,
 				172DC25A20C51987009FC881 /* Extensions */,
-				172DC2BB20C62CFD009FC881 /* Utils.swift */,
 			);
 			path = Architecture;
 			sourceTree = "<group>";
