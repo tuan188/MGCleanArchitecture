@@ -4,7 +4,7 @@ import RxCocoa
 import Then
 
 final class LoadMoreTableView: BaseLoadMoreTableView {
-    private var tableRefreshControl: UIRefreshControl!
+    private let tableRefreshControl = UIRefreshControl()
     private var loadingMoreView: TableLoadingView!
     private var emptyView: EmptyDataView?
     
@@ -13,9 +13,8 @@ final class LoadMoreTableView: BaseLoadMoreTableView {
             if loading {
                 tableView.tableRefreshControl.beginRefreshing()
             } else {
-                if let tableRefreshControl = tableView.tableRefreshControl,
-                    tableRefreshControl.isRefreshing {
-                    tableRefreshControl.endRefreshing()
+                if tableView.tableRefreshControl.isRefreshing {
+                    tableView.tableRefreshControl.endRefreshing()
                 }
             }
         }
@@ -27,9 +26,8 @@ final class LoadMoreTableView: BaseLoadMoreTableView {
         }
     }
     
-    private var _refreshTrigger = PublishSubject<Void>()
     var refreshTrigger: Driver<Void> {
-        return _refreshTrigger.asDriverOnErrorJustComplete()
+        return tableRefreshControl.rx.controlEvent(.valueChanged).asDriver()
     }
     
     private var _loadMoreTrigger = PublishSubject<Void>()
@@ -39,11 +37,7 @@ final class LoadMoreTableView: BaseLoadMoreTableView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let tableRefreshControl = UIRefreshControl().with {
-            $0.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        }
         self.addSubview(tableRefreshControl)
-        self.tableRefreshControl = tableRefreshControl
         
         loadingMoreView = TableLoadingView.loadFromNib().with {
             $0.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50)
@@ -54,10 +48,6 @@ final class LoadMoreTableView: BaseLoadMoreTableView {
             self?._loadMoreTrigger.onNext(())
         }
     }
-    
-    @objc private func refresh() {
-        _refreshTrigger.onNext(())
-    }
 }
 
 extension LoadMoreTableView {
@@ -66,8 +56,8 @@ extension LoadMoreTableView {
             let (isEmptyData, message) = data
             if isEmptyData {
                 let frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: tableView.frame.size.height)
-                self.emptyView = EmptyDataView(frame: frame)
-                self.emptyView?.showEmptyViewWithMessage(message: message)
+                tableView.emptyView = EmptyDataView(frame: frame)
+                tableView.emptyView?.showEmptyViewWithMessage(message: message)
                 tableView.backgroundView = self.emptyView
             } else {
                 tableView.backgroundView = nil

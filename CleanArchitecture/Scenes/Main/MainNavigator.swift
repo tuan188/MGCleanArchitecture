@@ -11,6 +11,7 @@ protocol MainNavigatorType {
     func toProducts()
     func toSectionedProducts()
     func toRepos()
+    func toRepoCollection()
 }
 
 struct MainNavigator: MainNavigatorType {
@@ -33,6 +34,11 @@ struct MainNavigator: MainNavigatorType {
     func toRepos() {
         let navigator = ReposNavigator(navigationController: navigationController)
         navigator.toRepos()
+    }
+    
+    func toRepoCollection() {
+        let navigator = ReposNavigator(navigationController: navigationController)
+        navigator.toRepoCollection()
     }
 }
 

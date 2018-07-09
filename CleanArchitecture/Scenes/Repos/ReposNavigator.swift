@@ -9,6 +9,7 @@
 protocol ReposNavigatorType {
     func toRepos()
     func toRepoDetail(repo: Repo)
+    func toRepoCollection()
 }
 
 struct ReposNavigator: ReposNavigatorType {
@@ -23,6 +24,13 @@ struct ReposNavigator: ReposNavigatorType {
 
     func toRepoDetail(repo: Repo) {
 
+    }
+    
+    func toRepoCollection() {
+        let vc = RepoCollectionViewController.instantiate()
+        let vm = ReposViewModel(navigator: self, useCase: ReposUseCase())
+        vc.bindViewModel(to: vm)
+        navigationController.pushViewController(vc, animated: true)
     }
 }
 

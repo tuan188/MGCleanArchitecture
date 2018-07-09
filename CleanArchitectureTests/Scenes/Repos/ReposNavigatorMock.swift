@@ -21,4 +21,12 @@ final class ReposNavigatorMock: ReposNavigatorType {
     func toRepoDetail(repo: Repo) {
         toRepoDetail_Called = true
     }
+    
+    // MARK: - toRepoCollection
+    var toRepoCollection_Called = false
+    
+    func toRepoCollection() {
+        toRepoCollection_Called = true
+    }
 }
+
