@@ -1,17 +1,13 @@
-import UIKit
 import MJRefresh
+import UIKit
 
-class LoadMoreCollectionView: UICollectionView {
-    private let _refreshControl = UIRefreshControl()
-    
+class RefreshTableView: UITableView {
     var refreshing: Binder<Bool> {
         return Binder(self) { collectionView, loading in
             if loading {
-                collectionView._refreshControl.beginRefreshing()
+                collectionView.mj_header?.beginRefreshing()
             } else {
-                if collectionView._refreshControl.isRefreshing {
-                    collectionView._refreshControl.endRefreshing()
-                }
+                collectionView.mj_header?.endRefreshing()
             }
         }
     }
@@ -26,13 +22,23 @@ class LoadMoreCollectionView: UICollectionView {
         }
     }
     
+    private var _refreshTrigger = PublishSubject<Void>()
     var refreshTrigger: Driver<Void> {
-        return _refreshControl.rx.controlEvent(.valueChanged).asDriver()
+        return _refreshTrigger.asDriverOnErrorJustComplete()
     }
     
     private var _loadMoreTrigger = PublishSubject<Void>()
     var loadMoreTrigger: Driver<Void> {
         return _loadMoreTrigger.asDriverOnErrorJustComplete()
+    }
+    
+    var refreshHeader: MJRefreshHeader? {
+        didSet {
+            mj_header = refreshHeader
+            mj_header.refreshingBlock = { [weak self] in
+                self?._refreshTrigger.onNext(())
+            }
+        }
     }
     
     var refreshFooter: MJRefreshFooter? {
@@ -46,7 +52,7 @@ class LoadMoreCollectionView: UICollectionView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.addSubview(_refreshControl)
+        self.refreshHeader = RefreshAutoHeader(refreshingBlock: nil)
         self.refreshFooter = RefreshAutoFooter(refreshingBlock: nil)
     }
 }

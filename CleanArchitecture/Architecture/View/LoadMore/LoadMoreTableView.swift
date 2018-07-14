@@ -1,7 +1,7 @@
 import UIKit
 import MJRefresh
 
-final class LoadMoreTableView: UITableView {
+class LoadMoreTableView: UITableView {
     private let _refreshControl = UIRefreshControl()
     
     var refreshing: Binder<Bool> {

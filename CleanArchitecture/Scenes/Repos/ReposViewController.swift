@@ -10,7 +10,7 @@ import UIKit
 import Reusable
 
 final class ReposViewController: UIViewController, BindableType {
-    @IBOutlet weak var tableView: LoadMoreTableView!
+    @IBOutlet weak var tableView: RefreshTableView!
     var viewModel: ReposViewModel!
 
     override func viewDidLoad() {
