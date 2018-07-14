@@ -23,7 +23,6 @@ final class SectionedProductsViewController: UIViewController, BindableType {
 
     private func configView() {
         tableView.do {
-            $0.loadMoreDelegate = self
             $0.estimatedRowHeight = 550
             $0.rowHeight = UITableViewAutomaticDimension
             $0.register(cellType: SectionedProductCell.self)

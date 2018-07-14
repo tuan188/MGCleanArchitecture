@@ -1,11 +1,3 @@
-//
-//  LoadMoreCollectionView.swift
-//  CleanArchitecture
-//
-//  Created by Tuan Truong on 7/14/18.
-//  Copyright © 2018 Framgia. All rights reserved.
-//
-
 import UIKit
 import MJRefresh
 
@@ -43,11 +35,18 @@ final class LoadMoreCollectionView: UICollectionView {
         return _loadMoreTrigger.asDriverOnErrorJustComplete()
     }
     
+    var refreshFooter: MJRefreshFooter? {
+        didSet {
+            mj_footer = refreshFooter
+            mj_footer.refreshingBlock = { [weak self] in
+                self?._loadMoreTrigger.onNext(())
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.addSubview(_refreshControl)
-        self.mj_footer = RefreshAutoFooter(refreshingBlock: { [weak self] in
-            self?._loadMoreTrigger.onNext(())
-        })
+        self.refreshFooter = RefreshAutoFooter(refreshingBlock: nil)
     }
 }

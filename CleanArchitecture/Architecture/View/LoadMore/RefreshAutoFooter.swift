@@ -1,11 +1,3 @@
-//
-//  RefreshAutoFooter.swift
-//  CleanArchitecture
-//
-//  Created by Tuan Truong on 7/12/18.
-//  Copyright © 2018 Framgia. All rights reserved.
-//
-
 import UIKit
 import MJRefresh
 

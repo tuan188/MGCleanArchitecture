@@ -6,8 +6,6 @@
 //  Copyright © 2018 Framgia. All rights reserved.
 //
 
-#import "DelegateTransporter.h"
-
 @import RxSwift;
 @import RxCocoa;
 @import NSObject_Rx;
