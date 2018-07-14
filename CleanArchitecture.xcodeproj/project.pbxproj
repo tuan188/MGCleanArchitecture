@@ -333,6 +333,22 @@
 			path = LoadMore;
 			sourceTree = "<group>";
 		};
+		170B307420FA3E7400D39001 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				172DC29B20C54FF3009FC881 /* Model */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		170B307520FA3EA100D39001 /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				1721726920E478EF007D33A5 /* Services */,
+			);
+			path = Platform;
+			sourceTree = "<group>";
+		};
 		170F4E4620F7551600EF16B3 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,8 +474,8 @@
 			isa = PBXGroup;
 			children = (
 				172172AB20E4E0E1007D33A5 /* Extensions */,
-				1721726920E478EF007D33A5 /* Services */,
-				172DC29B20C54FF3009FC881 /* Entities */,
+				170B307420FA3E7400D39001 /* Domain */,
+				170B307520FA3EA100D39001 /* Platform */,
 				172DC24820C51987009FC881 /* Architecture */,
 				172DC27220C5333F009FC881 /* Scenes */,
 				172DC22820C4DDF9009FC881 /* AppDelegate.swift */,
@@ -610,13 +626,13 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		172DC29B20C54FF3009FC881 /* Entities */ = {
+		172DC29B20C54FF3009FC881 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				172DC2AE20C62A01009FC881 /* Product.swift */,
 				1721726F20E49038007D33A5 /* Repo.swift */,
 			);
-			path = Entities;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		172DC2A520C62975009FC881 /* Products */ = {

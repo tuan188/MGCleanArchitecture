@@ -16,6 +16,7 @@ final class SectionedProductsViewController: UIViewController, BindableType {
 
     fileprivate typealias ProductSectionModel = SectionModel<String, SectionedProductsViewModel.ProductModel>
     fileprivate var dataSource: RxTableViewSectionedReloadDataSource<ProductSectionModel>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()

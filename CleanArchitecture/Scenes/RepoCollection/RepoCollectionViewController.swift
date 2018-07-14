@@ -39,11 +39,9 @@ final class RepoCollectionViewController: UIViewController, BindableType {
             $0.register(cellType: RepoCollectionCell.self)
             $0.alwaysBounceVertical = true
         }
-        
         collectionView.rx
             .setDelegate(self)
             .disposed(by: rx.disposeBag)
-        
     }
     
     deinit {
