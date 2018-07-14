@@ -7,26 +7,27 @@
 //
 
 import UIKit
+import MJRefresh
 
 final class RepoCollectionViewController: UIViewController, BindableType {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: LoadMoreCollectionView!
     
     var viewModel: ReposViewModel!
     
-    fileprivate var refreshControl: UIRefreshControl = UIRefreshControl()
-    
-    private struct Constant {
-        // colection view
-        static var spaceBetweenCell: CGFloat = 8
-        static var itemsPerRow: Int = 3
-        static var sectionInsets: UIEdgeInsets = UIEdgeInsets(
+    fileprivate struct Options {
+        var itemSpacing: CGFloat = 8
+        var lineSpacing: CGFloat = 8
+        var itemsPerRow: Int = 2
+        var sectionInsets: UIEdgeInsets = UIEdgeInsets(
             top: 10.0,
             left: 10.0,
             bottom: 10.0,
             right: 10.0
         )
     }
+    
+    private var options = Options()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +38,12 @@ final class RepoCollectionViewController: UIViewController, BindableType {
         collectionView.do {
             $0.register(cellType: RepoCollectionCell.self)
             $0.alwaysBounceVertical = true
-            $0.addSubview(refreshControl)
         }
         
         collectionView.rx
             .setDelegate(self)
             .disposed(by: rx.disposeBag)
+        
     }
     
     deinit {
@@ -52,14 +53,15 @@ final class RepoCollectionViewController: UIViewController, BindableType {
     func bindViewModel() {
         let input = ReposViewModel.Input(
             loadTrigger: Driver.just(()),
-            reloadTrigger: refreshControl.rx.controlEvent(.valueChanged).asDriver(),
-            loadMoreTrigger: Driver.empty(),
+            reloadTrigger: collectionView.refreshTrigger,
+            loadMoreTrigger: collectionView.loadMoreTrigger,
             selectRepoTrigger: collectionView.rx.itemSelected.asDriver()
         )
         let output = viewModel.transform(input)
         output.repoList
             .drive(collectionView.rx.items) { collectionView, index, repo in
-                return collectionView.dequeueReusableCell(for: IndexPath(row: index, section: 0), cellType: RepoCollectionCell.self)
+                return collectionView.dequeueReusableCell(for: IndexPath(row: index, section: 0),
+                                                          cellType: RepoCollectionCell.self)
                     .then {
                         $0.configView(with: repo)
                     }
@@ -72,10 +74,10 @@ final class RepoCollectionViewController: UIViewController, BindableType {
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
         output.refreshing
-            .drive(refreshingBinding)
+            .drive(collectionView.refreshing)
             .disposed(by: rx.disposeBag)
         output.loadingMore
-            .drive()
+            .drive(collectionView.loadingMore)
             .disposed(by: rx.disposeBag)
         output.fetchItems
             .drive()
@@ -86,18 +88,6 @@ final class RepoCollectionViewController: UIViewController, BindableType {
         output.isEmptyData
             .drive()
             .disposed(by: rx.disposeBag)
-    }
-}
-
-extension RepoCollectionViewController {
-    var refreshingBinding: Binder<Bool> {
-        return Binder(self) { vc, refreshing in
-            if refreshing {
-                vc.refreshControl.beginRefreshing()
-            } else {
-                vc.refreshControl.endRefreshing()
-            }
-        }
     }
 }
 
@@ -112,11 +102,11 @@ extension RepoCollectionViewController: UICollectionViewDelegate, UICollectionVi
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenSize = UIScreen.main.bounds
-        let paddingSpace = Constant.sectionInsets.left
-            + Constant.sectionInsets.right
-            + CGFloat(Constant.itemsPerRow - 1) * Constant.spaceBetweenCell
+        let paddingSpace = options.sectionInsets.left
+            + options.sectionInsets.right
+            + CGFloat(options.itemsPerRow - 1) * options.itemSpacing
         let availableWidth = screenSize.width - paddingSpace
-        let widthPerItem = availableWidth / CGFloat(Constant.itemsPerRow)
+        let widthPerItem = availableWidth / CGFloat(options.itemsPerRow)
         let heightPerItem = widthPerItem
         
         return CGSize(width: widthPerItem, height: heightPerItem)
@@ -125,19 +115,19 @@ extension RepoCollectionViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return Constant.sectionInsets
+        return options.sectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return Constant.spaceBetweenCell
+        return options.lineSpacing
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return Constant.spaceBetweenCell
+        return options.itemSpacing
     }
     
 }

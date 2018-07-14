@@ -19,7 +19,7 @@ def pods
     pod 'SDWebImage', '~> 4.4'
     pod 'OrderedSet', '3.0'
     pod 'ActionSheetPicker-3.0', '~> 2.3'
-
+    pod 'MJRefresh', '~> 3.1'
 
 end
 
