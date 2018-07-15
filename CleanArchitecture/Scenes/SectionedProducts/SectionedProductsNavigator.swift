@@ -7,23 +7,16 @@
 //
 
 protocol SectionedProductsNavigatorType {
-    func toSectionedProducts()
     func toProductDetail(product: Product)
 }
 
 struct SectionedProductsNavigator: SectionedProductsNavigatorType {
+    unowned let assembler: Assembler
     unowned let navigationController: UINavigationController
     
-    func toSectionedProducts() {
-        let vc = SectionedProductsViewController.instantiate()
-        let vm = SectionedProductsViewModel(navigator: self, useCase: SectionedProductsUseCase())
-        vc.bindViewModel(to: vm)
-        navigationController.pushViewController(vc, animated: true)
-    }
-
     func toProductDetail(product: Product) {
-        let navigator = StaticProductDetailNavigator(navigationController: navigationController)
-        navigator.toStaticProductDetail(product: product)
+        let vc: StaticProductDetailViewController = assembler.resolve(navigationController: navigationController, product: product)
+        navigationController.pushViewController(vc, animated: true)
     }
 }
 

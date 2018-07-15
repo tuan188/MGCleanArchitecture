@@ -7,7 +7,6 @@
 //
 
 protocol MainNavigatorType {
-    func toLogin()
     func toProducts()
     func toSectionedProducts()
     func toRepos()
@@ -15,29 +14,26 @@ protocol MainNavigatorType {
 }
 
 struct MainNavigator: MainNavigatorType {
+    unowned let assembler: Assembler
     unowned let navigationController: UINavigationController
     
-    func toLogin() {
-        
-    }
-    
     func toProducts() {
-        let navigator = ProductsNavigator(navigationController: navigationController)
-        navigator.toProducts()
+        let vc: ProductsViewController = assembler.resolve(navigationController: navigationController)
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func toSectionedProducts() {
-        let navigator = SectionedProductsNavigator(navigationController: navigationController)
-        navigator.toSectionedProducts()
+        let vc: SectionedProductsViewController = assembler.resolve(navigationController: navigationController)
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func toRepos() {
-        let navigator = ReposNavigator(navigationController: navigationController)
+        let navigator = ReposNavigator(assembler: assembler, navigationController: navigationController)
         navigator.toRepos()
     }
     
     func toRepoCollection() {
-        let navigator = ReposNavigator(navigationController: navigationController)
+        let navigator = ReposNavigator(assembler: assembler, navigationController: navigationController)
         navigator.toRepoCollection()
     }
 }

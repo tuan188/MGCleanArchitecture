@@ -12,6 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var assembler: Assembler = DefaultAssembler()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -21,9 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func bindViewModel() {
         guard let window = window else { return }
-        let navigator = AppNavigator(window: window)
-        let useCase = AppUseCase()
-        let vm = AppViewModel(navigator: navigator, useCase: useCase)
+        let vm: AppViewModel = assembler.resolve(window: window)
         let input = AppViewModel.Input(loadTrigger: Driver.just(()))
         let output = vm.transform(input)
         output.toMain.drive().disposed(by: rx.disposeBag)

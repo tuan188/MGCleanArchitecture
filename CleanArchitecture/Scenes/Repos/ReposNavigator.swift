@@ -13,12 +13,11 @@ protocol ReposNavigatorType {
 }
 
 struct ReposNavigator: ReposNavigatorType {
+    unowned let assembler: Assembler
     unowned let navigationController: UINavigationController
 
     func toRepos() {
-        let vc = ReposViewController.instantiate()
-        let vm = ReposViewModel(navigator: self, useCase: ReposUseCase())
-        vc.bindViewModel(to: vm)
+        let vc: ReposViewController = assembler.resolve(navigationController: navigationController)
         navigationController.pushViewController(vc, animated: true)
     }
 
@@ -27,9 +26,7 @@ struct ReposNavigator: ReposNavigatorType {
     }
     
     func toRepoCollection() {
-        let vc = RepoCollectionViewController.instantiate()
-        let vm = ReposViewModel(navigator: self, useCase: ReposUseCase())
-        vc.bindViewModel(to: vm)
+        let vc: RepoCollectionViewController = assembler.resolve(navigationController: navigationController)
         navigationController.pushViewController(vc, animated: true)
     }
 }

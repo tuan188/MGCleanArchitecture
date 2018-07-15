@@ -11,15 +11,13 @@ protocol AppNavigatorType {
 }
 
 struct AppNavigator: AppNavigatorType {
+    unowned let assembler: Assembler
     unowned let window: UIWindow
     
     func toMain() {
-        let vc = MainViewController.instantiate()
-        let nav = UINavigationController(rootViewController: vc)
-        let navigator = MainNavigator(navigationController: nav)
-        let useCase = MainUseCase()
-        let vm = MainViewModel(navigator: navigator, useCase: useCase)
-        vc.bindViewModel(to: vm)
+        let nav = UINavigationController()
+        let vc: MainViewController = assembler.resolve(navigationController: nav)
+        nav.viewControllers.append(vc)
         window.rootViewController = nav
     }
 }

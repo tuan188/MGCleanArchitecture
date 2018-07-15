@@ -7,17 +7,10 @@
 //
 
 protocol ProductDetailNavigatorType {
-    func toProductDetail(product: Product)
+    
 }
 
 struct ProductDetailNavigator: ProductDetailNavigatorType {
+    unowned let assembler: Assembler
     unowned let navigationController: UINavigationController
-    
-    func toProductDetail(product: Product) {
-        let useCase = ProductDetailUseCase()
-        let vm = ProductDetailViewModel(navigator: self, useCase: useCase, product: product)
-        let vc = ProductDetailViewController.instantiate()
-        vc.bindViewModel(to: vm)
-        navigationController.pushViewController(vc, animated: true)
-    }
 }

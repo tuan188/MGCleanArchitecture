@@ -9,13 +9,6 @@
 @testable import CleanArchitecture
 
 final class ProductsNavigatorMock: ProductsNavigatorType {
-    
-    // MARK: - toProducts
-    var toProducts_Called = false
-    func toProducts() {
-        toProducts_Called = true
-    }
-    
     // MARK: - toProductDetail
     var toProductDetail_Called = false
     func toProductDetail(product: Product) {
@@ -33,11 +26,9 @@ final class ProductsNavigatorMock: ProductsNavigatorType {
     // MARK: - confirmDeleteProduct
     var confirmDeleteProduct_Called = false
     var confirmDeleteProduct_ReturnValue: Driver<Void> = Driver.just(())
-    
     func confirmDeleteProduct(_ product: Product) -> Driver<Void> {
         confirmDeleteProduct_Called = true
         return confirmDeleteProduct_ReturnValue
     }
-    
 }
 

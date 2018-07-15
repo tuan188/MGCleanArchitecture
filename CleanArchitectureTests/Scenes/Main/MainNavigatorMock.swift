@@ -9,13 +9,6 @@
 @testable import CleanArchitecture
 
 final class MainNavigatorMock: MainNavigatorType {
-    
-    // MARK: - toLogin
-    var toLogin_Called = false
-    func toLogin() {
-        toLogin_Called = true
-    }
-    
     // MARK: - toProducts
     var toProducts_Called = false
     func toProducts() {
@@ -40,5 +33,4 @@ final class MainNavigatorMock: MainNavigatorType {
     func toRepoCollection() {
         toRepoCollection_Called = true
     }
-    
 }

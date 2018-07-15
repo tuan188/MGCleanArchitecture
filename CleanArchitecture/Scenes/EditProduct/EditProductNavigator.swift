@@ -11,6 +11,7 @@ protocol EditProductNavigatorType {
 }
 
 struct EditProductNavigator: EditProductNavigatorType {
+    unowned let assembler: Assembler
     unowned let navigationController: UINavigationController
     
     func dismiss() {

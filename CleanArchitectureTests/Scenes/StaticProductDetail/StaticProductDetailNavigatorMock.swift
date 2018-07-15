@@ -9,7 +9,5 @@
 @testable import CleanArchitecture
 
 final class StaticProductDetailNavigatorMock: StaticProductDetailNavigatorType {
-    func toStaticProductDetail(product: Product) {
 
-    }
 }
