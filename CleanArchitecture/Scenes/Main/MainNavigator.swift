@@ -28,13 +28,13 @@ struct MainNavigator: MainNavigatorType {
     }
     
     func toRepos() {
-        let navigator = ReposNavigator(assembler: assembler, navigationController: navigationController)
-        navigator.toRepos()
+        let vc: ReposViewController = assembler.resolve(navigationController: navigationController)
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func toRepoCollection() {
-        let navigator = ReposNavigator(assembler: assembler, navigationController: navigationController)
-        navigator.toRepoCollection()
+        let vc: RepoCollectionViewController = assembler.resolve(navigationController: navigationController)
+        navigationController.pushViewController(vc, animated: true)
     }
 }
 
