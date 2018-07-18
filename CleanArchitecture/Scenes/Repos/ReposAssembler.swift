@@ -39,7 +39,7 @@ extension ReposAssembler {
 
 extension ReposAssembler where Self: DefaultAssembler {
     func resolve() -> ReposUseCaseType {
-        return ReposUseCase()
+        return ReposUseCase(repository: resolve())
     }
     
     func resolve(navigationController: UINavigationController) -> ReposNavigatorType {

@@ -7,6 +7,7 @@
 //
 
 protocol Assembler: class,
+    RepositoriesAssembler,
     AppAssembler,
     MainAssembler,
     ReposAssembler,

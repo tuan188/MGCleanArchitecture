@@ -12,19 +12,14 @@ protocol ReposUseCaseType {
 }
 
 struct ReposUseCase: ReposUseCaseType {
+    let repository: RepoRepositoryType
+    
     func getRepoList() -> Observable<PagingInfo<Repo>> {
         return loadMoreRepoList(page: 1)
     }
 
     func loadMoreRepoList(page: Int) -> Observable<PagingInfo<Repo>> {
-        let input = API.GetRepoListInput(page: page)
-        return API.shared.getRepoList(input)
-            .map { output in
-                guard let repos = output.repos else {
-                    throw APIInvalidResponseError()
-                }
-                return PagingInfo<Repo>(page: page, items: OrderedSet<Repo>(sequence: repos))
-            }
+        return repository.getRepoList(page: page, perPage: 10)
     }
 }
 

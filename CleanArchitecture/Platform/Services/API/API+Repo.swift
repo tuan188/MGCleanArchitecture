@@ -10,10 +10,6 @@ import ObjectMapper
 
 // MARK: - GetRepoList
 extension API {
-    func getRepoList(_ input: GetRepoListInput) -> Observable<GetRepoListOutput> {
-        return request(input)
-    }
-    
     final class GetRepoListInput: APIInput {
         init(page: Int, perPage: Int = 10) {
             let params: JSONDictionary = [
