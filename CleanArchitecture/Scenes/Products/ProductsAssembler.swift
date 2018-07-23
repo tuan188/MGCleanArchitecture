@@ -37,6 +37,6 @@ extension ProductsAssembler where Self: DefaultAssembler {
     }
     
     func resolve() -> ProductsUseCaseType {
-        return ProductsUseCase()
+        return ProductsUseCase(productRepository: resolve())
     }
 }

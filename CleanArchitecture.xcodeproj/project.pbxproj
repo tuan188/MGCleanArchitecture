@@ -115,6 +115,7 @@
 		17A4E5EB20C90C08003DE0EA /* SectionedProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4E5EA20C90C08003DE0EA /* SectionedProductCell.swift */; };
 		17BB3A6920FF574F00C5F8B0 /* RepoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB3A6820FF574F00C5F8B0 /* RepoRepository.swift */; };
 		17BB3A6B20FF57DD00C5F8B0 /* RepositoriesAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB3A6A20FF57DD00C5F8B0 /* RepositoriesAssembler.swift */; };
+		17BD35102105D83A0042CAEB /* ProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BD350F2105D83A0042CAEB /* ProductRepository.swift */; };
 		17D80D1320DF8FEA009E68F0 /* StaticProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D1220DF8FE9009E68F0 /* StaticProductDetailViewModel.swift */; };
 		17D80D1A20DF9164009E68F0 /* StaticProductDetailNavigatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D1520DF9162009E68F0 /* StaticProductDetailNavigatorMock.swift */; };
 		17D80D1C20DF9164009E68F0 /* StaticProductDetailUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D1720DF9162009E68F0 /* StaticProductDetailUseCaseMock.swift */; };
@@ -269,6 +270,7 @@
 		17A4E5EA20C90C08003DE0EA /* SectionedProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedProductCell.swift; sourceTree = "<group>"; };
 		17BB3A6820FF574F00C5F8B0 /* RepoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoRepository.swift; sourceTree = "<group>"; };
 		17BB3A6A20FF57DD00C5F8B0 /* RepositoriesAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesAssembler.swift; sourceTree = "<group>"; };
+		17BD350F2105D83A0042CAEB /* ProductRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepository.swift; sourceTree = "<group>"; };
 		17D80D1220DF8FE9009E68F0 /* StaticProductDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProductDetailViewModel.swift; sourceTree = "<group>"; };
 		17D80D1520DF9162009E68F0 /* StaticProductDetailNavigatorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProductDetailNavigatorMock.swift; sourceTree = "<group>"; };
 		17D80D1720DF9162009E68F0 /* StaticProductDetailUseCaseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProductDetailUseCaseMock.swift; sourceTree = "<group>"; };
@@ -759,6 +761,7 @@
 			isa = PBXGroup;
 			children = (
 				17BB3A6820FF574F00C5F8B0 /* RepoRepository.swift */,
+				17BD350F2105D83A0042CAEB /* ProductRepository.swift */,
 				17BB3A6A20FF57DD00C5F8B0 /* RepositoriesAssembler.swift */,
 			);
 			path = Repositories;
@@ -1099,6 +1102,7 @@
 				17EC214B20DCDEE700F793FE /* ProductNameCell.swift in Sources */,
 				17EC212E20DCD50700F793FE /* ProductDetailViewModel.swift in Sources */,
 				17EC213020DCD55100F793FE /* ProductDetailViewController.swift in Sources */,
+				17BD35102105D83A0042CAEB /* ProductRepository.swift in Sources */,
 				172DC28020C53DB1009FC881 /* MainViewModel.swift in Sources */,
 				172DC27920C533C8009FC881 /* AppNavigator.swift in Sources */,
 				172DC2BA20C62C64009FC881 /* UIViewController+.swift in Sources */,

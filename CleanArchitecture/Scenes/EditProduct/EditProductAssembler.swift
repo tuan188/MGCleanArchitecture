@@ -47,6 +47,6 @@ extension EditProductAssembler where Self: DefaultAssembler {
     }
     
     func resolve() -> EditProductUseCaseType {
-        return EditProductUseCase()
+        return EditProductUseCase(productRepository: resolve())
     }
 }

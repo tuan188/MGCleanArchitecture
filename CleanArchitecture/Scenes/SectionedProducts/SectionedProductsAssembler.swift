@@ -37,6 +37,6 @@ extension SectionedProductsAssembler where Self: DefaultAssembler {
     }
     
     func resolve() -> SectionedProductsUseCaseType {
-        return SectionedProductsUseCase()
+        return SectionedProductsUseCase(productRepository: resolve())
     }
 }

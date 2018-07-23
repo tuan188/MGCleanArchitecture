@@ -13,6 +13,7 @@ protocol EditProductUseCaseType {
 }
 
 struct EditProductUseCase: EditProductUseCaseType {
+    let productRepository: ProductRepositoryType
     
     func validate(name: String) -> ValidationResult {
         let minLengthRule = ValidationRuleLength(min: 5, error: ValidationError.productNameMinLength)
@@ -28,7 +29,6 @@ struct EditProductUseCase: EditProductUseCaseType {
     }
     
     func update(_ product: Product) -> Observable<Void> {
-        return Observable.just(())
+        return productRepository.update(product)
     }
-    
 }
