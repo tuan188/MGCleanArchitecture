@@ -34,8 +34,8 @@ final class ReposViewController: UIViewController, BindableType {
     func bindViewModel() {
         let input = ReposViewModel.Input(
             loadTrigger: Driver.just(()),
-            reloadTrigger: tableView.refreshTrigger,
-            loadMoreTrigger: tableView.loadMoreTrigger,
+            reloadTrigger: tableView.loadMoreTopTrigger,
+            loadMoreTrigger: tableView.loadMoreBottomTrigger,
             selectRepoTrigger: tableView.rx.itemSelected.asDriver()
         )
         let output = viewModel.transform(input)
@@ -56,10 +56,10 @@ final class ReposViewController: UIViewController, BindableType {
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
         output.refreshing
-            .drive(tableView.refreshing)
+            .drive(tableView.loadingMoreTop)
             .disposed(by: rx.disposeBag)
         output.loadingMore
-            .drive(tableView.loadingMore)
+            .drive(tableView.loadingMoreBottom)
             .disposed(by: rx.disposeBag)
         output.fetchItems
             .drive()
