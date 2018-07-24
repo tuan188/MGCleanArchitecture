@@ -5,6 +5,9 @@ def pods
     pod 'ObjectMapper', '~> 3.2'
     pod 'Reusable', '~> 4.0'
     pod 'Then', '~> 2.3'
+    pod 'MJRefresh', '~> 3.1'
+    pod 'OrderedSet', '3.0'
+    pod 'Validator', '~> 3.0.2'
     
     # Rx
     pod 'RxSwift', '~> 4.1'
@@ -15,12 +18,8 @@ def pods
     
     #
     pod 'MBProgressHUD', '~> 1.1'
-    pod 'Validator', '~> 3.0.2'
     pod 'SDWebImage', '~> 4.4'
-    pod 'OrderedSet', '3.0'
     pod 'ActionSheetPicker-3.0', '~> 2.3'
-    pod 'MJRefresh', '~> 3.1'
-
 end
 
 def test_pods

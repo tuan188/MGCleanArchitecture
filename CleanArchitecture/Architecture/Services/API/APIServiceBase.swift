@@ -92,7 +92,7 @@ class APIBase {
                 return try self.process(dataResponse)
             }
             .catchError { [unowned self] error -> Observable<JSONDictionary> in
-                return try self.handleRequestError(error)
+                return try self.handleRequestError(error, input: input)
             }
             .do(onNext: { (json) in
                 if input.useCache {
@@ -143,7 +143,7 @@ class APIBase {
         throw error
     }
     
-    func handleRequestError(_ error: Error) throws -> Observable<JSONDictionary> {
+    func handleRequestError(_ error: Error, input: APIInputBase) throws -> Observable<JSONDictionary> {
         throw error
     }
     
