@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -492,13 +492,14 @@
 		172DC22720C4DDF9009FC881 /* CleanArchitecture */ = {
 			isa = PBXGroup;
 			children = (
+				17DCDA4120FB344200E2602A /* Assembler */,
+				173746A921071D6900B41621 /* Support */,
 				172172AB20E4E0E1007D33A5 /* Extensions */,
 				170B307420FA3E7400D39001 /* Domain */,
 				170B307520FA3EA100D39001 /* Platform */,
 				172DC24820C51987009FC881 /* Architecture */,
 				172DC27220C5333F009FC881 /* Scenes */,
 				172DC22820C4DDF9009FC881 /* AppDelegate.swift */,
-				172DC2BB20C62CFD009FC881 /* Utils.swift */,
 				172DC22F20C4DDFA009FC881 /* Assets.xcassets */,
 				172DC23120C4DDFA009FC881 /* LaunchScreen.storyboard */,
 				172DC23420C4DDFA009FC881 /* Info.plist */,
@@ -569,7 +570,6 @@
 		172DC27220C5333F009FC881 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				17DCDA4120FB344200E2602A /* Assembler */,
 				17368FCC20F3373500A4A3E9 /* RepoCollection */,
 				1721727120E49234007D33A5 /* Repos */,
 				17D80D2320DF9898009E68F0 /* EditProduct */,
@@ -701,6 +701,14 @@
 				17368FD020F33E4A00A4A3E9 /* RepoCollectionCell.xib */,
 			);
 			path = RepoCollection;
+			sourceTree = "<group>";
+		};
+		173746A921071D6900B41621 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				172DC2BB20C62CFD009FC881 /* Utils.swift */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 		177982C220CE1AF70095CCA8 /* SectionedProducts */ = {
@@ -875,16 +883,18 @@
 				TargetAttributes = {
 					172DC22420C4DDF9009FC881 = {
 						CreatedOnToolsVersion = 9.4;
+						ProvisioningStyle = Automatic;
 					};
 					172DC23820C4DDFA009FC881 = {
 						CreatedOnToolsVersion = 9.4;
 						LastSwiftMigration = 0940;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 172DC22420C4DDF9009FC881;
 					};
 				};
 			};
 			buildConfigurationList = 172DC22020C4DDF9009FC881 /* Build configuration list for PBXProject "CleanArchitecture" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1306,8 +1316,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1320,10 +1329,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = CleanArchitecture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.CleanArchitecture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CleanArchitecture/Bridging-Header.h";
@@ -1340,10 +1346,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = CleanArchitecture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.CleanArchitecture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CleanArchitecture/Bridging-Header.h";
@@ -1360,11 +1363,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = CleanArchitectureTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.CleanArchitectureTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1382,11 +1381,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = CleanArchitectureTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.CleanArchitectureTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
