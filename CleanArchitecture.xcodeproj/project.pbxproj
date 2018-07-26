@@ -125,7 +125,7 @@
 		17D80D2920DF98D7009E68F0 /* EditProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D2520DF98D6009E68F0 /* EditProductViewModel.swift */; };
 		17D80D2A20DF98D7009E68F0 /* EditProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D2620DF98D7009E68F0 /* EditProductUseCase.swift */; };
 		17D80D2B20DF98D7009E68F0 /* EditProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D2720DF98D7009E68F0 /* EditProductViewController.swift */; };
-		17DCDA4320FB346600E2602A /* DefaultAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCDA4220FB346600E2602A /* DefaultAssembler.swift */; };
+		17DCDA4320FB346600E2602A /* Assembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCDA4220FB346600E2602A /* Assembler.swift */; };
 		17DCDA4520FB352300E2602A /* ReposAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCDA4420FB352300E2602A /* ReposAssembler.swift */; };
 		17DCDA4C20FB43CC00E2602A /* EditProductAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCDA4B20FB43CC00E2602A /* EditProductAssembler.swift */; };
 		17EC212E20DCD50700F793FE /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EC212C20DCD50600F793FE /* ProductDetailViewModel.swift */; };
@@ -280,7 +280,7 @@
 		17D80D2520DF98D6009E68F0 /* EditProductViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProductViewModel.swift; sourceTree = "<group>"; };
 		17D80D2620DF98D7009E68F0 /* EditProductUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProductUseCase.swift; sourceTree = "<group>"; };
 		17D80D2720DF98D7009E68F0 /* EditProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProductViewController.swift; sourceTree = "<group>"; };
-		17DCDA4220FB346600E2602A /* DefaultAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAssembler.swift; sourceTree = "<group>"; };
+		17DCDA4220FB346600E2602A /* Assembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembler.swift; sourceTree = "<group>"; };
 		17DCDA4420FB352300E2602A /* ReposAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposAssembler.swift; sourceTree = "<group>"; };
 		17DCDA4B20FB43CC00E2602A /* EditProductAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProductAssembler.swift; sourceTree = "<group>"; };
 		17EC212C20DCD50600F793FE /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
@@ -801,7 +801,7 @@
 		17DCDA4120FB344200E2602A /* Assembler */ = {
 			isa = PBXGroup;
 			children = (
-				17DCDA4220FB346600E2602A /* DefaultAssembler.swift */,
+				17DCDA4220FB346600E2602A /* Assembler.swift */,
 			);
 			path = Assembler;
 			sourceTree = "<group>";
@@ -1097,7 +1097,7 @@
 				172172AA20E4D706007D33A5 /* APIUrls.swift in Sources */,
 				17D80D2920DF98D7009E68F0 /* EditProductViewModel.swift in Sources */,
 				172DC2A120C555A1009FC881 /* MenuCell.swift in Sources */,
-				17DCDA4320FB346600E2602A /* DefaultAssembler.swift in Sources */,
+				17DCDA4320FB346600E2602A /* Assembler.swift in Sources */,
 				17EC215420DCE58800F793FE /* StaticProductDetailViewController.swift in Sources */,
 				172DC2B820C62BFF009FC881 /* UIViewController+Rx.swift in Sources */,
 				172DC2D820C678DD009FC881 /* ProductsViewModel.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  DefaultAssembler.swift
+//  Assembler.swift
 //  CleanArchitecture
 //
 //  Created by Tuan Truong on 7/15/18.

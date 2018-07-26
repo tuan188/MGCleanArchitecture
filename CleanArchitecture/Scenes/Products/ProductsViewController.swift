@@ -26,8 +26,10 @@ final class ProductsViewController: UIViewController, BindableType {
             $0.estimatedRowHeight = 550
             $0.rowHeight = UITableViewAutomaticDimension
             $0.register(cellType: ProductCell.self)
-            $0.delegate = self
         }
+        tableView.rx
+            .setDelegate(self)
+            .disposed(by: rx.disposeBag)
     }
 
     deinit {
