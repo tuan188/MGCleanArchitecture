@@ -29,7 +29,7 @@ struct ProductsViewModel: ViewModelType {
         let deletedProduct: Driver<Void>
     }
 
-    struct ProductModel {
+    struct ProductModel: Hashable {
         let product: Product
     }
 
@@ -46,11 +46,12 @@ struct ProductsViewModel: ViewModelType {
             refreshTrigger: input.reloadTrigger,
             refreshItems: useCase.getProductList,
             loadMoreTrigger: input.loadMoreTrigger,
-            loadMoreItems: useCase.loadMoreProductList)
+            loadMoreItems: useCase.loadMoreProductList,
+            mapper: ProductModel.init(product:))
         let (page, fetchItems, loadError, loading, refreshing, loadingMore) = loadMoreOutput
 
         let productList = page
-            .map { $0.items.map { ProductModel(product: $0) } }
+            .map { $0.items.map { $0 } }
             .asDriverOnErrorJustComplete()
 
         let selectedProduct = input.selectProductTrigger
@@ -76,8 +77,9 @@ struct ProductsViewModel: ViewModelType {
                 switch delegate {
                 case .updatedProduct(let product):
                     let productList = page.value.items
-                    if let index = productList.index(of: product) {
-                        productList[index] = product
+                    let productModel = ProductModel(product: product)
+                    if let index = productList.index(of: productModel) {
+                        productList[index] = productModel
                         let updatedPage = PagingInfo(page: page.value.page, items: productList)
                         page.accept(updatedPage)
                     }
@@ -107,7 +109,8 @@ struct ProductsViewModel: ViewModelType {
             }
             .do(onNext: { product in
                 let productList = page.value.items
-                productList.remove(product)
+                let productModel = ProductModel(product: product)
+                productList.remove(productModel)
                 let updatedPage = PagingInfo(page: page.value.page, items: productList)
                 page.accept(updatedPage)
             })
