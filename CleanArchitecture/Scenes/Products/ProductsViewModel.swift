@@ -85,9 +85,10 @@ struct ProductsViewModel: ViewModelType {
             })
             .mapToVoid()
 
-        let isEmptyData = Driver.combineLatest(productList, loading)
+        let isEmptyData = Driver.combineLatest(fetchItems, loading)
             .filter { !$0.1 }
-            .map { $0.0.isEmpty }
+            .withLatestFrom(productList)
+            .map { $0.isEmpty }
         
         let deletedProduct = input.deleteProductTrigger
             .withLatestFrom(productList) { indexPath, productList in

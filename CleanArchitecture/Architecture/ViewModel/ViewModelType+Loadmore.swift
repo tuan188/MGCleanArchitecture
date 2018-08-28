@@ -40,11 +40,11 @@ extension ViewModelType {
                                             loadMoreTrigger: Driver<U>,
                                             loadMoreItems: @escaping (U, Int) -> Observable<PagingInfo<T>>)
         -> (page: BehaviorRelay<PagingInfo<T>>,
-        fetchItems: Driver<Void>,
-        error: Driver<Error>,
-        loading: Driver<Bool>,
-        refreshing: Driver<Bool>,
-        loadingMore: Driver<Bool>) {
+            fetchItems: Driver<Void>,
+            error: Driver<Error>,
+            loading: Driver<Bool>,
+            refreshing: Driver<Bool>,
+            loadingMore: Driver<Bool>) {
             
             let pageSubject = BehaviorRelay<PagingInfo<T>>(value: PagingInfo<T>(page: 1, items: []))
             let errorTracker = ErrorTracker()
