@@ -30,7 +30,7 @@ class APIBase {
             }
     }
     
-    fileprivate func request(_ input: APIInputBase) -> Observable<JSONDictionary> {
+    func request(_ input: APIInputBase) -> Observable<JSONDictionary> {
         let user = input.user
         let password = input.password
         let urlRequest = preprocess(input)
