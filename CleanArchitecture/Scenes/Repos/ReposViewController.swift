@@ -70,7 +70,7 @@ final class ReposViewController: UIViewController, BindableType {
             .drive()
             .disposed(by: rx.disposeBag)
         output.isEmptyData
-            .drive()
+            .drive(tableView.isEmptyData)
             .disposed(by: rx.disposeBag)
     }
 

@@ -64,10 +64,13 @@ struct SectionedProductsViewModel: ViewModelType {
             })
             .mapToVoid()
 
-        let isEmptyData = Driver.combineLatest(fetchItems, loading)
-            .filter { !$0.1 }
-            .withLatestFrom(productSections)
-            .map { $0.isEmpty }
+        let isEmptyData = Driver.combineLatest(fetchItems, Driver.merge(loading, refreshing))
+            .withLatestFrom(productSections) { ($0.1, $1.isEmpty) }
+            .map { args -> Bool in
+                let (loading, isEmpty) = args
+                if loading { return false }
+                return isEmpty
+            }
 
         return Output(
             error: loadError,

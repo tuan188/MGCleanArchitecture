@@ -84,7 +84,7 @@ final class RepoCollectionViewController: UIViewController, BindableType {
             .drive()
             .disposed(by: rx.disposeBag)
         output.isEmptyData
-            .drive()
+            .drive(collectionView.isEmptyData)
             .disposed(by: rx.disposeBag)
     }
 }

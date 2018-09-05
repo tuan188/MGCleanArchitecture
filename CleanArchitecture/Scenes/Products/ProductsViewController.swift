@@ -81,7 +81,7 @@ final class ProductsViewController: UIViewController, BindableType {
             .drive()
             .disposed(by: rx.disposeBag)
         output.isEmptyData
-            .drive()
+            .drive(tableView.isEmptyData)
             .disposed(by: rx.disposeBag)
         output.editedProduct
             .drive()
