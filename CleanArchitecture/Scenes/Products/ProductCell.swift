@@ -13,6 +13,7 @@ final class ProductCell: UITableViewCell, NibReusable {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var iconImageView: UIImageView!
     
     var editProductAction: (() -> Void)?
     var deleteProductAction: (() -> Void)?
@@ -25,9 +26,13 @@ final class ProductCell: UITableViewCell, NibReusable {
         if let viewModel = viewModel {
             nameLabel.text = viewModel.name
             priceLabel.text = viewModel.price
+            iconImageView.image = viewModel.icon
+            backgroundColor = viewModel.backgroundColor
         } else {
             nameLabel.text = ""
             priceLabel.text = ""
+            iconImageView.image = nil
+            backgroundColor = UIColor.white
         }
     }
     

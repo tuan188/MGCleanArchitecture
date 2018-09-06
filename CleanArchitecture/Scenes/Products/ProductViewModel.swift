@@ -16,4 +16,12 @@ struct ProductViewModel {
     var price: String {
         return product.product.price.currency
     }
+    
+    var icon: UIImage? {
+        return product.edited ? #imageLiteral(resourceName: "edited") : nil
+    }
+    
+    var backgroundColor: UIColor {
+        return product.edited ? UIColor.yellow.withAlphaComponent(0.5) : UIColor.white
+    }
 }

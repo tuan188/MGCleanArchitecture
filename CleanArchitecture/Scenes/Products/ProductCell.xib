@@ -56,16 +56,25 @@
                             <action selector="deleteProduct:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="DcM-do-jYU"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ioG-f7-Kvo">
+                        <rect key="frame" x="67" y="44" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="7aV-qD-P9s"/>
+                            <constraint firstAttribute="width" constant="16" id="hPA-uR-HeH"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Awh-N5-nNg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="1so-lD-KW0"/>
                     <constraint firstAttribute="trailingMargin" secondItem="RJK-V4-jx5" secondAttribute="trailing" constant="2" id="8Ql-Wl-JLX"/>
                     <constraint firstItem="RJK-V4-jx5" firstAttribute="leading" secondItem="Awh-N5-nNg" secondAttribute="trailing" constant="10" id="Wgv-wd-YX6"/>
                     <constraint firstItem="RJK-V4-jx5" firstAttribute="centerY" secondItem="Awh-N5-nNg" secondAttribute="centerY" id="X7m-Xp-6oR"/>
+                    <constraint firstItem="ioG-f7-Kvo" firstAttribute="centerY" secondItem="c6p-a9-5fe" secondAttribute="centerY" id="Yfz-bd-kg1"/>
                     <constraint firstItem="c6p-a9-5fe" firstAttribute="leading" secondItem="PTZ-T8-NFY" secondAttribute="leading" id="iGf-ZH-c8g"/>
                     <constraint firstItem="c6p-a9-5fe" firstAttribute="top" secondItem="PTZ-T8-NFY" secondAttribute="bottom" constant="8" id="pSk-6z-Nqs"/>
                     <constraint firstAttribute="bottomMargin" secondItem="c6p-a9-5fe" secondAttribute="bottom" constant="5" id="sDw-fP-JCr"/>
                     <constraint firstItem="Awh-N5-nNg" firstAttribute="leading" secondItem="PTZ-T8-NFY" secondAttribute="trailing" constant="8" id="tJF-fu-24A"/>
+                    <constraint firstItem="ioG-f7-Kvo" firstAttribute="leading" secondItem="c6p-a9-5fe" secondAttribute="trailing" constant="8" id="u75-a8-fz5"/>
                     <constraint firstItem="PTZ-T8-NFY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="uv2-AA-adq"/>
                     <constraint firstItem="PTZ-T8-NFY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="w8g-qq-fGf"/>
                 </constraints>
@@ -74,6 +83,7 @@
             <connections>
                 <outlet property="deleteButton" destination="RJK-V4-jx5" id="d3j-38-f8m"/>
                 <outlet property="editButton" destination="Awh-N5-nNg" id="lw4-p2-Ars"/>
+                <outlet property="iconImageView" destination="ioG-f7-Kvo" id="mkO-cp-zcd"/>
                 <outlet property="nameLabel" destination="PTZ-T8-NFY" id="BOL-sV-eV8"/>
                 <outlet property="priceLabel" destination="c6p-a9-5fe" id="qc8-Mp-Qj0"/>
             </connections>

@@ -73,7 +73,7 @@ struct ProductsViewModel: ViewModelType {
                 switch delegate {
                 case .updatedProduct(let product):
                     let productList = page.value.items
-                    let productModel = ProductModel(product: product)
+                    let productModel = ProductModel(product: product, edited: true)
                     if let index = productList.index(of: productModel) {
                         productList[index] = productModel
                         let updatedPage = PagingInfo(page: page.value.page, items: productList)

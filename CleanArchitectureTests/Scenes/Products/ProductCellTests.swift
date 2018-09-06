@@ -22,5 +22,6 @@ final class ProductCellTests: XCTestCase {
         XCTAssertNotNil(cell.nameLabel)
         XCTAssertNotNil(cell.priceLabel)
         XCTAssertNotNil(cell.editButton)
+        XCTAssertNotNil(cell.iconImageView)
     }
 }
