@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Baseline standard spacing" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +15,6 @@
         <!--Templates-->
         <scene sceneID="y4J-bL-gij">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bVL-0y-x36" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="MainViewController" id="H8u-Rd-YNT" customClass="MainViewController" customModule="CleanArchitecture" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="POl-FH-KuS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -38,6 +39,7 @@
                         <outlet property="tableView" destination="08B-aq-GFb" id="e8w-Kg-GSe"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bVL-0y-x36" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="633" y="158"/>
         </scene>
@@ -58,6 +60,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kCv-sl-xBJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-140" y="158"/>
+        </scene>
+        <!--Unit Test View Controller-->
+        <scene sceneID="6Xn-jV-kZN">
+            <objects>
+                <viewController storyboardIdentifier="UnitTestViewController" id="6wa-ch-53h" customClass="UnitTestViewController" customModule="CleanArchitecture" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ucv-vb-893">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Testing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zeE-SI-JiZ">
+                                <rect key="frame" x="114" y="309.5" width="146.5" height="48"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Vcd-Ze-mab">
+                                <rect key="frame" x="177" y="375.5" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zeE-SI-JiZ" firstAttribute="centerX" secondItem="Ucv-vb-893" secondAttribute="centerX" id="2e2-fd-kpg"/>
+                            <constraint firstItem="Vcd-Ze-mab" firstAttribute="firstBaseline" secondItem="zeE-SI-JiZ" secondAttribute="baseline" constant="28" symbolType="layoutAnchor" id="8ag-d9-q9k"/>
+                            <constraint firstItem="zeE-SI-JiZ" firstAttribute="centerY" secondItem="Ucv-vb-893" secondAttribute="centerY" id="BX2-RQ-iS1"/>
+                            <constraint firstItem="Vcd-Ze-mab" firstAttribute="centerX" secondItem="zeE-SI-JiZ" secondAttribute="centerX" id="tdh-9r-REg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="H2X-UI-bKb"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9iK-az-UUm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-49" y="890"/>
         </scene>
     </scenes>
 </document>
