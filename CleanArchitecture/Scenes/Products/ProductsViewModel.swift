@@ -29,10 +29,6 @@ struct ProductsViewModel: ViewModelType {
         let deletedProduct: Driver<Void>
     }
 
-    struct ProductModel: Hashable {
-        let product: Product
-    }
-
     let navigator: ProductsNavigatorType
     let useCase: ProductsUseCaseType
 
@@ -53,7 +49,7 @@ struct ProductsViewModel: ViewModelType {
         let productList = page
             .map { $0.items.map { $0 } }
             .asDriverOnErrorJustComplete()
-
+        
         let selectedProduct = input.selectProductTrigger
             .withLatestFrom(productList) {
                 return ($0, $1)

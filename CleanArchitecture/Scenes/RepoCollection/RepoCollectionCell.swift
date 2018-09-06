@@ -17,16 +17,10 @@ final class RepoCollectionCell: UICollectionViewCell, NibReusable {
         super.awakeFromNib()
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        configView(with: nil)
-    }
-    
-    func configView(with model: ReposViewModel.RepoModel?) {
-        if let repo = model?.repo {
-            nameLabel.text = repo.name
-            let url = URL(string: repo.avatarURLString)
-            avatarURLStringImageView.sd_setImage(with: url, completed: nil)
+    func bindViewModel(_ viewModel: RepoViewModel?) {
+        if let viewModel = viewModel {
+            nameLabel.text = viewModel.name
+            avatarURLStringImageView.sd_setImage(with: viewModel.url, completed: nil)
         } else {
             nameLabel.text = ""
             avatarURLStringImageView.image = nil

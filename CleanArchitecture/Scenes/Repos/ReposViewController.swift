@@ -47,7 +47,7 @@ final class ReposViewController: UIViewController, BindableType {
                     for: IndexPath(row: index, section: 0),
                     cellType: RepoCell.self)
                     .then {
-                        $0.configView(with: repo)
+                        $0.bindViewModel(RepoViewModel(repo: repo))
                     }
             }
             .disposed(by: rx.disposeBag)

@@ -25,10 +25,6 @@ struct SectionedProductsViewModel: ViewModelType {
         let isEmptyData: Driver<Bool>
     }
 
-    struct ProductModel {
-        let product: Product
-    }
-
     struct ProductSection {
         let header: String
         let productList: [ProductModel]
@@ -51,6 +47,7 @@ struct SectionedProductsViewModel: ViewModelType {
             .map { $0.items.map { ProductModel(product: $0) } }
             .map { [ProductSection(header: "Section1", productList: $0)] }
             .asDriverOnErrorJustComplete()
+        
         let selectedProduct = input.selectProductTrigger
             .withLatestFrom(productSections) {
                 return ($0, $1)

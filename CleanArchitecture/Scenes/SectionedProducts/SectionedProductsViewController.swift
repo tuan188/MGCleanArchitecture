@@ -14,7 +14,7 @@ final class SectionedProductsViewController: UIViewController, BindableType {
     @IBOutlet weak var tableView: LoadMoreTableView!
     var viewModel: SectionedProductsViewModel!
 
-    fileprivate typealias ProductSectionModel = SectionModel<String, SectionedProductsViewModel.ProductModel>
+    fileprivate typealias ProductSectionModel = SectionModel<String, ProductModel>
     fileprivate var dataSource: RxTableViewSectionedReloadDataSource<ProductSectionModel>!
     
     override func viewDidLoad() {
@@ -48,7 +48,7 @@ final class SectionedProductsViewController: UIViewController, BindableType {
         dataSource = RxTableViewSectionedReloadDataSource<ProductSectionModel>(
             configureCell: { (_, tableView, indexPath, product) -> UITableViewCell in
                 return tableView.dequeueReusableCell(for: indexPath, cellType: SectionedProductCell.self).then {
-                    $0.configView(with: product)
+                    $0.bindViewModel(ProductViewModel(product: product))
                 }
             },
             titleForHeaderInSection: { dataSource, section in

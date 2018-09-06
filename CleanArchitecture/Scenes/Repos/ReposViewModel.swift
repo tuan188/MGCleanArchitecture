@@ -20,13 +20,9 @@ struct ReposViewModel: ViewModelType {
         let refreshing: Driver<Bool>
         let loadingMore: Driver<Bool>
         let fetchItems: Driver<Void>
-        let repoList: Driver<[RepoModel]>
+        let repoList: Driver<[Repo]>
         let selectedRepo: Driver<Void>
         let isEmptyData: Driver<Bool>
-    }
-
-    struct RepoModel {
-        let repo: Repo
     }
 
     let navigator: ReposNavigatorType
@@ -43,7 +39,7 @@ struct ReposViewModel: ViewModelType {
         let (page, fetchItems, loadError, loading, refreshing, loadingMore) = loadMoreOutput
 
         let repoList = page
-            .map { $0.items.map { RepoModel(repo: $0) } }
+            .map { $0.items.map { $0 } }
             .asDriverOnErrorJustComplete()
 
         let selectedRepo = input.selectRepoTrigger
@@ -54,7 +50,7 @@ struct ReposViewModel: ViewModelType {
                 return repoList[indexPath.row]
             }
             .do(onNext: { repo in
-                self.navigator.toRepoDetail(repo: repo.repo)
+                self.navigator.toRepoDetail(repo: repo)
             })
             .mapToVoid()
 

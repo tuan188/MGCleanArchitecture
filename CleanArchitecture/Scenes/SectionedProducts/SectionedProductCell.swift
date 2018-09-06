@@ -15,16 +15,11 @@ final class SectionedProductCell: UITableViewCell, NibReusable {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        configView(with: nil)
-    }
-
-    func configView(with model: SectionedProductsViewModel.ProductModel?) {
-        if let model = model {
-            nameLabel.text = model.product.name
-            priceLabel.text = String(model.product.price)
+    
+    func bindViewModel(_ viewModel: ProductViewModel?) {
+        if let viewModel = viewModel {
+            nameLabel.text = viewModel.name
+            priceLabel.text = viewModel.price
         } else {
             nameLabel.text = ""
             priceLabel.text = ""

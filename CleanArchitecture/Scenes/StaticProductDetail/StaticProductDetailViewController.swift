@@ -30,11 +30,10 @@ final class StaticProductDetailViewController: UITableViewController, BindableTy
         )
         let output = viewModel.transform(input)
         output.name
-            .map { String($0) }
             .drive(nameLabel.rx.text)
             .disposed(by: rx.disposeBag)
         output.price
-            .map { String($0) }
+            .map { $0.currency }
             .drive(priceLabel.rx.text)
             .disposed(by: rx.disposeBag)
     }
