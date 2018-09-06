@@ -48,7 +48,7 @@ final class ProductDetailViewController: UIViewController, BindableType {
                     return tableView.dequeueReusableCell(
                         for: indexPath,
                         cellType: ProductPriceCell.self).then {
-                            $0.priceLabel.text = price.currency
+                            $0.priceLabel.text = price
                     }
                 }
             }

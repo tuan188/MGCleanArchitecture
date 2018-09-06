@@ -20,12 +20,13 @@ final class StaticProductDetailViewModelTests: XCTestCase {
     private var input: StaticProductDetailViewModel.Input!
     private var output: StaticProductDetailViewModel.Output!
     private let loadTrigger = PublishSubject<Void>()
+    private let product = Product(id: 1, name: "Foo", price: 1)
 
     override func setUp() {
         super.setUp()
         navigator = StaticProductDetailNavigatorMock()
         useCase = StaticProductDetailUseCaseMock()
-        viewModel = StaticProductDetailViewModel(navigator: navigator, useCase: useCase, product: Product())
+        viewModel = StaticProductDetailViewModel(navigator: navigator, useCase: useCase, product: product)
         disposeBag = DisposeBag()
         input = StaticProductDetailViewModel.Input(
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete()
@@ -42,7 +43,8 @@ final class StaticProductDetailViewModelTests: XCTestCase {
         let price = try? output.price.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(true)
+        XCTAssertEqual(name, product.name)
+        XCTAssertEqual(price, product.price.currency)
     }
 
 }

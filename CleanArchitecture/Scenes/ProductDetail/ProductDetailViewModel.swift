@@ -18,7 +18,7 @@ struct ProductDetailViewModel: ViewModelType {
 
     enum CellType {
         case name(String)
-        case price(Double)
+        case price(String)
     }
 
     let navigator: ProductDetailNavigatorType
@@ -32,7 +32,7 @@ struct ProductDetailViewModel: ViewModelType {
             .map { product -> [CellType] in
                 var cells = [CellType]()
                 cells.append(CellType.name(product.name))
-                cells.append(CellType.price(product.price))
+                cells.append(CellType.price(product.price.currency))
                 return cells
             }
         return Output(cells: cells)

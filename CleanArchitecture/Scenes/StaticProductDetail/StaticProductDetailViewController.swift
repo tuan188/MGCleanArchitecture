@@ -33,7 +33,6 @@ final class StaticProductDetailViewController: UITableViewController, BindableTy
             .drive(nameLabel.rx.text)
             .disposed(by: rx.disposeBag)
         output.price
-            .map { $0.currency }
             .drive(priceLabel.rx.text)
             .disposed(by: rx.disposeBag)
     }

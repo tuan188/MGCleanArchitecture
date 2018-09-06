@@ -14,7 +14,7 @@ struct StaticProductDetailViewModel: ViewModelType {
 
     struct Output {
         let name: Driver<String>
-        let price: Driver<Double>
+        let price: Driver<String>
     }
 
     let navigator: StaticProductDetailNavigatorType
@@ -25,7 +25,7 @@ struct StaticProductDetailViewModel: ViewModelType {
         let product = input.loadTrigger
             .map { self.product }
         let name = product.map { $0.name }
-        let price = product.map { $0.price }
+        let price = product.map { $0.price.currency }
         return Output(
             name: name,
             price: price
