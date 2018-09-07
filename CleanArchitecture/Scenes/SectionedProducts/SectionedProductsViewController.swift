@@ -8,14 +8,14 @@
 
 import UIKit
 import Reusable
-
 import RxDataSources
+
 final class SectionedProductsViewController: UIViewController, BindableType {
     @IBOutlet weak var tableView: LoadMoreTableView!
+    
     var viewModel: SectionedProductsViewModel!
-
     fileprivate typealias ProductSectionModel = SectionModel<String, ProductModel>
-    fileprivate var dataSource: RxTableViewSectionedReloadDataSource<ProductSectionModel>!
+    fileprivate var dataSource: RxTableViewSectionedReloadDataSource<ProductSectionModel>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +27,7 @@ final class SectionedProductsViewController: UIViewController, BindableType {
             $0.estimatedRowHeight = 550
             $0.rowHeight = UITableViewAutomaticDimension
             $0.register(cellType: SectionedProductCell.self)
+            $0.register(headerFooterViewType: ProductHeaderView.self)
         }
         tableView.rx
             .setDelegate(self)
@@ -45,15 +46,17 @@ final class SectionedProductsViewController: UIViewController, BindableType {
             selectProductTrigger: tableView.rx.itemSelected.asDriver()
         )
         let output = viewModel.transform(input)
-        dataSource = RxTableViewSectionedReloadDataSource<ProductSectionModel>(
+        let dataSource = RxTableViewSectionedReloadDataSource<ProductSectionModel>(
             configureCell: { (_, tableView, indexPath, product) -> UITableViewCell in
                 return tableView.dequeueReusableCell(for: indexPath, cellType: SectionedProductCell.self).then {
                     $0.bindViewModel(ProductViewModel(product: product))
                 }
             },
             titleForHeaderInSection: { dataSource, section in
-                return dataSource.sectionModels[section].model
+//                return dataSource.sectionModels[section].model  // uncomment this line to use default header
+                return ""
             })
+        self.dataSource = dataSource
         output.productSections
             .map {
                 $0.map { section in
@@ -95,6 +98,16 @@ extension SectionedProductsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return CGFloat.leastNonzeroMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(ProductHeaderView.self)
+        header?.titleLabel.text = dataSource?.sectionModels[section].model
+        return header
     }
 }
 

@@ -124,6 +124,8 @@
 		17BB3A6920FF574F00C5F8B0 /* RepoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB3A6820FF574F00C5F8B0 /* RepoRepository.swift */; };
 		17BB3A6B20FF57DD00C5F8B0 /* RepositoriesAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB3A6A20FF57DD00C5F8B0 /* RepositoriesAssembler.swift */; };
 		17BD35102105D83A0042CAEB /* ProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BD350F2105D83A0042CAEB /* ProductRepository.swift */; };
+		17C0F25321424D8A0047C902 /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0F25221424D8A0047C902 /* ProductHeaderView.swift */; };
+		17C0F25521424D960047C902 /* ProductHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17C0F25421424D960047C902 /* ProductHeaderView.xib */; };
 		17D80D1320DF8FEA009E68F0 /* StaticProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D1220DF8FE9009E68F0 /* StaticProductDetailViewModel.swift */; };
 		17D80D1A20DF9164009E68F0 /* StaticProductDetailNavigatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D1520DF9162009E68F0 /* StaticProductDetailNavigatorMock.swift */; };
 		17D80D1C20DF9164009E68F0 /* StaticProductDetailUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D1720DF9162009E68F0 /* StaticProductDetailUseCaseMock.swift */; };
@@ -288,6 +290,8 @@
 		17BB3A6820FF574F00C5F8B0 /* RepoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoRepository.swift; sourceTree = "<group>"; };
 		17BB3A6A20FF57DD00C5F8B0 /* RepositoriesAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesAssembler.swift; sourceTree = "<group>"; };
 		17BD350F2105D83A0042CAEB /* ProductRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepository.swift; sourceTree = "<group>"; };
+		17C0F25221424D8A0047C902 /* ProductHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
+		17C0F25421424D960047C902 /* ProductHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductHeaderView.xib; sourceTree = "<group>"; };
 		17D80D1220DF8FE9009E68F0 /* StaticProductDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProductDetailViewModel.swift; sourceTree = "<group>"; };
 		17D80D1520DF9162009E68F0 /* StaticProductDetailNavigatorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProductDetailNavigatorMock.swift; sourceTree = "<group>"; };
 		17D80D1720DF9162009E68F0 /* StaticProductDetailUseCaseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProductDetailUseCaseMock.swift; sourceTree = "<group>"; };
@@ -793,6 +797,8 @@
 				17A4E5E120C90AD4003DE0EA /* SectionedProductsUseCase.swift */,
 				177982CD20CE30FF0095CCA8 /* SectionedProductsViewModel.swift */,
 				177982D120CE359D0095CCA8 /* SectionedProductsViewController.swift */,
+				17C0F25221424D8A0047C902 /* ProductHeaderView.swift */,
+				17C0F25421424D960047C902 /* ProductHeaderView.xib */,
 				17A4E5EA20C90C08003DE0EA /* SectionedProductCell.swift */,
 				17A4E5E720C90BF9003DE0EA /* SectionedProductCell.xib */,
 				170A6BA120FB5753003ECCF2 /* SectionedProductsAssembler.swift */,
@@ -959,6 +965,7 @@
 				1721728C20E49A81007D33A5 /* Repo.storyboard in Resources */,
 				17800300213FB94C00D20209 /* EmptyDataView.xib in Resources */,
 				172DC2ED20C67EAA009FC881 /* Product.storyboard in Resources */,
+				17C0F25521424D960047C902 /* ProductHeaderView.xib in Resources */,
 				172DC2B420C62AEE009FC881 /* ProductCell.xib in Resources */,
 				17368FD220F33E4A00A4A3E9 /* RepoCollectionCell.xib in Resources */,
 				172DC29A20C5477F009FC881 /* Main.storyboard in Resources */,
@@ -1149,6 +1156,7 @@
 				17D80D2A20DF98D7009E68F0 /* EditProductUseCase.swift in Sources */,
 				1721727A20E49245007D33A5 /* ReposViewModel.swift in Sources */,
 				17EC214B20DCDEE700F793FE /* ProductNameCell.swift in Sources */,
+				17C0F25321424D8A0047C902 /* ProductHeaderView.swift in Sources */,
 				17EC212E20DCD50700F793FE /* ProductDetailViewModel.swift in Sources */,
 				17EC213020DCD55100F793FE /* ProductDetailViewController.swift in Sources */,
 				17BD35102105D83A0042CAEB /* ProductRepository.swift in Sources */,
