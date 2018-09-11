@@ -51,7 +51,7 @@ struct EditProductViewModel: ViewModelType {
                 input.nameTrigger,
                 input.updateTrigger
             )
-            .map { $0.0 }
+            .map { $0.0 }    
             .map { name -> ValidationResult in
                 self.useCase.validate(name: name)
             }

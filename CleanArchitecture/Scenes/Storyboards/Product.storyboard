@@ -287,6 +287,42 @@
             </objects>
             <point key="canvasLocation" x="824.79999999999995" y="3080.5097451274364"/>
         </scene>
+        <!--Edit Product-->
+        <scene sceneID="Lnx-cQ-v6d">
+            <objects>
+                <viewController storyboardIdentifier="DynamicEditProductViewController" id="J8f-nG-LSt" customClass="DynamicEditProductViewController" customModule="CleanArchitecture" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FIz-6K-MZL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cfP-2a-b8f">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="P2g-jl-fTW" firstAttribute="bottom" secondItem="cfP-2a-b8f" secondAttribute="bottom" id="93J-Dt-gcJ"/>
+                            <constraint firstItem="cfP-2a-b8f" firstAttribute="leading" secondItem="P2g-jl-fTW" secondAttribute="leading" id="P5m-3R-sb4"/>
+                            <constraint firstItem="cfP-2a-b8f" firstAttribute="top" secondItem="P2g-jl-fTW" secondAttribute="top" id="XF2-v8-vWQ"/>
+                            <constraint firstItem="P2g-jl-fTW" firstAttribute="trailing" secondItem="cfP-2a-b8f" secondAttribute="trailing" id="exx-OQ-lJk"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="P2g-jl-fTW"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Product" id="i1g-jl-fAF">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="PpY-yu-q9C"/>
+                        <barButtonItem key="rightBarButtonItem" title="Update" style="done" id="euT-D1-Lcn"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cancelButton" destination="PpY-yu-q9C" id="UeD-A0-OGS"/>
+                        <outlet property="tableView" destination="cfP-2a-b8f" id="ggw-u3-wFv"/>
+                        <outlet property="updateButton" destination="euT-D1-Lcn" id="sLw-k8-uXC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B5G-a5-sPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2646" y="3081"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="1Oe-MR-n7h">
             <objects>
@@ -376,6 +412,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BaQ-OL-sD0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-114.40000000000001" y="3080.5097451274364"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LmL-LE-1bA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9ke-qT-btI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Oyw-QD-067">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="J8f-nG-LSt" kind="relationship" relationship="rootViewController" id="2mp-x1-f84"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Wy-zu-WWy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1826" y="3081"/>
         </scene>
     </scenes>
 </document>

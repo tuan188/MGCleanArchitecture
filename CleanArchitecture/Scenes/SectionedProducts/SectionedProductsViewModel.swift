@@ -12,6 +12,8 @@ struct SectionedProductsViewModel: ViewModelType {
         let reloadTrigger: Driver<Void>
         let loadMoreTrigger: Driver<Void>
         let selectProductTrigger: Driver<IndexPath>
+        let editProductTrigger: Driver<IndexPath>
+        let updatedProductTrigger: Driver<Product>
     }
 
     struct Output {
@@ -23,6 +25,8 @@ struct SectionedProductsViewModel: ViewModelType {
         let productSections: Driver<[ProductSection]>
         let selectedProduct: Driver<Void>
         let isEmptyData: Driver<Bool>
+        let editedProduct: Driver<Void>
+        let updatedProduct: Driver<Void>
     }
 
     struct ProductSection {
@@ -40,11 +44,12 @@ struct SectionedProductsViewModel: ViewModelType {
             refreshTrigger: input.reloadTrigger,
             refreshItems: useCase.getProductList,
             loadMoreTrigger: input.loadMoreTrigger,
-            loadMoreItems: useCase.loadMoreProductList)
+            loadMoreItems: useCase.loadMoreProductList,
+            mapper: ProductModel.init(product:))
         let (page, fetchItems, loadError, loading, refreshing, loadingMore) = loadMoreOutput
 
         let productSections = page
-            .map { $0.items.map { ProductModel(product: $0) } }
+            .map { $0.items.map { $0 } }
             .map { [ProductSection(header: "Section1", productList: $0)] }
             .asDriverOnErrorJustComplete()
         
@@ -68,6 +73,25 @@ struct SectionedProductsViewModel: ViewModelType {
                 if loading { return false }
                 return isEmpty
             }
+        
+        let editedProduct = input.editProductTrigger
+            .withLatestFrom(productSections) { indexPath, productSections -> Product in
+                return productSections[indexPath.section].productList[indexPath.row].product
+            }
+            .do(onNext: self.navigator.toEditProduct)
+            .mapToVoid()
+        
+        let updatedProduct = input.updatedProductTrigger
+            .do(onNext: { product in
+                let productList = page.value.items
+                let productModel = ProductModel(product: product, edited: true)
+                if let index = productList.index(of: productModel) {
+                    productList[index] = productModel
+                    let updatedPage = PagingInfo(page: page.value.page, items: productList)
+                    page.accept(updatedPage)
+                }
+            })
+            .mapToVoid()
 
         return Output(
             error: loadError,
@@ -77,7 +101,9 @@ struct SectionedProductsViewModel: ViewModelType {
             fetchItems: fetchItems,
             productSections: productSections,
             selectedProduct: selectedProduct,
-            isEmptyData: isEmptyData
+            isEmptyData: isEmptyData,
+            editedProduct: editedProduct,
+            updatedProduct: updatedProduct
         )
     }
 }

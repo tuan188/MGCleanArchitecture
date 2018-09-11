@@ -22,6 +22,8 @@ final class SectionedProductsViewModelTests: XCTestCase {
     private let reloadTrigger = PublishSubject<Void>()
     private let loadMoreTrigger = PublishSubject<Void>()
     private let selectProductTrigger = PublishSubject<IndexPath>()
+    private let editProductTrigger = PublishSubject<IndexPath>()
+    private let updatedProductTrigger = PublishSubject<Product>()
 
     override func setUp() {
         super.setUp()
@@ -33,7 +35,9 @@ final class SectionedProductsViewModelTests: XCTestCase {
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete(),
             reloadTrigger: reloadTrigger.asDriverOnErrorJustComplete(),
             loadMoreTrigger: loadMoreTrigger.asDriverOnErrorJustComplete(),
-            selectProductTrigger: selectProductTrigger.asDriverOnErrorJustComplete()
+            selectProductTrigger: selectProductTrigger.asDriverOnErrorJustComplete(),
+            editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete(),
+            updatedProductTrigger: updatedProductTrigger.asDriverOnErrorJustComplete()
         )
         output = viewModel.transform(input)
         output.error.drive().disposed(by: disposeBag)

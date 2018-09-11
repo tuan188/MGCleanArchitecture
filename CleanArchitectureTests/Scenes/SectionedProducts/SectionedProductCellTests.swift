@@ -21,5 +21,6 @@ final class SectionedProductCellTests: XCTestCase {
         XCTAssertNotNil(cell)
         XCTAssertNotNil(cell.nameLabel)
         XCTAssertNotNil(cell.priceLabel)
+        XCTAssertNotNil(cell.editButton)
     }
 }

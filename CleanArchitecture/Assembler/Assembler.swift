@@ -15,7 +15,8 @@ protocol Assembler: class,
     ProductsAssembler,
     ProductDetailAssembler,
     SectionedProductsAssembler,
-    StaticProductDetailAssembler
+    StaticProductDetailAssembler,
+    DynamicEditProductAssembler
 {
     
 }

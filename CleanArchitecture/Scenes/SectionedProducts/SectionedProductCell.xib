@@ -32,17 +32,31 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHf-1k-and">
+                        <rect key="frame" x="228" y="29" width="50" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="KAO-yT-EaR"/>
+                            <constraint firstAttribute="height" constant="30" id="Pcm-C2-S9A"/>
+                        </constraints>
+                        <state key="normal" title="Edit"/>
+                        <connections>
+                            <action selector="edit:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CYu-BE-Prw"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="DHf-1k-and" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="700-Gc-8Jd"/>
                     <constraint firstAttribute="bottomMargin" secondItem="zaQ-IG-gwW" secondAttribute="bottom" constant="7" id="AYb-Ih-yhn"/>
                     <constraint firstItem="7dR-G8-j4t" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="HDU-IS-L4G"/>
                     <constraint firstItem="zaQ-IG-gwW" firstAttribute="top" secondItem="7dR-G8-j4t" secondAttribute="bottom" constant="16.5" id="HML-8r-Ywh"/>
                     <constraint firstItem="7dR-G8-j4t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="Lez-34-Sv6"/>
                     <constraint firstItem="zaQ-IG-gwW" firstAttribute="leading" secondItem="7dR-G8-j4t" secondAttribute="leading" id="ezw-Hf-ucZ"/>
+                    <constraint firstItem="DHf-1k-and" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="g6I-xU-jU2"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="editButton" destination="DHf-1k-and" id="vrt-A9-m3R"/>
                 <outlet property="nameLabel" destination="7dR-G8-j4t" id="Axj-6c-eQX"/>
                 <outlet property="priceLabel" destination="zaQ-IG-gwW" id="lRt-ZY-Fva"/>
             </connections>

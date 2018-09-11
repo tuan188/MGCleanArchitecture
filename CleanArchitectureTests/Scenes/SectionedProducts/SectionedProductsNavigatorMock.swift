@@ -14,4 +14,11 @@ final class SectionedProductsNavigatorMock: SectionedProductsNavigatorType {
     func toProductDetail(product: Product) {
         toProductDetail_Called = true
     }
+    
+    // MARK: - toEditProduct
+    var toEditProduct_Called = false
+    func toEditProduct(_ product: Product) {
+        toEditProduct_Called = true
+    }
 }
+

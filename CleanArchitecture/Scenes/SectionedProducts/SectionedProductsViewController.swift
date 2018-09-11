@@ -16,6 +16,7 @@ final class SectionedProductsViewController: UIViewController, BindableType {
     var viewModel: SectionedProductsViewModel!
     fileprivate typealias ProductSectionModel = SectionModel<String, ProductModel>
     fileprivate var dataSource: RxTableViewSectionedReloadDataSource<ProductSectionModel>?
+    fileprivate let editProductTrigger = PublishSubject<IndexPath>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,17 +40,29 @@ final class SectionedProductsViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
+        let updatedProductTrigger = NotificationCenter.default.rx.notification(Notification.Name.updatedProduct)
+            .map { notification in
+                notification.object as? Product
+            }
+            .unwrap()
+            .asDriverOnErrorJustComplete()
+        
         let input = SectionedProductsViewModel.Input(
             loadTrigger: Driver.just(()),
             reloadTrigger: tableView.refreshTrigger,
             loadMoreTrigger: tableView.loadMoreTrigger,
-            selectProductTrigger: tableView.rx.itemSelected.asDriver()
+            selectProductTrigger: tableView.rx.itemSelected.asDriver(),
+            editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete(),
+            updatedProductTrigger: updatedProductTrigger
         )
         let output = viewModel.transform(input)
         let dataSource = RxTableViewSectionedReloadDataSource<ProductSectionModel>(
-            configureCell: { (_, tableView, indexPath, product) -> UITableViewCell in
+            configureCell: { [weak self] (_, tableView, indexPath, product) -> UITableViewCell in
                 return tableView.dequeueReusableCell(for: indexPath, cellType: SectionedProductCell.self).then {
                     $0.bindViewModel(ProductViewModel(product: product))
+                    $0.editProductAction = {
+                        self?.editProductTrigger.onNext(indexPath)
+                    }
                 }
             },
             titleForHeaderInSection: { dataSource, section in
@@ -85,6 +98,12 @@ final class SectionedProductsViewController: UIViewController, BindableType {
             .disposed(by: rx.disposeBag)
         output.isEmptyData
             .drive(tableView.isEmptyData)
+            .disposed(by: rx.disposeBag)
+        output.editedProduct
+            .drive()
+            .disposed(by: rx.disposeBag)
+        output.updatedProduct
+            .drive()
             .disposed(by: rx.disposeBag)
     }
 

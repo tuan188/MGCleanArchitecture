@@ -11,6 +11,9 @@ import UIKit
 final class SectionedProductCell: UITableViewCell, NibReusable {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var editButton: UIButton!
+    
+    var editProductAction: (() -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,6 +27,10 @@ final class SectionedProductCell: UITableViewCell, NibReusable {
             nameLabel.text = ""
             priceLabel.text = ""
         }
+    }
+    
+    @IBAction func edit(_ sender: Any) {
+        editProductAction?()
     }
 }
 
