@@ -23,6 +23,7 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
     
     fileprivate let dataTrigger = PublishSubject<DynamicEditProductViewModel.DataType>()
     fileprivate let endEditTrigger = PublishSubject<Void>()
+    fileprivate var cells = [DynamicEditProductViewModel.CellType]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,7 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
             $0.register(cellType: EditProductPriceCell.self)
             $0.tableFooterView = UIView()
             $0.keyboardDismissMode = .onDrag
+            $0.dataSource = self
         }
     }
 
@@ -44,9 +46,9 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
-        let loadTrigger = endEditTrigger
+        let loadTrigger = endEditTrigger.map { DynamicEditProductViewModel.TriggerType.endEditing }
             .asDriverOnErrorJustComplete()
-            .startWith(())
+            .startWith(DynamicEditProductViewModel.TriggerType.load)
         let input = DynamicEditProductViewModel.Input(
             loadTrigger: loadTrigger,
             updateTrigger: updateButton.rx.tap.asDriver(),
@@ -60,55 +62,7 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
             .drive()
             .disposed(by: rx.disposeBag)
         output.cells
-            .drive(tableView.rx.items) { [weak self] tableView, index, cellType in
-                let indexPath = IndexPath(row: index, section: 0)
-                let viewModel = ValidationResultViewModel(validationResult: cellType.validationResult)
-                switch cellType.dataType {
-                case let .name(name):
-                    let cell = tableView.dequeueReusableCell(
-                        for: indexPath,
-                        cellType: EditProductNameCell.self).then {
-                            $0.nameTextField.text = name
-                            $0.nameTextField.backgroundColor = viewModel.backgroundColor
-                            $0.validationLabel.text = viewModel.text
-                            
-                    }
-                    cell.nameTextField.rx.text.orEmpty
-                        .subscribe(onNext: { text in
-                            self?.dataTrigger.onNext(DynamicEditProductViewModel.DataType.name(text))
-                        })
-                        .disposed(by: cell.rx.disposeBag)
-                    cell.nameTextField.rx.controlEvent(UIControlEvents.editingDidEnd)
-                        .subscribe(onNext: { _ in
-                            self?.endEditTrigger.onNext(())
-                        })
-                        .disposed(by: cell.rx.disposeBag)
-                    self?.nameTextField = cell.nameTextField
-                    self?.nameValidationLabel = cell.validationLabel
-                    return cell
-                case let .price(price):
-                    let cell = tableView.dequeueReusableCell(
-                        for: indexPath,
-                        cellType: EditProductPriceCell.self).then {
-                            $0.priceTextField.text = price
-                            $0.priceTextField.backgroundColor = viewModel.backgroundColor
-                            $0.validationLabel.text = viewModel.text
-                    }
-                    cell.priceTextField.rx.text.orEmpty
-                        .subscribe(onNext: { text in
-                            self?.dataTrigger.onNext(DynamicEditProductViewModel.DataType.price(text))
-                        })
-                        .disposed(by: cell.rx.disposeBag)
-                    cell.priceTextField.rx.controlEvent(UIControlEvents.editingDidEnd)
-                        .subscribe(onNext: { _ in
-                            self?.endEditTrigger.onNext(())
-                        })
-                        .disposed(by: cell.rx.disposeBag)
-                    self?.priceTextField = cell.priceTextField
-                    self?.priceValidationLabel = cell.validationLabel
-                    return cell
-                }
-            }
+            .drive(cellsBinding)
             .disposed(by: rx.disposeBag)
         output.updatedProduct
             .drive()
@@ -145,6 +99,72 @@ extension DynamicEditProductViewController {
             let viewModel = ValidationResultViewModel(validationResult: validation)
             vc.priceTextField?.backgroundColor = viewModel.backgroundColor
             vc.priceValidationLabel?.text = viewModel.text
+        }
+    }
+    
+    var cellsBinding: Binder<([DynamicEditProductViewModel.CellType], Bool)> {
+        return Binder(self) { vc, args in
+            let (cells, needReload) = args
+            vc.cells = cells
+            if needReload {
+                vc.tableView.reloadData()
+            }
+        }
+    }
+}
+
+extension DynamicEditProductViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cells.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellType = cells[indexPath.row]
+        let viewModel = ValidationResultViewModel(validationResult: cellType.validationResult)
+        switch cellType.dataType {
+        case let .name(name):
+            let cell = tableView.dequeueReusableCell(
+                for: indexPath,
+                cellType: EditProductNameCell.self).then {
+                    $0.nameTextField.text = name
+                    $0.nameTextField.backgroundColor = viewModel.backgroundColor
+                    $0.validationLabel.text = viewModel.text
+                    
+            }
+            cell.nameTextField.rx.text.orEmpty
+                .subscribe(onNext: { [unowned self] text in
+                    self.dataTrigger.onNext(DynamicEditProductViewModel.DataType.name(text))
+                })
+                .disposed(by: cell.rx.disposeBag)
+            cell.nameTextField.rx.controlEvent(UIControlEvents.editingDidEnd)
+                .subscribe(onNext: { [unowned self] _ in
+                    self.endEditTrigger.onNext(())
+                })
+                .disposed(by: cell.rx.disposeBag)
+            nameTextField = cell.nameTextField
+            nameValidationLabel = cell.validationLabel
+            return cell
+        case let .price(price):
+            let cell = tableView.dequeueReusableCell(
+                for: indexPath,
+                cellType: EditProductPriceCell.self).then {
+                    $0.priceTextField.text = price
+                    $0.priceTextField.backgroundColor = viewModel.backgroundColor
+                    $0.validationLabel.text = viewModel.text
+            }
+            cell.priceTextField.rx.text.orEmpty
+                .subscribe(onNext: { [unowned self] text in
+                    self.dataTrigger.onNext(DynamicEditProductViewModel.DataType.price(text))
+                })
+                .disposed(by: cell.rx.disposeBag)
+            cell.priceTextField.rx.controlEvent(UIControlEvents.editingDidEnd)
+                .subscribe(onNext: { [unowned self] _ in
+                    self.endEditTrigger.onNext(())
+                })
+                .disposed(by: cell.rx.disposeBag)
+            priceTextField = cell.priceTextField
+            priceValidationLabel = cell.validationLabel
+            return cell
         }
     }
 }

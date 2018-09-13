@@ -8,7 +8,7 @@
 
 struct DynamicEditProductViewModel: ViewModelType {
     struct Input {
-        let loadTrigger: Driver<Void>
+        let loadTrigger: Driver<TriggerType>
         let updateTrigger: Driver<Void>
         let cancelTrigger: Driver<Void>
         let dataTrigger: Driver<DataType>
@@ -22,7 +22,7 @@ struct DynamicEditProductViewModel: ViewModelType {
         let cancel: Driver<Void>
         let error: Driver<Error>
         let loading: Driver<Bool>
-        let cells: Driver<[CellType]>
+        let cells: Driver<([CellType], Bool)>
     }
     
     enum DataType {
@@ -33,6 +33,11 @@ struct DynamicEditProductViewModel: ViewModelType {
     struct CellType {
         let dataType: DataType
         let validationResult: ValidationResult
+    }
+    
+    enum TriggerType {
+        case load
+        case endEditing
     }
 
     let navigator: DynamicEditProductNavigatorType
@@ -101,6 +106,9 @@ struct DynamicEditProductViewModel: ViewModelType {
                     CellType(dataType: .name(product.name), validationResult: nameValidation),
                     CellType(dataType: .price(String(product.price)), validationResult: priceValidation)
                 ]
+            }
+            .withLatestFrom(input.loadTrigger) {
+                ($0, $1 == .load)
             }
         
         let cancel = input.cancelTrigger
