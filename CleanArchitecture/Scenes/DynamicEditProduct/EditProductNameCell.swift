@@ -12,8 +12,15 @@ final class EditProductNameCell: UITableViewCell, NibReusable {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var validationLabel: UILabel!
+    
+    private(set) var disposeBag = DisposeBag()
 
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
 }

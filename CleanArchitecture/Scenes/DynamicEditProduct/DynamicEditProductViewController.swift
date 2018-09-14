@@ -137,12 +137,12 @@ extension DynamicEditProductViewController: UITableViewDataSource {
                 .subscribe(onNext: { [unowned self] text in
                     self.dataTrigger.onNext(DynamicEditProductViewModel.DataType.name(text))
                 })
-                .disposed(by: cell.rx.disposeBag)
+                .disposed(by: cell.disposeBag)
             cell.nameTextField.rx.controlEvent(UIControlEvents.editingDidEnd)
                 .subscribe(onNext: { [unowned self] _ in
                     self.endEditTrigger.onNext(())
                 })
-                .disposed(by: cell.rx.disposeBag)
+                .disposed(by: cell.disposeBag)
             nameTextField = cell.nameTextField
             nameValidationLabel = cell.validationLabel
             return cell
@@ -158,12 +158,12 @@ extension DynamicEditProductViewController: UITableViewDataSource {
                 .subscribe(onNext: { [unowned self] text in
                     self.dataTrigger.onNext(DynamicEditProductViewModel.DataType.price(text))
                 })
-                .disposed(by: cell.rx.disposeBag)
+                .disposed(by: cell.disposeBag)
             cell.priceTextField.rx.controlEvent(UIControlEvents.editingDidEnd)
                 .subscribe(onNext: { [unowned self] _ in
                     self.endEditTrigger.onNext(())
                 })
-                .disposed(by: cell.rx.disposeBag)
+                .disposed(by: cell.disposeBag)
             priceTextField = cell.priceTextField
             priceValidationLabel = cell.validationLabel
             return cell
