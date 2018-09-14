@@ -23,7 +23,7 @@ struct ValidationResultViewModel {
     var text: String {
         switch validationResult {
         case .valid:
-            return ""
+            return " "
         case .invalid(let errors):
             return errors.map { $0.localizedDescription }.joined(separator: "\n")
         }

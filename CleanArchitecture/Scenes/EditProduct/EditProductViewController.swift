@@ -49,10 +49,10 @@ final class EditProductViewController: UITableViewController, BindableType {
             .drive(priceTextField.rx.text)
             .disposed(by: rx.disposeBag)
         output.nameValidation
-            .drive(nameValidatorBinding)
+            .drive(nameValidatorBinder)
             .disposed(by: rx.disposeBag)
         output.priceValidation
-            .drive(priceValidatorBinding)
+            .drive(priceValidatorBinder)
             .disposed(by: rx.disposeBag)
         output.updateEnable
             .drive(updateButton.rx.isEnabled)
@@ -73,32 +73,21 @@ final class EditProductViewController: UITableViewController, BindableType {
 
 }
 
+// MARK: - Binders
 extension EditProductViewController {
-    var nameValidatorBinding: Binder<ValidationResult> {
+    var nameValidatorBinder: Binder<ValidationResult> {
         return Binder(self) { vc, validation in
-            switch validation {
-            case .valid:
-                vc.nameTextField.backgroundColor = UIColor.white
-                vc.nameValidationLabel.text = " "
-            case .invalid(let errors):
-                vc.nameTextField.backgroundColor = UIColor.yellow
-                let errorText = errors.map { $0.localizedDescription }.joined(separator: "\n")
-                vc.nameValidationLabel.text = errorText
-            }
+            let viewModel = ValidationResultViewModel(validationResult: validation)
+            vc.nameTextField.backgroundColor = viewModel.backgroundColor
+            vc.nameValidationLabel.text = viewModel.text
         }
     }
     
-    var priceValidatorBinding: Binder<ValidationResult> {
+    var priceValidatorBinder: Binder<ValidationResult> {
         return Binder(self) { vc, validation in
-            switch validation {
-            case .valid:
-                vc.priceTextField.backgroundColor = UIColor.white
-                vc.priceValidationLabel.text = " "
-            case .invalid(let errors):
-                vc.priceTextField.backgroundColor = UIColor.yellow
-                let errorText = errors.map { $0.localizedDescription }.joined(separator: "\n")
-                vc.priceValidationLabel.text = errorText
-            }
+            let viewModel = ValidationResultViewModel(validationResult: validation)
+            vc.priceTextField.backgroundColor = viewModel.backgroundColor
+            vc.priceValidationLabel.text = viewModel.text
         }
     }
 }

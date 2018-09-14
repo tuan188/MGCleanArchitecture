@@ -62,16 +62,16 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
             .drive()
             .disposed(by: rx.disposeBag)
         output.cells
-            .drive(cellsBinding)
+            .drive(cellsBinder)
             .disposed(by: rx.disposeBag)
         output.updatedProduct
             .drive()
             .disposed(by: rx.disposeBag)
         output.nameValidation
-            .drive(nameValidatorBinding)
+            .drive(nameValidatorBinder)
             .disposed(by: rx.disposeBag)
         output.priceValidation
-            .drive(priceValidatorBinding)
+            .drive(priceValidatorBinder)
             .disposed(by: rx.disposeBag)
         output.updateEnable
             .drive(updateButton.rx.isEnabled)
@@ -85,8 +85,9 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
     }
 }
 
+// MARK: - Binders
 extension DynamicEditProductViewController {
-    var nameValidatorBinding: Binder<ValidationResult> {
+    var nameValidatorBinder: Binder<ValidationResult> {
         return Binder(self) { vc, validation in
             let viewModel = ValidationResultViewModel(validationResult: validation)
             vc.nameTextField?.backgroundColor = viewModel.backgroundColor
@@ -94,7 +95,7 @@ extension DynamicEditProductViewController {
         }
     }
     
-    var priceValidatorBinding: Binder<ValidationResult> {
+    var priceValidatorBinder: Binder<ValidationResult> {
         return Binder(self) { vc, validation in
             let viewModel = ValidationResultViewModel(validationResult: validation)
             vc.priceTextField?.backgroundColor = viewModel.backgroundColor
@@ -102,7 +103,7 @@ extension DynamicEditProductViewController {
         }
     }
     
-    var cellsBinding: Binder<([DynamicEditProductViewModel.CellType], Bool)> {
+    var cellsBinder: Binder<([DynamicEditProductViewModel.CellType], Bool)> {
         return Binder(self) { vc, args in
             let (cells, needReload) = args
             vc.cells = cells
@@ -113,6 +114,7 @@ extension DynamicEditProductViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension DynamicEditProductViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cells.count
