@@ -164,6 +164,11 @@
 		17EC215920DCECBC00F793FE /* ProductDetailNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EC215820DCECBC00F793FE /* ProductDetailNavigator.swift */; };
 		17EF7B2A21479727005DFB79 /* ValidationResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EF7B2921479727005DFB79 /* ValidationResultViewModel.swift */; };
 		17EF7B2C21479A3A005DFB79 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EF7B2B21479A3A005DFB79 /* Notifications.swift */; };
+		17F4CABD214B8E05009212A4 /* DynamicEditProductUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CAB9214B8E04009212A4 /* DynamicEditProductUseCaseMock.swift */; };
+		17F4CABE214B8E05009212A4 /* DynamicEditProductNavigatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CABA214B8E04009212A4 /* DynamicEditProductNavigatorMock.swift */; };
+		17F4CABF214B8E05009212A4 /* DynamicEditProductViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CABB214B8E04009212A4 /* DynamicEditProductViewControllerTests.swift */; };
+		17F4CAC0214B8E05009212A4 /* DynamicEditProductViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CABC214B8E05009212A4 /* DynamicEditProductViewModelTests.swift */; };
+		17F4CAC2214BB3E4009212A4 /* DynamicEditProductCellsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CAC1214BB3E4009212A4 /* DynamicEditProductCellsTests.swift */; };
 		3A2E02F187E8710B78B5E231 /* Pods_CleanArchitectureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5FD8603288973AA5E739DF2 /* Pods_CleanArchitectureTests.framework */; };
 		47C2C4AB2C7FDC58DF2C2E07 /* Pods_CleanArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD71CA6A0F61765728AEC51B /* Pods_CleanArchitecture.framework */; };
 /* End PBXBuildFile section */
@@ -341,6 +346,11 @@
 		17EC215820DCECBC00F793FE /* ProductDetailNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailNavigator.swift; sourceTree = "<group>"; };
 		17EF7B2921479727005DFB79 /* ValidationResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultViewModel.swift; sourceTree = "<group>"; };
 		17EF7B2B21479A3A005DFB79 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		17F4CAB9214B8E04009212A4 /* DynamicEditProductUseCaseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicEditProductUseCaseMock.swift; sourceTree = "<group>"; };
+		17F4CABA214B8E04009212A4 /* DynamicEditProductNavigatorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicEditProductNavigatorMock.swift; sourceTree = "<group>"; };
+		17F4CABB214B8E04009212A4 /* DynamicEditProductViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicEditProductViewControllerTests.swift; sourceTree = "<group>"; };
+		17F4CABC214B8E05009212A4 /* DynamicEditProductViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicEditProductViewModelTests.swift; sourceTree = "<group>"; };
+		17F4CAC1214BB3E4009212A4 /* DynamicEditProductCellsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicEditProductCellsTests.swift; sourceTree = "<group>"; };
 		1B56A7B3E25D78F505421566 /* Pods-CleanArchitectureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitectureTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitectureTests/Pods-CleanArchitectureTests.release.xcconfig"; sourceTree = "<group>"; };
 		24453F7014456B10492E9F99 /* Pods-CleanArchitecture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitecture.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitecture/Pods-CleanArchitecture.release.xcconfig"; sourceTree = "<group>"; };
 		5E4085BD6F7B046C5AF86A7D /* Pods-CleanArchitectureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitectureTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitectureTests/Pods-CleanArchitectureTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -663,6 +673,7 @@
 		172DC28620C53E2E009FC881 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				17F4CAB8214B8DF8009212A4 /* DynamicEditProduct */,
 				1721727C20E492D0007D33A5 /* Repos */,
 				1706D2AE20E213BF001798FB /* EditProduct */,
 				17D80D1420DF908B009E68F0 /* StaticProductDetail */,
@@ -898,6 +909,18 @@
 				170A6BA520FB58D7003ECCF2 /* StaticProductDetailAssembler.swift */,
 			);
 			path = StaticProductDetail;
+			sourceTree = "<group>";
+		};
+		17F4CAB8214B8DF8009212A4 /* DynamicEditProduct */ = {
+			isa = PBXGroup;
+			children = (
+				17F4CABA214B8E04009212A4 /* DynamicEditProductNavigatorMock.swift */,
+				17F4CAB9214B8E04009212A4 /* DynamicEditProductUseCaseMock.swift */,
+				17F4CABB214B8E04009212A4 /* DynamicEditProductViewControllerTests.swift */,
+				17F4CABC214B8E05009212A4 /* DynamicEditProductViewModelTests.swift */,
+				17F4CAC1214BB3E4009212A4 /* DynamicEditProductCellsTests.swift */,
+			);
+			path = DynamicEditProduct;
 			sourceTree = "<group>";
 		};
 		AB3DC3B869CF06A149B17C0D /* Pods */ = {
@@ -1251,8 +1274,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1721728620E492DD007D33A5 /* ReposUseCaseMock.swift in Sources */,
+				17F4CAC2214BB3E4009212A4 /* DynamicEditProductCellsTests.swift in Sources */,
 				1721728220E492DD007D33A5 /* RepoCellTests.swift in Sources */,
 				172DC29620C53E5D009FC881 /* AppUseCaseMock.swift in Sources */,
+				17F4CABD214B8E05009212A4 /* DynamicEditProductUseCaseMock.swift in Sources */,
 				177982CA20CE1B830095CCA8 /* SectionedProductCellTests.swift in Sources */,
 				17EC214320DCD86600F793FE /* ProductDetailViewModelTests.swift in Sources */,
 				172DC29020C53E4F009FC881 /* MainNavigatorMock.swift in Sources */,
@@ -1265,9 +1290,11 @@
 				172DC28E20C53E4F009FC881 /* MainUseCaseMock.swift in Sources */,
 				172DC28D20C53E4F009FC881 /* MainViewControllerTests.swift in Sources */,
 				1706D2B520E213D4001798FB /* EditProductViewModelTests.swift in Sources */,
+				17F4CAC0214B8E05009212A4 /* DynamicEditProductViewModelTests.swift in Sources */,
 				172DC2E920C67E6A009FC881 /* ProductsViewControllerTests.swift in Sources */,
 				172DC29420C53E5D009FC881 /* AppViewModelTests.swift in Sources */,
 				1706D2B420E213D4001798FB /* EditProductUseCaseMock.swift in Sources */,
+				17F4CABE214B8E05009212A4 /* DynamicEditProductNavigatorMock.swift in Sources */,
 				177982C820CE1B830095CCA8 /* SectionedProductsUseCaseMock.swift in Sources */,
 				177982C920CE1B830095CCA8 /* SectionedProductsViewControllerTests.swift in Sources */,
 				172DC2A420C55674009FC881 /* MenuCellTests.swift in Sources */,
@@ -1276,6 +1303,7 @@
 				17EC215720DCECA300F793FE /* ProductDetailNavigatorMock.swift in Sources */,
 				17D80D1C20DF9164009E68F0 /* StaticProductDetailUseCaseMock.swift in Sources */,
 				172DC2EA20C67E6A009FC881 /* ProductsUseCaseMock.swift in Sources */,
+				17F4CABF214B8E05009212A4 /* DynamicEditProductViewControllerTests.swift in Sources */,
 				17EC214820DCDC1600F793FE /* ProductDetailCellsTests.swift in Sources */,
 				1706D2B620E213D4001798FB /* EditProductViewControllerTests.swift in Sources */,
 				1721728320E492DD007D33A5 /* ReposViewControllerTests.swift in Sources */,

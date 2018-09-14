@@ -68,6 +68,7 @@ final class EditProductViewModelTests: XCTestCase {
     
     func test_loadTriggerInvoked_enableUpdateByDefault() {
         // act
+        loadTrigger.onNext(())
         let updateEnable = try? output.updateEnable.toBlocking(timeout: 1).first()
         
         // assert
