@@ -9,4 +9,5 @@ Inspired by https://github.com/sergdort/CleanArchitectureRxSwift
 
 ## Links
 
-[Dependency Injection in Swift — Part 1](https://medium.com/makingtuenti/dependency-injection-in-swift-part-1-236fddad144a)
+- [Dependency Injection in Swift — Part 1](https://medium.com/makingtuenti/dependency-injection-in-swift-part-1-236fddad144a)
+- [igen - Code Generation Tools for iOS](https://github.com/tuan188/MGiOSTools)
