@@ -89,6 +89,7 @@ final class RepoCollectionViewController: UIViewController, BindableType {
     }
 }
 
+// MARK: - StoryboardSceneBased
 extension RepoCollectionViewController: StoryboardSceneBased {
     static var sceneStoryboard = Storyboards.repo
 }

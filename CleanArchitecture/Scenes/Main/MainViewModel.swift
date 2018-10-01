@@ -37,8 +37,6 @@ struct MainViewModel: ViewModelType {
             .map { $0.menu }
             .do(onNext: { menu in
                 switch menu {
-//                case .login:
-//                    self.navigator.toLogin()
                 case .products:
                     self.navigator.toProducts()
                 case .sectionedProducts:
@@ -59,7 +57,6 @@ struct MainViewModel: ViewModelType {
 
 extension MainViewModel {
     enum Menu: Int, CustomStringConvertible {
-//        case login
         case products
         case sectionedProducts
         case repos
@@ -67,8 +64,6 @@ extension MainViewModel {
         
         var description: String {
             switch self {
-//            case .login:
-//                return "Login"
             case .products:
                 return "Product list"
             case .sectionedProducts:

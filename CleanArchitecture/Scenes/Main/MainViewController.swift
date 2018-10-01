@@ -10,11 +10,10 @@ import UIKit
 import Reusable
 
 final class MainViewController: UIViewController, BindableType {
-    
     @IBOutlet weak var tableView: UITableView!
 
     var viewModel: MainViewModel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
@@ -31,7 +30,7 @@ final class MainViewController: UIViewController, BindableType {
     deinit {
         logDeinit()
     }
-
+    
     func bindViewModel() {
         let input = MainViewModel.Input(
             loadTrigger: Driver.just(()),

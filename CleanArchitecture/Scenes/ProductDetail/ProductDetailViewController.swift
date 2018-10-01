@@ -59,6 +59,5 @@ final class ProductDetailViewController: UIViewController, BindableType {
 
 // MARK: - StoryboardSceneBased
 extension ProductDetailViewController: StoryboardSceneBased {
-    // TODO: - Update storyboard
     static var sceneStoryboard = Storyboards.product
 }
