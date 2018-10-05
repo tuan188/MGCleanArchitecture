@@ -9,7 +9,6 @@
 protocol ReposNavigatorType {
     func toRepos()
     func toRepoDetail(repo: Repo)
-    func toRepoCollection()
 }
 
 struct ReposNavigator: ReposNavigatorType {
@@ -23,11 +22,6 @@ struct ReposNavigator: ReposNavigatorType {
 
     func toRepoDetail(repo: Repo) {
 
-    }
-    
-    func toRepoCollection() {
-        let vc: RepoCollectionViewController = assembler.resolve(navigationController: navigationController)
-        navigationController.pushViewController(vc, animated: true)
     }
 }
 
