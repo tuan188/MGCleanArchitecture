@@ -51,6 +51,7 @@ final class ReposViewController: UIViewController, BindableType {
                     }
             }
             .disposed(by: rx.disposeBag)
+    
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)

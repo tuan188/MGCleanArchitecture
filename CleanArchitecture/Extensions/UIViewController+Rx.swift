@@ -12,7 +12,6 @@ extension Reactive where Base: UIViewController {
         return Binder(base) { viewController, isLoading in
             if isLoading {
                 let hud = MBProgressHUD.showAdded(to: viewController.view, animated: true)
-                hud.offset.y = -30
             } else {
                 MBProgressHUD.hide(for: viewController.view, animated: true)
             }
