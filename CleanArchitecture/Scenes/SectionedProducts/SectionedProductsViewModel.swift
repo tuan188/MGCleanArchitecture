@@ -6,7 +6,13 @@
 // Copyright © 2018 Framgia. All rights reserved.
 //
 
-struct SectionedProductsViewModel: ViewModelType {
+struct SectionedProductsViewModel {
+    let navigator: SectionedProductsNavigatorType
+    let useCase: SectionedProductsUseCaseType
+}
+
+// MARK: - ViewModelType
+extension SectionedProductsViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<Void>
         let reloadTrigger: Driver<Void>
@@ -33,9 +39,6 @@ struct SectionedProductsViewModel: ViewModelType {
         let header: String
         let productList: [ProductModel]
     }
-
-    let navigator: SectionedProductsNavigatorType
-    let useCase: SectionedProductsUseCaseType
 
     func transform(_ input: Input) -> Output {
         let loadMoreOutput = setupLoadMorePaging(

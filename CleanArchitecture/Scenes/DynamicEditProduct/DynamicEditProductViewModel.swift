@@ -6,7 +6,14 @@
 // Copyright © 2018 Framgia. All rights reserved.
 //
 
-struct DynamicEditProductViewModel: ViewModelType {
+struct DynamicEditProductViewModel {
+    let navigator: DynamicEditProductNavigatorType
+    let useCase: DynamicEditProductUseCaseType
+    let product: Product
+}
+
+// MARK: - ViewModelType
+extension DynamicEditProductViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<TriggerType>
         let updateTrigger: Driver<Void>
@@ -39,10 +46,6 @@ struct DynamicEditProductViewModel: ViewModelType {
         case load
         case endEditing
     }
-
-    let navigator: DynamicEditProductNavigatorType
-    let useCase: DynamicEditProductUseCaseType
-    let product: Product
 
     func transform(_ input: Input) -> Output {
         let errorTracker = ErrorTracker()

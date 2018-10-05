@@ -10,8 +10,15 @@ enum EditProductDelegate {
     case updatedProduct(Product)
 }
 
-struct EditProductViewModel: ViewModelType {
+struct EditProductViewModel {
+    let navigator: EditProductNavigatorType
+    let useCase: EditProductUseCaseType
+    let product: Product
+    let delegate: PublishSubject<EditProductDelegate>
+}
 
+// MARK: - ViewModelType
+extension EditProductViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<Void>
         let nameTrigger: Driver<String>
@@ -31,11 +38,6 @@ struct EditProductViewModel: ViewModelType {
         let error: Driver<Error>
         let loading: Driver<Bool>
     }
-
-    let navigator: EditProductNavigatorType
-    let useCase: EditProductUseCaseType
-    let product: Product
-    let delegate: PublishSubject<EditProductDelegate>
 
     func transform(_ input: Input) -> Output {
         let errorTracker = ErrorTracker()

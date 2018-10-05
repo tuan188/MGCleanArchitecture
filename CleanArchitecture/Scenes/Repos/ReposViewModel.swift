@@ -6,7 +6,13 @@
 // Copyright © 2018 Framgia. All rights reserved.
 //
 
-struct ReposViewModel: ViewModelType {
+struct ReposViewModel {
+    let navigator: ReposNavigatorType
+    let useCase: ReposUseCaseType
+}
+
+// MARK: - ViewModelType
+extension ReposViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<Void>
         let reloadTrigger: Driver<Void>
@@ -24,9 +30,6 @@ struct ReposViewModel: ViewModelType {
         let selectedRepo: Driver<Void>
         let isEmptyData: Driver<Bool>
     }
-
-    let navigator: ReposNavigatorType
-    let useCase: ReposUseCaseType
 
     func transform(_ input: Input) -> Output {
         let loadMoreOutput = setupLoadMorePaging(

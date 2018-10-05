@@ -6,8 +6,14 @@
 // Copyright © 2018 Framgia. All rights reserved.
 //
 
-struct StaticProductDetailViewModel: ViewModelType {
+struct StaticProductDetailViewModel {
+    let navigator: StaticProductDetailNavigatorType
+    let useCase: StaticProductDetailUseCaseType
+    let product: Product
+}
 
+// MARK: - ViewModelType
+extension StaticProductDetailViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<Void>
     }
@@ -16,10 +22,6 @@ struct StaticProductDetailViewModel: ViewModelType {
         let name: Driver<String>
         let price: Driver<String>
     }
-
-    let navigator: StaticProductDetailNavigatorType
-    let useCase: StaticProductDetailUseCaseType
-    let product: Product
 
     func transform(_ input: Input) -> Output {
         let product = input.loadTrigger

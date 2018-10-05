@@ -6,8 +6,13 @@
 // Copyright © 2018 Framgia. All rights reserved.
 //
 
-struct MainViewModel: ViewModelType {
+struct MainViewModel {
+    let navigator: MainNavigatorType
+    let useCase: MainUseCaseType
+}
 
+// MARK: - ViewModelType
+extension MainViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<Void>
         let selectMenuTrigger: Driver<IndexPath>
@@ -21,9 +26,6 @@ struct MainViewModel: ViewModelType {
     struct MenuModel {
         let menu: Menu
     }
-
-    let navigator: MainNavigatorType
-    let useCase: MainUseCaseType
 
     func transform(_ input: Input) -> Output {
         let menuList = input.loadTrigger

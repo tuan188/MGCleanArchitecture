@@ -6,7 +6,13 @@
 // Copyright © 2018 Framgia. All rights reserved.
 //
 
-struct ProductsViewModel: ViewModelType {
+struct ProductsViewModel {
+    let navigator: ProductsNavigatorType
+    let useCase: ProductsUseCaseType
+}
+
+// MARK: - ViewModelType
+extension ProductsViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<Void>
         let reloadTrigger: Driver<Void>
@@ -28,9 +34,6 @@ struct ProductsViewModel: ViewModelType {
         let isEmptyData: Driver<Bool>
         let deletedProduct: Driver<Void>
     }
-
-    let navigator: ProductsNavigatorType
-    let useCase: ProductsUseCaseType
 
     func transform(_ input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
