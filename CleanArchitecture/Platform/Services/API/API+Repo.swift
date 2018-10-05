@@ -11,7 +11,7 @@ import ObjectMapper
 // MARK: - GetRepoList
 extension API {
     final class GetRepoListInput: APIInput {
-        init(page: Int, perPage: Int = 10) {
+        init(page: Int, perPage: Int = 20) {
             let params: JSONDictionary = [
                 "q": "language:swift",
                 "per_page": perPage,

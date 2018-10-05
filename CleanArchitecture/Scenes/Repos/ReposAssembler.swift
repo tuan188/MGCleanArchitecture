@@ -10,7 +10,6 @@ import Foundation
 
 protocol ReposAssembler {
     func resolve(navigationController: UINavigationController) -> ReposViewController
-    func resolve(navigationController: UINavigationController) -> RepoCollectionViewController
     func resolve(navigationController: UINavigationController) -> ReposViewModel
     func resolve(navigationController: UINavigationController) -> ReposNavigatorType
     func resolve() -> ReposUseCaseType
@@ -19,13 +18,6 @@ protocol ReposAssembler {
 extension ReposAssembler {
     func resolve(navigationController: UINavigationController) -> ReposViewController {
         let vc = ReposViewController.instantiate()
-        let vm: ReposViewModel = resolve(navigationController: navigationController)
-        vc.bindViewModel(to: vm)
-        return vc
-    }
-    
-    func resolve(navigationController: UINavigationController) -> RepoCollectionViewController {
-        let vc = RepoCollectionViewController.instantiate()
         let vm: ReposViewModel = resolve(navigationController: navigationController)
         vc.bindViewModel(to: vm)
         return vc

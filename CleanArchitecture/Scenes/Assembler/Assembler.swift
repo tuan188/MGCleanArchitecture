@@ -10,14 +10,7 @@ protocol Assembler: class,
     RepositoriesAssembler,
     AppAssembler,
     MainAssembler,
-    ReposAssembler,
-    EditProductAssembler,
-    ProductsAssembler,
-    ProductDetailAssembler,
-    SectionedProductsAssembler,
-    StaticProductDetailAssembler,
-    DynamicEditProductAssembler
-{
+    ReposAssembler {
     
 }
 

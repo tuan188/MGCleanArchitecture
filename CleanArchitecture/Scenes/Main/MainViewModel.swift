@@ -39,14 +39,8 @@ extension MainViewModel: ViewModelType {
             .map { $0.menu }
             .do(onNext: { menu in
                 switch menu {
-                case .products:
-                    self.navigator.toProducts()
-                case .sectionedProducts:
-                    self.navigator.toSectionedProducts()
                 case .repos:
                     self.navigator.toRepos()
-                case .repoCollection:
-                    self.navigator.toRepoCollection()
                 }
             })
             .mapToVoid()
@@ -59,24 +53,15 @@ extension MainViewModel: ViewModelType {
 
 extension MainViewModel {
     enum Menu: Int, CustomStringConvertible {
-        case products
-        case sectionedProducts
         case repos
-        case repoCollection
         
         var description: String {
             switch self {
-            case .products:
-                return "Product list"
-            case .sectionedProducts:
-                return "Sectioned product list"
             case .repos:
                 return "Git repo list"
-            case .repoCollection:
-                return "Git repo collection"
             }
         }
         
-        static var all: [Menu] = [.products, .sectionedProducts, .repos, .repoCollection]
+        static var all: [Menu] = [.repos]
     }
 }

@@ -3,21 +3,21 @@ import UIKit
 
 class RefreshTableView: UITableView {
     var loadingMoreTop: Binder<Bool> {
-        return Binder(self) { collectionView, loading in
+        return Binder(self) { tableView, loading in
             if loading {
-                collectionView.mj_header?.beginRefreshing()
+                tableView.mj_header?.beginRefreshing()
             } else {
-                collectionView.mj_header?.endRefreshing()
+                tableView.mj_header?.endRefreshing()
             }
         }
     }
     
     var loadingMoreBottom: Binder<Bool> {
-        return Binder(self) { collectionView, loading in
+        return Binder(self) { tableView, loading in
             if loading {
-                collectionView.mj_footer?.beginRefreshing()
+                tableView.mj_footer?.beginRefreshing()
             } else {
-                collectionView.mj_footer?.endRefreshing()
+                tableView.mj_footer?.endRefreshing()
             }
         }
     }
