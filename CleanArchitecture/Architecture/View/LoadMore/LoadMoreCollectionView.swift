@@ -38,7 +38,7 @@ class LoadMoreCollectionView: UICollectionView {
     var refreshFooter: MJRefreshFooter? {
         didSet {
             mj_footer = refreshFooter
-            mj_footer.refreshingBlock = { [weak self] in
+            mj_footer?.refreshingBlock = { [weak self] in
                 self?._loadMoreTrigger.onNext(())
             }
         }

@@ -87,7 +87,9 @@ extension ViewModelType {
             
             let loading = loadingActivityIndicator.asDriver()
             let refreshing = refreshingActivityIndicator.asDriver()
-            let loadingMore = loadingMoreActivityIndicator.asDriver()
+            let loadingMoreSubject = PublishSubject<Bool>()
+            let loadingMore = Driver.merge(loadingMoreActivityIndicator.asDriver(),
+                                           loadingMoreSubject.asDriverOnErrorJustComplete())
             
             let loadingOrLoadingMore = Driver.merge(loading, refreshing, loadingMore)
                 .startWith(false)
@@ -132,6 +134,15 @@ extension ViewModelType {
                 }
                 .filter { !$0.loading }
                 .map { $0.arg }
+                .withLatestFrom(pageSubject.asDriverOnErrorJustComplete()) { arg, page in
+                    (arg, page)
+                }
+                .do(onNext: { _, page in
+                    if page.items.isEmpty {
+                        loadingMoreSubject.onNext(false)
+                    }
+                })
+                .map { $0.0 }
                 .filter { _ in !pageSubject.value.items.isEmpty }
                 .flatMapLatest { arg -> Driver<PagingInfo<T>> in
                     let page = pageSubject.value.page
@@ -181,7 +192,9 @@ extension ViewModelType {
             
             let loading = loadingActivityIndicator.asDriver()
             let refreshing = refreshingActivityIndicator.asDriver()
-            let loadingMore = loadingMoreActivityIndicator.asDriver()
+            let loadingMoreSubject = PublishSubject<Bool>()
+            let loadingMore = Driver.merge(loadingMoreActivityIndicator.asDriver(),
+                                           loadingMoreSubject.asDriverOnErrorJustComplete())
             
             let loadingOrLoadingMore = Driver.merge(loading, refreshing, loadingMore)
                 .startWith(false)
@@ -230,6 +243,15 @@ extension ViewModelType {
                 }
                 .filter { !$0.loading }
                 .map { $0.arg }
+                .withLatestFrom(pageSubject.asDriverOnErrorJustComplete()) { arg, page in
+                    (arg, page)
+                }
+                .do(onNext: { _, page in
+                    if page.items.isEmpty {
+                        loadingMoreSubject.onNext(false)
+                    }
+                })
+                .map { $0.0 }
                 .filter { _ in !pageSubject.value.items.isEmpty }
                 .flatMapLatest { arg -> Driver<PagingInfo<T>> in
                     let page = pageSubject.value.page
