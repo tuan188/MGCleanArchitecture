@@ -1,29 +1,34 @@
 platform :ios, '9.0'
 
+source 'https://github.com/cocoapods/specs.git'
+source 'https://github.com/tuan188/MGPodSpecs.git'
+
 def pods
     # Core
-    pod 'ObjectMapper', '~> 3.3'
-    pod 'Reusable', '~> 4.0'
-    pod 'Then', '~> 2.3'
-    pod 'MJRefresh', '~> 3.1'
+    pod 'ObjectMapper', '3.3'
+    pod 'Reusable', '4.0'
+    pod 'Then', '2.3'
+    pod 'MJRefresh', '3.1'
     pod 'OrderedSet', '3.0'
-    pod 'Validator', '~> 3.0.2'
+    pod 'Validator', '3.0.2'
     
     # Rx
-    pod 'RxSwift', '~> 4.1'
-    pod 'RxCocoa', '~> 4.1'
-    pod 'NSObject+Rx', '~> 4.3'
-    pod 'RxDataSources', '~> 3.0'
-    pod 'RxAlamofire', '~> 4.2'
+    pod 'RxSwift', '4.1'
+    pod 'RxCocoa', '4.1'
+    pod 'NSObject+Rx', '4.3'
+    pod 'RxDataSources', '3.0'
+    pod 'RxAlamofire', '4.2'
     
     #
-    pod 'MBProgressHUD', '~> 1.1'
-    pod 'SDWebImage', '~> 4.4'
-    pod 'ActionSheetPicker-3.0', '~> 2.3'
+    pod 'MBProgressHUD', '1.1'
+    pod 'SDWebImage', '4.4'
+    pod 'ActionSheetPicker-3.0', '2.3'
+    
+    pod 'MGAPIService', '0.1.6'
 end
 
 def test_pods
-    pod 'RxBlocking', '~> 4.1'
+    pod 'RxBlocking', '4.1'
 end
 
 target 'CleanArchitecture' do
