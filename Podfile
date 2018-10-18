@@ -25,6 +25,7 @@ def pods
     pod 'ActionSheetPicker-3.0', '2.3'
     
     pod 'MGAPIService', '0.1.6'
+    pod 'MGLoadMore', '0.1.0'
 end
 
 def test_pods

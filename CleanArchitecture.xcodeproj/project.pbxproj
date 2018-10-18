@@ -17,11 +17,6 @@
 		170A6BA020FB538B003ECCF2 /* MainAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6B9F20FB538B003ECCF2 /* MainAssembler.swift */; };
 		170A6BA220FB5753003ECCF2 /* SectionedProductsAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6BA120FB5753003ECCF2 /* SectionedProductsAssembler.swift */; };
 		170A6BA620FB58D7003ECCF2 /* StaticProductDetailAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6BA520FB58D7003ECCF2 /* StaticProductDetailAssembler.swift */; };
-		170B306C20F9E0FD00D39001 /* LoadMoreCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170B306B20F9E0FD00D39001 /* LoadMoreCollectionView.swift */; };
-		170B306F20F9E43D00D39001 /* LoadMoreTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170B306E20F9E43D00D39001 /* LoadMoreTableView.swift */; };
-		170B307120FA290C00D39001 /* RefreshTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170B307020FA290C00D39001 /* RefreshTableView.swift */; };
-		170B307320FA315000D39001 /* RefreshAutoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170B307220FA315000D39001 /* RefreshAutoHeader.swift */; };
-		170F4E4820F7553300EF16B3 /* RefreshAutoFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170F4E4720F7553300EF16B3 /* RefreshAutoFooter.swift */; };
 		1721726C20E47909007D33A5 /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721726B20E47909007D33A5 /* ValidationError.swift */; };
 		1721727020E49038007D33A5 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721726F20E49038007D33A5 /* Repo.swift */; };
 		1721727820E49245007D33A5 /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721727320E49243007D33A5 /* ReposViewController.swift */; };
@@ -187,11 +182,6 @@
 		170A6B9F20FB538B003ECCF2 /* MainAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAssembler.swift; sourceTree = "<group>"; };
 		170A6BA120FB5753003ECCF2 /* SectionedProductsAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionedProductsAssembler.swift; sourceTree = "<group>"; };
 		170A6BA520FB58D7003ECCF2 /* StaticProductDetailAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticProductDetailAssembler.swift; sourceTree = "<group>"; };
-		170B306B20F9E0FD00D39001 /* LoadMoreCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreCollectionView.swift; sourceTree = "<group>"; };
-		170B306E20F9E43D00D39001 /* LoadMoreTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreTableView.swift; sourceTree = "<group>"; };
-		170B307020FA290C00D39001 /* RefreshTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTableView.swift; sourceTree = "<group>"; };
-		170B307220FA315000D39001 /* RefreshAutoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshAutoHeader.swift; sourceTree = "<group>"; };
-		170F4E4720F7553300EF16B3 /* RefreshAutoFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshAutoFooter.swift; sourceTree = "<group>"; };
 		1721726B20E47909007D33A5 /* ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationError.swift; sourceTree = "<group>"; };
 		1721726F20E49038007D33A5 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 		1721727320E49243007D33A5 /* ReposViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
@@ -385,18 +375,6 @@
 			path = EditProduct;
 			sourceTree = "<group>";
 		};
-		170B306D20F9E3F300D39001 /* LoadMore */ = {
-			isa = PBXGroup;
-			children = (
-				170B306B20F9E0FD00D39001 /* LoadMoreCollectionView.swift */,
-				170B306E20F9E43D00D39001 /* LoadMoreTableView.swift */,
-				170B307020FA290C00D39001 /* RefreshTableView.swift */,
-				170F4E4720F7553300EF16B3 /* RefreshAutoFooter.swift */,
-				170B307220FA315000D39001 /* RefreshAutoHeader.swift */,
-			);
-			path = LoadMore;
-			sourceTree = "<group>";
-		};
 		170B307420FA3E7400D39001 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,7 +545,6 @@
 		172DC25220C51987009FC881 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				170B306D20F9E3F300D39001 /* LoadMore */,
 				172DC28420C53DFA009FC881 /* UIViewController+Debug.swift */,
 			);
 			path = View;
@@ -1036,6 +1013,7 @@
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MGAPIService/MGAPIService.framework",
+				"${BUILT_PRODUCTS_DIR}/MGLoadMore/MGLoadMore.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
@@ -1056,6 +1034,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGAPIService.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGLoadMore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
@@ -1136,19 +1115,15 @@
 				172DC28220C53DB1009FC881 /* MainNavigator.swift in Sources */,
 				1721726C20E47909007D33A5 /* ValidationError.swift in Sources */,
 				172DC27720C533C8009FC881 /* AppViewModel.swift in Sources */,
-				170B307320FA315000D39001 /* RefreshAutoHeader.swift in Sources */,
 				172DC2D920C678DD009FC881 /* ProductsUseCase.swift in Sources */,
 				173CA58C21460F8B001AF22D /* DynamicEditProductUseCase.swift in Sources */,
-				170B307120FA290C00D39001 /* RefreshTableView.swift in Sources */,
 				172DC28520C53DFA009FC881 /* UIViewController+Debug.swift in Sources */,
 				172DC2C520C676F6009FC881 /* ProductCell.swift in Sources */,
 				17A4E5EB20C90C08003DE0EA /* SectionedProductCell.swift in Sources */,
-				170F4E4820F7553300EF16B3 /* RefreshAutoFooter.swift in Sources */,
 				17BB3A6920FF574F00C5F8B0 /* RepoRepository.swift in Sources */,
 				172DC2AF20C62A01009FC881 /* Product.swift in Sources */,
 				1741037B214119B200267731 /* UnitTestViewController.swift in Sources */,
 				170A6BA020FB538B003ECCF2 /* MainAssembler.swift in Sources */,
-				170B306F20F9E43D00D39001 /* LoadMoreTableView.swift in Sources */,
 				173CA58E21460F8B001AF22D /* DynamicEditProductViewModel.swift in Sources */,
 				17E7593F213FDED00037EE4C /* RepoViewModel.swift in Sources */,
 				1741037921410AEB00267731 /* Double+.swift in Sources */,
@@ -1163,7 +1138,6 @@
 				173CA5962146601C001AF22D /* EditProductPriceCell.swift in Sources */,
 				172DC25F20C51987009FC881 /* ActivityIndicator.swift in Sources */,
 				172172A220E4D248007D33A5 /* APIInput.swift in Sources */,
-				170B306C20F9E0FD00D39001 /* LoadMoreCollectionView.swift in Sources */,
 				172DC26220C51987009FC881 /* PagingInfo.swift in Sources */,
 				173CA58A21460F8B001AF22D /* DynamicEditProductViewController.swift in Sources */,
 				172172AA20E4D706007D33A5 /* APIUrls.swift in Sources */,

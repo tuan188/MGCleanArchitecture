@@ -7,6 +7,10 @@ PODS:
     - ObjectMapper (~> 3.3)
     - RxAlamofire (~> 4.2)
     - RxSwift (~> 4.1)
+  - MGLoadMore (0.1.0):
+    - MJRefresh (~> 3.1)
+    - RxCocoa (~> 4.1)
+    - RxSwift (~> 4.1)
   - MJRefresh (3.1.0)
   - "NSObject+Rx (4.3.0)":
     - RxSwift (~> 4.0)
@@ -41,6 +45,7 @@ DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.3)
   - MBProgressHUD (= 1.1)
   - MGAPIService (= 0.1.6)
+  - MGLoadMore (= 0.1.0)
   - MJRefresh (= 3.1)
   - "NSObject+Rx (= 4.3)"
   - ObjectMapper (= 3.3)
@@ -76,6 +81,7 @@ SPEC REPOS:
     - Validator
   https://github.com/tuan188/MGPodSpecs:
     - MGAPIService
+    - MGLoadMore
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
@@ -83,6 +89,7 @@ SPEC CHECKSUMS:
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MGAPIService: 483c5a28255c3ded04ac7b6be40fe7fe48ffd681
+  MGLoadMore: c43d3ba8ffb5d96dfa8a4d99d6c3df8899da7db3
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   "NSObject+Rx": 9a5eeff5e08156f849fa973514456f28eef08742
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
@@ -97,6 +104,6 @@ SPEC CHECKSUMS:
   Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
   Validator: bf211c1d71b3f910d230c09c70e62429d0fef63a
 
-PODFILE CHECKSUM: a3a96d1d70c39d7380ea0c25e7037055f04de302
+PODFILE CHECKSUM: cf0b395aa582c4557bce4dee07a51a705352aaa0
 
 COCOAPODS: 1.5.3
