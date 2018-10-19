@@ -4,6 +4,11 @@ source 'https://github.com/cocoapods/specs.git'
 source 'https://github.com/tuan188/MGPodSpecs.git'
 
 def pods
+    # Clean Architecture
+    pod 'MGArchitecture', '0.1.2'
+    pod 'MGAPIService', '0.1.6'
+    pod 'MGLoadMore', '0.1.0'
+    
     # Core
     pod 'ObjectMapper', '3.3'
     pod 'Reusable', '4.0'
@@ -23,9 +28,6 @@ def pods
     pod 'MBProgressHUD', '1.1'
     pod 'SDWebImage', '4.4'
     pod 'ActionSheetPicker-3.0', '2.3'
-    
-    pod 'MGAPIService', '0.1.6'
-    pod 'MGLoadMore', '0.1.0'
 end
 
 def test_pods
@@ -33,7 +35,8 @@ def test_pods
 end
 
 target 'CleanArchitecture' do
-  use_frameworks!
+#  use_frameworks!
+  use_modular_headers!
   pods
 
   target 'CleanArchitectureTests' do

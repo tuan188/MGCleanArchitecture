@@ -6,6 +6,10 @@
 //  Copyright © 2018 Framgia. All rights reserved.
 //
 
+@import MGArchitecture;
+@import MGAPIService;
+@import MGLoadMore;
+
 @import RxSwift;
 @import RxCocoa;
 @import NSObject_Rx;
@@ -14,5 +18,3 @@
 @import OrderedSet;
 @import Validator;
 @import SDWebImage;
-@import MGAPIService;
-@import MGLoadMore;
