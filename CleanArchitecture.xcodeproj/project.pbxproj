@@ -148,8 +148,8 @@
 		17F4CABF214B8E05009212A4 /* DynamicEditProductViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CABB214B8E04009212A4 /* DynamicEditProductViewControllerTests.swift */; };
 		17F4CAC0214B8E05009212A4 /* DynamicEditProductViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CABC214B8E05009212A4 /* DynamicEditProductViewModelTests.swift */; };
 		17F4CAC2214BB3E4009212A4 /* DynamicEditProductCellsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CAC1214BB3E4009212A4 /* DynamicEditProductCellsTests.swift */; };
-		30B4541D8A615483A57BA60C /* libPods-CleanArchitecture.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD230CA0F3B8A3F232612107 /* libPods-CleanArchitecture.a */; };
-		EAA746DB32C4A94E6658D386 /* libPods-CleanArchitectureTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6077F143F99B97CD8C24FBAE /* libPods-CleanArchitectureTests.a */; };
+		42D2A9A6D1821A169E7783C3 /* Pods_CleanArchitectureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0C3F3F853AF2EDA6A0D1566 /* Pods_CleanArchitectureTests.framework */; };
+		DF70396247CC49A48029CA12 /* Pods_CleanArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42628C46829552A4994964B /* Pods_CleanArchitecture.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -312,9 +312,9 @@
 		1B56A7B3E25D78F505421566 /* Pods-CleanArchitectureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitectureTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitectureTests/Pods-CleanArchitectureTests.release.xcconfig"; sourceTree = "<group>"; };
 		24453F7014456B10492E9F99 /* Pods-CleanArchitecture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitecture.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitecture/Pods-CleanArchitecture.release.xcconfig"; sourceTree = "<group>"; };
 		5E4085BD6F7B046C5AF86A7D /* Pods-CleanArchitectureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitectureTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitectureTests/Pods-CleanArchitectureTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6077F143F99B97CD8C24FBAE /* libPods-CleanArchitectureTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleanArchitectureTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		625FFF9245A976FED73BB621 /* Pods-CleanArchitecture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitecture.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitecture/Pods-CleanArchitecture.debug.xcconfig"; sourceTree = "<group>"; };
-		BD230CA0F3B8A3F232612107 /* libPods-CleanArchitecture.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleanArchitecture.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C42628C46829552A4994964B /* Pods_CleanArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CleanArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0C3F3F853AF2EDA6A0D1566 /* Pods_CleanArchitectureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CleanArchitectureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,7 +322,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30B4541D8A615483A57BA60C /* libPods-CleanArchitecture.a in Frameworks */,
+				DF70396247CC49A48029CA12 /* Pods_CleanArchitecture.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +330,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAA746DB32C4A94E6658D386 /* libPods-CleanArchitectureTests.a in Frameworks */,
+				42D2A9A6D1821A169E7783C3 /* Pods_CleanArchitectureTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,8 +340,8 @@
 		0EB9237AAE5F772347A0BA39 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BD230CA0F3B8A3F232612107 /* libPods-CleanArchitecture.a */,
-				6077F143F99B97CD8C24FBAE /* libPods-CleanArchitectureTests.a */,
+				C42628C46829552A4994964B /* Pods_CleanArchitecture.framework */,
+				E0C3F3F853AF2EDA6A0D1566 /* Pods_CleanArchitectureTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -810,7 +810,7 @@
 				172DC22120C4DDF9009FC881 /* Sources */,
 				172DC22220C4DDF9009FC881 /* Frameworks */,
 				172DC22320C4DDF9009FC881 /* Resources */,
-				A8457B258CBE870C42B701AE /* [CP] Copy Pods Resources */,
+				C72CC2B57EB35EDC258EF11A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -829,6 +829,7 @@
 				172DC23520C4DDFA009FC881 /* Sources */,
 				172DC23620C4DDFA009FC881 /* Frameworks */,
 				172DC23720C4DDFA009FC881 /* Resources */,
+				1BA8FDB03F238FAEC1AE9320 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -915,6 +916,30 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1BA8FDB03F238FAEC1AE9320 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CleanArchitectureTests/Pods-CleanArchitectureTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CleanArchitectureTests/Pods-CleanArchitectureTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4E1080AF3D13A3C47A1FFEFE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -951,7 +976,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A8457B258CBE870C42B701AE /* [CP] Copy Pods Resources */ = {
+		C72CC2B57EB35EDC258EF11A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -959,18 +984,54 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CleanArchitecture/Pods-CleanArchitecture-resources.sh",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${SRCROOT}/Pods/Target Support Files/Pods-CleanArchitecture/Pods-CleanArchitecture-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MGAPIService/MGAPIService.framework",
+				"${BUILT_PRODUCTS_DIR}/MGArchitecture/MGArchitecture.framework",
+				"${BUILT_PRODUCTS_DIR}/MGLoadMore/MGLoadMore.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/OrderedSet/OrderedSet.framework",
+				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
+				"${BUILT_PRODUCTS_DIR}/Validator/Validator.framework",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGAPIService.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGArchitecture.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGLoadMore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OrderedSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Validator.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CleanArchitecture/Pods-CleanArchitecture-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CleanArchitecture/Pods-CleanArchitecture-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

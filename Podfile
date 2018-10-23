@@ -1,12 +1,9 @@
 platform :ios, '9.0'
 
-source 'https://github.com/cocoapods/specs.git'
-source 'https://github.com/tuan188/MGPodSpecs.git'
-
 def pods
     # Clean Architecture
     pod 'MGArchitecture', '0.1.2'
-    pod 'MGAPIService', '0.1.6'
+    pod 'MGAPIService', '0.1.7'
     pod 'MGLoadMore', '0.1.0'
     
     # Core
@@ -35,8 +32,8 @@ def test_pods
 end
 
 target 'CleanArchitecture' do
-#  use_frameworks!
-  use_modular_headers!
+  use_frameworks!
+#  use_modular_headers!
   pods
 
   target 'CleanArchitectureTests' do

@@ -3,7 +3,7 @@ PODS:
   - Alamofire (4.7.2)
   - Differentiator (3.1.0)
   - MBProgressHUD (1.1.0)
-  - MGAPIService (0.1.6):
+  - MGAPIService (0.1.7):
     - ObjectMapper (~> 3.3)
     - RxAlamofire (~> 4.2)
     - RxSwift (~> 4.1)
@@ -48,7 +48,7 @@ PODS:
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.3)
   - MBProgressHUD (= 1.1)
-  - MGAPIService (= 0.1.6)
+  - MGAPIService (= 0.1.7)
   - MGArchitecture (= 0.1.2)
   - MGLoadMore (= 0.1.0)
   - MJRefresh (= 3.1)
@@ -71,6 +71,9 @@ SPEC REPOS:
     - Alamofire
     - Differentiator
     - MBProgressHUD
+    - MGAPIService
+    - MGArchitecture
+    - MGLoadMore
     - MJRefresh
     - "NSObject+Rx"
     - ObjectMapper
@@ -84,19 +87,15 @@ SPEC REPOS:
     - SDWebImage
     - Then
     - Validator
-  https://github.com/tuan188/MGPodSpecs:
-    - MGAPIService
-    - MGArchitecture
-    - MGLoadMore
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  MGAPIService: 483c5a28255c3ded04ac7b6be40fe7fe48ffd681
-  MGArchitecture: 4431a81483c48638c273305b6801ca8b4899cb36
-  MGLoadMore: c43d3ba8ffb5d96dfa8a4d99d6c3df8899da7db3
+  MGAPIService: 5cd4826b446064da839867d098268231e8219f01
+  MGArchitecture: 349adeb5664adf14ee7a28c6529c7d7af11a406d
+  MGLoadMore: a2a0e473d14b08a2f7f3cd13bda61e2aa45af380
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   "NSObject+Rx": 9a5eeff5e08156f849fa973514456f28eef08742
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
@@ -111,6 +110,6 @@ SPEC CHECKSUMS:
   Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
   Validator: bf211c1d71b3f910d230c09c70e62429d0fef63a
 
-PODFILE CHECKSUM: c423d69cf55134aac924c03a9c88d52571298dc3
+PODFILE CHECKSUM: 3904867c1585a19cbb8bd549974b8dd39a463860
 
 COCOAPODS: 1.5.3
