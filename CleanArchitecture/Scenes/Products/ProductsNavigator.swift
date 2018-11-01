@@ -50,7 +50,7 @@ struct ProductsNavigator: ProductsNavigatorType {
             alert.addAction(okAction)
             
             let cancel = UIAlertAction(title: "Cancel",
-                                       style: UIAlertActionStyle.cancel) { (_) in
+                                       style: UIAlertAction.Style.cancel) { (_) in
                                         observer.onCompleted()
             }
             alert.addAction(cancel)

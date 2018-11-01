@@ -13,15 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var assembler: Assembler = DefaultAssembler()
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+    
+    func applicationDidFinishLaunching(_ application: UIApplication) {
         if let _ = NSClassFromString("XCTest") { // test
             window?.rootViewController = UnitTestViewController.instantiate()
         } else {
             bindViewModel()
         }
-        return true
     }
 
     private func bindViewModel() {

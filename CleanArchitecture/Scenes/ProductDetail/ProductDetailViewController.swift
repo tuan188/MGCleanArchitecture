@@ -22,7 +22,7 @@ final class ProductDetailViewController: UIViewController, BindableType {
     private func configView() {
         tableView.do {
             $0.estimatedRowHeight = 550
-            $0.rowHeight = UITableViewAutomaticDimension
+            $0.rowHeight = UITableView.automaticDimension
             $0.register(cellType: ProductNameCell.self)
             $0.register(cellType: ProductPriceCell.self)
         }

@@ -2,24 +2,21 @@ platform :ios, '9.0'
 
 def pods
     # Clean Architecture
-    pod 'MGArchitecture', '0.1.2'
-    pod 'MGAPIService', '0.1.7'
-    pod 'MGLoadMore', '0.1.0'
+    pod 'MGArchitecture', '0.2'
+    pod 'MGAPIService', '0.2'
+    pod 'MGLoadMore', '0.2.1'
     
     # Core
     pod 'ObjectMapper', '3.3'
-    pod 'Reusable', '4.0'
-    pod 'Then', '2.3'
+    pod 'Reusable', '4.0.4'
+    pod 'Then', '2.4'
     pod 'MJRefresh', '3.1'
     pod 'OrderedSet', '3.0'
     pod 'Validator', '3.0.2'
     
     # Rx
-    pod 'RxSwift', '4.1'
-    pod 'RxCocoa', '4.1'
     pod 'NSObject+Rx', '4.3'
     pod 'RxDataSources', '3.0'
-    pod 'RxAlamofire', '4.2'
     
     #
     pod 'MBProgressHUD', '1.1'
@@ -33,7 +30,6 @@ end
 
 target 'CleanArchitecture' do
   use_frameworks!
-#  use_modular_headers!
   pods
 
   target 'CleanArchitectureTests' do
@@ -41,4 +37,14 @@ target 'CleanArchitecture' do
     test_pods	
   end
 
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if ['Validator', 'RxDataSources'].include? target.name
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.0'
+            end
+        end
+    end
 end
