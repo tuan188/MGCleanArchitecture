@@ -23,4 +23,9 @@ final class ProductsViewControllerTests: XCTestCase {
         _ = viewController.view
         XCTAssertNotNil(viewController.tableView)
     }
+    
+    func test_bindViewModel() {
+        _ = viewController.view
+        viewController.bindViewModel()
+    }
 }

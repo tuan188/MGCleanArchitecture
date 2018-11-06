@@ -45,8 +45,8 @@ final class ProductsViewController: UIViewController, BindableType {
             editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete(),
             deleteProductTrigger: deleteProductTrigger.asDriverOnErrorJustComplete()
         )
-        let output = viewModel.transform(input)
-        output.productList
+        let output = viewModel?.transform(input)
+        output?.productList
             .drive(tableView.rx.items) { [unowned self] tableView, index, product in
                 return tableView.dequeueReusableCell(
                     for: IndexPath(row: index, section: 0),
@@ -62,31 +62,31 @@ final class ProductsViewController: UIViewController, BindableType {
                     }
             }
             .disposed(by: rx.disposeBag)
-        output.error
+        output?.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
-        output.loading
+        output?.loading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
-        output.refreshing
+        output?.refreshing
             .drive(tableView.refreshing)
             .disposed(by: rx.disposeBag)
-        output.loadingMore
+        output?.loadingMore
             .drive(tableView.loadingMore)
             .disposed(by: rx.disposeBag)
-        output.fetchItems
+        output?.fetchItems
             .drive()
             .disposed(by: rx.disposeBag)
-        output.selectedProduct
+        output?.selectedProduct
             .drive()
             .disposed(by: rx.disposeBag)
-        output.isEmptyData
+        output?.isEmptyData
             .drive(tableView.isEmptyData)
             .disposed(by: rx.disposeBag)
-        output.editedProduct
+        output?.editedProduct
             .drive()
             .disposed(by: rx.disposeBag)
-        output.deletedProduct
+        output?.deletedProduct
             .drive()
             .disposed(by: rx.disposeBag)
     }
