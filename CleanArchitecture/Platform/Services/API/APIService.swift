@@ -6,8 +6,6 @@
 //  Copyright © 2018 Framgia. All rights reserved.
 //
 
-import UIKit
-
 final class API: APIBase {
     static var shared = API()
     
@@ -16,5 +14,9 @@ final class API: APIBase {
             return APIResponseError(statusCode: response.statusCode, message: message)
         }
         return super.handleResponseError(response: response, data: data, json: json)
+    }
+    
+    override func preprocess(_ input: APIInputBase) -> Observable<APIInputBase> {
+        return super.preprocess(input)
     }
 }
