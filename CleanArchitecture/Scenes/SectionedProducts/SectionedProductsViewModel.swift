@@ -86,7 +86,7 @@ extension SectionedProductsViewModel: ViewModelType {
         
         let updatedProduct = input.updatedProductTrigger
             .do(onNext: { product in
-                let productList = page.value.items
+                var productList = page.value.items
                 let productModel = ProductModel(product: product, edited: true)
                 if let index = productList.index(of: productModel) {
                     productList[index] = productModel

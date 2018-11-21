@@ -50,7 +50,7 @@ extension ProductsViewModel: ViewModelType {
         let (page, fetchItems, loadError, loading, refreshing, loadingMore) = loadMoreOutput
 
         let productList = page
-            .map { $0.items.map { $0 } }
+            .map { $0.itemSet.map { $0 } }
             .asDriverOnErrorJustComplete()
         
         let selectedProduct = input.selectProductTrigger
@@ -75,7 +75,7 @@ extension ProductsViewModel: ViewModelType {
             .do(onNext: { delegate in
                 switch delegate {
                 case .updatedProduct(let product):
-                    let productList = page.value.items
+                    var productList = page.value.items
                     let productModel = ProductModel(product: product, edited: true)
                     if let index = productList.index(of: productModel) {
                         productList[index] = productModel
@@ -110,9 +110,8 @@ extension ProductsViewModel: ViewModelType {
                     .asDriverOnErrorJustComplete()
             }
             .do(onNext: { product in
-                let productList = page.value.items
-                let productModel = ProductModel(product: product)
-                productList.remove(productModel)
+                var productList = page.value.items
+                productList.removeAll { $0.product.id == product.id }
                 let updatedPage = PagingInfo(page: page.value.page, items: productList)
                 page.accept(updatedPage)
             })

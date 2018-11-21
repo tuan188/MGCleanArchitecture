@@ -20,7 +20,7 @@ final class RepoRepository: RepoRepositoryType {
             guard let repos = output.repos else {
                 throw APIInvalidResponseError()
             }
-            return PagingInfo<Repo>(page: page, items: OrderedSet<Repo>(sequence: repos))
+            return PagingInfo<Repo>(page: page, items: repos)
         }
     }
 }
