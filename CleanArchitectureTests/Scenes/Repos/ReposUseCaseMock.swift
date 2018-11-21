@@ -17,7 +17,7 @@ final class ReposUseCaseMock: ReposUseCaseType {
         let items = [
             Repo().with { $0.id = 1 }
         ]
-        let page = PagingInfo<Repo>(page: 1, items: OrderedSet(sequence: items))
+        let page = PagingInfo<Repo>(page: 1, items: items)
         return Observable.just(page)
     }()
     func getRepoList() -> Observable<PagingInfo<Repo>> {
@@ -31,7 +31,7 @@ final class ReposUseCaseMock: ReposUseCaseType {
         let items = [
             Repo().with { $0.id = 2 }
         ]
-        let page = PagingInfo<Repo>(page: 2, items: OrderedSet(sequence: items))
+        let page = PagingInfo<Repo>(page: 2, items: items)
         return Observable.just(page)
     }()
     func loadMoreRepoList(page: Int) -> Observable<PagingInfo<Repo>> {

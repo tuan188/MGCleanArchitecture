@@ -17,7 +17,7 @@ final class SectionedProductsUseCaseMock: SectionedProductsUseCaseType {
         let items = [
             Product().with { $0.id = 1 }
         ]
-        let page = PagingInfo<Product>(page: 1, items: OrderedSet(sequence: items))
+        let page = PagingInfo<Product>(page: 1, items: items)
         return Observable.just(page)
     }()
     func getProductList() -> Observable<PagingInfo<Product>> {
@@ -31,7 +31,7 @@ final class SectionedProductsUseCaseMock: SectionedProductsUseCaseType {
         let items = [
             Product().with { $0.id = 2 }
         ]
-        let page = PagingInfo<Product>(page: 2, items: OrderedSet(sequence: items))
+        let page = PagingInfo<Product>(page: 2, items: items)
         return Observable.just(page)
     }()
     func loadMoreProductList(page: Int) -> Observable<PagingInfo<Product>> {
