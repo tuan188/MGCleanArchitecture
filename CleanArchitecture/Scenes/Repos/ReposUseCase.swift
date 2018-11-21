@@ -19,7 +19,7 @@ struct ReposUseCase: ReposUseCaseType {
     }
 
     func loadMoreRepoList(page: Int) -> Observable<PagingInfo<Repo>> {
-        return repository.getRepoList(page: page, perPage: 10)
+        return repository.getRepoList(page: page, perPage: 10, useCache: page == 1)
     }
 }
 
