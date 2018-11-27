@@ -7,8 +7,6 @@
 //
 
 protocol Assembler: class,
-    RepositoriesAssembler,
-    AppAssembler,
     MainAssembler,
     ReposAssembler,
     EditProductAssembler,
@@ -16,8 +14,9 @@ protocol Assembler: class,
     ProductDetailAssembler,
     SectionedProductsAssembler,
     StaticProductDetailAssembler,
-    DynamicEditProductAssembler
-{
+    DynamicEditProductAssembler,
+    RepositoriesAssembler,
+    AppAssembler {
     
 }
 

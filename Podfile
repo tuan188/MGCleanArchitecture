@@ -30,6 +30,7 @@ end
 
 target 'CleanArchitecture' do
   use_frameworks!
+  inhibit_all_warnings!
   pods
 
   target 'CleanArchitectureTests' do

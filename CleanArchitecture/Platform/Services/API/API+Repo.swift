@@ -15,7 +15,7 @@ extension API {
             let params: JSONDictionary = [
                 "q": "language:swift",
                 "per_page": perPage,
-                "page": page,
+                "page": page
             ]
             super.init(urlString: API.Urls.getRepoList,
                        parameters: params,

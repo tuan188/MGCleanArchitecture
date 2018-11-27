@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var assembler: Assembler = DefaultAssembler()
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
-        if let _ = NSClassFromString("XCTest") { // test
+        if NSClassFromString("XCTest") != nil { // test
             window?.rootViewController = UnitTestViewController()
         } else {
             bindViewModel()

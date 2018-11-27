@@ -64,9 +64,7 @@ final class SectionedProductsViewController: UIViewController, BindableType {
                         self?.editProductTrigger.onNext(indexPath)
                     }
                 }
-            },
-            titleForHeaderInSection: { dataSource, section in
-//                return dataSource.sectionModels[section].model  // uncomment this line to use default header
+            }, titleForHeaderInSection: { _, _ in
                 return ""
             })
         self.dataSource = dataSource

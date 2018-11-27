@@ -14,7 +14,7 @@ struct EditProductViewModel {
     let navigator: EditProductNavigatorType
     let useCase: EditProductUseCaseType
     let product: Product
-    let delegate: PublishSubject<EditProductDelegate>
+    let delegate: PublishSubject<EditProductDelegate> // swiftlint:disable:this weak_delegate
 }
 
 // MARK: - ViewModelType

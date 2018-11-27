@@ -1,0 +1,70 @@
+disabled_rules: # rule identifiers to exclude from running
+  - colon
+  - comma
+  - control_statement
+  - trailing_whitespace
+  - trailing_newline
+
+opt_in_rules: # some rules are only opt-in
+  - force_unwrapping
+  - empty_count
+  # Find all the available rules by running:
+  # swiftlint rules
+
+included: # paths to include during linting. `--path` is ignored if present.
+  - CleanArchitecture
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Pods
+
+line_length:
+    warning: 120
+    error: 200
+    ignores_function_declarations: true
+    ignores_comments: true
+    ignores_urls: true
+
+function_body_length:
+    warning: 300
+    error: 500
+
+function_parameter_count:
+    warning: 6
+    error: 8
+
+type_body_length:
+    warning: 300
+    error: 500
+
+file_length:
+    warning: 1000
+    error: 1500
+    ignore_comment_only_lines: true
+
+cyclomatic_complexity:
+    warning: 15
+    error: 25
+
+type_name:
+  min_length: 4 
+  max_length: 
+    warning: 40
+    error: 50
+  excluded: 
+    - iPhone 
+    - API
+
+identifier_name:
+  min_length:
+    warning: 2
+    error: 1 
+  excluded: # excluded via string array
+    - id
+    - URL
+    - GlobalAPIKey
+    - vm
+    - vc
+    - ac
+
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube)

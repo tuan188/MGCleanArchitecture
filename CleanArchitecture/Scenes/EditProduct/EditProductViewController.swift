@@ -94,6 +94,5 @@ extension EditProductViewController {
 
 // MARK: - StoryboardSceneBased
 extension EditProductViewController: StoryboardSceneBased {
-    // TODO: - Update storyboard
     static var sceneStoryboard = Storyboards.product
 }

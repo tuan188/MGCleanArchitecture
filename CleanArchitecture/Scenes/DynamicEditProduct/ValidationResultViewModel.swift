@@ -15,7 +15,7 @@ struct ValidationResultViewModel {
         switch validationResult {
         case .valid:
             return UIColor.white
-        case .invalid(_):
+        case .invalid:
             return UIColor.yellow
         }
     }
