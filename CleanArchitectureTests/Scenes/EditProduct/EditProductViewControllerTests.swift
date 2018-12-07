@@ -22,5 +22,11 @@ final class EditProductViewControllerTests: XCTestCase {
     func test_ibOutlets() {
         _ = viewController.view
         XCTAssertNotNil(viewController.tableView)
+        XCTAssertNotNil(viewController.cancelButton)
+        XCTAssertNotNil(viewController.updateButton)
+        XCTAssertNotNil(viewController.nameTextField)
+        XCTAssertNotNil(viewController.nameValidationLabel)
+        XCTAssertNotNil(viewController.priceTextField)
+        XCTAssertNotNil(viewController.priceValidationLabel)
     }
 }
