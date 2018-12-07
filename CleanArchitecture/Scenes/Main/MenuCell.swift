@@ -11,10 +11,6 @@ import UIKit
 final class MenuCell: UITableViewCell, NibReusable {
     @IBOutlet weak var titleLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         configView(with: nil)

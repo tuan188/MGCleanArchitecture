@@ -10,14 +10,27 @@ import UIKit
 import Reusable
 
 final class MainViewController: UIViewController, BindableType {
+    
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - Properties
 
     var viewModel: MainViewModel!
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
     }
+    
+    deinit {
+        logDeinit()
+    }
+    
+    // MARK: - Methods
     
     private func configView() {
         tableView.do {
@@ -26,17 +39,15 @@ final class MainViewController: UIViewController, BindableType {
             $0.delegate = self
         }
     }
-
-    deinit {
-        logDeinit()
-    }
     
     func bindViewModel() {
         let input = MainViewModel.Input(
             loadTrigger: Driver.just(()),
             selectMenuTrigger: tableView.rx.itemSelected.asDriver()
         )
+        
         let output = viewModel.transform(input)
+        
         output.menuList
             .drive(tableView.rx.items) { tableView, index, menu in
                 return tableView.dequeueReusableCell(
@@ -51,7 +62,6 @@ final class MainViewController: UIViewController, BindableType {
             .drive()
             .disposed(by: rx.disposeBag)
     }
-
 }
 
 // MARK: - StoryboardSceneBased

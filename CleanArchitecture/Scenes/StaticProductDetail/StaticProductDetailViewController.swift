@@ -11,10 +11,16 @@ import Reusable
 
 final class StaticProductDetailViewController: UITableViewController, BindableType {
     
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    
+    // MARK: - Properties
 
     var viewModel: StaticProductDetailViewModel!
+    
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +29,16 @@ final class StaticProductDetailViewController: UITableViewController, BindableTy
     deinit {
         logDeinit()
     }
+    
+    // MARK: - Methods
 
     func bindViewModel() {
         let input = StaticProductDetailViewModel.Input(
             loadTrigger: Driver.just(())
         )
+        
         let output = viewModel.transform(input)
+        
         output.name
             .drive(nameLabel.rx.text)
             .disposed(by: rx.disposeBag)
@@ -36,7 +46,6 @@ final class StaticProductDetailViewController: UITableViewController, BindableTy
             .drive(priceLabel.rx.text)
             .disposed(by: rx.disposeBag)
     }
-
 }
 
 // MARK: - StoryboardSceneBased

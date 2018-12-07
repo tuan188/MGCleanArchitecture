@@ -39,6 +39,7 @@ extension ReposViewModel: ViewModelType {
             refreshItems: useCase.getRepoList,
             loadMoreTrigger: input.loadMoreTrigger,
             loadMoreItems: useCase.loadMoreRepoList)
+        
         let (page, fetchItems, loadError, loading, refreshing, loadingMore) = loadMoreOutput
 
         let repoList = page

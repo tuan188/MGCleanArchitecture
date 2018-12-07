@@ -8,6 +8,12 @@
 
 import ObjectMapper
 
+extension API {
+    func getRepoList(_ input: GetRepoListInput) -> Observable<GetRepoListOutput> {
+        return request(input)
+    }
+}
+
 // MARK: - GetRepoList
 extension API {
     final class GetRepoListInput: APIInput {

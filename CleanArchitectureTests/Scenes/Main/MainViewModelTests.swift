@@ -16,25 +16,30 @@ final class MainViewModelTests: XCTestCase {
     private var viewModel: MainViewModel!
     private var navigator: MainNavigatorMock!
     private var useCase: MainUseCaseMock!
-    private var disposeBag: DisposeBag!
     
     private var input: MainViewModel.Input!
     private var output: MainViewModel.Output!
-    private var loadTrigger = PublishSubject<Void>()
-    private var selectMenuTrigger = PublishSubject<IndexPath>()
+    
+    private var disposeBag: DisposeBag!
+    
+    private let loadTrigger = PublishSubject<Void>()
+    private let selectMenuTrigger = PublishSubject<IndexPath>()
     
     override func setUp() {
         super.setUp()
         navigator = MainNavigatorMock()
         useCase = MainUseCaseMock()
         viewModel = MainViewModel(navigator: navigator, useCase: useCase)
-        disposeBag = DisposeBag()
         
         input = MainViewModel.Input(
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete(),
             selectMenuTrigger: selectMenuTrigger.asDriverOnErrorJustComplete()
         )
+        
         output = viewModel.transform(input)
+        
+        disposeBag = DisposeBag()
+        
         output.menuList.drive().disposed(by: disposeBag)
         output.selectedMenu.drive().disposed(by: disposeBag)
     }
@@ -45,7 +50,7 @@ final class MainViewModelTests: XCTestCase {
         let menuList = try? output.menuList.toBlocking(timeout: 1).first()
         
         // assert
-        XCTAssertEqual(menuList??.count, MainViewModel.Menu.all.count)
+        XCTAssertEqual(menuList??.count, MainViewModel.Menu.allCases.count)
     }
     
     func test_selectMenuTriggerInvoked_toProductList() {

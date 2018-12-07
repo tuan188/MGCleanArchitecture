@@ -49,6 +49,7 @@ extension SectionedProductsViewModel: ViewModelType {
             loadMoreTrigger: input.loadMoreTrigger,
             loadMoreItems: useCase.loadMoreProductList,
             mapper: ProductModel.init(product:))
+        
         let (page, fetchItems, loadError, loading, refreshing, loadingMore) = loadMoreOutput
 
         let productSections = page

@@ -12,6 +12,7 @@ import RxSwift
 final class EditProductUseCaseMock: EditProductUseCaseType {
     
     // MARK: - validate
+    
     var validateName_Called = false
     var validateName_ReturnValue: ValidationResult = ValidationResult.valid
     

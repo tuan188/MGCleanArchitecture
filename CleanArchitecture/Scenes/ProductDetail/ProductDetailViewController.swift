@@ -10,15 +10,28 @@ import UIKit
 import Reusable
 
 final class ProductDetailViewController: UIViewController, BindableType {
+    
+    // MARK: - IBOutlets
 
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - Properties
+
     var viewModel: ProductDetailViewModel!
+    
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
     }
-
+    
+    deinit {
+        logDeinit()
+    }
+    
+    // MARK: - Methods
+    
     private func configView() {
         tableView.do {
             $0.estimatedRowHeight = 550
@@ -27,13 +40,12 @@ final class ProductDetailViewController: UIViewController, BindableType {
             $0.register(cellType: ProductPriceCell.self)
         }
     }
-    deinit {
-        logDeinit()
-    }
 
     func bindViewModel() {
         let input = ProductDetailViewModel.Input(loadTrigger: Driver.just(()))
+        
         let output = viewModel.transform(input)
+        
         output.cells
             .drive(tableView.rx.items) { tableView, index, cellType in
                 let indexPath = IndexPath(row: index, section: 0)
@@ -54,7 +66,6 @@ final class ProductDetailViewController: UIViewController, BindableType {
             }
             .disposed(by: rx.disposeBag)
     }
-
 }
 
 // MARK: - StoryboardSceneBased

@@ -15,9 +15,12 @@ final class SectionedProductsViewModelTests: XCTestCase {
     private var viewModel: SectionedProductsViewModel!
     private var navigator: SectionedProductsNavigatorMock!
     private var useCase: SectionedProductsUseCaseMock!
-    private var disposeBag: DisposeBag!
+    
     private var input: SectionedProductsViewModel.Input!
     private var output: SectionedProductsViewModel.Output!
+    
+    private var disposeBag: DisposeBag!
+    
     private let loadTrigger = PublishSubject<Void>()
     private let reloadTrigger = PublishSubject<Void>()
     private let loadMoreTrigger = PublishSubject<Void>()
@@ -30,7 +33,7 @@ final class SectionedProductsViewModelTests: XCTestCase {
         navigator = SectionedProductsNavigatorMock()
         useCase = SectionedProductsUseCaseMock()
         viewModel = SectionedProductsViewModel(navigator: navigator, useCase: useCase)
-        disposeBag = DisposeBag()
+        
         input = SectionedProductsViewModel.Input(
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete(),
             reloadTrigger: reloadTrigger.asDriverOnErrorJustComplete(),
@@ -39,7 +42,11 @@ final class SectionedProductsViewModelTests: XCTestCase {
             editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete(),
             updatedProductTrigger: updatedProductTrigger.asDriverOnErrorJustComplete()
         )
+        
         output = viewModel.transform(input)
+        
+        disposeBag = DisposeBag()
+        
         output.error.drive().disposed(by: disposeBag)
         output.loading.drive().disposed(by: disposeBag)
         output.refreshing.drive().disposed(by: disposeBag)

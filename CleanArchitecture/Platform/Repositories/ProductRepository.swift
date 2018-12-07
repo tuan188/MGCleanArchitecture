@@ -28,7 +28,6 @@ final class ProductRepository: ProductRepositoryType {
                         }
                 }
                 let page = PagingInfo<Product>(page: page, items: products)
-                
                 observer.onNext(page)
                 observer.onCompleted()
             })

@@ -10,25 +10,38 @@ import UIKit
 import Reusable
 
 final class DynamicEditProductViewController: UIViewController, BindableType {
+    
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var updateButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - Properties
+    
+    var viewModel: DynamicEditProductViewModel!
     
     fileprivate weak var nameTextField: UITextField?
     fileprivate weak var priceTextField: UITextField?
     fileprivate weak var nameValidationLabel: UILabel?
     fileprivate weak var priceValidationLabel: UILabel?
     
-    var viewModel: DynamicEditProductViewModel!
-    
     fileprivate let dataTrigger = PublishSubject<DynamicEditProductViewModel.DataType>()
     fileprivate let endEditTrigger = PublishSubject<Void>()
     fileprivate var cells = [DynamicEditProductViewModel.CellType]()
+    
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
     }
+
+    deinit {
+        logDeinit()
+    }
+    
+    // MARK: - Methods
     
     private func configView() {
         tableView.do {
@@ -41,14 +54,11 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
         }
     }
 
-    deinit {
-        logDeinit()
-    }
-
     func bindViewModel() {
         let loadTrigger = endEditTrigger.map { DynamicEditProductViewModel.TriggerType.endEditing }
             .asDriverOnErrorJustComplete()
             .startWith(DynamicEditProductViewModel.TriggerType.load)
+        
         let input = DynamicEditProductViewModel.Input(
             loadTrigger: loadTrigger,
             updateTrigger: updateButton.rx.tap.asDriver(),
@@ -123,6 +133,7 @@ extension DynamicEditProductViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellType = cells[indexPath.row]
         let viewModel = ValidationResultViewModel(validationResult: cellType.validationResult)
+        
         switch cellType.dataType {
         case let .name(name):
             let cell = tableView.dequeueReusableCell(
@@ -131,7 +142,6 @@ extension DynamicEditProductViewController: UITableViewDataSource {
                     $0.nameTextField.text = name
                     $0.nameTextField.backgroundColor = viewModel.backgroundColor
                     $0.validationLabel.text = viewModel.text
-                    
             }
             cell.nameTextField.rx.text.orEmpty
                 .subscribe(onNext: { [unowned self] text in

@@ -26,8 +26,10 @@ extension StaticProductDetailViewModel: ViewModelType {
     func transform(_ input: Input) -> Output {
         let product = input.loadTrigger
             .map { self.product }
+        
         let name = product.map { $0.name }
         let price = product.map { $0.price.currency }
+        
         return Output(
             name: name,
             price: price

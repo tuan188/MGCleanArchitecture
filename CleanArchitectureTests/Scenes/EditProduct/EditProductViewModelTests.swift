@@ -16,16 +16,20 @@ final class EditProductViewModelTests: XCTestCase {
     private var viewModel: EditProductViewModel!
     private var navigator: EditProductNavigatorMock!
     private var useCase: EditProductUseCaseMock!
-    private var disposeBag: DisposeBag!
     
     private var input: EditProductViewModel.Input!
     private var output: EditProductViewModel.Output!
+    
+    private var disposeBag: DisposeBag!
+    
     private let nameTrigger = PublishSubject<String>()
     private let priceTrigger = PublishSubject<String>()
     private let loadTrigger = PublishSubject<Void>()
     private let updateTrigger = PublishSubject<Void>()
     private let cancelTrigger = PublishSubject<Void>()
+    
     private let delegate = PublishSubject<EditProductDelegate>()
+    
     private var product: Product!
     
     override func setUp() {
@@ -34,7 +38,6 @@ final class EditProductViewModelTests: XCTestCase {
         useCase = EditProductUseCaseMock()
         product = Product(id: 1, name: "foobar", price: 10)
         viewModel = EditProductViewModel(navigator: navigator, useCase: useCase, product: product, delegate: delegate)
-        disposeBag = DisposeBag()
         
         input = EditProductViewModel.Input(
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete(),
@@ -43,7 +46,11 @@ final class EditProductViewModelTests: XCTestCase {
             updateTrigger: updateTrigger.asDriverOnErrorJustComplete(),
             cancelTrigger: cancelTrigger.asDriverOnErrorJustComplete()
         )
+        
         output = viewModel.transform(input)
+        
+        disposeBag = DisposeBag()
+        
         output.name.drive().disposed(by: disposeBag)
         output.price.drive().disposed(by: disposeBag)
         output.nameValidation.drive().disposed(by: disposeBag)

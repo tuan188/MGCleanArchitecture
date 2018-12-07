@@ -30,8 +30,9 @@ extension MainViewModel: ViewModelType {
     func transform(_ input: Input) -> Output {
         let menuList = input.loadTrigger
             .map {
-                Menu.all.map { MenuModel(menu: $0) }
+                Menu.allCases.map { MenuModel(menu: $0) }
             }
+        
         let selectedMenu = input.selectMenuTrigger
             .withLatestFrom(menuList) { indexPath, menuList in
                 menuList[indexPath.row]
@@ -50,6 +51,7 @@ extension MainViewModel: ViewModelType {
                 }
             })
             .mapToVoid()
+        
         return Output(
             menuList: menuList,
             selectedMenu: selectedMenu
@@ -58,7 +60,7 @@ extension MainViewModel: ViewModelType {
 }
 
 extension MainViewModel {
-    enum Menu: Int, CustomStringConvertible {
+    enum Menu: Int, CustomStringConvertible, CaseIterable {
         case products
         case sectionedProducts
         case repos
@@ -76,7 +78,5 @@ extension MainViewModel {
                 return "Git repo collection"
             }
         }
-        
-        static var all: [Menu] = [.products, .sectionedProducts, .repos, .repoCollection]
     }
 }

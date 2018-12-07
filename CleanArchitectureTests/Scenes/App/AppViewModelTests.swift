@@ -16,11 +16,13 @@ final class AppViewModelTests: XCTestCase {
     private var viewModel: AppViewModel!
     private var navigator: AppNavigatorMock!
     private var useCase: AppUseCaseMock!
-    private var disposeBag: DisposeBag!
     
     private var input: AppViewModel.Input!
     private var output: AppViewModel.Output!
-    private var loadTrigger = PublishSubject<Void>()
+    
+    private var disposeBag: DisposeBag!
+    
+    private let loadTrigger = PublishSubject<Void>()
     
     override func setUp() {
         super.setUp()

@@ -11,18 +11,32 @@ import Reusable
 import RxDataSources
 
 final class SectionedProductsViewController: UIViewController, BindableType {
+    
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var tableView: LoadMoreTableView!
     
+    // MARK: - Properties
+    
     var viewModel: SectionedProductsViewModel!
+    
     fileprivate typealias ProductSectionModel = SectionModel<String, ProductModel>
     fileprivate var dataSource: RxTableViewSectionedReloadDataSource<ProductSectionModel>?
     fileprivate let editProductTrigger = PublishSubject<IndexPath>()
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
     }
-
+    
+    deinit {
+        logDeinit()
+    }
+    
+    // MARK: - Methods
+    
     private func configView() {
         tableView.do {
             $0.estimatedRowHeight = 550
@@ -35,12 +49,9 @@ final class SectionedProductsViewController: UIViewController, BindableType {
             .disposed(by: rx.disposeBag)
     }
 
-    deinit {
-        logDeinit()
-    }
-
     func bindViewModel() {
-        let updatedProductTrigger = NotificationCenter.default.rx.notification(Notification.Name.updatedProduct)
+        let updatedProductTrigger = NotificationCenter.default.rx
+            .notification(Notification.Name.updatedProduct)
             .map { notification in
                 notification.object as? Product
             }
@@ -55,10 +66,13 @@ final class SectionedProductsViewController: UIViewController, BindableType {
             editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete(),
             updatedProductTrigger: updatedProductTrigger
         )
+        
         let output = viewModel.transform(input)
+        
         let dataSource = RxTableViewSectionedReloadDataSource<ProductSectionModel>(
             configureCell: { [weak self] (_, tableView, indexPath, product) -> UITableViewCell in
-                return tableView.dequeueReusableCell(for: indexPath, cellType: SectionedProductCell.self).then {
+                return tableView.dequeueReusableCell(for: indexPath,
+                                                     cellType: SectionedProductCell.self).then {
                     $0.bindViewModel(ProductViewModel(product: product))
                     $0.editProductAction = {
                         self?.editProductTrigger.onNext(indexPath)
@@ -67,7 +81,9 @@ final class SectionedProductsViewController: UIViewController, BindableType {
             }, titleForHeaderInSection: { _, _ in
                 return ""
             })
+        
         self.dataSource = dataSource
+        
         output.productSections
             .map {
                 $0.map { section in

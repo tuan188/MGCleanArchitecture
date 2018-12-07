@@ -16,10 +16,14 @@ final class ProductDetailViewModelTests: XCTestCase {
     private var viewModel: ProductDetailViewModel!
     private var navigator: ProductDetailNavigatorMock!
     private var useCase: ProductDetailUseCaseMock!
-    private var disposeBag: DisposeBag!
+    
     private var input: ProductDetailViewModel.Input!
     private var output: ProductDetailViewModel.Output!
+    
+    private var disposeBag: DisposeBag!
+    
     private let loadTrigger = PublishSubject<Void>()
+    
     private let product = Product(id: 1, name: "Foo", price: 1)
 
     override func setUp() {
@@ -27,11 +31,15 @@ final class ProductDetailViewModelTests: XCTestCase {
         navigator = ProductDetailNavigatorMock()
         useCase = ProductDetailUseCaseMock()
         viewModel = ProductDetailViewModel(navigator: navigator, useCase: useCase, product: product)
-        disposeBag = DisposeBag()
+        
         input = ProductDetailViewModel.Input(
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete()
         )
+        
         output = viewModel.transform(input)
+        
+        disposeBag = DisposeBag()
+        
         output.cells.drive().disposed(by: disposeBag)
     }
 

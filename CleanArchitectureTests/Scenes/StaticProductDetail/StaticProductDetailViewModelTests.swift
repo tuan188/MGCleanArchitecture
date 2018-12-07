@@ -16,9 +16,12 @@ final class StaticProductDetailViewModelTests: XCTestCase {
     private var viewModel: StaticProductDetailViewModel!
     private var navigator: StaticProductDetailNavigatorMock!
     private var useCase: StaticProductDetailUseCaseMock!
-    private var disposeBag: DisposeBag!
+    
     private var input: StaticProductDetailViewModel.Input!
     private var output: StaticProductDetailViewModel.Output!
+    
+    private var disposeBag: DisposeBag!
+    
     private let loadTrigger = PublishSubject<Void>()
     private let product = Product(id: 1, name: "Foo", price: 1)
 
@@ -27,11 +30,15 @@ final class StaticProductDetailViewModelTests: XCTestCase {
         navigator = StaticProductDetailNavigatorMock()
         useCase = StaticProductDetailUseCaseMock()
         viewModel = StaticProductDetailViewModel(navigator: navigator, useCase: useCase, product: product)
-        disposeBag = DisposeBag()
+        
         input = StaticProductDetailViewModel.Input(
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete()
         )
+        
         output = viewModel.transform(input)
+        
+        disposeBag = DisposeBag()
+        
         output.name.drive().disposed(by: disposeBag)
         output.price.drive().disposed(by: disposeBag)
     }

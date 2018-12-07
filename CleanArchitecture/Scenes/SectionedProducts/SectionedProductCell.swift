@@ -14,10 +14,6 @@ final class SectionedProductCell: UITableViewCell, NibReusable {
     @IBOutlet weak var editButton: UIButton!
     
     var editProductAction: (() -> Void)?
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
     func bindViewModel(_ viewModel: ProductViewModel?) {
         if let viewModel = viewModel {

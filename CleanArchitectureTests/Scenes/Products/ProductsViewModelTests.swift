@@ -15,9 +15,12 @@ final class ProductsViewModelTests: XCTestCase {
     private var viewModel: ProductsViewModel!
     private var navigator: ProductsNavigatorMock!
     private var useCase: ProductsUseCaseMock!
-    private var disposeBag: DisposeBag!
+    
     private var input: ProductsViewModel.Input!
     private var output: ProductsViewModel.Output!
+    
+    private var disposeBag: DisposeBag!
+    
     private let loadTrigger = PublishSubject<Void>()
     private let reloadTrigger = PublishSubject<Void>()
     private let loadMoreTrigger = PublishSubject<Void>()

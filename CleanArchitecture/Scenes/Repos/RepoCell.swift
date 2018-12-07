@@ -12,10 +12,6 @@ final class RepoCell: UITableViewCell, NibReusable {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var avatarURLStringImageView: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     func bindViewModel(_ viewModel: RepoViewModel?) {
         if let viewModel = viewModel {
             nameLabel.text = viewModel.name

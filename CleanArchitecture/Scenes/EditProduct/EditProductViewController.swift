@@ -11,6 +11,8 @@ import Reusable
 
 final class EditProductViewController: UITableViewController, BindableType {
     
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var updateButton: UIBarButtonItem!
     @IBOutlet weak var nameTextField: UITextField!
@@ -18,7 +20,11 @@ final class EditProductViewController: UITableViewController, BindableType {
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var priceValidationLabel: UILabel!
 
+    // MARK: - Properties
+
     var viewModel: EditProductViewModel!
+    
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +33,8 @@ final class EditProductViewController: UITableViewController, BindableType {
     deinit {
         logDeinit()
     }
+    
+    // MARK: - Methods
 
     func bindViewModel() {
         let input = EditProductViewModel.Input(
@@ -40,7 +48,9 @@ final class EditProductViewController: UITableViewController, BindableType {
                 .throttle(0.5, scheduler: MainScheduler.instance)
                 .asDriverOnErrorJustComplete()
         )
+        
         let output = viewModel.transform(input)
+        
         output.name
             .drive(nameTextField.rx.text)
             .disposed(by: rx.disposeBag)
@@ -70,7 +80,6 @@ final class EditProductViewController: UITableViewController, BindableType {
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
     }
-
 }
 
 // MARK: - Binders

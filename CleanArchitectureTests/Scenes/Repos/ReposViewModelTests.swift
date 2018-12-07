@@ -15,9 +15,12 @@ final class ReposViewModelTests: XCTestCase {
     private var viewModel: ReposViewModel!
     private var navigator: ReposNavigatorMock!
     private var useCase: ReposUseCaseMock!
-    private var disposeBag: DisposeBag!
+    
     private var input: ReposViewModel.Input!
     private var output: ReposViewModel.Output!
+    
+    private var disposeBag: DisposeBag!
+    
     private let loadTrigger = PublishSubject<Void>()
     private let reloadTrigger = PublishSubject<Void>()
     private let loadMoreTrigger = PublishSubject<Void>()
@@ -28,14 +31,18 @@ final class ReposViewModelTests: XCTestCase {
         navigator = ReposNavigatorMock()
         useCase = ReposUseCaseMock()
         viewModel = ReposViewModel(navigator: navigator, useCase: useCase)
-        disposeBag = DisposeBag()
+        
         input = ReposViewModel.Input(
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete(),
             reloadTrigger: reloadTrigger.asDriverOnErrorJustComplete(),
             loadMoreTrigger: loadMoreTrigger.asDriverOnErrorJustComplete(),
             selectRepoTrigger: selectRepoTrigger.asDriverOnErrorJustComplete()
         )
+        
         output = viewModel.transform(input)
+        
+        disposeBag = DisposeBag()
+        
         output.error.drive().disposed(by: disposeBag)
         output.loading.drive().disposed(by: disposeBag)
         output.refreshing.drive().disposed(by: disposeBag)

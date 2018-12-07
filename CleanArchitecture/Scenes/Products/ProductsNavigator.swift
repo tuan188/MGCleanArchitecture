@@ -25,13 +25,16 @@ struct ProductsNavigator: ProductsNavigatorType {
     
     func toEditProduct(_ product: Product) -> Driver<EditProductDelegate> {
         let delegate = PublishSubject<EditProductDelegate>()
+        
         let nav = UINavigationController()
         let vc: EditProductViewController = assembler.resolve(
             navigationController: nav,
             product: product,
             delegate: delegate)
         nav.viewControllers.append(vc)
+        
         navigationController.present(nav, animated: true, completion: nil)
+        
         return delegate.asDriverOnErrorJustComplete()
     }
     
@@ -41,6 +44,7 @@ struct ProductsNavigator: ProductsNavigatorType {
                 title: "Delete product: " + product.name,
                 message: "Are you sure?",
                 preferredStyle: .alert)
+            
             let okAction = UIAlertAction(
                 title: "Delete",
                 style: .destructive) { _ in
@@ -54,7 +58,9 @@ struct ProductsNavigator: ProductsNavigatorType {
                                         observer.onCompleted()
             }
             alert.addAction(cancel)
+            
             self.navigationController.present(alert, animated: true, completion: nil)
+            
             return Disposables.create {
                 alert.dismiss(animated: true, completion: nil)
             }

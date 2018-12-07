@@ -15,9 +15,12 @@ final class DynamicEditProductViewModelTests: XCTestCase {
     private var viewModel: DynamicEditProductViewModel!
     private var navigator: DynamicEditProductNavigatorMock!
     private var useCase: DynamicEditProductUseCaseMock!
-    private var disposeBag: DisposeBag!
+    
     private var input: DynamicEditProductViewModel.Input!
     private var output: DynamicEditProductViewModel.Output!
+    
+    private var disposeBag: DisposeBag!
+    
     private let loadTrigger = PublishSubject<DynamicEditProductViewModel.TriggerType>()
     private let updateTrigger = PublishSubject<Void>()
     private let cancelTrigger = PublishSubject<Void>()
@@ -28,7 +31,6 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         navigator = DynamicEditProductNavigatorMock()
         useCase = DynamicEditProductUseCaseMock()
         viewModel = DynamicEditProductViewModel(navigator: navigator, useCase: useCase, product: Product())
-        disposeBag = DisposeBag()
         
         input = DynamicEditProductViewModel.Input(
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete(),
@@ -36,7 +38,11 @@ final class DynamicEditProductViewModelTests: XCTestCase {
             cancelTrigger: cancelTrigger.asDriverOnErrorJustComplete(),
             dataTrigger: dataTrigger.asDriverOnErrorJustComplete()
         )
+        
         output = viewModel.transform(input)
+        
+        disposeBag = DisposeBag()
+        
         output.nameValidation.drive().disposed(by: disposeBag)
         output.priceValidation.drive().disposed(by: disposeBag)
         output.updateEnabled.drive().disposed(by: disposeBag)

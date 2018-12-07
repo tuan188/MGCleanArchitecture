@@ -10,25 +10,32 @@
 import RxSwift
 
 final class DynamicEditProductUseCaseMock: DynamicEditProductUseCaseType {
-    // MARK: - validate
+    
+    // MARK: - validate name
+    
     var validateName_Called = false
     var validateName_ReturnValue: ValidationResult = ValidationResult.valid
+    
     func validate(name: String) -> ValidationResult {
         validateName_Called = true
         return validateName_ReturnValue
     }
     
-    // MARK: - validate
+    // MARK: - validate price
+    
     var validatePrice_Called = false
     var validatePrice_ReturnValue: ValidationResult = ValidationResult.valid
+    
     func validate(price: String) -> ValidationResult {
         validatePrice_Called = true
         return validatePrice_ReturnValue
     }
     
-    // MARK: - update
+    // MARK: - update product
+    
     var update_Called = false
     var update_ReturnValue: Observable<Void> = Observable.just(())
+    
     func update(_ product: Product) -> Observable<Void> {
         update_Called = true
         return update_ReturnValue

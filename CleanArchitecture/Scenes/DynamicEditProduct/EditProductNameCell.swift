@@ -15,10 +15,6 @@ final class EditProductNameCell: UITableViewCell, NibReusable {
     
     private(set) var disposeBag = DisposeBag()
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()

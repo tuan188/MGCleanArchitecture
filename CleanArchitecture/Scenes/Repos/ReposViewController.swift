@@ -10,14 +10,28 @@ import UIKit
 import Reusable
 
 final class ReposViewController: UIViewController, BindableType {
+    
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var tableView: RefreshTableView!
+    
+    // MARK: - Properties
+    
     var viewModel: ReposViewModel!
+    
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
     }
 
+    deinit {
+        logDeinit()
+    }
+    
+    // MARK: - Methods
+    
     private func configView() {
         tableView.do {
             $0.estimatedRowHeight = 550
@@ -29,10 +43,6 @@ final class ReposViewController: UIViewController, BindableType {
             .disposed(by: rx.disposeBag)
     }
 
-    deinit {
-        logDeinit()
-    }
-
     func bindViewModel() {
         let input = ReposViewModel.Input(
             loadTrigger: Driver.just(()),
@@ -40,7 +50,9 @@ final class ReposViewController: UIViewController, BindableType {
             loadMoreTrigger: tableView.loadMoreBottomTrigger,
             selectRepoTrigger: tableView.rx.itemSelected.asDriver()
         )
+        
         let output = viewModel.transform(input)
+        
         output.repoList
             .drive(tableView.rx.items) { tableView, index, repo in
                 return tableView.dequeueReusableCell(
@@ -73,7 +85,6 @@ final class ReposViewController: UIViewController, BindableType {
             .drive(tableView.isEmptyData)
             .disposed(by: rx.disposeBag)
     }
-
 }
 
 // MARK: - UITableViewDelegate

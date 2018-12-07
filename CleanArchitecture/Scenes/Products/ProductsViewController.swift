@@ -10,17 +10,31 @@ import UIKit
 import Reusable
 
 final class ProductsViewController: UIViewController, BindableType {
+    
+    // MARK: - IBOutlets
+
     @IBOutlet weak var tableView: LoadMoreTableView!
+    
+    // MARK: - Properties
+
     var viewModel: ProductsViewModel!
     
     fileprivate var editProductTrigger = PublishSubject<IndexPath>()
     fileprivate var deleteProductTrigger = PublishSubject<IndexPath>()
+    
+    // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
     }
-
+    
+    deinit {
+        logDeinit()
+    }
+    
+    // MARK: - Methods
+    
     private func configView() {
         tableView.do {
             $0.estimatedRowHeight = 550
@@ -32,10 +46,6 @@ final class ProductsViewController: UIViewController, BindableType {
             .disposed(by: rx.disposeBag)
     }
 
-    deinit {
-        logDeinit()
-    }
-
     func bindViewModel() {
         let input = ProductsViewModel.Input(
             loadTrigger: Driver.just(()),
@@ -45,7 +55,9 @@ final class ProductsViewController: UIViewController, BindableType {
             editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete(),
             deleteProductTrigger: deleteProductTrigger.asDriverOnErrorJustComplete()
         )
+        
         let output = viewModel?.transform(input)
+        
         output?.productList
             .drive(tableView.rx.items) { [unowned self] tableView, index, product in
                 return tableView.dequeueReusableCell(

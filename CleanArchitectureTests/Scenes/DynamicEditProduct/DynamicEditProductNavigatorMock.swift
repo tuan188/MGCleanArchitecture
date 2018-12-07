@@ -9,8 +9,11 @@
 @testable import CleanArchitecture
 
 final class DynamicEditProductNavigatorMock: DynamicEditProductNavigatorType {
+    
     // MARK: - dismiss
+    
     var dismiss_Called = false
+    
     func dismiss() {
         dismiss_Called = true
     }

@@ -30,6 +30,7 @@ extension ProductDetailViewModel: ViewModelType {
     func transform(_ input: Input) -> Output {
         let product = input.loadTrigger
             .map { self.product }
+        
         let cells = product
             .map { product -> [CellType] in
                 var cells = [CellType]()
@@ -37,6 +38,7 @@ extension ProductDetailViewModel: ViewModelType {
                 cells.append(CellType.price(product.price.currency))
                 return cells
             }
+        
         return Output(cells: cells)
     }
 }

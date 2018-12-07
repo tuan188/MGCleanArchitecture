@@ -11,7 +11,11 @@ import MJRefresh
 
 final class RepoCollectionViewController: UIViewController, BindableType {
     
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var collectionView: LoadMoreCollectionView!
+    
+    // MARK: - Properties
     
     var viewModel: ReposViewModel!
     
@@ -29,10 +33,18 @@ final class RepoCollectionViewController: UIViewController, BindableType {
     
     private var options = Options()
 
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cofigView()
     }
+    
+    deinit {
+        logDeinit()
+    }
+    
+    // MARK: - Methods
     
     private func cofigView() {
         collectionView.do {
@@ -44,10 +56,6 @@ final class RepoCollectionViewController: UIViewController, BindableType {
             .disposed(by: rx.disposeBag)
     }
     
-    deinit {
-        logDeinit()
-    }
-    
     func bindViewModel() {
         let input = ReposViewModel.Input(
             loadTrigger: Driver.just(()),
@@ -55,7 +63,9 @@ final class RepoCollectionViewController: UIViewController, BindableType {
             loadMoreTrigger: collectionView.loadMoreTrigger,
             selectRepoTrigger: collectionView.rx.itemSelected.asDriver()
         )
+        
         let output = viewModel.transform(input)
+        
         output.repoList
             .drive(collectionView.rx.items) { collectionView, index, repo in
                 return collectionView.dequeueReusableCell(for: IndexPath(row: index, section: 0),
