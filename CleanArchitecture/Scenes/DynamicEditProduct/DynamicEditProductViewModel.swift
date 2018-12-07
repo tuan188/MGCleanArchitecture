@@ -24,7 +24,7 @@ extension DynamicEditProductViewModel: ViewModelType {
     struct Output {
         let nameValidation: Driver<ValidationResult>
         let priceValidation: Driver<ValidationResult>
-        let updateEnable: Driver<Bool>
+        let updateEnabled: Driver<Bool>
         let updatedProduct: Driver<Void>
         let cancel: Driver<Void>
         let error: Driver<Error>
@@ -141,7 +141,7 @@ extension DynamicEditProductViewModel: ViewModelType {
         return Output(
             nameValidation: nameValidation,
             priceValidation: priceValidation,
-            updateEnable: updateEnable,
+            updateEnabled: updateEnable,
             updatedProduct: updatedProduct,
             cancel: cancel,
             error: error,

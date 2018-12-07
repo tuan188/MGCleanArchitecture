@@ -32,7 +32,7 @@ extension EditProductViewModel: ViewModelType {
         let price: Driver<Double>
         let nameValidation: Driver<ValidationResult>
         let priceValidation: Driver<ValidationResult>
-        let updateEnable: Driver<Bool>
+        let updateEnabled: Driver<Bool>
         let updatedProduct: Driver<Void>
         let cancel: Driver<Void>
         let error: Driver<Error>
@@ -114,7 +114,7 @@ extension EditProductViewModel: ViewModelType {
             price: price,
             nameValidation: nameValidation,
             priceValidation: priceValidation,
-            updateEnable: updateEnable,
+            updateEnabled: updateEnable,
             updatedProduct: updatedProduct,
             cancel: cancel,
             error: error,
