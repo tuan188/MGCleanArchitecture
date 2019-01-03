@@ -14,7 +14,7 @@ final class EditProductUseCaseMock: EditProductUseCaseType {
     // MARK: - validate
     
     var validateName_Called = false
-    var validateName_ReturnValue: ValidationResult = ValidationResult.valid
+    var validateName_ReturnValue = ValidationResult.valid
     
     func validate(name: String) -> ValidationResult {
         validateName_Called = true
@@ -23,7 +23,7 @@ final class EditProductUseCaseMock: EditProductUseCaseType {
     
     // MARK: - validate
     var validatePrice_Called = false
-    var validatePrice_ReturnValue: ValidationResult = ValidationResult.valid
+    var validatePrice_ReturnValue = ValidationResult.valid
     
     func validate(price: String) -> ValidationResult {
         validatePrice_Called = true

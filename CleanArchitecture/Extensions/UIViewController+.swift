@@ -29,7 +29,8 @@ extension UIViewController {
                 completion?()
             }
         } else {
-            let ac = UIAlertController(title: title, message: message,
+            let ac = UIAlertController(title: title,
+                                       message: message,
                                        preferredStyle: .alert)
             after(interval: interval) {
                 ac.dismiss(animated: true, completion: completion)

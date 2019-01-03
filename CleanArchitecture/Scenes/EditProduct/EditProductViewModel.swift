@@ -68,15 +68,15 @@ extension EditProductViewModel: ViewModelType {
             }
         
         let updateEnable = Driver.combineLatest([
-                nameValidation,
-                priceValidation
-            ])
-            .map {
-                $0.reduce(true) { result, validation -> Bool in
-                    result && validation.isValid
-                }
+            nameValidation,
+            priceValidation
+        ])
+        .map {
+            $0.reduce(true) { result, validation -> Bool in
+                result && validation.isValid
             }
-            .startWith(true)
+        }
+        .startWith(true)
         
         let updatedProduct = input.updateTrigger
             .withLatestFrom(updateEnable)

@@ -26,7 +26,7 @@ final class ProductRepository: ProductRepositoryType {
                             $0.name = "Product \(id)"
                             $0.price = Double(id * 2)
                         }
-                }
+                    }
                 let page = PagingInfo<Product>(page: page, items: products)
                 observer.onNext(page)
                 observer.onCompleted()

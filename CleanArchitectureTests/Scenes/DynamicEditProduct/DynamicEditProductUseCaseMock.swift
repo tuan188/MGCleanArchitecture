@@ -14,7 +14,7 @@ final class DynamicEditProductUseCaseMock: DynamicEditProductUseCaseType {
     // MARK: - validate name
     
     var validateName_Called = false
-    var validateName_ReturnValue: ValidationResult = ValidationResult.valid
+    var validateName_ReturnValue = ValidationResult.valid
     
     func validate(name: String) -> ValidationResult {
         validateName_Called = true
@@ -24,7 +24,7 @@ final class DynamicEditProductUseCaseMock: DynamicEditProductUseCaseType {
     // MARK: - validate price
     
     var validatePrice_Called = false
-    var validatePrice_ReturnValue: ValidationResult = ValidationResult.valid
+    var validatePrice_ReturnValue = ValidationResult.valid
     
     func validate(price: String) -> ValidationResult {
         validatePrice_Called = true

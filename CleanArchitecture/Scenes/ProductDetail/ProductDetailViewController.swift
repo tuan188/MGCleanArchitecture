@@ -51,17 +51,17 @@ final class ProductDetailViewController: UIViewController, BindableType {
                 let indexPath = IndexPath(row: index, section: 0)
                 switch cellType {
                 case let .name(name):
-                    return tableView.dequeueReusableCell(
-                        for: indexPath,
-                        cellType: ProductNameCell.self).then {
+                    return tableView.dequeueReusableCell(for: indexPath,
+                                                         cellType: ProductNameCell.self)
+                        .then {
                             $0.nameLabel.text = name
-                    }
+                        }
                 case let .price(price):
-                    return tableView.dequeueReusableCell(
-                        for: indexPath,
-                        cellType: ProductPriceCell.self).then {
+                    return tableView.dequeueReusableCell(for: indexPath,
+                                                         cellType: ProductPriceCell.self)
+                        .then {
                             $0.priceLabel.text = price
-                    }
+                        }
                 }
             }
             .disposed(by: rx.disposeBag)

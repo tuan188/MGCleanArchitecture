@@ -16,11 +16,11 @@ final class SectionedProductsViewControllerTests: XCTestCase {
 
     override func setUp() {
 		super.setUp()
-//        viewController = SectionedProductsViewController.instantiate()
+        viewController = SectionedProductsViewController.instantiate()
 	}
 
     func test_ibOutlets() {
-//        _ = viewController.view
-//        XCTAssertNotNil(viewController.tableView)
+        _ = viewController.view
+        XCTAssertNotNil(viewController.tableView)
     }
 }

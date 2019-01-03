@@ -23,7 +23,7 @@ final class RepoCollectionViewController: UIViewController, BindableType {
         var itemSpacing: CGFloat = 8
         var lineSpacing: CGFloat = 8
         var itemsPerRow: Int = 2
-        var sectionInsets: UIEdgeInsets = UIEdgeInsets(
+        var sectionInsets = UIEdgeInsets(
             top: 10.0,
             left: 10.0,
             bottom: 10.0,

@@ -55,5 +55,3 @@ final class ProductsUseCaseMock: ProductsUseCaseType {
         return deleteProduct_ReturnValue
     }
 }
-
-

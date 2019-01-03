@@ -14,16 +14,12 @@ final class RepoCellTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-//        cell = RepoCell.loadFromNib()
+        cell = RepoCell.loadFromNib()
     }
 
     func test_iboutlets() {
-//        XCTAssertNotNil(cell)
-//        XCTAssertNotNil(cell.nameLabel)
-//        XCTAssertNotNil(cell.fullnameLabel)
-//        XCTAssertNotNil(cell.urlStringImageView)
-//        XCTAssertNotNil(cell.starCountLabel)
-//        XCTAssertNotNil(cell.folkCountLabel)
-//        XCTAssertNotNil(cell.avatarURLStringImageView)
+        XCTAssertNotNil(cell)
+        XCTAssertNotNil(cell.nameLabel)
+        XCTAssertNotNil(cell.avatarURLStringImageView)
     }
 }

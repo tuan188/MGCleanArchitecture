@@ -20,7 +20,6 @@ final class DynamicEditProductViewControllerTests: XCTestCase {
 
     func test_ibOutlets() {
         _ = viewController.view
-        XCTAssert(true)
         XCTAssertNotNil(viewController.tableView)
         XCTAssertNotNil(viewController.cancelButton)
         XCTAssertNotNil(viewController.updateButton)

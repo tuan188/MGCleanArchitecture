@@ -72,12 +72,13 @@ final class SectionedProductsViewController: UIViewController, BindableType {
         let dataSource = RxTableViewSectionedReloadDataSource<ProductSectionModel>(
             configureCell: { [weak self] (_, tableView, indexPath, product) -> UITableViewCell in
                 return tableView.dequeueReusableCell(for: indexPath,
-                                                     cellType: SectionedProductCell.self).then {
-                    $0.bindViewModel(ProductViewModel(product: product))
-                    $0.editProductAction = {
-                        self?.editProductTrigger.onNext(indexPath)
+                                                     cellType: SectionedProductCell.self)
+                    .then {
+                        $0.bindViewModel(ProductViewModel(product: product))
+                        $0.editProductAction = {
+                            self?.editProductTrigger.onNext(indexPath)
+                        }
                     }
-                }
             }, titleForHeaderInSection: { _, _ in
                 return ""
             })

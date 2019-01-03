@@ -136,13 +136,12 @@ extension DynamicEditProductViewController: UITableViewDataSource {
         
         switch cellType.dataType {
         case let .name(name):
-            let cell = tableView.dequeueReusableCell(
-                for: indexPath,
-                cellType: EditProductNameCell.self).then {
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: EditProductNameCell.self)
+                .then {
                     $0.nameTextField.text = name
                     $0.nameTextField.backgroundColor = viewModel.backgroundColor
                     $0.validationLabel.text = viewModel.text
-            }
+                }
             cell.nameTextField.rx.text.orEmpty
                 .subscribe(onNext: { [unowned self] text in
                     self.dataTrigger.onNext(DynamicEditProductViewModel.DataType.name(text))
@@ -157,13 +156,12 @@ extension DynamicEditProductViewController: UITableViewDataSource {
             nameValidationLabel = cell.validationLabel
             return cell
         case let .price(price):
-            let cell = tableView.dequeueReusableCell(
-                for: indexPath,
-                cellType: EditProductPriceCell.self).then {
+            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: EditProductPriceCell.self)
+                .then {
                     $0.priceTextField.text = price
                     $0.priceTextField.backgroundColor = viewModel.backgroundColor
                     $0.validationLabel.text = viewModel.text
-            }
+                }
             cell.priceTextField.rx.text.orEmpty
                 .subscribe(onNext: { [unowned self] text in
                     self.dataTrigger.onNext(DynamicEditProductViewModel.DataType.price(text))

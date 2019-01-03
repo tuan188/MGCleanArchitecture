@@ -61,10 +61,10 @@ extension MainViewModel: ViewModelType {
 
 extension MainViewModel {
     enum Menu: Int, CustomStringConvertible, CaseIterable {
-        case products
-        case sectionedProducts
-        case repos
-        case repoCollection
+        case products = 0
+        case sectionedProducts = 1
+        case repos = 2
+        case repoCollection = 3
         
         var description: String {
             switch self {

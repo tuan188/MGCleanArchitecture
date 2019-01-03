@@ -50,12 +50,11 @@ final class MainViewController: UIViewController, BindableType {
         
         output.menuList
             .drive(tableView.rx.items) { tableView, index, menu in
-                return tableView.dequeueReusableCell(
-                    for: IndexPath(row: index, section: 0),
-                    cellType: MenuCell.self)
+                return tableView.dequeueReusableCell(for: IndexPath(row: index, section: 0),
+                                                     cellType: MenuCell.self)
                     .then {
                         $0.configView(with: menu)
-                }
+                    }
             }
             .disposed(by: rx.disposeBag)
         output.selectedMenu

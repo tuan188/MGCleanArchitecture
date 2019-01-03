@@ -7,7 +7,7 @@
 //
 
 extension API {
-    struct Urls {
+    enum Urls {
         static let getRepoList = "https://api.github.com/search/repositories"
     }
 }

@@ -16,11 +16,11 @@ final class ReposViewControllerTests: XCTestCase {
 
     override func setUp() {
 		super.setUp()
-//        viewController = ReposViewController.instantiate()
+        viewController = ReposViewController.instantiate()
 	}
 
     func test_ibOutlets() {
-//        _ = viewController.view
-//        XCTAssertNotNil(viewController.tableView)
+        _ = viewController.view
+        XCTAssertNotNil(viewController.tableView)
     }
 }

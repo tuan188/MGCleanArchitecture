@@ -28,7 +28,7 @@ final class EditProductViewModelTests: XCTestCase {
     private let updateTrigger = PublishSubject<Void>()
     private let cancelTrigger = PublishSubject<Void>()
     
-    private let delegate = PublishSubject<EditProductDelegate>()
+    private let delegate = PublishSubject<EditProductDelegate>() // swiftlint:disable:this weak_delegate
     
     private var product: Product!
     

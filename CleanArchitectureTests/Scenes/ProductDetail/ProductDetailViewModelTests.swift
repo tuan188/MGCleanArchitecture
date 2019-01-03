@@ -47,8 +47,8 @@ final class ProductDetailViewModelTests: XCTestCase {
         // act
         loadTrigger.onNext(())
         let cells = try? output.cells.toBlocking(timeout: 1).first()
-        var productName: String? = nil
-        var productPrice: String? = nil
+        var productName: String?
+        var productPrice: String?
         if let nameCellType = cells??[0],
             case let ProductDetailViewModel.CellType.name(name) = nameCellType {
             productName = name

@@ -88,13 +88,13 @@ extension DynamicEditProductViewModel: ViewModelType {
         let updateEnable = Driver.combineLatest([
             nameValidation,
             priceValidation
-            ])
-            .map {
-                $0.reduce(true) { result, validation -> Bool in
-                    result && validation.isValid
-                }
+        ])
+        .map {
+            $0.reduce(true) { result, validation -> Bool in
+                result && validation.isValid
             }
-            .startWith(true)
+        }
+        .startWith(true)
         
         let product = Driver.combineLatest(name, price)
             .map { name, price in

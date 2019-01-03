@@ -21,7 +21,7 @@ struct EditProductUseCase: EditProductUseCaseType {
     }
     
     func validate(price: String) -> ValidationResult {
-        let priceNumber: Double = Double(price) ?? 0.0
+        let priceNumber = Double(price) ?? 0.0
         if priceNumber <= 0 {
             return ValidationResult.invalid([ValidationError.productPriceMinValue])
         }
