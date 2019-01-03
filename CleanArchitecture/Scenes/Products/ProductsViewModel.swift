@@ -87,13 +87,9 @@ extension ProductsViewModel: ViewModelType {
             })
             .mapToVoid()
 
-        let isEmptyData = Driver.combineLatest(fetchItems, Driver.merge(loading, refreshing))
-            .withLatestFrom(productList) { ($0.1, $1.isEmpty) }
-            .map { args -> Bool in
-                let (loading, isEmpty) = args
-                if loading { return false }
-                return isEmpty
-            }
+        let isEmptyData = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
+                                             loadTrigger: Driver.merge(loading, refreshing),
+                                             items: productList)
         
         let deletedProduct = input.deleteProductTrigger
             .withLatestFrom(productList) { indexPath, productList in

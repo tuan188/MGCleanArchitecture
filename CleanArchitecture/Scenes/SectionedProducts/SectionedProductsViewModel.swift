@@ -69,14 +69,10 @@ extension SectionedProductsViewModel: ViewModelType {
                 self.navigator.toProductDetail(product: product.product)
             })
             .mapToVoid()
-
-        let isEmptyData = Driver.combineLatest(fetchItems, Driver.merge(loading, refreshing))
-            .withLatestFrom(productSections) { ($0.1, $1.isEmpty) }
-            .map { args -> Bool in
-                let (loading, isEmpty) = args
-                if loading { return false }
-                return isEmpty
-            }
+        
+        let isEmptyData = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
+                                             loadTrigger: Driver.merge(loading, refreshing),
+                                             items: productSections)
         
         let editedProduct = input.editProductTrigger
             .withLatestFrom(productSections) { indexPath, productSections -> Product in

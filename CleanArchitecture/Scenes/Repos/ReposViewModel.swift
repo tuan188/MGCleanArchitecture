@@ -57,14 +57,10 @@ extension ReposViewModel: ViewModelType {
                 self.navigator.toRepoDetail(repo: repo)
             })
             .mapToVoid()
-
-        let isEmptyData = Driver.combineLatest(fetchItems, Driver.merge(loading, refreshing))
-            .withLatestFrom(repoList) { ($0.1, $1.isEmpty) }
-            .map { args -> Bool in
-                let (loading, isEmpty) = args
-                if loading { return false }
-                return isEmpty
-            }
+        
+        let isEmptyData = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
+                                             loadTrigger: Driver.merge(loading, refreshing),
+                                             items: repoList)
 
         return Output(
             error: loadError,
@@ -78,4 +74,3 @@ extension ReposViewModel: ViewModelType {
         )
     }
 }
-
