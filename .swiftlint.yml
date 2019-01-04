@@ -156,37 +156,46 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
 
 line_length:
-    error: 120
-    ignores_function_declarations: true
-    ignores_comments: true
-    ignores_urls: true
+  error: 120
+  ignores_function_declarations: true
+  ignores_comments: true
+  ignores_urls: true
 
 function_body_length:
-    warning: 300
-    error: 500
+  warning: 300
+  error: 500
 
 function_parameter_count:
-    warning: 6
-    error: 8
+  warning: 6
+  error: 8
 
 type_body_length:
-    warning: 300
-    error: 500
+  warning: 300
+  error: 500
 
 file_length:
-    warning: 1000
-    error: 1500
-    ignore_comment_only_lines: true
+  warning: 1000
+  error: 1500
+  ignore_comment_only_lines: true
+
+type_name:
+  min_length: 4
+  max_length:
+    warning: 50
+  excluded:
+    - API
+    - URL
 
 cyclomatic_complexity:
-    warning: 15
-    error: 25
+  warning: 15
+  error: 25
 
 reporter: "xcode" # reporter type (xcode, jsm
+
 custom_rules:
   final_class:
     name: "Final Class"
-    regex: "(^[ ]*class)"
+    regex: "(^[ ]*class [A-Z]+)"
     match_kinds: keyword
     message: "Class should be marked as final."
     severity: warning
