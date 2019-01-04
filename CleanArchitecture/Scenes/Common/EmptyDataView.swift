@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmptyDataView: UIView, NibOwnerLoadable {
+final class EmptyDataView: UIView, NibOwnerLoadable {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

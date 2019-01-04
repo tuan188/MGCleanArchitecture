@@ -156,8 +156,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
 
 line_length:
-    warning: 120
-    error: 200
+    error: 120
     ignores_function_declarations: true
     ignores_comments: true
     ignores_urls: true
@@ -183,25 +182,24 @@ cyclomatic_complexity:
     warning: 15
     error: 25
 
-type_name:
-  min_length: 4 
-  max_length: 
-    warning: 40
-    error: 50
-  excluded: 
-    - iPhone 
-    - API
+reporter: "xcode" # reporter type (xcode, jsm
+custom_rules:
+  final_class:
+    name: "Final Class"
+    regex: "(^[ ]*class)"
+    match_kinds: keyword
+    message: "Class should be marked as final."
+    severity: warning
+  drive_one_line:
+    excluded: ".*Test(s)?\\.swift"
+    name: "Drive One Line"
+    regex: "(\\.drive\\([^\\)]*\\)\\.)"
+    message: "Break line."
+    severity: warning
+  subscribe_one_line:
+    excluded: ".*Test(s)?\\.swift"
+    name: "Subscribe One Line"
+    regex: "(\\.subscribe\\([^\\)]*\\)\\.)"
+    message: "Break line."
+    severity: warning
 
-identifier_name:
-  min_length:
-    warning: 2
-    error: 1 
-  excluded: # excluded via string array
-    - id
-    - URL
-    - GlobalAPIKey
-    - vm
-    - vc
-    - ac
-
-reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube)

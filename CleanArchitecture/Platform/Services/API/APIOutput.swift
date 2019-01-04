@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-class APIOutput: APIOutputBase {
+class APIOutput: APIOutputBase {  // swiftlint:disable:this final_class
     var message: String?
     
     override func mapping(map: Map) {

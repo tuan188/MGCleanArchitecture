@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var assembler: Assembler = DefaultAssembler()
@@ -27,7 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vm: AppViewModel = assembler.resolve(window: window)
         let input = AppViewModel.Input(loadTrigger: Driver.just(()))
         let output = vm.transform(input)
-        output.toMain.drive().disposed(by: rx.disposeBag)
+        output.toMain
+            .drive()
+            .disposed(by: rx.disposeBag)
     }
 }
 

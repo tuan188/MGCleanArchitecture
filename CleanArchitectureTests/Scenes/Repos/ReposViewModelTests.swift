@@ -181,6 +181,7 @@ final class ReposViewModelTests: XCTestCase {
         reloadTrigger.onNext(())
         useCase.getRepoList_Called = false
         loadMoreTrigger.onNext(())
+        
         // assert
         XCTAssertFalse(useCase.loadMoreRepoList_Called)
     }
@@ -189,7 +190,7 @@ final class ReposViewModelTests: XCTestCase {
         // arrange
         let loadMoreRepoList_ReturnValue = PublishSubject<PagingInfo<Repo>>()
         useCase.loadMoreRepoList_ReturnValue = loadMoreRepoList_ReturnValue
-
+        
         // act
         loadMoreTrigger.onNext(())
         useCase.loadMoreRepoList_Called = false

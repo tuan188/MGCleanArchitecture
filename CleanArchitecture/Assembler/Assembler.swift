@@ -20,6 +20,6 @@ protocol Assembler: class,
     
 }
 
-class DefaultAssembler: Assembler {
+final class DefaultAssembler: Assembler {
     
 }
