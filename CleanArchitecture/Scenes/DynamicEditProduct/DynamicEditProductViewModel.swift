@@ -71,19 +71,12 @@ extension DynamicEditProductViewModel: ViewModelType {
             .unwrap()
             .startWith(String(self.product.price))
         
-        let nameValidation = Driver.combineLatest(name, input.updateTrigger)
-            .map { $0.0 }
-            .map { name -> ValidationResult in
-                self.useCase.validate(name: name)
-            }
-            .startWith(.valid)
-        
-        let priceValidation = Driver.combineLatest(price, input.updateTrigger)
-            .map { $0.0 }
-            .map { price -> ValidationResult in
-                self.useCase.validate(price: price)
-            }
-            .startWith(.valid)
+        let nameValidation = validate(object: name,
+                                      trigger: input.updateTrigger,
+                                      validator: useCase.validate(name:))
+        let priceValidation = validate(object: price,
+                                       trigger: input.updateTrigger,
+                                       validator: useCase.validate(price:))
         
         let updateEnable = Driver.combineLatest([
             nameValidation,

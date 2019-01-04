@@ -49,23 +49,13 @@ extension EditProductViewModel: ViewModelType {
         let price = input.loadTrigger
             .map { self.product.price }
         
-        let nameValidation = Driver.combineLatest(
-                input.nameTrigger,
-                input.updateTrigger
-            )
-            .map { $0.0 }    
-            .map { name -> ValidationResult in
-                self.useCase.validate(name: name)
-            }
+        let nameValidation = validate(object: input.nameTrigger,
+                                      trigger: input.updateTrigger,
+                                      validator: useCase.validate(name:))
         
-        let priceValidation = Driver.combineLatest(
-                input.priceTrigger,
-                input.updateTrigger
-            )
-            .map { $0.0 }
-            .map { price -> ValidationResult in
-                self.useCase.validate(price: price)
-            }
+        let priceValidation = validate(object: input.priceTrigger,
+                                       trigger: input.updateTrigger,
+                                       validator: useCase.validate(price:))
         
         let updateEnable = Driver.combineLatest([
             nameValidation,
@@ -85,8 +75,7 @@ extension EditProductViewModel: ViewModelType {
                 input.nameTrigger,
                 input.priceTrigger
             ))
-            .flatMapLatest { params -> Driver<Product> in
-                let (name, price) = params
+            .flatMapLatest { name, price -> Driver<Product> in
                 let product = self.product.with {
                     $0.name = name
                     $0.price = Double(price) ?? 0.0
