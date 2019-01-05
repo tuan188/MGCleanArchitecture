@@ -19,25 +19,20 @@ extension MainViewModel: ViewModelType {
     }
     
     struct Output {
-        let menuList: Driver<[MenuModel]>
+        let menuSections: Driver<[MenuSection]>
         let selectedMenu: Driver<Void>
-    }
-    
-    struct MenuModel {
-        let menu: Menu
     }
 
     func transform(_ input: Input) -> Output {
-        let menuList = input.loadTrigger
+        let menuSections = input.loadTrigger
             .map {
-                Menu.allCases.map { MenuModel(menu: $0) }
+                self.menuSections()
             }
         
         let selectedMenu = input.selectMenuTrigger
-            .withLatestFrom(menuList) { indexPath, menuList in
-                menuList[indexPath.row]
+            .withLatestFrom(menuSections) { indexPath, menuSections in
+                menuSections[indexPath.section].menus[indexPath.row]
             }
-            .map { $0.menu }
             .do(onNext: { menu in
                 switch menu {
                 case .products:
@@ -53,9 +48,16 @@ extension MainViewModel: ViewModelType {
             .mapToVoid()
         
         return Output(
-            menuList: menuList,
+            menuSections: menuSections,
             selectedMenu: selectedMenu
         )
+    }
+    
+    func menuSections() -> [MenuSection] {
+        return [
+            MenuSection(title: "Mock Data", menus: [.products, .sectionedProducts]),
+            MenuSection(title: "API", menus: [.repos, .repoCollection])
+        ]
     }
 }
 
@@ -78,5 +80,10 @@ extension MainViewModel {
                 return "Git repo collection"
             }
         }
+    }
+    
+    struct MenuSection {
+        let title: String
+        let menus: [Menu]
     }
 }

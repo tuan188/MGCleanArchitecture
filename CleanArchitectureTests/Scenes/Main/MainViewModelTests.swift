@@ -40,24 +40,38 @@ final class MainViewModelTests: XCTestCase {
         
         disposeBag = DisposeBag()
         
-        output.menuList.drive().disposed(by: disposeBag)
+        output.menuSections.drive().disposed(by: disposeBag)
         output.selectedMenu.drive().disposed(by: disposeBag)
     }
     
     func test_loadTriggerInvoked_loadMenuList() {
         // act
         loadTrigger.onNext(())
-        let menuList = try? output.menuList.toBlocking(timeout: 1).first()
+        let menuSections = try? output.menuSections.toBlocking(timeout: 1).first()
         
         // assert
-        XCTAssertEqual(menuList??.count, MainViewModel.Menu.allCases.count)
+        XCTAssertEqual(menuSections??.count, 2)
+    }
+    
+    private func indexPath(of menu: MainViewModel.Menu) -> IndexPath? {
+        let menuSections = viewModel.menuSections()
+        for (section, menuSection) in menuSections.enumerated() {
+            for (row, aMenu) in menuSection.menus.enumerated() {
+                if aMenu == menu { // swiftlint:disable:this for_where
+                    return IndexPath(row: row, section: section)
+                }
+            }
+        }
+        return nil
     }
     
     func test_selectMenuTriggerInvoked_toProductList() {
         // act
         loadTrigger.onNext(())
-        let index = MainViewModel.Menu.products.rawValue
-        let indexPath = IndexPath(row: index, section: 0)
+        guard let indexPath = indexPath(of: .products) else {
+            XCTFail()
+            return
+        }
         selectMenuTrigger.onNext(indexPath)
         
         // assert
@@ -67,8 +81,10 @@ final class MainViewModelTests: XCTestCase {
     func test_selectMenuTriggerInvoked_toSectionedProductList() {
         // act
         loadTrigger.onNext(())
-        let index = MainViewModel.Menu.sectionedProducts.rawValue
-        let indexPath = IndexPath(row: index, section: 0)
+        guard let indexPath = indexPath(of: .sectionedProducts) else {
+            XCTFail()
+            return
+        }
         selectMenuTrigger.onNext(indexPath)
         
         // assert
@@ -78,12 +94,27 @@ final class MainViewModelTests: XCTestCase {
     func test_selectMenuTriggerInvoked_toRepoList() {
         // act
         loadTrigger.onNext(())
-        let index = MainViewModel.Menu.repos.rawValue
-        let indexPath = IndexPath(row: index, section: 0)
+        guard let indexPath = indexPath(of: .repos) else {
+            XCTFail()
+            return
+        }
         selectMenuTrigger.onNext(indexPath)
         
         // assert
         XCTAssert(navigator.toRepos_Called)
+    }
+    
+    func test_selectMenuTriggerInvoked_toRepoCollection() {
+        // act
+        loadTrigger.onNext(())
+        guard let indexPath = indexPath(of: .repoCollection) else {
+            XCTFail()
+            return
+        }
+        selectMenuTrigger.onNext(indexPath)
+        
+        // assert
+        XCTAssert(navigator.toRepoCollection_Called)
     }
     
 }

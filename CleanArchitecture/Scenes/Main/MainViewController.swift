@@ -8,6 +8,7 @@
 
 import UIKit
 import Reusable
+import RxDataSources
 
 final class MainViewController: UIViewController, BindableType {
     
@@ -18,6 +19,9 @@ final class MainViewController: UIViewController, BindableType {
     // MARK: - Properties
 
     var viewModel: MainViewModel!
+    
+    private typealias MainMenuSectionModel = SectionModel<String, MainViewModel.Menu>
+    private var dataSource: RxTableViewSectionedReloadDataSource<MainMenuSectionModel>?
     
     // MARK: - Life Cycle
     
@@ -48,15 +52,28 @@ final class MainViewController: UIViewController, BindableType {
         
         let output = viewModel.transform(input)
         
-        output.menuList
-            .drive(tableView.rx.items) { tableView, index, menu in
-                return tableView.dequeueReusableCell(for: IndexPath(row: index, section: 0),
+        let dataSource = RxTableViewSectionedReloadDataSource<MainMenuSectionModel>(
+            configureCell: { (_, tableView, indexPath, menu) -> UITableViewCell in
+                return tableView.dequeueReusableCell(for: IndexPath(row: indexPath.row, section: 0),
                                                      cellType: MenuCell.self)
                     .then {
-                        $0.configView(with: menu)
+                        $0.configData(menu: menu)
                     }
+            }, titleForHeaderInSection: { dataSource, section in
+                return dataSource.sectionModels[section].model
+            })
+        
+        self.dataSource = dataSource
+        
+        output.menuSections
+            .map {
+                $0.map { section in
+                    MainMenuSectionModel(model: section.title, items: section.menus)
+                }
             }
+            .drive(tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
+        
         output.selectedMenu
             .drive()
             .disposed(by: rx.disposeBag)

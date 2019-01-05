@@ -11,16 +11,7 @@ import UIKit
 final class MenuCell: UITableViewCell, NibReusable {
     @IBOutlet weak var titleLabel: UILabel!
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        configView(with: nil)
-    }
-    
-    func configView(with model: MainViewModel.MenuModel?) {
-        guard let model = model else {
-            titleLabel.text = ""
-            return
-        }
-        titleLabel.text = model.menu.description
+    func configData(menu: MainViewModel.Menu?) {
+        titleLabel.text = menu?.description
     }
 }
