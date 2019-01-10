@@ -59,22 +59,22 @@ final class ReposViewModelTests: XCTestCase {
         let repoList = try? output.repoList.toBlocking(timeout: 1).first()
         
         // assert
-        XCTAssert(useCase.getRepoList_Called)
+        XCTAssert(useCase.getRepoListCalled)
         XCTAssertEqual(repoList??.count, 1)
     }
 
     func test_loadTriggerInvoked_getRepoList_failedShowError() {
         // arrange
-        let getRepoList_ReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.getRepoList_ReturnValue = getRepoList_ReturnValue
+        let getRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
+        useCase.getRepoListReturnValue = getRepoListReturnValue
 
         // act
         loadTrigger.onNext(())
-        getRepoList_ReturnValue.onError(TestError())
+        getRepoListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.getRepoList_Called)
+        XCTAssert(useCase.getRepoListCalled)
         XCTAssert(error is TestError)
     }
 
@@ -84,51 +84,51 @@ final class ReposViewModelTests: XCTestCase {
         let repoList = try? output.repoList.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.getRepoList_Called)
+        XCTAssert(useCase.getRepoListCalled)
         XCTAssertEqual(repoList??.count, 1)
     }
 
     func test_reloadTriggerInvoked_getRepoList_failedShowError() {
         // arrange
-        let getRepoList_ReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.getRepoList_ReturnValue = getRepoList_ReturnValue
+        let getRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
+        useCase.getRepoListReturnValue = getRepoListReturnValue
 
         // act
         reloadTrigger.onNext(())
-        getRepoList_ReturnValue.onError(TestError())
+        getRepoListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.getRepoList_Called)
+        XCTAssert(useCase.getRepoListCalled)
         XCTAssert(error is TestError)
     }
 
     func test_reloadTriggerInvoked_notGetRepoListIfStillLoading() {
         // arrange
-        let getRepoList_ReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.getRepoList_ReturnValue = getRepoList_ReturnValue
+        let getRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
+        useCase.getRepoListReturnValue = getRepoListReturnValue
 
         // act
         loadTrigger.onNext(())
-        useCase.getRepoList_Called = false
+        useCase.getRepoListCalled = false
         reloadTrigger.onNext(())
 
         // assert
-        XCTAssertFalse(useCase.getRepoList_Called)
+        XCTAssertFalse(useCase.getRepoListCalled)
     }
 
     func test_reloadTriggerInvoked_notGetRepoListIfStillReloading() {
         // arrange
-        let getRepoList_ReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.getRepoList_ReturnValue = getRepoList_ReturnValue
+        let getRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
+        useCase.getRepoListReturnValue = getRepoListReturnValue
 
         // act
         reloadTrigger.onNext(())
-        useCase.getRepoList_Called = false
+        useCase.getRepoListCalled = false
         reloadTrigger.onNext(())
 
         // assert
-        XCTAssertFalse(useCase.getRepoList_Called)
+        XCTAssertFalse(useCase.getRepoListCalled)
     }
 
     func test_loadMoreTriggerInvoked_loadMoreRepoList() {
@@ -138,66 +138,66 @@ final class ReposViewModelTests: XCTestCase {
         let repoList = try? output.repoList.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.loadMoreRepoList_Called)
+        XCTAssert(useCase.loadMoreRepoListCalled)
         XCTAssertEqual(repoList??.count, 2)
     }
 
     func test_loadMoreTriggerInvoked_loadMoreRepoList_failedShowError() {
         // arrange
-        let loadMoreRepoList_ReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.loadMoreRepoList_ReturnValue = loadMoreRepoList_ReturnValue
+        let loadMoreRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
+        useCase.loadMoreRepoListReturnValue = loadMoreRepoListReturnValue
 
         // act
         loadTrigger.onNext(())
         loadMoreTrigger.onNext(())
-        loadMoreRepoList_ReturnValue.onError(TestError())
+        loadMoreRepoListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.loadMoreRepoList_Called)
+        XCTAssert(useCase.loadMoreRepoListCalled)
         XCTAssert(error is TestError)
     }
 
     func test_loadMoreTriggerInvoked_notLoadMoreRepoListIfStillLoading() {
         // arrange
-        let getRepoList_ReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.getRepoList_ReturnValue = getRepoList_ReturnValue
+        let getRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
+        useCase.getRepoListReturnValue = getRepoListReturnValue
 
         // act
         loadTrigger.onNext(())
-        useCase.getRepoList_Called = false
+        useCase.getRepoListCalled = false
         loadMoreTrigger.onNext(())
 
         // assert
-        XCTAssertFalse(useCase.loadMoreRepoList_Called)
+        XCTAssertFalse(useCase.loadMoreRepoListCalled)
     }
 
     func test_loadMoreTriggerInvoked_notLoadMoreRepoListIfStillReloading() {
         // arrange
-        let getRepoList_ReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.getRepoList_ReturnValue = getRepoList_ReturnValue
+        let getRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
+        useCase.getRepoListReturnValue = getRepoListReturnValue
 
         // act
         reloadTrigger.onNext(())
-        useCase.getRepoList_Called = false
+        useCase.getRepoListCalled = false
         loadMoreTrigger.onNext(())
         
         // assert
-        XCTAssertFalse(useCase.loadMoreRepoList_Called)
+        XCTAssertFalse(useCase.loadMoreRepoListCalled)
     }
 
     func test_loadMoreTriggerInvoked_notLoadMoreDocumentTypesStillLoadingMore() {
         // arrange
-        let loadMoreRepoList_ReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.loadMoreRepoList_ReturnValue = loadMoreRepoList_ReturnValue
+        let loadMoreRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
+        useCase.loadMoreRepoListReturnValue = loadMoreRepoListReturnValue
         
         // act
         loadMoreTrigger.onNext(())
-        useCase.loadMoreRepoList_Called = false
+        useCase.loadMoreRepoListCalled = false
         loadMoreTrigger.onNext(())
 
         // assert
-        XCTAssertFalse(useCase.loadMoreRepoList_Called)
+        XCTAssertFalse(useCase.loadMoreRepoListCalled)
     }
 
     func test_selectRepoTriggerInvoked_toRepoDetail() {
@@ -206,7 +206,7 @@ final class ReposViewModelTests: XCTestCase {
         selectRepoTrigger.onNext(IndexPath(row: 0, section: 0))
 
         // assert
-        XCTAssert(navigator.toRepoDetail_Called)
+        XCTAssert(navigator.toRepoDetailCalled)
     }
 }
 

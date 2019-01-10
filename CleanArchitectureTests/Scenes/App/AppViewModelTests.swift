@@ -43,7 +43,7 @@ final class AppViewModelTests: XCTestCase {
         loadTrigger.onNext(())
         
         // assert
-        XCTAssert(navigator.toMain_Called)
+        XCTAssert(navigator.toMainCalled)
     }
     
 }

@@ -12,10 +12,10 @@ final class EditProductNavigatorMock: EditProductNavigatorType {
     
     // MARK: - dismiss
     
-    var dismiss_Called = false
+    var dismissCalled = false
     
     func dismiss() {
-        dismiss_Called = true
+        dismissCalled = true
     }
     
 }

@@ -13,9 +13,9 @@ final class ProductsUseCaseMock: ProductsUseCaseType {
 
     // MARK: - getProductList
     
-    var getProductList_Called = false
+    var getProductListCalled = false
     
-    var getProductList_ReturnValue: Observable<PagingInfo<Product>> = {
+    var getProductListReturnValue: Observable<PagingInfo<Product>> = {
         let items = [
             Product().with { $0.id = 1 }
         ]
@@ -24,15 +24,15 @@ final class ProductsUseCaseMock: ProductsUseCaseType {
     }()
     
     func getProductList() -> Observable<PagingInfo<Product>> {
-        getProductList_Called = true
-        return getProductList_ReturnValue
+        getProductListCalled = true
+        return getProductListReturnValue
     }
 
     // MARK: - loadMoreProductList
     
-    var loadMoreProductList_Called = false
+    var loadMoreProductListCalled = false
     
-    var loadMoreProductList_ReturnValue: Observable<PagingInfo<Product>> = {
+    var loadMoreProductListReturnValue: Observable<PagingInfo<Product>> = {
         let items = [
             Product().with { $0.id = 2 }
         ]
@@ -41,17 +41,17 @@ final class ProductsUseCaseMock: ProductsUseCaseType {
     }()
     
     func loadMoreProductList(page: Int) -> Observable<PagingInfo<Product>> {
-        loadMoreProductList_Called = true
-        return loadMoreProductList_ReturnValue
+        loadMoreProductListCalled = true
+        return loadMoreProductListReturnValue
     }
     
     // MARK: - deleteProduct
     
-    var deleteProduct_Called = false
-    var deleteProduct_ReturnValue: Observable<Void> = Observable.empty()
+    var deleteProductCalled = false
+    var deleteProductReturnValue: Observable<Void> = Observable.empty()
     
     func deleteProduct(id: Int) -> Observable<Void> {
-        deleteProduct_Called = true
-        return deleteProduct_ReturnValue
+        deleteProductCalled = true
+        return deleteProductReturnValue
     }
 }

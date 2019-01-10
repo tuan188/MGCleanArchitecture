@@ -84,7 +84,7 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         cancelTrigger.onNext(())
         
         // assert
-        XCTAssert(navigator.dismiss_Called)
+        XCTAssert(navigator.dismissCalled)
     }
     
     func test_dataTrigger_product_name() {
@@ -111,7 +111,7 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         updateTrigger.onNext(())
         
         // assert
-        XCTAssert(useCase.validateName_Called)
+        XCTAssert(useCase.validateNameCalled)
     }
     
     func test_dataTrigger_product_price() {
@@ -138,7 +138,7 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         updateTrigger.onNext(())
         
         // assert
-        XCTAssert(useCase.validatePrice_Called)
+        XCTAssert(useCase.validatePriceCalled)
     }
     
     func test_loadTriggerInvoked_enableUpdateByDefault() {
@@ -151,8 +151,8 @@ final class DynamicEditProductViewModelTests: XCTestCase {
     }
     
     func test_updateTrigger_not_update() {
-        useCase.validateName_ReturnValue = ValidationResult.invalid([TestError()])
-        useCase.validatePrice_ReturnValue = ValidationResult.invalid([TestError()])
+        useCase.validateNameReturnValue = ValidationResult.invalid([TestError()])
+        useCase.validatePriceReturnValue = ValidationResult.invalid([TestError()])
         
         // act
         dataTrigger.onNext(DynamicEditProductViewModel.DataType.name("foo"))
@@ -162,7 +162,7 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         
         // assert
         XCTAssertEqual(updateEnable, false)
-        XCTAssertFalse(useCase.update_Called)
+        XCTAssertFalse(useCase.updateCalled)
     }
     
     func test_updateTrigger_update() {
@@ -170,21 +170,21 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         updateTrigger.onNext(())
         
         // assert
-        XCTAssert(useCase.update_Called)
+        XCTAssert(useCase.updateCalled)
     }
     
     func test_updateTrigger_update_fail_show_error() {
         // arrange
-        let update_ReturnValue = PublishSubject<Void>()
-        useCase.update_ReturnValue = update_ReturnValue.asObserver()
+        let updateReturnValue = PublishSubject<Void>()
+        useCase.updateReturnValue = updateReturnValue.asObserver()
         
         // act
         updateTrigger.onNext(())
-        update_ReturnValue.onError(TestError())
+        updateReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
         
         // assert
-        XCTAssert(useCase.update_Called)
+        XCTAssert(useCase.updateCalled)
         XCTAssert(error is TestError)
     }
     

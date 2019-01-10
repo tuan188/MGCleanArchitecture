@@ -18,6 +18,9 @@ def pods
     pod 'NSObject+Rx', '4.3'
     pod 'RxDataSources', '3.0'
     
+    # Core Data
+    pod 'MagicalRecord', '2.3'
+    
     #
     pod 'MBProgressHUD', '1.1'
     pod 'SDWebImage', '4.4'

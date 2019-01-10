@@ -75,7 +75,7 @@ final class MainViewModelTests: XCTestCase {
         selectMenuTrigger.onNext(indexPath)
         
         // assert
-        XCTAssert(navigator.toProducts_Called)
+        XCTAssert(navigator.toProductsCalled)
     }
     
     func test_selectMenuTriggerInvoked_toSectionedProductList() {
@@ -88,7 +88,7 @@ final class MainViewModelTests: XCTestCase {
         selectMenuTrigger.onNext(indexPath)
         
         // assert
-        XCTAssert(navigator.toSectionedProducts_Called)
+        XCTAssert(navigator.toSectionedProductsCalled)
     }
     
     func test_selectMenuTriggerInvoked_toRepoList() {
@@ -101,7 +101,7 @@ final class MainViewModelTests: XCTestCase {
         selectMenuTrigger.onNext(indexPath)
         
         // assert
-        XCTAssert(navigator.toRepos_Called)
+        XCTAssert(navigator.toReposCalled)
     }
     
     func test_selectMenuTriggerInvoked_toRepoCollection() {
@@ -114,7 +114,7 @@ final class MainViewModelTests: XCTestCase {
         selectMenuTrigger.onNext(indexPath)
         
         // assert
-        XCTAssert(navigator.toRepoCollection_Called)
+        XCTAssert(navigator.toRepoCollectionCalled)
     }
     
 }

@@ -13,9 +13,9 @@ final class SectionedProductsUseCaseMock: SectionedProductsUseCaseType {
 
     // MARK: - getProductList
     
-    var getProductList_Called = false
+    var getProductListCalled = false
     
-    var getProductList_ReturnValue: Observable<PagingInfo<Product>> = {
+    var getProductListReturnValue: Observable<PagingInfo<Product>> = {
         let items = [
             Product().with { $0.id = 1 }
         ]
@@ -24,15 +24,15 @@ final class SectionedProductsUseCaseMock: SectionedProductsUseCaseType {
     }()
     
     func getProductList() -> Observable<PagingInfo<Product>> {
-        getProductList_Called = true
-        return getProductList_ReturnValue
+        getProductListCalled = true
+        return getProductListReturnValue
     }
 
     // MARK: - loadMoreProductList
     
-    var loadMoreProductList_Called = false
+    var loadMoreProductListCalled = false
     
-    var loadMoreProductList_ReturnValue: Observable<PagingInfo<Product>> = {
+    var loadMoreProductListReturnValue: Observable<PagingInfo<Product>> = {
         let items = [
             Product().with { $0.id = 2 }
         ]
@@ -41,7 +41,7 @@ final class SectionedProductsUseCaseMock: SectionedProductsUseCaseType {
     }()
     
     func loadMoreProductList(page: Int) -> Observable<PagingInfo<Product>> {
-        loadMoreProductList_Called = true
-        return loadMoreProductList_ReturnValue
+        loadMoreProductListCalled = true
+        return loadMoreProductListReturnValue
     }
 }

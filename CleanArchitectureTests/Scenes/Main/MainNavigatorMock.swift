@@ -12,33 +12,33 @@ final class MainNavigatorMock: MainNavigatorType {
     
     // MARK: - toProducts
     
-    var toProducts_Called = false
+    var toProductsCalled = false
     
     func toProducts() {
-        toProducts_Called = true
+        toProductsCalled = true
     }
     
     // MARK: - toSectionedProducts
     
-    var toSectionedProducts_Called = false
+    var toSectionedProductsCalled = false
     
     func toSectionedProducts() {
-        toSectionedProducts_Called = true
+        toSectionedProductsCalled = true
     }
     
     // MARK: - toRepos
     
-    var toRepos_Called = false
+    var toReposCalled = false
     
     func toRepos() {
-        toRepos_Called = true
+        toReposCalled = true
     }
     
     // MARK: - toRepoCollection
     
-    var toRepoCollection_Called = false
+    var toRepoCollectionCalled = false
     
     func toRepoCollection() {
-        toRepoCollection_Called = true
+        toRepoCollectionCalled = true
     }
 }

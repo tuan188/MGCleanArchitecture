@@ -63,22 +63,22 @@ final class SectionedProductsViewModelTests: XCTestCase {
         let productSections = try? output.productSections.toBlocking(timeout: 1).first()
         
         // assert
-        XCTAssert(useCase.getProductList_Called)
+        XCTAssert(useCase.getProductListCalled)
         XCTAssertEqual(productSections??[0].productList.count, 1)
     }
 
     func test_loadTriggerInvoked_getProductList_failedShowError() {
         // arrange
-        let getProductList_ReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.getProductList_ReturnValue = getProductList_ReturnValue
+        let getProductListReturnValue = PublishSubject<PagingInfo<Product>>()
+        useCase.getProductListReturnValue = getProductListReturnValue
 
         // act
         loadTrigger.onNext(())
-        getProductList_ReturnValue.onError(TestError())
+        getProductListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.getProductList_Called)
+        XCTAssert(useCase.getProductListCalled)
         XCTAssert(error is TestError)
     }
 
@@ -88,51 +88,51 @@ final class SectionedProductsViewModelTests: XCTestCase {
         let productSections = try? output.productSections.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.getProductList_Called)
+        XCTAssert(useCase.getProductListCalled)
         XCTAssertEqual(productSections??[0].productList.count, 1)
     }
 
     func test_reloadTriggerInvoked_getProductList_failedShowError() {
         // arrange
-        let getProductList_ReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.getProductList_ReturnValue = getProductList_ReturnValue
+        let getProductListReturnValue = PublishSubject<PagingInfo<Product>>()
+        useCase.getProductListReturnValue = getProductListReturnValue
 
         // act
         reloadTrigger.onNext(())
-        getProductList_ReturnValue.onError(TestError())
+        getProductListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.getProductList_Called)
+        XCTAssert(useCase.getProductListCalled)
         XCTAssert(error is TestError)
     }
 
     func test_reloadTriggerInvoked_notGetProductListIfStillLoading() {
         // arrange
-        let getProductList_ReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.getProductList_ReturnValue = getProductList_ReturnValue
+        let getProductListReturnValue = PublishSubject<PagingInfo<Product>>()
+        useCase.getProductListReturnValue = getProductListReturnValue
 
         // act
         loadTrigger.onNext(())
-        useCase.getProductList_Called = false
+        useCase.getProductListCalled = false
         reloadTrigger.onNext(())
 
         // assert
-        XCTAssertFalse(useCase.getProductList_Called)
+        XCTAssertFalse(useCase.getProductListCalled)
     }
 
     func test_reloadTriggerInvoked_notGetProductListIfStillReloading() {
         // arrange
-        let getProductList_ReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.getProductList_ReturnValue = getProductList_ReturnValue
+        let getProductListReturnValue = PublishSubject<PagingInfo<Product>>()
+        useCase.getProductListReturnValue = getProductListReturnValue
 
         // act
         reloadTrigger.onNext(())
-        useCase.getProductList_Called = false
+        useCase.getProductListCalled = false
         reloadTrigger.onNext(())
 
         // assert
-        XCTAssertFalse(useCase.getProductList_Called)
+        XCTAssertFalse(useCase.getProductListCalled)
     }
 
     func test_loadMoreTriggerInvoked_loadMoreProductList() {
@@ -142,65 +142,65 @@ final class SectionedProductsViewModelTests: XCTestCase {
         let productSections = try? output.productSections.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.loadMoreProductList_Called)
+        XCTAssert(useCase.loadMoreProductListCalled)
         XCTAssertEqual(productSections??[0].productList.count, 2)
     }
 
     func test_loadMoreTriggerInvoked_loadMoreProductList_failedShowError() {
         // arrange
-        let loadMoreProductList_ReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.loadMoreProductList_ReturnValue = loadMoreProductList_ReturnValue
+        let loadMoreProductListReturnValue = PublishSubject<PagingInfo<Product>>()
+        useCase.loadMoreProductListReturnValue = loadMoreProductListReturnValue
 
         // act
         loadTrigger.onNext(())
         loadMoreTrigger.onNext(())
-        loadMoreProductList_ReturnValue.onError(TestError())
+        loadMoreProductListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.loadMoreProductList_Called)
+        XCTAssert(useCase.loadMoreProductListCalled)
         XCTAssert(error is TestError)
     }
 
     func test_loadMoreTriggerInvoked_notLoadMoreProductListIfStillLoading() {
         // arrange
-        let getProductList_ReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.getProductList_ReturnValue = getProductList_ReturnValue
+        let getProductListReturnValue = PublishSubject<PagingInfo<Product>>()
+        useCase.getProductListReturnValue = getProductListReturnValue
 
         // act
         loadTrigger.onNext(())
-        useCase.getProductList_Called = false
+        useCase.getProductListCalled = false
         loadMoreTrigger.onNext(())
 
         // assert
-        XCTAssertFalse(useCase.loadMoreProductList_Called)
+        XCTAssertFalse(useCase.loadMoreProductListCalled)
     }
 
     func test_loadMoreTriggerInvoked_notLoadMoreProductListIfStillReloading() {
         // arrange
-        let getProductList_ReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.getProductList_ReturnValue = getProductList_ReturnValue
+        let getProductListReturnValue = PublishSubject<PagingInfo<Product>>()
+        useCase.getProductListReturnValue = getProductListReturnValue
 
         // act
         reloadTrigger.onNext(())
-        useCase.getProductList_Called = false
+        useCase.getProductListCalled = false
         loadMoreTrigger.onNext(())
         // assert
-        XCTAssertFalse(useCase.loadMoreProductList_Called)
+        XCTAssertFalse(useCase.loadMoreProductListCalled)
     }
 
     func test_loadMoreTriggerInvoked_notLoadMoreDocumentTypesStillLoadingMore() {
         // arrange
-        let loadMoreProductList_ReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.loadMoreProductList_ReturnValue = loadMoreProductList_ReturnValue
+        let loadMoreProductListReturnValue = PublishSubject<PagingInfo<Product>>()
+        useCase.loadMoreProductListReturnValue = loadMoreProductListReturnValue
 
         // act
         loadMoreTrigger.onNext(())
-        useCase.loadMoreProductList_Called = false
+        useCase.loadMoreProductListCalled = false
         loadMoreTrigger.onNext(())
 
         // assert
-        XCTAssertFalse(useCase.loadMoreProductList_Called)
+        XCTAssertFalse(useCase.loadMoreProductListCalled)
     }
 
     func test_selectProductTriggerInvoked_toProductDetail() {
@@ -209,7 +209,7 @@ final class SectionedProductsViewModelTests: XCTestCase {
         selectProductTrigger.onNext(IndexPath(row: 0, section: 0))
 
         // assert
-        XCTAssert(navigator.toProductDetail_Called)
+        XCTAssert(navigator.toProductDetailCalled)
     }
 }
 

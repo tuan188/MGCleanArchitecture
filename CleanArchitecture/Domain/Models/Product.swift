@@ -14,7 +14,11 @@ struct Product {
 
 extension Product {
     init() {
-        self.init(id: 0, name: "", price: 0.0)
+        self.init(
+            id: 0,
+            name: "",
+            price: 0.0
+        )
     }
 }
 

@@ -12,9 +12,9 @@ final class AppNavigatorMock: AppNavigatorType {
     
     // MARK: - toMain
     
-    var toMain_Called = false
+    var toMainCalled = false
     
     func toMain() {
-        toMain_Called = true
+        toMainCalled = true
     }
 }

@@ -103,6 +103,7 @@
 		177982D620CE5A980095CCA8 /* SectionedProductsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177982D520CE5A980095CCA8 /* SectionedProductsViewModelTests.swift */; };
 		177982EC20CE6F590095CCA8 /* ProductNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 177982EA20CE6F590095CCA8 /* ProductNameCell.xib */; };
 		177982F020CE6F6B0095CCA8 /* ProductPriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 177982EE20CE6F6B0095CCA8 /* ProductPriceCell.xib */; };
+		177A12E221E45124007F1559 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177A12E121E45124007F1559 /* User.swift */; };
 		178002FE213FB93E00D20209 /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178002FD213FB93E00D20209 /* EmptyDataView.swift */; };
 		17800300213FB94C00D20209 /* EmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 178002FF213FB94C00D20209 /* EmptyDataView.xib */; };
 		17800302213FBA8200D20209 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17800301213FBA8200D20209 /* UITableView+.swift */; };
@@ -268,6 +269,7 @@
 		177982D520CE5A980095CCA8 /* SectionedProductsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedProductsViewModelTests.swift; sourceTree = "<group>"; };
 		177982EA20CE6F590095CCA8 /* ProductNameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductNameCell.xib; sourceTree = "<group>"; };
 		177982EE20CE6F6B0095CCA8 /* ProductPriceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductPriceCell.xib; sourceTree = "<group>"; };
+		177A12E121E45124007F1559 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		178002FD213FB93E00D20209 /* EmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDataView.swift; sourceTree = "<group>"; };
 		178002FF213FB94C00D20209 /* EmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyDataView.xib; sourceTree = "<group>"; };
 		17800301213FBA8200D20209 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
@@ -368,7 +370,8 @@
 		170B307420FA3E7400D39001 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				172DC29B20C54FF3009FC881 /* Model */,
+				177A12E321E4524A007F1559 /* Entities */,
+				172DC29B20C54FF3009FC881 /* Models */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -585,13 +588,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		172DC29B20C54FF3009FC881 /* Model */ = {
+		172DC29B20C54FF3009FC881 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				172DC2AE20C62A01009FC881 /* Product.swift */,
+				177A12E121E45124007F1559 /* User.swift */,
 				1721726F20E49038007D33A5 /* Repo.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		172DC2A520C62975009FC881 /* Products */ = {
@@ -708,6 +712,13 @@
 				17EC214720DCDC1500F793FE /* ProductDetailCellsTests.swift */,
 			);
 			path = ProductDetail;
+			sourceTree = "<group>";
+		};
+		177A12E321E4524A007F1559 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		178002FC213FB92400D20209 /* Common */ = {
@@ -960,7 +971,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi  \n";
 		};
 		1BA8FDB03F238FAEC1AE9320 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1129,6 +1140,7 @@
 				172DC2A120C555A1009FC881 /* MenuCell.swift in Sources */,
 				17DCDA4320FB346600E2602A /* Assembler.swift in Sources */,
 				17EC215420DCE58800F793FE /* StaticProductDetailViewController.swift in Sources */,
+				177A12E221E45124007F1559 /* User.swift in Sources */,
 				172DC2B820C62BFF009FC881 /* UIViewController+Rx.swift in Sources */,
 				172DC2D820C678DD009FC881 /* ProductsViewModel.swift in Sources */,
 				17D80D2820DF98D7009E68F0 /* EditProductNavigator.swift in Sources */,

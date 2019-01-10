@@ -13,32 +13,32 @@ final class DynamicEditProductUseCaseMock: DynamicEditProductUseCaseType {
     
     // MARK: - validate name
     
-    var validateName_Called = false
-    var validateName_ReturnValue = ValidationResult.valid
+    var validateNameCalled = false
+    var validateNameReturnValue = ValidationResult.valid
     
     func validate(name: String) -> ValidationResult {
-        validateName_Called = true
-        return validateName_ReturnValue
+        validateNameCalled = true
+        return validateNameReturnValue
     }
     
     // MARK: - validate price
     
-    var validatePrice_Called = false
-    var validatePrice_ReturnValue = ValidationResult.valid
+    var validatePriceCalled = false
+    var validatePriceReturnValue = ValidationResult.valid
     
     func validate(price: String) -> ValidationResult {
-        validatePrice_Called = true
-        return validatePrice_ReturnValue
+        validatePriceCalled = true
+        return validatePriceReturnValue
     }
     
     // MARK: - update product
     
-    var update_Called = false
-    var update_ReturnValue: Observable<Void> = Observable.just(())
+    var updateCalled = false
+    var updateReturnValue: Observable<Void> = Observable.just(())
     
     func update(_ product: Product) -> Observable<Void> {
-        update_Called = true
-        return update_ReturnValue
+        updateCalled = true
+        return updateReturnValue
     }
 }
 

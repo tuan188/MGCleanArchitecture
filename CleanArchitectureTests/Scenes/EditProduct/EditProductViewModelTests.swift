@@ -88,12 +88,12 @@ final class EditProductViewModelTests: XCTestCase {
         updateTrigger.onNext(())
         
         // assert
-        XCTAssert(useCase.validateName_Called)
+        XCTAssert(useCase.validateNameCalled)
     }
     
     func test_nameTriggerInvoked_validateNameFailNotEnableUpdate() {
         // arrange
-        useCase.validateName_ReturnValue = ValidationResult.invalid([TestError()])
+        useCase.validateNameReturnValue = ValidationResult.invalid([TestError()])
         
         // act
         nameTrigger.onNext("foo")
@@ -111,12 +111,12 @@ final class EditProductViewModelTests: XCTestCase {
         updateTrigger.onNext(())
         
         // assert
-        XCTAssert(useCase.validatePrice_Called)
+        XCTAssert(useCase.validatePriceCalled)
     }
     
     func test_priceTriggerInvoked_validatePriceFailNotEnableUpdate() {
         // arrange
-        useCase.validatePrice_ReturnValue = ValidationResult.invalid([TestError()])
+        useCase.validatePriceReturnValue = ValidationResult.invalid([TestError()])
         
         // act
         nameTrigger.onNext("foo")
@@ -141,7 +141,7 @@ final class EditProductViewModelTests: XCTestCase {
     
     func test_updateTriggerInvoked_notUpdateProduct() {
         // arrange
-        useCase.validateName_ReturnValue = ValidationResult.invalid([TestError()])
+        useCase.validateNameReturnValue = ValidationResult.invalid([TestError()])
         
         // act
         nameTrigger.onNext("foo")
@@ -149,7 +149,7 @@ final class EditProductViewModelTests: XCTestCase {
         updateTrigger.onNext(())
         
         // assert
-        XCTAssertFalse(useCase.update_Called)
+        XCTAssertFalse(useCase.updateCalled)
     }
     
     func test_updateTriggerInvoked_updateProduct() {
@@ -159,25 +159,25 @@ final class EditProductViewModelTests: XCTestCase {
         updateTrigger.onNext(())
         
         // assert
-        XCTAssert(useCase.update_Called)
-        XCTAssert(navigator.dismiss_Called)
+        XCTAssert(useCase.updateCalled)
+        XCTAssert(navigator.dismissCalled)
     }
     
     func test_updateTriggerInvoked_updateProductFailShowError() {
         // arrange
-        let update_ReturnValue = PublishSubject<Void>()
-        useCase.update_ReturnValue = update_ReturnValue
+        let updateReturnValue = PublishSubject<Void>()
+        useCase.updateReturnValue = updateReturnValue
         
         // act
         nameTrigger.onNext("foo")
         priceTrigger.onNext("10")
         updateTrigger.onNext(())
-        update_ReturnValue.onError(TestError())
+        updateReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
         
         // assert
-        XCTAssert(useCase.update_Called)
-        XCTAssertFalse(navigator.dismiss_Called)
+        XCTAssert(useCase.updateCalled)
+        XCTAssertFalse(navigator.dismissCalled)
         XCTAssert(error is TestError)
     }
     
@@ -186,7 +186,7 @@ final class EditProductViewModelTests: XCTestCase {
         cancelTrigger.onNext(())
         
         // assert
-        XCTAssert(navigator.dismiss_Called)
+        XCTAssert(navigator.dismissCalled)
     }
     
 }

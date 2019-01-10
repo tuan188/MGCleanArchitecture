@@ -12,26 +12,26 @@ final class ReposNavigatorMock: ReposNavigatorType {
 
     // MARK: - toRepos
     
-    var toRepos_Called = false
+    var toReposCalled = false
     
     func toRepos() {
-        toRepos_Called = true
+        toReposCalled = true
     }
 
     // MARK: - toRepoDetail
     
-    var toRepoDetail_Called = false
+    var toRepoDetailCalled = false
     
     func toRepoDetail(repo: Repo) {
-        toRepoDetail_Called = true
+        toRepoDetailCalled = true
     }
     
     // MARK: - toRepoCollection
     
-    var toRepoCollection_Called = false
+    var toRepoCollectionCalled = false
     
     func toRepoCollection() {
-        toRepoCollection_Called = true
+        toRepoCollectionCalled = true
     }
 }
 

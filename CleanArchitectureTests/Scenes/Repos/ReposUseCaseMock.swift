@@ -13,9 +13,9 @@ final class ReposUseCaseMock: ReposUseCaseType {
 
     // MARK: - getRepoList
     
-    var getRepoList_Called = false
+    var getRepoListCalled = false
     
-    var getRepoList_ReturnValue: Observable<PagingInfo<Repo>> = {
+    var getRepoListReturnValue: Observable<PagingInfo<Repo>> = {
         let items = [
             Repo().with { $0.id = 1 }
         ]
@@ -24,15 +24,15 @@ final class ReposUseCaseMock: ReposUseCaseType {
     }()
     
     func getRepoList() -> Observable<PagingInfo<Repo>> {
-        getRepoList_Called = true
-        return getRepoList_ReturnValue
+        getRepoListCalled = true
+        return getRepoListReturnValue
     }
 
     // MARK: - loadMoreRepoList
     
-    var loadMoreRepoList_Called = false
+    var loadMoreRepoListCalled = false
     
-    var loadMoreRepoList_ReturnValue: Observable<PagingInfo<Repo>> = {
+    var loadMoreRepoListReturnValue: Observable<PagingInfo<Repo>> = {
         let items = [
             Repo().with { $0.id = 2 }
         ]
@@ -41,7 +41,7 @@ final class ReposUseCaseMock: ReposUseCaseType {
     }()
     
     func loadMoreRepoList(page: Int) -> Observable<PagingInfo<Repo>> {
-        loadMoreRepoList_Called = true
-        return loadMoreRepoList_ReturnValue
+        loadMoreRepoListCalled = true
+        return loadMoreRepoListReturnValue
     }
 }

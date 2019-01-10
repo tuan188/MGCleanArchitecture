@@ -12,9 +12,9 @@ final class DynamicEditProductNavigatorMock: DynamicEditProductNavigatorType {
     
     // MARK: - dismiss
     
-    var dismiss_Called = false
+    var dismissCalled = false
     
     func dismiss() {
-        dismiss_Called = true
+        dismissCalled = true
     }
 }

@@ -1,7 +1,6 @@
 disabled_rules: # rule identifiers to exclude from running
   - trailing_whitespace
   - trailing_newline
-  - identifier_name
   - xctfail_message
 
 opt_in_rules: # some rules are only opt-in
@@ -185,6 +184,15 @@ type_name:
   excluded:
     - API
     - URL
+
+identifier_name:
+  min_length:
+    warning: 3
+  excluded:
+    - id
+    - vc
+    - vm
+    - ac
 
 cyclomatic_complexity:
   warning: 15
