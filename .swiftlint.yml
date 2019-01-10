@@ -204,7 +204,6 @@ custom_rules:
   final_class:
     name: "Final Class"
     regex: "(^[ ]*class [A-Z]+)"
-    match_kinds: keyword
     message: "Class should be marked as final."
     severity: warning
   drive_one_line:
