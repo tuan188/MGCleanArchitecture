@@ -43,6 +43,8 @@ extension MainViewModel: ViewModelType {
                     self.navigator.toRepos()
                 case .repoCollection:
                     self.navigator.toRepoCollection()
+                case .users:
+                    self.navigator.toUsers()
                 }
             })
             .mapToVoid()
@@ -56,7 +58,8 @@ extension MainViewModel: ViewModelType {
     func menuSections() -> [MenuSection] {
         return [
             MenuSection(title: "Mock Data", menus: [.products, .sectionedProducts]),
-            MenuSection(title: "API", menus: [.repos, .repoCollection])
+            MenuSection(title: "API", menus: [.repos, .repoCollection]),
+            MenuSection(title: "Core Data", menus: [ .users ])
         ]
     }
 }
@@ -67,6 +70,7 @@ extension MainViewModel {
         case sectionedProducts = 1
         case repos = 2
         case repoCollection = 3
+        case users = 4
         
         var description: String {
             switch self {
@@ -78,6 +82,8 @@ extension MainViewModel {
                 return "Git repo list"
             case .repoCollection:
                 return "Git repo collection"
+            case .users:
+                return "User list"
             }
         }
     }

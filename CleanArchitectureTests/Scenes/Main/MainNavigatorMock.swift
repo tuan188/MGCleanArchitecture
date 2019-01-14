@@ -41,4 +41,12 @@ final class MainNavigatorMock: MainNavigatorType {
     func toRepoCollection() {
         toRepoCollectionCalled = true
     }
+    
+    // MARK: - toUsers
+    
+    var toUsersCalled = false
+    
+    func toUsers() {
+        toUsersCalled = true
+    }
 }

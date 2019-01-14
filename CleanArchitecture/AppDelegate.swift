@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MagicalRecord
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,11 +16,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     var assembler: Assembler = DefaultAssembler()
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
+        setupCoreData()
+        
         if NSClassFromString("XCTest") != nil { // test
             window?.rootViewController = UnitTestViewController()
         } else {
             bindViewModel()
         }
+    }
+    
+    private func setupCoreData() {
+        MagicalRecord.setupAutoMigratingCoreDataStack()
+        MagicalRecord.setLoggingLevel(MagicalRecordLoggingLevel.error)
     }
 
     private func bindViewModel() {
@@ -30,6 +38,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         output.toMain
             .drive()
             .disposed(by: rx.disposeBag)
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        MagicalRecord.cleanUp()
     }
 }
 

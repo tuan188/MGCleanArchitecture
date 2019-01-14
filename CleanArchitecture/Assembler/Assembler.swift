@@ -16,6 +16,7 @@ protocol Assembler: class,
     StaticProductDetailAssembler,
     DynamicEditProductAssembler,
     RepositoriesAssembler,
+    UserListAssembler,
     AppAssembler {
     
 }
