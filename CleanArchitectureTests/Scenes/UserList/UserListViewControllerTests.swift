@@ -15,12 +15,11 @@ final class UserListViewControllerTests: XCTestCase {
 
     override func setUp() {
 		super.setUp()
-//        viewController = UserListViewController.instantiate()
+        viewController = UserListViewController.instantiate()
 	}
 
     func test_ibOutlets() {
-//        _ = viewController.view
-        XCTAssert(true)
-//        XCTAssertNotNil(viewController.tableView)
+        _ = viewController.view
+        XCTAssertNotNil(viewController.tableView)
     }
 }

@@ -13,8 +13,7 @@ final class UserListViewController: UIViewController, BindableType {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var tableView: LoadMoreTableView!
-    @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var tableView: RefreshTableView!
 
     // MARK: - Properties
     
@@ -39,6 +38,7 @@ final class UserListViewController: UIViewController, BindableType {
             $0.rowHeight = UITableView.automaticDimension
             $0.register(cellType: UserCell.self)
             $0.refreshFooter = nil
+            $0.refreshHeader = nil
         }
         tableView.rx
             .setDelegate(self)
@@ -48,7 +48,7 @@ final class UserListViewController: UIViewController, BindableType {
     func bindViewModel() {
         let input = UserListViewModel.Input(
             loadTrigger: Driver.just(()),
-            reloadTrigger: tableView.refreshTrigger,
+            reloadTrigger: Driver.empty(),
             loadMoreTrigger: Driver.empty(),
             selectUserTrigger: tableView.rx.itemSelected.asDriver()
         )
@@ -72,10 +72,10 @@ final class UserListViewController: UIViewController, BindableType {
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
         output.refreshing
-            .drive(tableView.refreshing)
+            .drive()
             .disposed(by: rx.disposeBag)
         output.loadingMore
-            .drive(tableView.loadingMore)
+            .drive()
             .disposed(by: rx.disposeBag)
         output.fetchItems
             .drive()

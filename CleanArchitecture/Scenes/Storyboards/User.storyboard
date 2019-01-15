@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6CT-JZ-sVs" customClass="LoadMoreTableView" customModule="MGLoadMore">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6CT-JZ-sVs" customClass="RefreshTableView" customModule="MGLoadMore">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -32,12 +32,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hdd-Ci-lza"/>
                     </view>
-                    <navigationItem key="navigationItem" title="User List" id="6bx-Eb-9dh">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="FjE-Ye-BhO"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="User List" id="6bx-Eb-9dh"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="addButton" destination="FjE-Ye-BhO" id="76K-ij-YdN"/>
                         <outlet property="tableView" destination="6CT-JZ-sVs" id="JjY-2F-lrP"/>
                     </connections>
                 </viewController>
