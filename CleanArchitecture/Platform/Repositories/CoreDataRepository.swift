@@ -86,22 +86,34 @@ extension CoreDataRepository where
         }
     }
     
-    func add(_ item: ModelType) -> Observable<Void> {
+    func addAll(_ items: [ModelType]) -> Observable<Void> {
         return MagicalRecord.rx.save(block: { context in
-            if let entity = EntityType.mr_createEntity(in: context) {
-                Self.map(from: item, to: entity)
+            for item in items {
+                if let entity = EntityType.mr_createEntity(in: context) {
+                    Self.map(from: item, to: entity)
+                }
             }
         })
     }
     
-    func update(_ item: ModelType) -> Observable<Void> {
+    func add(_ item: ModelType) -> Observable<Void> {
+        return addAll([item])
+    }
+    
+    func updateAll(_ items: [ModelType]) -> Observable<Void> {
         return MagicalRecord.rx.save { context in
-            let predicate = NSPredicate(format: "\(ModelType.primaryKey) = " + (item.modelID is Int ? "%d" : "%@" ),
-                                        item.modelID)
-            if let entity = EntityType.mr_findFirst(with: predicate, in: context) {
-                Self.map(from: item, to: entity)
+            for item in items {
+                let predicate = NSPredicate(format: "\(ModelType.primaryKey) = " + (item.modelID is Int ? "%d" : "%@" ),
+                                            item.modelID)
+                if let entity = EntityType.mr_findFirst(with: predicate, in: context) {
+                    Self.map(from: item, to: entity)
+                }
             }
         }
+    }
+    
+    func update(_ item: ModelType) -> Observable<Void> {
+        return updateAll([item])
     }
     
     func deleteItem(havingID id: ModelType.IDType) -> Observable<Void> {
