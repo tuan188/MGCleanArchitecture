@@ -49,4 +49,13 @@ final class MainNavigatorMock: MainNavigatorType {
     func toUsers() {
         toUsersCalled = true
     }
+    
+    // MARK: - toLogin
+    
+    var toLoginCalled = false
+    
+    func toLogin() {
+        toLoginCalled = true
+    }
+
 }

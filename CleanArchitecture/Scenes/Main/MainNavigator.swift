@@ -12,6 +12,7 @@ protocol MainNavigatorType {
     func toRepos()
     func toRepoCollection()
     func toUsers()
+    func toLogin()
 }
 
 struct MainNavigator: MainNavigatorType {
@@ -40,6 +41,11 @@ struct MainNavigator: MainNavigatorType {
     
     func toUsers() {
         let vc: UserListViewController = assembler.resolve(navigationController: navigationController)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func toLogin() {
+        let vc: LoginViewController = assembler.resolve(navigationController: navigationController)
         navigationController.pushViewController(vc, animated: true)
     }
 }

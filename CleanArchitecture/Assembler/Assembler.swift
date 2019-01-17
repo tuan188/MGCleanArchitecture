@@ -17,6 +17,7 @@ protocol Assembler: class,
     DynamicEditProductAssembler,
     RepositoriesAssembler,
     UserListAssembler,
+    LoginAssembler,
     AppAssembler {
     
 }

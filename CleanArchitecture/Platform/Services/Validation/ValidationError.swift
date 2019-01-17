@@ -11,6 +11,8 @@ import UIKit
 enum ValidationError: Error {
     case productNameMinLength
     case productPriceMinValue
+    case usernameMinLength
+    case passwordMinLength
 }
 
 extension ValidationError: LocalizedError {
@@ -20,6 +22,10 @@ extension ValidationError: LocalizedError {
             return "Product name must be at least 5 characters."
         case .productPriceMinValue:
             return "Product price must be greater than 0."
+        case .usernameMinLength:
+            return "Please enter your username."
+        case .passwordMinLength:
+            return "Please enter your password"
         }
     }
 }

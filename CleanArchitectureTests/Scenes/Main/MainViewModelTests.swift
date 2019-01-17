@@ -50,7 +50,7 @@ final class MainViewModelTests: XCTestCase {
         let menuSections = try? output.menuSections.toBlocking(timeout: 1).first()
         
         // assert
-        XCTAssertEqual(menuSections??.count, 3)
+        XCTAssertEqual(menuSections??.count, 4)
     }
     
     private func indexPath(of menu: MainViewModel.Menu) -> IndexPath? {
@@ -128,6 +128,19 @@ final class MainViewModelTests: XCTestCase {
         
         // assert
         XCTAssert(navigator.toUsersCalled)
+    }
+    
+    func test_selectMenuTriggerInvoked_toLogin() {
+        // act
+        loadTrigger.onNext(())
+        guard let indexPath = indexPath(of: .login) else {
+            XCTFail()
+            return
+        }
+        selectMenuTrigger.onNext(indexPath)
+        
+        // assert
+        XCTAssert(navigator.toLoginCalled)
     }
     
 }
