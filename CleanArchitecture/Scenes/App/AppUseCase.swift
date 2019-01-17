@@ -13,8 +13,7 @@ protocol AppUseCaseType {
 }
 
 struct AppUseCase: AppUseCaseType {
-    
-    let userRepository: UserRepository
+    let userRepository: UserRepositoryType
     
     func checkIfFirstRun() -> Bool {
         return !AppSettings.didInit
@@ -39,6 +38,6 @@ struct AppUseCase: AppUseCaseType {
                  gender: .female,
                  birthday: Date.date(day: 29, month: 8, year: 1_985) ?? Date())
         ]
-        return userRepository.addAll(users)
+        return userRepository.add(users)
     }
 }

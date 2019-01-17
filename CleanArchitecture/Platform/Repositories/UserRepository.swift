@@ -8,7 +8,22 @@
 
 import MagicalRecord
 
-struct UserRepository: CoreDataRepository {
+protocol UserRepositoryType {
+    func getUsers() -> Observable<[User]>
+    func add(_ users: [User]) -> Observable<Void>
+}
+
+struct UserRepository: UserRepositoryType {
+    func getUsers() -> Observable<[User]> {
+        return all()
+    }
+    
+    func add(_ users: [User]) -> Observable<Void> {
+        return addAll(users)
+    }
+}
+
+extension UserRepository: CoreDataRepository {
     static func map(from item: User, to entity: UserEntity) {
         entity.id = item.id
         entity.name = item.name

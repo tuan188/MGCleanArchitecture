@@ -12,11 +12,11 @@ protocol UserListUseCaseType {
 }
 
 struct UserListUseCase: UserListUseCaseType {
-    let userRepository: UserRepository
+    let userRepository: UserRepositoryType
     
     func getUserList() -> Observable<PagingInfo<User>> {
         return userRepository
-            .all()
+            .getUsers()
             .map { PagingInfo(page: 1, items: $0) }
     }
     

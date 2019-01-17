@@ -430,7 +430,6 @@
 		170B307420FA3E7400D39001 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				177A12E321E4524A007F1559 /* Entities */,
 				172DC29B20C54FF3009FC881 /* Models */,
 			);
 			path = Domain;
@@ -439,6 +438,7 @@
 		170B307520FA3EA100D39001 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				177A12E321E4524A007F1559 /* CoreData */,
 				17BB3A6620FF568700C5F8B0 /* Repositories */,
 				1721726920E478EF007D33A5 /* Services */,
 			);
@@ -783,12 +783,12 @@
 			path = ProductDetail;
 			sourceTree = "<group>";
 		};
-		177A12E321E4524A007F1559 /* Entities */ = {
+		177A12E321E4524A007F1559 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				17CDA62D21EC2DBC0001FE4A /* Model.xcdatamodeld */,
 			);
-			path = Entities;
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		178002FC213FB92400D20209 /* Common */ = {
