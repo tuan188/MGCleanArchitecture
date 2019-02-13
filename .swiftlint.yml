@@ -2,6 +2,11 @@ disabled_rules: # rule identifiers to exclude from running
   - trailing_whitespace
   - trailing_newline
   - xctfail_message
+  - identifier_name
+  - function_body_length
+  - type_body_length
+  - file_length
+  - type_name
 
 opt_in_rules: # some rules are only opt-in
   # - anyobject_protocol
@@ -35,7 +40,7 @@ opt_in_rules: # some rules are only opt-in
   - empty_string
   - empty_xctest_method
   # - explicit_acl
-  - explicit_enum_raw_value
+  # - explicit_enum_raw_value
   - explicit_init
   # - explicit_top_level_acl
   # - explicit_type_interface
@@ -43,14 +48,14 @@ opt_in_rules: # some rules are only opt-in
   - fallthrough
   - fatal_error_message
   # - file_header
-  - file_length
+  # - file_length
   # - file_name
   - first_where
   - for_where
   - force_cast
   - force_try
   - force_unwrapping
-  - function_body_length
+  # - function_body_length
   # - function_default_parameter_at_end
   - function_parameter_count
   - generic_type_name
@@ -126,8 +131,8 @@ opt_in_rules: # some rules are only opt-in
   - trailing_newline
   - trailing_semicolon
   - trailing_whitespace
-  - type_body_length
-  - type_name
+  # - type_body_length
+  # - type_name
   - unavailable_function
   - unneeded_break_in_switch
   # - unneeded_parentheses_in_closure_argument
@@ -160,39 +165,9 @@ line_length:
   ignores_comments: true
   ignores_urls: true
 
-function_body_length:
-  warning: 300
-  error: 500
-
 function_parameter_count:
   warning: 6
   error: 8
-
-type_body_length:
-  warning: 300
-  error: 500
-
-file_length:
-  warning: 1000
-  error: 1500
-  ignore_comment_only_lines: true
-
-type_name:
-  min_length: 4
-  max_length:
-    warning: 50
-  excluded:
-    - API
-    - URL
-
-identifier_name:
-  min_length:
-    warning: 3
-  excluded:
-    - id
-    - vc
-    - vm
-    - ac
 
 cyclomatic_complexity:
   warning: 15

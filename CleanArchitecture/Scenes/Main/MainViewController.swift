@@ -54,10 +54,9 @@ final class MainViewController: UIViewController, BindableType {
         
         let dataSource = RxTableViewSectionedReloadDataSource<MainMenuSectionModel>(
             configureCell: { (_, tableView, indexPath, menu) -> UITableViewCell in
-                return tableView.dequeueReusableCell(for: IndexPath(row: indexPath.row, section: 0),
-                                                     cellType: MenuCell.self)
+                return tableView.dequeueReusableCell(for: indexPath, cellType: MenuCell.self)
                     .then {
-                        $0.configData(menu: menu)
+                        $0.titleLabel.text = menu.description
                     }
             }, titleForHeaderInSection: { dataSource, section in
                 return dataSource.sectionModels[section].model

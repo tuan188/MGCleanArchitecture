@@ -21,6 +21,6 @@ final class MainViewControllerTests: XCTestCase {
 
     func test_ibOutlets() {
         _ = viewController.view
-      XCTAssertNotNil(viewController.tableView)
+        XCTAssertNotNil(viewController.tableView)
     }
 }

@@ -10,8 +10,4 @@ import UIKit
 
 final class MenuCell: UITableViewCell, NibReusable {
     @IBOutlet weak var titleLabel: UILabel!
-    
-    func configData(menu: MainViewModel.Menu?) {
-        titleLabel.text = menu?.description
-    }
 }
