@@ -17,7 +17,7 @@ final class UserCellTests: XCTestCase {
         cell = UserCell.loadFromNib()
     }
 
-    func test_iboutlets() {
+    func test_ibOutlets() {
         XCTAssert(true)
         XCTAssertNotNil(cell)
         XCTAssertNotNil(cell.nameLabel)

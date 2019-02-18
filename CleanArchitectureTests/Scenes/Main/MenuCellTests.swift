@@ -17,7 +17,7 @@ final class MenuCellTests: XCTestCase {
         cell = MenuCell.loadFromNib()
     }
 
-    func test_iboutlets() {
+    func test_ibOutlets() {
         XCTAssertNotNil(cell)
         XCTAssertNotNil(cell.titleLabel)
     }

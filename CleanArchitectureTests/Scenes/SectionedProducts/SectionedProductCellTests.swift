@@ -17,7 +17,7 @@ final class SectionedProductCellTests: XCTestCase {
         cell = SectionedProductCell.loadFromNib()
     }
 
-    func test_iboutlets() {
+    func test_ibOutlets() {
         XCTAssertNotNil(cell)
         XCTAssertNotNil(cell.nameLabel)
         XCTAssertNotNil(cell.priceLabel)

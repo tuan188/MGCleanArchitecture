@@ -21,14 +21,14 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
     
     var viewModel: DynamicEditProductViewModel!
     
-    fileprivate weak var nameTextField: UITextField?
-    fileprivate weak var priceTextField: UITextField?
-    fileprivate weak var nameValidationLabel: UILabel?
-    fileprivate weak var priceValidationLabel: UILabel?
+    private weak var nameTextField: UITextField?
+    private weak var priceTextField: UITextField?
+    private weak var nameValidationLabel: UILabel?
+    private weak var priceValidationLabel: UILabel?
     
-    fileprivate let dataTrigger = PublishSubject<DynamicEditProductViewModel.DataType>()
-    fileprivate let endEditTrigger = PublishSubject<Void>()
-    fileprivate var cells = [DynamicEditProductViewModel.CellType]()
+    private let dataTrigger = PublishSubject<DynamicEditProductViewModel.DataType>()
+    private let endEditTrigger = PublishSubject<Void>()
+    private var cells = [DynamicEditProductViewModel.CellType]()
     
     // MARK: - Life Cycle
 

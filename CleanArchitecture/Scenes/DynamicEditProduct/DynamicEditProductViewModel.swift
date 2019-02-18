@@ -78,7 +78,7 @@ extension DynamicEditProductViewModel: ViewModelType {
                                        trigger: input.updateTrigger,
                                        validator: useCase.validate(price:))
         
-        let updateEnable = Driver.combineLatest([
+        let updateEnabled = Driver.combineLatest([
             nameValidation,
             priceValidation
         ])
@@ -91,13 +91,16 @@ extension DynamicEditProductViewModel: ViewModelType {
         
         let product = Driver.combineLatest(name, price)
             .map { name, price in
-                Product(id: self.product.id, name: name, price: Double(price) ?? 0.0)
+                Product(
+                    id: self.product.id,
+                    name: name,
+                    price: Double(price) ?? 0.0
+                )
             }
         
         let cells = input.loadTrigger
             .withLatestFrom(Driver.combineLatest(product, nameValidation, priceValidation))
-            .map { params -> [CellType] in
-                let (product, nameValidation, priceValidation) = params
+            .map { product, nameValidation, priceValidation -> [CellType] in
                 return [
                     CellType(dataType: .name(product.name), validationResult: nameValidation),
                     CellType(dataType: .price(String(product.price)), validationResult: priceValidation)
@@ -111,7 +114,7 @@ extension DynamicEditProductViewModel: ViewModelType {
             .do(onNext: navigator.dismiss)
         
         let updatedProduct = input.updateTrigger
-            .withLatestFrom(updateEnable)
+            .withLatestFrom(updateEnabled)
             .filter { $0 }
             .withLatestFrom(product)
             .flatMapLatest { product in
@@ -134,7 +137,7 @@ extension DynamicEditProductViewModel: ViewModelType {
         return Output(
             nameValidation: nameValidation,
             priceValidation: priceValidation,
-            updateEnabled: updateEnable,
+            updateEnabled: updateEnabled,
             updatedProduct: updatedProduct,
             cancel: cancel,
             error: error,

@@ -21,7 +21,7 @@ final class DynamicEditProductCellsTests: XCTestCase {
         priceCell = EditProductPriceCell.loadFromNib()
     }
     
-    func test_iboutlets() {
+    func test_ibOutlets() {
         XCTAssertNotNil(nameCell.nameTextField)
         XCTAssertNotNil(nameCell.validationLabel)
         XCTAssertNotNil(priceCell.priceTextField)

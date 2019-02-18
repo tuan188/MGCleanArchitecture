@@ -17,7 +17,7 @@ final class ProductCellTests: XCTestCase {
         cell = ProductCell.loadFromNib()
     }
 
-    func test_iboutlets() {
+    func test_ibOutlets() {
         XCTAssertNotNil(cell)
         XCTAssertNotNil(cell.nameLabel)
         XCTAssertNotNil(cell.priceLabel)

@@ -17,7 +17,7 @@ final class RepoCellTests: XCTestCase {
         cell = RepoCell.loadFromNib()
     }
 
-    func test_iboutlets() {
+    func test_ibOutlets() {
         XCTAssertNotNil(cell)
         XCTAssertNotNil(cell.nameLabel)
         XCTAssertNotNil(cell.avatarURLStringImageView)
