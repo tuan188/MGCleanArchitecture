@@ -60,7 +60,7 @@ final class UserListViewModelTests: XCTestCase {
         
         // assert
         XCTAssert(useCase.getUserListCalled)
-        XCTAssertEqual(userList??.count, 1)
+        XCTAssertEqual(userList?.count, 1)
     }
 
     func test_loadTrigger_getUserList_failedShowError() {
@@ -85,7 +85,7 @@ final class UserListViewModelTests: XCTestCase {
 
         // assert
         XCTAssert(useCase.getUserListCalled)
-        XCTAssertEqual(userList??.count, 1)
+        XCTAssertEqual(userList?.count, 1)
     }
 
     func test_reloadTrigger_getUserList_failedShowError() {
@@ -139,7 +139,7 @@ final class UserListViewModelTests: XCTestCase {
 
         // assert
         XCTAssert(useCase.loadMoreUserListCalled)
-        XCTAssertEqual(userList??.count, 2)
+        XCTAssertEqual(userList?.count, 2)
     }
 
     func test_loadMoreTrigger_loadMoreUserList_failedShowError() {

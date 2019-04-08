@@ -50,7 +50,7 @@ final class MainViewModelTests: XCTestCase {
         let menuSections = try? output.menuSections.toBlocking(timeout: 1).first()
         
         // assert
-        XCTAssertEqual(menuSections??.count, 4)
+        XCTAssertEqual(menuSections?.count, 4)
     }
     
     private func indexPath(of menu: MainViewModel.Menu) -> IndexPath? {

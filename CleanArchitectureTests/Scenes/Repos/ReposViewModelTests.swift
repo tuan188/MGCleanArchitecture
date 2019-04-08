@@ -60,7 +60,7 @@ final class ReposViewModelTests: XCTestCase {
         
         // assert
         XCTAssert(useCase.getRepoListCalled)
-        XCTAssertEqual(repoList??.count, 1)
+        XCTAssertEqual(repoList?.count, 1)
     }
 
     func test_loadTriggerInvoked_getRepoList_failedShowError() {
@@ -85,7 +85,7 @@ final class ReposViewModelTests: XCTestCase {
 
         // assert
         XCTAssert(useCase.getRepoListCalled)
-        XCTAssertEqual(repoList??.count, 1)
+        XCTAssertEqual(repoList?.count, 1)
     }
 
     func test_reloadTriggerInvoked_getRepoList_failedShowError() {
@@ -139,7 +139,7 @@ final class ReposViewModelTests: XCTestCase {
 
         // assert
         XCTAssert(useCase.loadMoreRepoListCalled)
-        XCTAssertEqual(repoList??.count, 2)
+        XCTAssertEqual(repoList?.count, 2)
     }
 
     func test_loadMoreTriggerInvoked_loadMoreRepoList_failedShowError() {

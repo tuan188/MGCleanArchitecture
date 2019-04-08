@@ -58,8 +58,8 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         loadTrigger.onNext(.load)
         
         let args = try? output.cells.toBlocking(timeout: 1).first()
-        let cells = args??.0
-        let needReload = args??.1
+        let cells = args?.0
+        let needReload = args?.1
         
         // assert
         XCTAssertEqual(cells?.count, 2)
@@ -71,8 +71,8 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         loadTrigger.onNext(.endEditing)
         
         let args = try? output.cells.toBlocking(timeout: 1).first()
-        let cells = args??.0
-        let needReload = args??.1
+        let cells = args?.0
+        let needReload = args?.1
         
         // assert
         XCTAssertEqual(cells?.count, 2)
@@ -93,7 +93,7 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         dataTrigger.onNext(DynamicEditProductViewModel.DataType.name(productName))
         loadTrigger.onNext(.endEditing)
         let args = try? output.cells.toBlocking(timeout: 1).first()
-        let cells = args??.0
+        let cells = args?.0
         
         // assert
         if let dataType = cells?[0].dataType,
@@ -120,7 +120,7 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         dataTrigger.onNext(DynamicEditProductViewModel.DataType.price(productPrice))
         loadTrigger.onNext(.endEditing)
         let args = try? output.cells.toBlocking(timeout: 1).first()
-        let cells = args??.0
+        let cells = args?.0
         
         // assert
         if let dataType = cells?[1].dataType,

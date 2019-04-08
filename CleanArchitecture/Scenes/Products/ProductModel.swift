@@ -12,6 +12,7 @@ struct ProductModel {
 }
 
 extension ProductModel: Hashable {
+    
     var hashValue: Int {
         return product.id
     }

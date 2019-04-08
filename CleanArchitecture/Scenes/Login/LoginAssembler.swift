@@ -14,7 +14,6 @@ protocol LoginAssembler {
     func resolve(navigationController: UINavigationController) -> LoginNavigatorType
     func resolve() -> LoginUseCaseType
 }
-
 extension LoginAssembler {
     func resolve(navigationController: UINavigationController) -> LoginViewController {
         let vc = LoginViewController.instantiate()

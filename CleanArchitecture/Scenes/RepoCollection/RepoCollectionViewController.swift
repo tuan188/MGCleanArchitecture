@@ -19,7 +19,7 @@ final class RepoCollectionViewController: UIViewController, BindableType {
     
     var viewModel: ReposViewModel!
     
-    fileprivate struct Options {
+    struct Options {
         var itemSpacing: CGFloat = 8
         var lineSpacing: CGFloat = 8
         var itemsPerRow: Int = 2

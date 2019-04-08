@@ -62,7 +62,7 @@ final class ProductsViewModelTests: XCTestCase {
         
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssertEqual(productList??.count, 1)
+        XCTAssertEqual(productList?.count, 1)
     }
 
     func test_loadTriggerInvoked_getProductList_failedShowError() {
@@ -87,7 +87,7 @@ final class ProductsViewModelTests: XCTestCase {
 
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssertEqual(productList??.count, 1)
+        XCTAssertEqual(productList?.count, 1)
     }
 
     func test_reloadTriggerInvoked_getProductList_failedShowError() {
@@ -141,7 +141,7 @@ final class ProductsViewModelTests: XCTestCase {
 
         // assert
         XCTAssert(useCase.loadMoreProductListCalled)
-        XCTAssertEqual(productList??.count, 2)
+        XCTAssertEqual(productList?.count, 2)
     }
 
     func test_loadMoreTriggerInvoked_loadMoreProductList_failedShowError() {
