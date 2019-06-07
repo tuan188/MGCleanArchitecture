@@ -29,6 +29,7 @@ end
 
 def test_pods
     pod 'RxBlocking', '4.5'
+    pod 'Mockingjay', :git => 'https://github.com/anhnc55/Mockingjay.git', :branch => 'swift_5'
 end
 
 target 'CleanArchitecture' do

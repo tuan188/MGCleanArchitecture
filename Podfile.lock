@@ -19,6 +19,12 @@ PODS:
     - RxCocoa (~> 4.4)
     - RxSwift (~> 4.4)
   - MJRefresh (3.1.0)
+  - Mockingjay (2.0.1):
+    - Mockingjay/Core (= 2.0.1)
+    - Mockingjay/XCTest (= 2.0.1)
+  - Mockingjay/Core (2.0.1)
+  - Mockingjay/XCTest (2.0.1):
+    - Mockingjay/Core
   - "NSObject+Rx (4.4.0)":
     - RxSwift (~> 4.3)
   - ObjectMapper (3.3.0)
@@ -34,8 +40,8 @@ PODS:
     - Alamofire (~> 4.8)
     - RxSwift (~> 4.5)
   - RxAtomic (4.4.2)
-  - RxBlocking (4.3.0):
-    - RxSwift (~> 4.0)
+  - RxBlocking (4.5.0):
+    - RxSwift (>= 4.4.2, ~> 4.4)
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
   - RxDataSources (3.1.0):
@@ -57,11 +63,12 @@ DEPENDENCIES:
   - MGArchitecture (= 0.4.0)
   - MGLoadMore (= 0.3.0)
   - MJRefresh (= 3.1)
+  - Mockingjay (from `https://github.com/anhnc55/Mockingjay.git`, branch `swift_5`)
   - "NSObject+Rx (= 4.4)"
   - ObjectMapper (= 3.3)
   - OrderedSet (= 3.0)
   - Reusable (= 4.0.4)
-  - RxBlocking (= 4.3)
+  - RxBlocking (= 4.5)
   - RxDataSources (= 3.1)
   - SDWebImage (= 5.0)
   - Then (= 2.4)
@@ -92,6 +99,16 @@ SPEC REPOS:
     - Then
     - Validator
 
+EXTERNAL SOURCES:
+  Mockingjay:
+    :branch: swift_5
+    :git: https://github.com/anhnc55/Mockingjay.git
+
+CHECKOUT OPTIONS:
+  Mockingjay:
+    :commit: 118547353bbeff72e0348e8a2f45e5a19b4d8096
+    :git: https://github.com/anhnc55/Mockingjay.git
+
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -102,13 +119,14 @@ SPEC CHECKSUMS:
   MGArchitecture: 968ad647af56abb8f02a9d4f3d7310fd321adc38
   MGLoadMore: e8943ffd39d51f67089d911e0113254e34f28122
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+  Mockingjay: 0660815ee4907b2f0c1ac988126061bb3e19b7aa
   "NSObject+Rx": 3291262e7eddc434b6c98d1e85dedc4faa451ace
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   OrderedSet: b990e16dcf6b79f1d3826b996b1eb613c696eec0
   Reusable: 7fc772097df3e5fc86f59d8a7af9708e49b5ff55
   RxAlamofire: ed65f451f5a9a59419b0b9e705043dc01410edd9
   RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
-  RxBlocking: ab8b3ac2aa5d030146fe3a3e7916d8efa202beae
+  RxBlocking: 79413e4d916f44bb3e113c5b2cc059e36fe58910
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
@@ -116,6 +134,6 @@ SPEC CHECKSUMS:
   Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
   Validator: bf211c1d71b3f910d230c09c70e62429d0fef63a
 
-PODFILE CHECKSUM: b122b44ab7a10199911d95c044934efef4cb58d2
+PODFILE CHECKSUM: effc131c4090fe176dacf92915a53c4f01609b2f
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.1
