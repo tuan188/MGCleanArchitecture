@@ -184,6 +184,9 @@
 		17F4CABF214B8E05009212A4 /* DynamicEditProductViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CABB214B8E04009212A4 /* DynamicEditProductViewControllerTests.swift */; };
 		17F4CAC0214B8E05009212A4 /* DynamicEditProductViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CABC214B8E05009212A4 /* DynamicEditProductViewModelTests.swift */; };
 		17F4CAC2214BB3E4009212A4 /* DynamicEditProductCellsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CAC1214BB3E4009212A4 /* DynamicEditProductCellsTests.swift */; };
+		1B885D2522A9F14E002F4F10 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B885D2422A9F14E002F4F10 /* ServiceHelper.swift */; };
+		1B885D2822A9F247002F4F10 /* API+RepoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B885D2722A9F247002F4F10 /* API+RepoTest.swift */; };
+		1B885D2A22A9F263002F4F10 /* repo.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B885D2922A9F263002F4F10 /* repo.json */; };
 		42D2A9A6D1821A169E7783C3 /* Pods_CleanArchitectureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0C3F3F853AF2EDA6A0D1566 /* Pods_CleanArchitectureTests.framework */; };
 		DF70396247CC49A48029CA12 /* Pods_CleanArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42628C46829552A4994964B /* Pods_CleanArchitecture.framework */; };
 /* End PBXBuildFile section */
@@ -382,6 +385,9 @@
 		17F4CABC214B8E05009212A4 /* DynamicEditProductViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicEditProductViewModelTests.swift; sourceTree = "<group>"; };
 		17F4CAC1214BB3E4009212A4 /* DynamicEditProductCellsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicEditProductCellsTests.swift; sourceTree = "<group>"; };
 		1B56A7B3E25D78F505421566 /* Pods-CleanArchitectureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitectureTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitectureTests/Pods-CleanArchitectureTests.release.xcconfig"; sourceTree = "<group>"; };
+		1B885D2422A9F14E002F4F10 /* ServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
+		1B885D2722A9F247002F4F10 /* API+RepoTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+RepoTest.swift"; sourceTree = "<group>"; };
+		1B885D2922A9F263002F4F10 /* repo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = repo.json; sourceTree = "<group>"; };
 		24453F7014456B10492E9F99 /* Pods-CleanArchitecture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitecture.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitecture/Pods-CleanArchitecture.release.xcconfig"; sourceTree = "<group>"; };
 		5E4085BD6F7B046C5AF86A7D /* Pods-CleanArchitectureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitectureTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitectureTests/Pods-CleanArchitectureTests.debug.xcconfig"; sourceTree = "<group>"; };
 		625FFF9245A976FED73BB621 /* Pods-CleanArchitecture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleanArchitecture.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleanArchitecture/Pods-CleanArchitecture.debug.xcconfig"; sourceTree = "<group>"; };
@@ -565,6 +571,7 @@
 		172DC23C20C4DDFB009FC881 /* CleanArchitectureTests */ = {
 			isa = PBXGroup;
 			children = (
+				1B885D2322A9F13C002F4F10 /* Service */,
 				179E425221919F36005F60D0 /* Domain */,
 				172DC28620C53E2E009FC881 /* Scenes */,
 				172DC23F20C4DDFB009FC881 /* Info.plist */,
@@ -952,6 +959,24 @@
 			path = DynamicEditProduct;
 			sourceTree = "<group>";
 		};
+		1B885D2322A9F13C002F4F10 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1B885D2622A9F236002F4F10 /* API+Repo */,
+				1B885D2422A9F14E002F4F10 /* ServiceHelper.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		1B885D2622A9F236002F4F10 /* API+Repo */ = {
+			isa = PBXGroup;
+			children = (
+				1B885D2922A9F263002F4F10 /* repo.json */,
+				1B885D2722A9F247002F4F10 /* API+RepoTest.swift */,
+			);
+			path = "API+Repo";
+			sourceTree = "<group>";
+		};
 		AB3DC3B869CF06A149B17C0D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1078,6 +1103,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B885D2A22A9F263002F4F10 /* repo.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1106,18 +1132,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CleanArchitectureTests/Pods-CleanArchitectureTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Mockingjay/Mockingjay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mockingjay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1166,8 +1190,6 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CleanArchitecture/Pods-CleanArchitecture-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
@@ -1193,8 +1215,6 @@
 				"${BUILT_PRODUCTS_DIR}/Validator/Validator.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
@@ -1348,6 +1368,7 @@
 				17F4CAC2214BB3E4009212A4 /* DynamicEditProductCellsTests.swift in Sources */,
 				1721728220E492DD007D33A5 /* RepoCellTests.swift in Sources */,
 				172DC29620C53E5D009FC881 /* AppUseCaseMock.swift in Sources */,
+				1B885D2522A9F14E002F4F10 /* ServiceHelper.swift in Sources */,
 				17F4CABD214B8E05009212A4 /* DynamicEditProductUseCaseMock.swift in Sources */,
 				177982CA20CE1B830095CCA8 /* SectionedProductCellTests.swift in Sources */,
 				17EC214320DCD86600F793FE /* ProductDetailViewModelTests.swift in Sources */,
@@ -1369,6 +1390,7 @@
 				172DC2E920C67E6A009FC881 /* ProductsViewControllerTests.swift in Sources */,
 				172DC29420C53E5D009FC881 /* AppViewModelTests.swift in Sources */,
 				17CDA62721EC239B0001FE4A /* UserCellTests.swift in Sources */,
+				1B885D2822A9F247002F4F10 /* API+RepoTest.swift in Sources */,
 				1706D2B420E213D4001798FB /* EditProductUseCaseMock.swift in Sources */,
 				178F567221EF0FB2008D22AB /* LoginViewControllerTests.swift in Sources */,
 				178F567021EF0FB2008D22AB /* LoginNavigatorMock.swift in Sources */,
