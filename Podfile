@@ -2,9 +2,9 @@ platform :ios, '10.0'
 
 def pods
     # Clean Architecture
-    pod 'MGArchitecture', '~> 0.5'
+    pod 'MGArchitecture', '~> 0.6'
     pod 'MGAPIService', '~> 0.7'
-    pod 'MGLoadMore', '~> 0.4'
+    pod 'MGLoadMore', '~> 0.5'
     
     # Rx
     pod 'NSObject+Rx', '~> 5.0'

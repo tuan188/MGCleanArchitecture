@@ -19,8 +19,8 @@ final class ProductsViewController: UIViewController, BindableType {
 
     var viewModel: ProductsViewModel!
     
-    fileprivate var editProductTrigger = PublishSubject<IndexPath>()
-    fileprivate var deleteProductTrigger = PublishSubject<IndexPath>()
+    private var editProductTrigger = PublishSubject<IndexPath>()
+    private var deleteProductTrigger = PublishSubject<IndexPath>()
     
     // MARK: - Life Cycle
 
@@ -81,10 +81,10 @@ final class ProductsViewController: UIViewController, BindableType {
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
         output?.isReloading
-            .drive(tableView.refreshing)
+            .drive(tableView.isRefreshing)
             .disposed(by: rx.disposeBag)
         output?.isLoadingMore
-            .drive(tableView.loadingMore)
+            .drive(tableView.isLoadingMore)
             .disposed(by: rx.disposeBag)
         output?.fetchItems
             .drive()

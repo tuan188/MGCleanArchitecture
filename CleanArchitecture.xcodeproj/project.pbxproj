@@ -91,7 +91,6 @@
 		1741037921410AEB00267731 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1741037821410AEB00267731 /* Double+.swift */; };
 		1741037B214119B200267731 /* UnitTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1741037A214119B200267731 /* UnitTestViewController.swift */; };
 		176A23FC21DDBAF300016AFC /* ViewModelType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176A23FB21DDBAF300016AFC /* ViewModelType+.swift */; };
-		176A23FE21DDBBA400016AFC /* Optional+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176A23FD21DDBBA400016AFC /* Optional+.swift */; };
 		1777C08021F022C60092F5B8 /* Observable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1777C07F21F022C60092F5B8 /* Observable+.swift */; };
 		177982C820CE1B830095CCA8 /* SectionedProductsUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177982C320CE1B820095CCA8 /* SectionedProductsUseCaseMock.swift */; };
 		177982C920CE1B830095CCA8 /* SectionedProductsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177982C420CE1B820095CCA8 /* SectionedProductsViewControllerTests.swift */; };
@@ -290,7 +289,6 @@
 		1741037821410AEB00267731 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		1741037A214119B200267731 /* UnitTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestViewController.swift; sourceTree = "<group>"; };
 		176A23FB21DDBAF300016AFC /* ViewModelType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModelType+.swift"; sourceTree = "<group>"; };
-		176A23FD21DDBBA400016AFC /* Optional+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+.swift"; sourceTree = "<group>"; };
 		1777C07F21F022C60092F5B8 /* Observable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+.swift"; sourceTree = "<group>"; };
 		177982C320CE1B820095CCA8 /* SectionedProductsUseCaseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedProductsUseCaseMock.swift; sourceTree = "<group>"; };
 		177982C420CE1B820095CCA8 /* SectionedProductsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedProductsViewControllerTests.swift; sourceTree = "<group>"; };
@@ -517,7 +515,6 @@
 				17800303213FBE6C00D20209 /* UICollectionView+.swift */,
 				1741037821410AEB00267731 /* Double+.swift */,
 				176A23FB21DDBAF300016AFC /* ViewModelType+.swift */,
-				176A23FD21DDBBA400016AFC /* Optional+.swift */,
 				17CDA61E21EC215E0001FE4A /* Date+.swift */,
 				1777C07F21F022C60092F5B8 /* Observable+.swift */,
 			);
@@ -1346,7 +1343,6 @@
 				17EF7B2C21479A3A005DFB79 /* Notifications.swift in Sources */,
 				174103762140FF2300267731 /* ProductModel.swift in Sources */,
 				178F401221FAEB94009EE0F7 /* MainAssembler.swift in Sources */,
-				176A23FE21DDBBA400016AFC /* Optional+.swift in Sources */,
 				172DC2D720C678DD009FC881 /* ProductsViewController.swift in Sources */,
 				17CDA63721EC47330001FE4A /* AppSettings.swift in Sources */,
 				17DCDA4520FB352300E2602A /* ReposAssembler.swift in Sources */,

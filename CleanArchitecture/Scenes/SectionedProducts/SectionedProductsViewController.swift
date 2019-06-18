@@ -20,9 +20,9 @@ final class SectionedProductsViewController: UIViewController, BindableType {
     
     var viewModel: SectionedProductsViewModel!
     
-    fileprivate typealias ProductSectionModel = SectionModel<String, ProductModel>
-    fileprivate var dataSource: RxTableViewSectionedReloadDataSource<ProductSectionModel>?
-    fileprivate let editProductTrigger = PublishSubject<IndexPath>()
+    private typealias ProductSectionModel = SectionModel<String, ProductModel>
+    private var dataSource: RxTableViewSectionedReloadDataSource<ProductSectionModel>?
+    private let editProductTrigger = PublishSubject<IndexPath>()
     
     // MARK: - Life Cycle
     
@@ -100,10 +100,10 @@ final class SectionedProductsViewController: UIViewController, BindableType {
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
         output.isReloading
-            .drive(tableView.refreshing)
+            .drive(tableView.isRefreshing)
             .disposed(by: rx.disposeBag)
         output.isLoadingMore
-            .drive(tableView.loadingMore)
+            .drive(tableView.isLoadingMore)
             .disposed(by: rx.disposeBag)
         output.fetchItems
             .drive()

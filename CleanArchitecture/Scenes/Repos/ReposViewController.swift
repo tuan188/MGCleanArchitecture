@@ -70,10 +70,10 @@ final class ReposViewController: UIViewController, BindableType {
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
         output.isReloading
-            .drive(tableView.loadingMoreTop)
+            .drive(tableView.isLoadingMoreTop)
             .disposed(by: rx.disposeBag)
         output.isLoadingMore
-            .drive(tableView.loadingMoreBottom)
+            .drive(tableView.isLoadingMoreBottom)
             .disposed(by: rx.disposeBag)
         output.fetchItems
             .drive()
