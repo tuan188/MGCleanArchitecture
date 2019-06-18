@@ -69,12 +69,10 @@ final class SectionedProductsViewModelTests: XCTestCase {
 
     func test_loadTriggerInvoked_getProductList_failedShowError() {
         // arrange
-        let getProductListReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.getProductListReturnValue = getProductListReturnValue
+        useCase.getProductListReturnValue = Observable.error(TestError())
 
         // act
         loadTrigger.onNext(())
-        getProductListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
@@ -94,12 +92,10 @@ final class SectionedProductsViewModelTests: XCTestCase {
 
     func test_reloadTriggerInvoked_getProductList_failedShowError() {
         // arrange
-        let getProductListReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.getProductListReturnValue = getProductListReturnValue
+        useCase.getProductListReturnValue = Observable.error(TestError())
 
         // act
         reloadTrigger.onNext(())
-        getProductListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
@@ -109,8 +105,7 @@ final class SectionedProductsViewModelTests: XCTestCase {
 
     func test_reloadTriggerInvoked_notGetProductListIfStillLoading() {
         // arrange
-        let getProductListReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.getProductListReturnValue = getProductListReturnValue
+        useCase.getProductListReturnValue = Observable.never()
 
         // act
         loadTrigger.onNext(())
@@ -123,8 +118,7 @@ final class SectionedProductsViewModelTests: XCTestCase {
 
     func test_reloadTriggerInvoked_notGetProductListIfStillReloading() {
         // arrange
-        let getProductListReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.getProductListReturnValue = getProductListReturnValue
+        useCase.getProductListReturnValue = Observable.never()
 
         // act
         reloadTrigger.onNext(())
@@ -148,13 +142,11 @@ final class SectionedProductsViewModelTests: XCTestCase {
 
     func test_loadMoreTriggerInvoked_loadMoreProductList_failedShowError() {
         // arrange
-        let loadMoreProductListReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.loadMoreProductListReturnValue = loadMoreProductListReturnValue
+        useCase.loadMoreProductListReturnValue = Observable.error(TestError())
 
         // act
         loadTrigger.onNext(())
         loadMoreTrigger.onNext(())
-        loadMoreProductListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
@@ -164,8 +156,7 @@ final class SectionedProductsViewModelTests: XCTestCase {
 
     func test_loadMoreTriggerInvoked_notLoadMoreProductListIfStillLoading() {
         // arrange
-        let getProductListReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.getProductListReturnValue = getProductListReturnValue
+        useCase.getProductListReturnValue = Observable.never()
 
         // act
         loadTrigger.onNext(())
@@ -178,8 +169,7 @@ final class SectionedProductsViewModelTests: XCTestCase {
 
     func test_loadMoreTriggerInvoked_notLoadMoreProductListIfStillReloading() {
         // arrange
-        let getProductListReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.getProductListReturnValue = getProductListReturnValue
+        useCase.getProductListReturnValue = Observable.never()
 
         // act
         reloadTrigger.onNext(())
@@ -191,8 +181,7 @@ final class SectionedProductsViewModelTests: XCTestCase {
 
     func test_loadMoreTriggerInvoked_notLoadMoreDocumentTypesStillLoadingMore() {
         // arrange
-        let loadMoreProductListReturnValue = PublishSubject<PagingInfo<Product>>()
-        useCase.loadMoreProductListReturnValue = loadMoreProductListReturnValue
+        useCase.loadMoreProductListReturnValue = Observable.never()
 
         // act
         loadMoreTrigger.onNext(())

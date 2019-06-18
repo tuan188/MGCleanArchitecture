@@ -123,8 +123,7 @@ final class LoginViewModelTests: XCTestCase {
     
     func test_loginTrigger_login_showLoading() {
         // arrange
-        let loginReturnValue = Observable<Void>.never()
-        useCase.loginReturnValue = loginReturnValue
+        useCase.loginReturnValue = Observable<Void>.never()
         
         // act
         usernameTrigger.onNext("")
@@ -140,8 +139,7 @@ final class LoginViewModelTests: XCTestCase {
     
     func test_loginTrigger_loading_disableLogin() {
         // arrange
-        let loginReturnValue = Observable<Void>.never()
-        useCase.loginReturnValue = loginReturnValue
+        useCase.loginReturnValue = Observable<Void>.never()
         
         // act
         usernameTrigger.onNext("")
@@ -159,14 +157,12 @@ final class LoginViewModelTests: XCTestCase {
     
     func test_loginTrigger_login_failedShowError() {
         // arrange
-        let loginReturnValue = PublishSubject<Void>()
-        useCase.loginReturnValue = loginReturnValue
+        useCase.loginReturnValue = Observable.error(TestError())
         
         // act
         usernameTrigger.onNext("")
         passwordTrigger.onNext("")
         loginTrigger.onNext(())
-        loginReturnValue.onError(TestError())
         
         let error = try? output.error.toBlocking(timeout: 1).first()
         

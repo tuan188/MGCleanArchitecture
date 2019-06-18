@@ -65,12 +65,10 @@ final class ReposViewModelTests: XCTestCase {
 
     func test_loadTriggerInvoked_getRepoList_failedShowError() {
         // arrange
-        let getRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.getRepoListReturnValue = getRepoListReturnValue
+        useCase.getRepoListReturnValue = Observable.error(TestError())
 
         // act
         loadTrigger.onNext(())
-        getRepoListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
@@ -90,12 +88,10 @@ final class ReposViewModelTests: XCTestCase {
 
     func test_reloadTriggerInvoked_getRepoList_failedShowError() {
         // arrange
-        let getRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.getRepoListReturnValue = getRepoListReturnValue
+        useCase.getRepoListReturnValue = Observable.error(TestError())
 
         // act
         reloadTrigger.onNext(())
-        getRepoListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
@@ -105,8 +101,7 @@ final class ReposViewModelTests: XCTestCase {
 
     func test_reloadTriggerInvoked_notGetRepoListIfStillLoading() {
         // arrange
-        let getRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.getRepoListReturnValue = getRepoListReturnValue
+        useCase.getRepoListReturnValue = Observable.never()
 
         // act
         loadTrigger.onNext(())
@@ -119,8 +114,7 @@ final class ReposViewModelTests: XCTestCase {
 
     func test_reloadTriggerInvoked_notGetRepoListIfStillReloading() {
         // arrange
-        let getRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.getRepoListReturnValue = getRepoListReturnValue
+        useCase.getRepoListReturnValue = Observable.never()
 
         // act
         reloadTrigger.onNext(())
@@ -144,13 +138,11 @@ final class ReposViewModelTests: XCTestCase {
 
     func test_loadMoreTriggerInvoked_loadMoreRepoList_failedShowError() {
         // arrange
-        let loadMoreRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.loadMoreRepoListReturnValue = loadMoreRepoListReturnValue
+        useCase.loadMoreRepoListReturnValue = Observable.error(TestError())
 
         // act
         loadTrigger.onNext(())
         loadMoreTrigger.onNext(())
-        loadMoreRepoListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
@@ -160,8 +152,7 @@ final class ReposViewModelTests: XCTestCase {
 
     func test_loadMoreTriggerInvoked_notLoadMoreRepoListIfStillLoading() {
         // arrange
-        let getRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.getRepoListReturnValue = getRepoListReturnValue
+        useCase.getRepoListReturnValue = Observable.never()
 
         // act
         loadTrigger.onNext(())
@@ -174,8 +165,7 @@ final class ReposViewModelTests: XCTestCase {
 
     func test_loadMoreTriggerInvoked_notLoadMoreRepoListIfStillReloading() {
         // arrange
-        let getRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.getRepoListReturnValue = getRepoListReturnValue
+        useCase.getRepoListReturnValue = Observable.never()
 
         // act
         reloadTrigger.onNext(())
@@ -188,8 +178,7 @@ final class ReposViewModelTests: XCTestCase {
 
     func test_loadMoreTriggerInvoked_notLoadMoreDocumentTypesStillLoadingMore() {
         // arrange
-        let loadMoreRepoListReturnValue = PublishSubject<PagingInfo<Repo>>()
-        useCase.loadMoreRepoListReturnValue = loadMoreRepoListReturnValue
+        useCase.loadMoreRepoListReturnValue = Observable.never()
         
         // act
         loadMoreTrigger.onNext(())

@@ -65,12 +65,10 @@ final class UserListViewModelTests: XCTestCase {
 
     func test_loadTrigger_getUserList_failedShowError() {
         // arrange
-        let getUserListReturnValue = PublishSubject<PagingInfo<User>>()
-        useCase.getUserListReturnValue = getUserListReturnValue
+        useCase.getUserListReturnValue = Observable.error(TestError())
 
         // act
         loadTrigger.onNext(())
-        getUserListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
@@ -90,12 +88,10 @@ final class UserListViewModelTests: XCTestCase {
 
     func test_reloadTrigger_getUserList_failedShowError() {
         // arrange
-        let getUserListReturnValue = PublishSubject<PagingInfo<User>>()
-        useCase.getUserListReturnValue = getUserListReturnValue
+        useCase.getUserListReturnValue = Observable.error(TestError())
 
         // act
         reloadTrigger.onNext(())
-        getUserListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
@@ -105,8 +101,7 @@ final class UserListViewModelTests: XCTestCase {
 
     func test_reloadTrigger_notGetUserListIfStillLoading() {
         // arrange
-        let getUserListReturnValue = PublishSubject<PagingInfo<User>>()
-        useCase.getUserListReturnValue = getUserListReturnValue
+        useCase.getUserListReturnValue = Observable.never()
 
         // act
         loadTrigger.onNext(())
@@ -119,8 +114,7 @@ final class UserListViewModelTests: XCTestCase {
 
     func test_reloadTrigger_notGetUserListIfStillReloading() {
         // arrange
-        let getUserListReturnValue = PublishSubject<PagingInfo<User>>()
-        useCase.getUserListReturnValue = getUserListReturnValue
+        useCase.getUserListReturnValue = Observable.never()
 
         // act
         reloadTrigger.onNext(())
@@ -144,13 +138,11 @@ final class UserListViewModelTests: XCTestCase {
 
     func test_loadMoreTrigger_loadMoreUserList_failedShowError() {
         // arrange
-        let loadMoreUserListReturnValue = PublishSubject<PagingInfo<User>>()
-        useCase.loadMoreUserListReturnValue = loadMoreUserListReturnValue
+        useCase.loadMoreUserListReturnValue = Observable.error(TestError())
 
         // act
         loadTrigger.onNext(())
         loadMoreTrigger.onNext(())
-        loadMoreUserListReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
@@ -160,8 +152,7 @@ final class UserListViewModelTests: XCTestCase {
 
     func test_loadMoreTrigger_notLoadMoreUserListIfStillLoading() {
         // arrange
-        let getUserListReturnValue = PublishSubject<PagingInfo<User>>()
-        useCase.getUserListReturnValue = getUserListReturnValue
+        useCase.getUserListReturnValue = Observable.never()
 
         // act
         loadTrigger.onNext(())
@@ -174,21 +165,20 @@ final class UserListViewModelTests: XCTestCase {
 
     func test_loadMoreTrigger_notLoadMoreUserListIfStillReloading() {
         // arrange
-        let getUserListReturnValue = PublishSubject<PagingInfo<User>>()
-        useCase.getUserListReturnValue = getUserListReturnValue
+        useCase.getUserListReturnValue = Observable.never()
 
         // act
         reloadTrigger.onNext(())
         useCase.getUserListCalled = false
         loadMoreTrigger.onNext(())
+        
         // assert
         XCTAssertFalse(useCase.loadMoreUserListCalled)
     }
 
     func test_loadMoreTrigger_notLoadMoreDocumentTypesStillLoadingMore() {
         // arrange
-        let loadMoreUserListReturnValue = PublishSubject<PagingInfo<User>>()
-        useCase.loadMoreUserListReturnValue = loadMoreUserListReturnValue
+        useCase.loadMoreUserListReturnValue = Observable.never()
 
         // act
         loadMoreTrigger.onNext(())

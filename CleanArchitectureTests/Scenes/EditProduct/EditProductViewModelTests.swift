@@ -165,14 +165,12 @@ final class EditProductViewModelTests: XCTestCase {
     
     func test_updateTriggerInvoked_updateProductFailShowError() {
         // arrange
-        let updateReturnValue = PublishSubject<Void>()
-        useCase.updateReturnValue = updateReturnValue
+        useCase.updateReturnValue = Observable.error(TestError())
         
         // act
         nameTrigger.onNext("foo")
         priceTrigger.onNext("10")
         updateTrigger.onNext(())
-        updateReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
         
         // assert

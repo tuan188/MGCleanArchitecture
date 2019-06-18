@@ -175,12 +175,10 @@ final class DynamicEditProductViewModelTests: XCTestCase {
     
     func test_updateTrigger_update_fail_show_error() {
         // arrange
-        let updateReturnValue = PublishSubject<Void>()
-        useCase.updateReturnValue = updateReturnValue.asObserver()
+        useCase.updateReturnValue = Observable.error(TestError())
         
         // act
         updateTrigger.onNext(())
-        updateReturnValue.onError(TestError())
         let error = try? output.error.toBlocking(timeout: 1).first()
         
         // assert
