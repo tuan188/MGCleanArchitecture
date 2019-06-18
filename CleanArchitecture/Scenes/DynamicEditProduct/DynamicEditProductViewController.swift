@@ -147,7 +147,7 @@ extension DynamicEditProductViewController: UITableViewDataSource {
                     self.dataTrigger.onNext(DynamicEditProductViewModel.DataType.name(text))
                 })
                 .disposed(by: cell.disposeBag)
-            cell.nameTextField.rx.controlEvent(UIControlEvents.editingDidEnd)
+            cell.nameTextField.rx.controlEvent(UIControl.Event.editingDidEnd)
                 .subscribe(onNext: { [unowned self] _ in
                     self.endEditTrigger.onNext(())
                 })
@@ -167,7 +167,7 @@ extension DynamicEditProductViewController: UITableViewDataSource {
                     self.dataTrigger.onNext(DynamicEditProductViewModel.DataType.price(text))
                 })
                 .disposed(by: cell.disposeBag)
-            cell.priceTextField.rx.controlEvent(UIControlEvents.editingDidEnd)
+            cell.priceTextField.rx.controlEvent(UIControl.Event.editingDidEnd)
                 .subscribe(onNext: { [unowned self] _ in
                     self.endEditTrigger.onNext(())
                 })

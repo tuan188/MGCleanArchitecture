@@ -8,7 +8,7 @@
 
 import RxSwift
 
-extension SharedSequenceConvertibleType where E == Bool {
+extension SharedSequenceConvertibleType where Element == Bool {
     public func not() -> SharedSequence<SharingStrategy, Bool> {
         return self.map(!)
     }

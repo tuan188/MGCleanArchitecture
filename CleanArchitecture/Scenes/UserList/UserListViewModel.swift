@@ -23,7 +23,7 @@ extension UserListViewModel: ViewModelType {
     struct Output {
         let error: Driver<Error>
         let loading: Driver<Bool>
-        let refreshing: Driver<Bool>
+        let reloading: Driver<Bool>
         let loadingMore: Driver<Bool>
         let fetchItems: Driver<Void>
         let userList: Driver<[User]>
@@ -32,15 +32,15 @@ extension UserListViewModel: ViewModelType {
     }
     
     func transform(_ input: Input) -> Output {
-        let loadMoreOutput = setupLoadMorePaging(
+        let configOutput = configPagination(
             loadTrigger: input.loadTrigger,
             getItems: useCase.getUserList,
-            refreshTrigger: input.reloadTrigger,
-            refreshItems: useCase.getUserList,
+            reloadTrigger: input.reloadTrigger,
+            reloadItems: useCase.getUserList,
             loadMoreTrigger: input.loadMoreTrigger,
             loadMoreItems: useCase.loadMoreUserList)
         
-        let (page, fetchItems, loadError, loading, refreshing, loadingMore) = loadMoreOutput
+        let (page, fetchItems, loadError, loading, reloading, loadingMore) = configOutput
         
         let userList = page
             .map { $0.items.map { $0 } }
@@ -59,13 +59,13 @@ extension UserListViewModel: ViewModelType {
             .mapToVoid()
         
         let isEmptyData = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
-                                             loadTrigger: Driver.merge(loading, refreshing),
+                                             loadTrigger: Driver.merge(loading, reloading),
                                              items: userList)
         
         return Output(
             error: loadError,
             loading: loading,
-            refreshing: refreshing,
+            reloading: reloading,
             loadingMore: loadingMore,
             fetchItems: fetchItems,
             userList: userList,

@@ -13,6 +13,7 @@ extension XCTestCase {
         let bundle = Bundle(for: classForCoder)
         let url = bundle.url(forResource: name, withExtension: `extension`)
         
-        return try! Data(contentsOf: url!)
+        // swiftlint:disable:next force_unwrapping
+        return try! Data(contentsOf: url!) // swiftlint:disable:this force_try
     }
 }

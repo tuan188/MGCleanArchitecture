@@ -71,7 +71,7 @@ final class UserListViewController: UIViewController, BindableType {
         output.loading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
-        output.refreshing
+        output.reloading
             .drive()
             .disposed(by: rx.disposeBag)
         output.loadingMore

@@ -69,7 +69,7 @@ final class ReposViewController: UIViewController, BindableType {
         output.loading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
-        output.refreshing
+        output.reloading
             .drive(tableView.loadingMoreTop)
             .disposed(by: rx.disposeBag)
         output.loadingMore

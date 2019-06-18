@@ -23,7 +23,7 @@ extension ReposViewModel: ViewModelType {
     struct Output {
         let error: Driver<Error>
         let loading: Driver<Bool>
-        let refreshing: Driver<Bool>
+        let reloading: Driver<Bool>
         let loadingMore: Driver<Bool>
         let fetchItems: Driver<Void>
         let repoList: Driver<[Repo]>
@@ -32,15 +32,15 @@ extension ReposViewModel: ViewModelType {
     }
 
     func transform(_ input: Input) -> Output {
-        let loadMoreOutput = setupLoadMorePaging(
+        let configOutput = configPagination(
             loadTrigger: input.loadTrigger,
             getItems: useCase.getRepoList,
-            refreshTrigger: input.reloadTrigger,
-            refreshItems: useCase.getRepoList,
+            reloadTrigger: input.reloadTrigger,
+            reloadItems: useCase.getRepoList,
             loadMoreTrigger: input.loadMoreTrigger,
             loadMoreItems: useCase.loadMoreRepoList)
         
-        let (page, fetchItems, loadError, loading, refreshing, loadingMore) = loadMoreOutput
+        let (page, fetchItems, loadError, loading, reloading, loadingMore) = configOutput
 
         let repoList = page
             .map { $0.items.map { $0 } }
@@ -59,13 +59,13 @@ extension ReposViewModel: ViewModelType {
             .mapToVoid()
         
         let isEmptyData = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
-                                             loadTrigger: Driver.merge(loading, refreshing),
+                                             loadTrigger: Driver.merge(loading, reloading),
                                              items: repoList)
 
         return Output(
             error: loadError,
             loading: loading,
-            refreshing: refreshing,
+            reloading: reloading,
             loadingMore: loadingMore,
             fetchItems: fetchItems,
             repoList: repoList,

@@ -81,7 +81,7 @@ final class RepoCollectionViewController: UIViewController, BindableType {
         output.loading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
-        output.refreshing
+        output.reloading
             .drive(collectionView.refreshing)
             .disposed(by: rx.disposeBag)
         output.loadingMore

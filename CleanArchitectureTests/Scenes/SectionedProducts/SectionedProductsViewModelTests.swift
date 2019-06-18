@@ -49,7 +49,7 @@ final class SectionedProductsViewModelTests: XCTestCase {
         
         output.error.drive().disposed(by: disposeBag)
         output.loading.drive().disposed(by: disposeBag)
-        output.refreshing.drive().disposed(by: disposeBag)
+        output.reloading.drive().disposed(by: disposeBag)
         output.loadingMore.drive().disposed(by: disposeBag)
         output.fetchItems.drive().disposed(by: disposeBag)
         output.productSections.drive().disposed(by: disposeBag)

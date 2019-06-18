@@ -25,7 +25,7 @@ extension SectionedProductsViewModel: ViewModelType {
     struct Output {
         let error: Driver<Error>
         let loading: Driver<Bool>
-        let refreshing: Driver<Bool>
+        let reloading: Driver<Bool>
         let loadingMore: Driver<Bool>
         let fetchItems: Driver<Void>
         let productSections: Driver<[ProductSection]>
@@ -41,16 +41,22 @@ extension SectionedProductsViewModel: ViewModelType {
     }
 
     func transform(_ input: Input) -> Output {
-        let loadMoreOutput = setupLoadMorePaging(
+        let loadMoreOutput = configPagination(
             loadTrigger: input.loadTrigger,
-            getItems: useCase.getProductList,
-            refreshTrigger: input.reloadTrigger,
-            refreshItems: useCase.getProductList,
+            getItems: { _ in
+                self.useCase.getProductList()
+            },
+            reloadTrigger: input.reloadTrigger,
+            reloadItems: { _ in
+                self.useCase.getProductList()
+            },
             loadMoreTrigger: input.loadMoreTrigger,
-            loadMoreItems: useCase.loadMoreProductList,
+            loadMoreItems: { _, page in
+                self.useCase.loadMoreProductList(page: page)
+            },
             mapper: ProductModel.init(product:))
         
-        let (page, fetchItems, loadError, loading, refreshing, loadingMore) = loadMoreOutput
+        let (page, fetchItems, loadError, loading, reloading, loadingMore) = loadMoreOutput
 
         let productSections = page
             .map { $0.items.map { $0 } }
@@ -71,7 +77,7 @@ extension SectionedProductsViewModel: ViewModelType {
             .mapToVoid()
         
         let isEmptyData = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
-                                             loadTrigger: Driver.merge(loading, refreshing),
+                                             loadTrigger: Driver.merge(loading, reloading),
                                              items: productSections)
         
         let editedProduct = input.editProductTrigger
@@ -96,7 +102,7 @@ extension SectionedProductsViewModel: ViewModelType {
         return Output(
             error: loadError,
             loading: loading,
-            refreshing: refreshing,
+            reloading: reloading,
             loadingMore: loadingMore,
             fetchItems: fetchItems,
             productSections: productSections,

@@ -28,7 +28,7 @@ final class APIRepoTests: XCTestCase {
         // assert
         XCTAssertNotNil(output?.repos)
         XCTAssertTrue(output?.repos?.count == 10)
-        XCTAssertTrue(output?.repos?.first?.id == 21700699)
+        XCTAssertTrue(output?.repos?.first?.id == 21_700_699)
         XCTAssertTrue(output?.repos?.first?.fullname == "vsouza/awesome-ios")
     }
 

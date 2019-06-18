@@ -39,19 +39,25 @@ extension ProductsViewModel: ViewModelType {
         let activityIndicator = ActivityIndicator()
         let errorTracker = ErrorTracker()
         
-        let loadMoreOutput = setupLoadMorePaging(
+        let configOutput = configPagination(
             loadTrigger: input.loadTrigger,
-            getItems: useCase.getProductList,
-            refreshTrigger: input.reloadTrigger,
-            refreshItems: useCase.getProductList,
+            getItems: { _ in
+                self.useCase.getProductList()
+            },
+            reloadTrigger: input.reloadTrigger,
+            reloadItems: { _ in
+                self.useCase.getProductList()
+            },
             loadMoreTrigger: input.loadMoreTrigger,
-            loadMoreItems: useCase.loadMoreProductList,
+            loadMoreItems: { _, page in
+                self.useCase.loadMoreProductList(page: page)
+            },
             mapper: ProductModel.init(product:))
         
-        let (page, fetchItems, loadError, loading, refreshing, loadingMore) = loadMoreOutput
+        let (page, fetchItems, loadError, loading, refreshing, loadingMore) = configOutput
 
         let productList = page
-            .map { $0.itemSet.map { $0 } }
+            .map { $0.items.map { $0 } }
             .asDriverOnErrorJustComplete()
         
         let selectedProduct = input.selectProductTrigger

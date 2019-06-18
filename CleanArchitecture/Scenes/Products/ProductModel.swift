@@ -13,10 +13,6 @@ struct ProductModel {
 
 extension ProductModel: Hashable {
     
-    var hashValue: Int {
-        return product.id
-    }
-    
     static func == (lhs: ProductModel, rhs: ProductModel) -> Bool {
         return lhs.product.id == rhs.product.id
     }

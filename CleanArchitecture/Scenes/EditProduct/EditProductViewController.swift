@@ -42,10 +42,10 @@ final class EditProductViewController: UITableViewController, BindableType {
             nameTrigger: nameTextField.rx.text.orEmpty.asDriver(),
             priceTrigger: priceTextField.rx.text.orEmpty.asDriver(),
             updateTrigger: updateButton.rx.tap
-                .throttle(0.5, scheduler: MainScheduler.instance)
+                .throttle(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
                 .asDriverOnErrorJustComplete(),
             cancelTrigger: cancelButton.rx.tap
-                .throttle(0.5, scheduler: MainScheduler.instance)
+                .throttle(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
                 .asDriverOnErrorJustComplete()
         )
         
