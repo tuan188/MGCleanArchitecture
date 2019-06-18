@@ -9,9 +9,9 @@
 import UIKit
 
 extension UICollectionView {
-    var isEmptyData: Binder<Bool> {
-        return Binder(self) { collectionView, isEmptyData in
-            if isEmptyData {
+    var isEmpty: Binder<Bool> {
+        return Binder(self) { collectionView, isEmpty in
+            if isEmpty {
                 let frame = CGRect(x: 0,
                                    y: 0,
                                    width: collectionView.frame.size.width,

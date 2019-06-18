@@ -44,8 +44,8 @@ final class LoginViewModelTests: XCTestCase {
         output.usernameValidation.drive().disposed(by: disposeBag)
         output.passwordValidation.drive().disposed(by: disposeBag)
         output.login.drive().disposed(by: disposeBag)
-        output.loginEnabled.drive().disposed(by: disposeBag)
-        output.loading.drive().disposed(by: disposeBag)
+        output.isLoginEnabled.drive().disposed(by: disposeBag)
+        output.isLoading.drive().disposed(by: disposeBag)
         output.error.drive().disposed(by: disposeBag)
     }
     
@@ -76,7 +76,7 @@ final class LoginViewModelTests: XCTestCase {
         passwordTrigger.onNext("")
         loginTrigger.onNext(())
         
-        let loginEnabled = try? output.loginEnabled.toBlocking(timeout: 1).first()
+        let loginEnabled = try? output.isLoginEnabled.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssertEqual(loginEnabled, false)
@@ -91,7 +91,7 @@ final class LoginViewModelTests: XCTestCase {
         passwordTrigger.onNext("")
         loginTrigger.onNext(())
         
-        let loginEnabled = try? output.loginEnabled.toBlocking(timeout: 1).first()
+        let loginEnabled = try? output.isLoginEnabled.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssertEqual(loginEnabled, false)
@@ -131,11 +131,11 @@ final class LoginViewModelTests: XCTestCase {
         passwordTrigger.onNext("")
         loginTrigger.onNext(())
         
-        let loading = try? output.loading.toBlocking(timeout: 1).first()
+        let isLoading = try? output.isLoading.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssert(useCase.loginCalled)
-        XCTAssertEqual(loading, true)
+        XCTAssertEqual(isLoading, true)
     }
     
     func test_loginTrigger_loading_disableLogin() {
@@ -148,13 +148,13 @@ final class LoginViewModelTests: XCTestCase {
         passwordTrigger.onNext("")
         loginTrigger.onNext(())
         
-        let loading = try? output.loading.toBlocking(timeout: 1).first()
-        let loginEnabled = try? output.loginEnabled.toBlocking(timeout: 1).first()
+        let isLoading = try? output.isLoading.toBlocking(timeout: 1).first()
+        let isLoginEnabled = try? output.isLoginEnabled.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssert(useCase.loginCalled)
-        XCTAssertEqual(loading, true)
-        XCTAssertEqual(loginEnabled, false)
+        XCTAssertEqual(isLoading, true)
+        XCTAssertEqual(isLoginEnabled, false)
     }
     
     func test_loginTrigger_login_failedShowError() {

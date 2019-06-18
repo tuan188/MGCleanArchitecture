@@ -22,13 +22,13 @@ extension UserListViewModel: ViewModelType {
     
     struct Output {
         let error: Driver<Error>
-        let loading: Driver<Bool>
-        let reloading: Driver<Bool>
-        let loadingMore: Driver<Bool>
+        let isLoading: Driver<Bool>
+        let isReloading: Driver<Bool>
+        let isLoadingMore: Driver<Bool>
         let fetchItems: Driver<Void>
         let userList: Driver<[User]>
         let selectedUser: Driver<Void>
-        let isEmptyData: Driver<Bool>
+        let isEmpty: Driver<Bool>
     }
     
     func transform(_ input: Input) -> Output {
@@ -40,7 +40,7 @@ extension UserListViewModel: ViewModelType {
             loadMoreTrigger: input.loadMoreTrigger,
             loadMoreItems: useCase.loadMoreUserList)
         
-        let (page, fetchItems, loadError, loading, reloading, loadingMore) = configOutput
+        let (page, fetchItems, loadError, isLoading, isReloading, isLoadingMore) = configOutput
         
         let userList = page
             .map { $0.items.map { $0 } }
@@ -58,19 +58,19 @@ extension UserListViewModel: ViewModelType {
             })
             .mapToVoid()
         
-        let isEmptyData = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
-                                             loadTrigger: Driver.merge(loading, reloading),
-                                             items: userList)
+        let isEmpty = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
+                                         loadTrigger: Driver.merge(isLoading, isReloading),
+                                         items: userList)
         
         return Output(
             error: loadError,
-            loading: loading,
-            reloading: reloading,
-            loadingMore: loadingMore,
+            isLoading: isLoading,
+            isReloading: isReloading,
+            isLoadingMore: isLoadingMore,
             fetchItems: fetchItems,
             userList: userList,
             selectedUser: selectedUser,
-            isEmptyData: isEmptyData
+            isEmpty: isEmpty
         )
     }
 }

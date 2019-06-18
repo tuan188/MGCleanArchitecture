@@ -55,11 +55,11 @@ final class EditProductViewModelTests: XCTestCase {
         output.price.drive().disposed(by: disposeBag)
         output.nameValidation.drive().disposed(by: disposeBag)
         output.priceValidation.drive().disposed(by: disposeBag)
-        output.updateEnabled.drive().disposed(by: disposeBag)
+        output.isUpdateEnabled.drive().disposed(by: disposeBag)
         output.updatedProduct.drive().disposed(by: disposeBag)
         output.cancel.drive().disposed(by: disposeBag)
         output.error.drive().disposed(by: disposeBag)
-        output.loading.drive().disposed(by: disposeBag)
+        output.isLoading.drive().disposed(by: disposeBag)
     }
     
     func test_loadTriggerInvoked_showProduct() {
@@ -76,7 +76,7 @@ final class EditProductViewModelTests: XCTestCase {
     func test_loadTriggerInvoked_enableUpdateByDefault() {
         // act
         loadTrigger.onNext(())
-        let updateEnable = try? output.updateEnabled.toBlocking(timeout: 1).first()
+        let updateEnable = try? output.isUpdateEnabled.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssertEqual(updateEnable, true)
@@ -99,7 +99,7 @@ final class EditProductViewModelTests: XCTestCase {
         nameTrigger.onNext("foo")
         priceTrigger.onNext("10")
         updateTrigger.onNext(())
-        let updateEnable = try? output.updateEnabled.toBlocking(timeout: 1).first()
+        let updateEnable = try? output.isUpdateEnabled.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssertEqual(updateEnable, false)
@@ -122,7 +122,7 @@ final class EditProductViewModelTests: XCTestCase {
         nameTrigger.onNext("foo")
         priceTrigger.onNext("10")
         updateTrigger.onNext(())
-        let updateEnable = try? output.updateEnabled.toBlocking(timeout: 1).first()
+        let updateEnable = try? output.isUpdateEnabled.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssertEqual(updateEnable, false)
@@ -133,7 +133,7 @@ final class EditProductViewModelTests: XCTestCase {
         nameTrigger.onNext("foo")
         priceTrigger.onNext("10")
         updateTrigger.onNext(())
-        let updateEnable = try? output.updateEnabled.toBlocking(timeout: 1).first()
+        let updateEnable = try? output.isUpdateEnabled.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssertEqual(updateEnable, true)

@@ -24,14 +24,14 @@ extension ProductsViewModel: ViewModelType {
 
     struct Output {
         let error: Driver<Error>
-        let loading: Driver<Bool>
-        let refreshing: Driver<Bool>
-        let loadingMore: Driver<Bool>
+        let isLoading: Driver<Bool>
+        let isReloading: Driver<Bool>
+        let isLoadingMore: Driver<Bool>
         let fetchItems: Driver<Void>
         let productList: Driver<[ProductModel]>
         let selectedProduct: Driver<Void>
         let editedProduct: Driver<Void>
-        let isEmptyData: Driver<Bool>
+        let isEmpty: Driver<Bool>
         let deletedProduct: Driver<Void>
     }
 
@@ -54,7 +54,7 @@ extension ProductsViewModel: ViewModelType {
             },
             mapper: ProductModel.init(product:))
         
-        let (page, fetchItems, loadError, loading, refreshing, loadingMore) = configOutput
+        let (page, fetchItems, loadError, isLoading, isReloading, isLoadingMore) = configOutput
 
         let productList = page
             .map { $0.items.map { $0 } }
@@ -93,9 +93,9 @@ extension ProductsViewModel: ViewModelType {
             })
             .mapToVoid()
 
-        let isEmptyData = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
-                                             loadTrigger: Driver.merge(loading, refreshing),
-                                             items: productList)
+        let isEmpty = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
+                                         loadTrigger: Driver.merge(isLoading, isReloading),
+                                         items: productList)
         
         let deletedProduct = input.deleteProductTrigger
             .withLatestFrom(productList) { indexPath, productList in
@@ -122,14 +122,14 @@ extension ProductsViewModel: ViewModelType {
 
         return Output(
             error: loadError,
-            loading: loading,
-            refreshing: refreshing,
-            loadingMore: loadingMore,
+            isLoading: isLoading,
+            isReloading: isReloading,
+            isLoadingMore: isLoadingMore,
             fetchItems: fetchItems,
             productList: productList,
             selectedProduct: selectedProduct,
             editedProduct: editedProduct,
-            isEmptyData: isEmptyData,
+            isEmpty: isEmpty,
             deletedProduct: deletedProduct
         )
     }

@@ -345,7 +345,7 @@
 		17CDA62B21EC23AF0001FE4A /* User.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
 		17CDA62E21EC2DBC0001FE4A /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		17CDA63021EC2FA80001FE4A /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
-		17CDA63221EC31250001FE4A /* MagicalRecord+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MagicalRecord+Rx.swift"; sourceTree = "<group>"; };
+		17CDA63221EC31250001FE4A /* MagicalRecord+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MagicalRecord+Rx.swift"; path = "../../Extensions/MagicalRecord+Rx.swift"; sourceTree = "<group>"; };
 		17CDA63421EC3CB40001FE4A /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		17CDA63621EC47330001FE4A /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		17D80D1220DF8FE9009E68F0 /* StaticProductDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProductDetailViewModel.swift; sourceTree = "<group>"; };
@@ -513,7 +513,6 @@
 			children = (
 				172DC2B920C62C63009FC881 /* UIViewController+.swift */,
 				172DC2B720C62BFF009FC881 /* UIViewController+Rx.swift */,
-				17CDA63221EC31250001FE4A /* MagicalRecord+Rx.swift */,
 				17800301213FBA8200D20209 /* UITableView+.swift */,
 				17800303213FBE6C00D20209 /* UICollectionView+.swift */,
 				1741037821410AEB00267731 /* Double+.swift */,
@@ -865,6 +864,7 @@
 		17BB3A6620FF568700C5F8B0 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				17CDA63221EC31250001FE4A /* MagicalRecord+Rx.swift */,
 				17CDA63021EC2FA80001FE4A /* CoreDataRepository.swift */,
 				17CDA63421EC3CB40001FE4A /* UserRepository.swift */,
 				17BB3A6820FF574F00C5F8B0 /* RepoRepository.swift */,

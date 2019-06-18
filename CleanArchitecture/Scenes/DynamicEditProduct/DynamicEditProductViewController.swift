@@ -83,13 +83,13 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
         output.priceValidation
             .drive(priceValidatorBinder)
             .disposed(by: rx.disposeBag)
-        output.updateEnabled
+        output.isUpdateEnabled
             .drive(updateButton.rx.isEnabled)
             .disposed(by: rx.disposeBag)
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
-        output.loading
+        output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
     }

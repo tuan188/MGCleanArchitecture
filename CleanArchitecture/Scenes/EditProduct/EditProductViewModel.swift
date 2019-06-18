@@ -32,11 +32,11 @@ extension EditProductViewModel: ViewModelType {
         let price: Driver<Double>
         let nameValidation: Driver<ValidationResult>
         let priceValidation: Driver<ValidationResult>
-        let updateEnabled: Driver<Bool>
+        let isUpdateEnabled: Driver<Bool>
         let updatedProduct: Driver<Void>
         let cancel: Driver<Void>
         let error: Driver<Error>
-        let loading: Driver<Bool>
+        let isLoading: Driver<Bool>
     }
 
     func transform(_ input: Input) -> Output {
@@ -57,7 +57,7 @@ extension EditProductViewModel: ViewModelType {
                                        trigger: input.updateTrigger,
                                        validator: useCase.validate(price:))
         
-        let updateEnable = Driver.combineLatest([
+        let isUpdateEnabled = Driver.combineLatest([
             nameValidation,
             priceValidation
         ])
@@ -69,7 +69,7 @@ extension EditProductViewModel: ViewModelType {
         .startWith(true)
         
         let updatedProduct = input.updateTrigger
-            .withLatestFrom(updateEnable)
+            .withLatestFrom(isUpdateEnabled)
             .filter { $0 }
             .withLatestFrom(Driver.combineLatest(
                 input.nameTrigger,
@@ -96,18 +96,18 @@ extension EditProductViewModel: ViewModelType {
             .do(onNext: navigator.dismiss)
         
         let error = errorTracker.asDriver()
-        let loading = activityIndicator.asDriver()
+        let isLoading = activityIndicator.asDriver()
         
         return Output(
             name: name,
             price: price,
             nameValidation: nameValidation,
             priceValidation: priceValidation,
-            updateEnabled: updateEnable,
+            isUpdateEnabled: isUpdateEnabled,
             updatedProduct: updatedProduct,
             cancel: cancel,
             error: error,
-            loading: loading
+            isLoading: isLoading
         )
     }
 }

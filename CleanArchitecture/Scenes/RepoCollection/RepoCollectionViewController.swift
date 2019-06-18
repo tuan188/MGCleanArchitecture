@@ -78,13 +78,13 @@ final class RepoCollectionViewController: UIViewController, BindableType {
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
-        output.loading
+        output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
-        output.reloading
+        output.isReloading
             .drive(collectionView.refreshing)
             .disposed(by: rx.disposeBag)
-        output.loadingMore
+        output.isLoadingMore
             .drive(collectionView.loadingMore)
             .disposed(by: rx.disposeBag)
         output.fetchItems
@@ -93,8 +93,8 @@ final class RepoCollectionViewController: UIViewController, BindableType {
         output.selectedRepo
             .drive()
             .disposed(by: rx.disposeBag)
-        output.isEmptyData
-            .drive(collectionView.isEmptyData)
+        output.isEmpty
+            .drive(collectionView.isEmpty)
             .disposed(by: rx.disposeBag)
     }
 }

@@ -24,21 +24,10 @@ enum Gender: Int {
 }
 
 struct User {
-    var id: String
-    var name: String
-    var gender: Gender
-    var birthday: Date
-}
-
-extension User {
-    init() {
-        self.init(
-            id: UUID().uuidString,
-            name: "",
-            gender: Gender.unknown,
-            birthday: Date()
-        )
-    }
+    var id = UUID().uuidString
+    var name = ""
+    var gender = Gender.unknown
+    var birthday = Date()
 }
 
 // MARK: - CoreDataModel

@@ -58,10 +58,10 @@ final class LoginViewController: UIViewController, BindableType {
         output.login
             .drive()
             .disposed(by: rx.disposeBag)
-        output.loginEnabled
+        output.isLoginEnabled
             .drive(loginButton.rx.isEnabled)
             .disposed(by: rx.disposeBag)
-        output.loading
+        output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
         output.error

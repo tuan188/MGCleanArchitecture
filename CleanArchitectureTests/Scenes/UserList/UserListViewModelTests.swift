@@ -44,13 +44,13 @@ final class UserListViewModelTests: XCTestCase {
         disposeBag = DisposeBag()
         
         output.error.drive().disposed(by: disposeBag)
-        output.loading.drive().disposed(by: disposeBag)
-        output.reloading.drive().disposed(by: disposeBag)
-        output.loadingMore.drive().disposed(by: disposeBag)
+        output.isLoading.drive().disposed(by: disposeBag)
+        output.isReloading.drive().disposed(by: disposeBag)
+        output.isLoadingMore.drive().disposed(by: disposeBag)
         output.fetchItems.drive().disposed(by: disposeBag)
         output.userList.drive().disposed(by: disposeBag)
         output.selectedUser.drive().disposed(by: disposeBag)
-        output.isEmptyData.drive().disposed(by: disposeBag)
+        output.isEmpty.drive().disposed(by: disposeBag)
     }
 
     func test_loadTrigger_getUserList() {

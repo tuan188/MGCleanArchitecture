@@ -9,9 +9,9 @@
 import UIKit
 
 extension UITableView {
-    var isEmptyData: Binder<Bool> {
-        return Binder(self) { tableView, isEmptyData in
-            if isEmptyData {
+    var isEmpty: Binder<Bool> {
+        return Binder(self) { tableView, isEmpty in
+            if isEmpty {
                 let frame = CGRect(x: 0,
                                    y: 0,
                                    width: tableView.frame.size.width,

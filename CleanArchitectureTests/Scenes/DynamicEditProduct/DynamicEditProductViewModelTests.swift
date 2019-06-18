@@ -45,11 +45,11 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         
         output.nameValidation.drive().disposed(by: disposeBag)
         output.priceValidation.drive().disposed(by: disposeBag)
-        output.updateEnabled.drive().disposed(by: disposeBag)
+        output.isUpdateEnabled.drive().disposed(by: disposeBag)
         output.updatedProduct.drive().disposed(by: disposeBag)
         output.cancel.drive().disposed(by: disposeBag)
         output.error.drive().disposed(by: disposeBag)
-        output.loading.drive().disposed(by: disposeBag)
+        output.isLoading.drive().disposed(by: disposeBag)
         output.cells.drive().disposed(by: disposeBag)
     }
     
@@ -144,7 +144,7 @@ final class DynamicEditProductViewModelTests: XCTestCase {
     func test_loadTriggerInvoked_enableUpdateByDefault() {
         // act
         loadTrigger.onNext(.load)
-        let updateEnable = try? output.updateEnabled.toBlocking(timeout: 1).first()
+        let updateEnable = try? output.isUpdateEnabled.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssertEqual(updateEnable, true)
@@ -158,7 +158,7 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         dataTrigger.onNext(DynamicEditProductViewModel.DataType.name("foo"))
         dataTrigger.onNext(DynamicEditProductViewModel.DataType.price("1.0"))
         updateTrigger.onNext(())
-        let updateEnable = try? output.updateEnabled.toBlocking(timeout: 1).first()
+        let updateEnable = try? output.isUpdateEnabled.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssertEqual(updateEnable, false)

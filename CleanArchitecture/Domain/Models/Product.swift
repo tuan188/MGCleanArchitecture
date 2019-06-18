@@ -7,19 +7,9 @@
 //
 
 struct Product {
-    var id: Int
-    var name: String
-    var price: Double
+    var id = 0
+    var name = ""
+    var price = 0.0
 }
 
-extension Product {
-    init() {
-        self.init(
-            id: 0,
-            name: "",
-            price: 0.0
-        )
-    }
-}
-
-extension Product: Then, HasID, Hashable { }
+extension Product: Then { }

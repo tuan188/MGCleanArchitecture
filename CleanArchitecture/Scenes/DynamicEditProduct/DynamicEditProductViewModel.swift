@@ -24,11 +24,11 @@ extension DynamicEditProductViewModel: ViewModelType {
     struct Output {
         let nameValidation: Driver<ValidationResult>
         let priceValidation: Driver<ValidationResult>
-        let updateEnabled: Driver<Bool>
+        let isUpdateEnabled: Driver<Bool>
         let updatedProduct: Driver<Void>
         let cancel: Driver<Void>
         let error: Driver<Error>
-        let loading: Driver<Bool>
+        let isLoading: Driver<Bool>
         let cells: Driver<([CellType], Bool)>
     }
     
@@ -78,7 +78,7 @@ extension DynamicEditProductViewModel: ViewModelType {
                                        trigger: input.updateTrigger,
                                        validator: useCase.validate(price:))
         
-        let updateEnabled = Driver.combineLatest([
+        let isUpdateEnabled = Driver.combineLatest([
             nameValidation,
             priceValidation
         ])
@@ -114,7 +114,7 @@ extension DynamicEditProductViewModel: ViewModelType {
             .do(onNext: navigator.dismiss)
         
         let updatedProduct = input.updateTrigger
-            .withLatestFrom(updateEnabled)
+            .withLatestFrom(isUpdateEnabled)
             .filter { $0 }
             .withLatestFrom(product)
             .flatMapLatest { product in
@@ -132,16 +132,16 @@ extension DynamicEditProductViewModel: ViewModelType {
             .mapToVoid()
         
         let error = errorTracker.asDriver()
-        let loading = activityIndicator.asDriver()
+        let isLoading = activityIndicator.asDriver()
         
         return Output(
             nameValidation: nameValidation,
             priceValidation: priceValidation,
-            updateEnabled: updateEnabled,
+            isUpdateEnabled: isUpdateEnabled,
             updatedProduct: updatedProduct,
             cancel: cancel,
             error: error,
-            loading: loading,
+            isLoading: isLoading,
             cells: cells
         )
     }

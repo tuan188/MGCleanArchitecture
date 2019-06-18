@@ -66,13 +66,13 @@ final class ReposViewController: UIViewController, BindableType {
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
-        output.loading
+        output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
-        output.reloading
+        output.isReloading
             .drive(tableView.loadingMoreTop)
             .disposed(by: rx.disposeBag)
-        output.loadingMore
+        output.isLoadingMore
             .drive(tableView.loadingMoreBottom)
             .disposed(by: rx.disposeBag)
         output.fetchItems
@@ -81,8 +81,8 @@ final class ReposViewController: UIViewController, BindableType {
         output.selectedRepo
             .drive()
             .disposed(by: rx.disposeBag)
-        output.isEmptyData
-            .drive(tableView.isEmptyData)
+        output.isEmpty
+            .drive(tableView.isEmpty)
             .disposed(by: rx.disposeBag)
     }
 }

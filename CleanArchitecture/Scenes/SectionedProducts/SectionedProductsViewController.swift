@@ -96,13 +96,13 @@ final class SectionedProductsViewController: UIViewController, BindableType {
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
-        output.loading
+        output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
-        output.reloading
+        output.isReloading
             .drive(tableView.refreshing)
             .disposed(by: rx.disposeBag)
-        output.loadingMore
+        output.isLoadingMore
             .drive(tableView.loadingMore)
             .disposed(by: rx.disposeBag)
         output.fetchItems
@@ -111,8 +111,8 @@ final class SectionedProductsViewController: UIViewController, BindableType {
         output.selectedProduct
             .drive()
             .disposed(by: rx.disposeBag)
-        output.isEmptyData
-            .drive(tableView.isEmptyData)
+        output.isEmpty
+            .drive(tableView.isEmpty)
             .disposed(by: rx.disposeBag)
         output.editedProduct
             .drive()

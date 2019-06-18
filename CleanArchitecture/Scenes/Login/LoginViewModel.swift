@@ -23,16 +23,17 @@ extension LoginViewModel: ViewModelType {
         let usernameValidation: Driver<ValidationResult>
         let passwordValidation: Driver<ValidationResult>
         let login: Driver<Void>
-        let loginEnabled: Driver<Bool>
-        let loading: Driver<Bool>
+        let isLoginEnabled: Driver<Bool>
+        let isLoading: Driver<Bool>
         let error: Driver<Error>
     }
 
     func transform(_ input: Input) -> Output {
         let errorTracker = ErrorTracker()
         let activityIndicator = ActivityIndicator()
+        
         let error = errorTracker.asDriver()
-        let loading = activityIndicator.asDriver()
+        let isLoading = activityIndicator.asDriver()
         
         let usernameValidation = validate(
             object: input.usernameTrigger,
@@ -54,10 +55,10 @@ extension LoginViewModel: ViewModelType {
             validations.reduce(true, { $0 && $1.isValid })
         }
         
-        let loginEnabled = Driver.merge(validation, loading.not())
+        let isLoginEnabled = Driver.merge(validation, isLoading.not())
         
         let login = input.loginTrigger
-            .withLatestFrom(loginEnabled)
+            .withLatestFrom(isLoginEnabled)
             .filter { $0 }
             .withLatestFrom(Driver.combineLatest(input.usernameTrigger, input.passwordTrigger))
             .flatMapLatest { username, password -> Driver<Void> in
@@ -72,8 +73,8 @@ extension LoginViewModel: ViewModelType {
             usernameValidation: usernameValidation,
             passwordValidation: passwordValidation,
             login: login,
-            loginEnabled: loginEnabled,
-            loading: loading,
+            isLoginEnabled: isLoginEnabled,
+            isLoading: isLoading,
             error: error
         )
     }

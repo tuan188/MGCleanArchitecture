@@ -64,7 +64,7 @@ final class EditProductViewController: UITableViewController, BindableType {
         output.priceValidation
             .drive(priceValidatorBinder)
             .disposed(by: rx.disposeBag)
-        output.updateEnabled
+        output.isUpdateEnabled
             .drive(updateButton.rx.isEnabled)
             .disposed(by: rx.disposeBag)
         output.updatedProduct
@@ -76,7 +76,7 @@ final class EditProductViewController: UITableViewController, BindableType {
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
-        output.loading
+        output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
     }
