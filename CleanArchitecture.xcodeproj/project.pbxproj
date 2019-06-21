@@ -1033,7 +1033,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0940;
-				ORGANIZATIONNAME = Framgia;
+				ORGANIZATIONNAME = "Sun Asterisk";
 				TargetAttributes = {
 					172DC22420C4DDF9009FC881 = {
 						CreatedOnToolsVersion = 9.4;

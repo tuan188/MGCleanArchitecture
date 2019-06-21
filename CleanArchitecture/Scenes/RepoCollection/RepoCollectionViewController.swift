@@ -3,7 +3,7 @@
 //  CleanArchitecture
 //
 //  Created by Tuan Truong on 7/9/18.
-//  Copyright © 2018 Framgia. All rights reserved.
+//  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
 import UIKit

@@ -1,9 +1,9 @@
 //
-// UserListNavigatorMock.swift
-// CleanArchitecture
+//  UserListNavigatorMock.swift
+//  CleanArchitecture
 //
-// Created by Tuan Truong on 1/14/19.
-// Copyright © 2019 Framgia. All rights reserved.
+//  Created by Tuan Truong on 1/14/19.
+//  Copyright © 2019 Sun Asterisk. All rights reserved.
 //
 
 @testable import CleanArchitecture

@@ -1,9 +1,9 @@
 //
-// SectionedProductCell.swift
-// CleanArchitecture
+//  SectionedProductCell.swift
+//  CleanArchitecture
 //
-// Created by Tuan Truong on 6/7/18.
-// Copyright © 2018 Framgia. All rights reserved.
+//  Created by Tuan Truong on 6/7/18.
+//  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
 import UIKit

@@ -3,7 +3,7 @@
 //  CleanArchitecture
 //
 //  Created by Tuan Truong on 1/8/19.
-//  Copyright © 2019 Framgia. All rights reserved.
+//  Copyright © 2019 Sun Asterisk. All rights reserved.
 //
 
 enum Gender: Int {

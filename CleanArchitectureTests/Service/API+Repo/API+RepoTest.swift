@@ -3,7 +3,7 @@
 //  CleanArchitectureTests
 //
 //  Created by Anh Nguyen on 6/7/19.
-//  Copyright © 2019 Framgia. All rights reserved.
+//  Copyright © 2019 Sun Asterisk. All rights reserved.
 //
 
 import XCTest

@@ -1,3 +1,11 @@
+//
+//  UIViewController+.swift
+//  CleanArchitecture
+//
+//  Created by Tuan Truong on 6/21/19.
+//  Copyright © 2019 Sun Asterisk. All rights reserved.
+//
+
 import UIKit
 import MBProgressHUD
 

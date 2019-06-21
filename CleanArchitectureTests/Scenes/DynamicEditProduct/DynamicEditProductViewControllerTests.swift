@@ -1,9 +1,9 @@
 //
-// DynamicEditProductViewControllerTests.swift
-// CleanArchitecture
+//  DynamicEditProductViewControllerTests.swift
+//  CleanArchitecture
 //
-// Created by Tuan Truong on 9/10/18.
-// Copyright © 2018 Framgia. All rights reserved.
+//  Created by Tuan Truong on 9/10/18.
+//  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
 @testable import CleanArchitecture
