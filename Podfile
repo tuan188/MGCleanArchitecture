@@ -22,7 +22,6 @@ def pods
     
     #
     pod 'MBProgressHUD', '~> 1.1'
-    pod 'SDWebImage', '5.0'
     pod 'ActionSheetPicker-3.0', '2.3'
     pod 'Nuke', '~> 7.6'
 end
