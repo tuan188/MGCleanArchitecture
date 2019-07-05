@@ -19,6 +19,9 @@ final class ReposViewController: UIViewController, BindableType {
     
     var viewModel: ReposViewModel!
     
+    private var repoList = [Repo]()
+    private let imagePreheater = ImagePreheater()
+    
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
@@ -37,7 +40,9 @@ final class ReposViewController: UIViewController, BindableType {
             $0.estimatedRowHeight = 550
             $0.rowHeight = UITableView.automaticDimension
             $0.register(cellType: RepoCell.self)
+            $0.prefetchDataSource = self
         }
+        
         tableView.rx
             .setDelegate(self)
             .disposed(by: rx.disposeBag)
@@ -54,6 +59,9 @@ final class ReposViewController: UIViewController, BindableType {
         let output = viewModel.transform(input)
         
         output.repoList
+            .do(onNext: { [unowned self] repoList in
+                self.repoList = repoList
+            })
             .drive(tableView.rx.items) { tableView, index, repo in
                 return tableView.dequeueReusableCell(
                     for: IndexPath(row: index, section: 0),
@@ -63,24 +71,31 @@ final class ReposViewController: UIViewController, BindableType {
                     }
             }
             .disposed(by: rx.disposeBag)
+        
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
+        
         output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
+        
         output.isReloading
             .drive(tableView.isLoadingMoreTop)
             .disposed(by: rx.disposeBag)
+        
         output.isLoadingMore
             .drive(tableView.isLoadingMoreBottom)
             .disposed(by: rx.disposeBag)
+        
         output.fetchItems
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.selectedRepo
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.isEmpty
             .drive(tableView.isEmpty)
             .disposed(by: rx.disposeBag)
@@ -97,4 +112,20 @@ extension ReposViewController: UITableViewDelegate {
 // MARK: - StoryboardSceneBased
 extension ReposViewController: StoryboardSceneBased {
     static var sceneStoryboard = Storyboards.repo
+}
+
+extension ReposViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        let urls = indexPaths
+            .map { repoList[$0.row].avatarURLString }
+            .compactMap { URL(string: $0) }
+        
+        imagePreheater.startPreheating(with: urls)
+        
+        print("Preheat", urls)
+    }
+    
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        
+    }
 }

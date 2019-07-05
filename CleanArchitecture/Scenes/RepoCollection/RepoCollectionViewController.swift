@@ -19,10 +19,14 @@ final class RepoCollectionViewController: UIViewController, BindableType {
     
     var viewModel: ReposViewModel!
     
+    private var repoList = [Repo]()
+    private let imagePreheater = ImagePreheater()
+    
     struct Options {
         var itemSpacing: CGFloat = 8
         var lineSpacing: CGFloat = 8
         var itemsPerRow: Int = 2
+        
         var sectionInsets = UIEdgeInsets(
             top: 10.0,
             left: 10.0,
@@ -50,7 +54,9 @@ final class RepoCollectionViewController: UIViewController, BindableType {
         collectionView.do {
             $0.register(cellType: RepoCollectionCell.self)
             $0.alwaysBounceVertical = true
+            $0.prefetchDataSource = self
         }
+        
         collectionView.rx
             .setDelegate(self)
             .disposed(by: rx.disposeBag)
@@ -67,6 +73,9 @@ final class RepoCollectionViewController: UIViewController, BindableType {
         let output = viewModel.transform(input)
         
         output.repoList
+            .do(onNext: { [unowned self] repoList in
+                self.repoList = repoList
+            })
             .drive(collectionView.rx.items) { collectionView, index, repo in
                 return collectionView.dequeueReusableCell(for: IndexPath(row: index, section: 0),
                                                           cellType: RepoCollectionCell.self)
@@ -75,24 +84,31 @@ final class RepoCollectionViewController: UIViewController, BindableType {
                     }
             }
             .disposed(by: rx.disposeBag)
+        
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
+        
         output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
+        
         output.isReloading
             .drive(collectionView.isRefreshing)
             .disposed(by: rx.disposeBag)
+        
         output.isLoadingMore
             .drive(collectionView.isLoadingMore)
             .disposed(by: rx.disposeBag)
+        
         output.fetchItems
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.selectedRepo
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.isEmpty
             .drive(collectionView.isEmpty)
             .disposed(by: rx.disposeBag)
@@ -139,4 +155,21 @@ extension RepoCollectionViewController: UICollectionViewDelegate, UICollectionVi
         return options.itemSpacing
     }
     
+}
+
+// MARK: - UICollectionViewDataSourcePrefetching
+extension RepoCollectionViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let urls = indexPaths
+            .map { repoList[$0.row].avatarURLString }
+            .compactMap { URL(string: $0) }
+        
+        imagePreheater.startPreheating(with: urls)
+        
+        print("Preheat", urls)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        
+    }
 }
