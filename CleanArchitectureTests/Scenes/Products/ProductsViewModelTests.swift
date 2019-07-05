@@ -33,7 +33,7 @@ final class ProductsViewModelTests: XCTestCase {
         navigator = ProductsNavigatorMock()
         useCase = ProductsUseCaseMock()
         viewModel = ProductsViewModel(navigator: navigator, useCase: useCase)
-        disposeBag = DisposeBag()
+        
         input = ProductsViewModel.Input(
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete(),
             reloadTrigger: reloadTrigger.asDriverOnErrorJustComplete(),
@@ -42,7 +42,11 @@ final class ProductsViewModelTests: XCTestCase {
             editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete(),
             deleteProductTrigger: deleteProductTrigger.asDriverOnErrorJustComplete()
         )
+        
         output = viewModel.transform(input)
+        
+        disposeBag = DisposeBag()
+        
         output.error.drive().disposed(by: disposeBag)
         output.isLoading.drive().disposed(by: disposeBag)
         output.isReloading.drive().disposed(by: disposeBag)
@@ -173,6 +177,7 @@ final class ProductsViewModelTests: XCTestCase {
         reloadTrigger.onNext(())
         useCase.getProductListCalled = false
         loadMoreTrigger.onNext(())
+        
         // assert
         XCTAssertFalse(useCase.loadMoreProductListCalled)
     }
@@ -217,6 +222,5 @@ final class ProductsViewModelTests: XCTestCase {
         XCTAssert(navigator.confirmDeleteProductCalled)
         XCTAssert(useCase.deleteProductCalled)
     }
-    
 }
 

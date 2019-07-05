@@ -19,6 +19,7 @@ final class UserListUseCaseMock: UserListUseCaseType {
         let items = [
             User().with { $0.id = "1" }
         ]
+        
         let page = PagingInfo<User>(page: 1, items: items)
         return Observable.just(page)
     }()
@@ -36,6 +37,7 @@ final class UserListUseCaseMock: UserListUseCaseType {
         let items = [
             User().with { $0.id = "2" }
         ]
+        
         let page = PagingInfo<User>(page: 2, items: items)
         return Observable.just(page)
     }()

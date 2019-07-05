@@ -55,6 +55,7 @@ final class MainViewModelTests: XCTestCase {
     
     private func indexPath(of menu: MainViewModel.Menu) -> IndexPath? {
         let menuSections = viewModel.menuSections()
+        
         for (section, menuSection) in menuSections.enumerated() {
             for (row, aMenu) in menuSection.menus.enumerated() {
                 if aMenu == menu { // swiftlint:disable:this for_where
@@ -62,16 +63,19 @@ final class MainViewModelTests: XCTestCase {
                 }
             }
         }
+        
         return nil
     }
     
     func test_selectMenuTriggerInvoked_toProductList() {
         // act
         loadTrigger.onNext(())
+        
         guard let indexPath = indexPath(of: .products) else {
             XCTFail()
             return
         }
+        
         selectMenuTrigger.onNext(indexPath)
         
         // assert
@@ -81,10 +85,12 @@ final class MainViewModelTests: XCTestCase {
     func test_selectMenuTriggerInvoked_toSectionedProductList() {
         // act
         loadTrigger.onNext(())
+        
         guard let indexPath = indexPath(of: .sectionedProducts) else {
             XCTFail()
             return
         }
+        
         selectMenuTrigger.onNext(indexPath)
         
         // assert
@@ -94,10 +100,12 @@ final class MainViewModelTests: XCTestCase {
     func test_selectMenuTriggerInvoked_toRepoList() {
         // act
         loadTrigger.onNext(())
+        
         guard let indexPath = indexPath(of: .repos) else {
             XCTFail()
             return
         }
+        
         selectMenuTrigger.onNext(indexPath)
         
         // assert
@@ -107,10 +115,12 @@ final class MainViewModelTests: XCTestCase {
     func test_selectMenuTriggerInvoked_toRepoCollection() {
         // act
         loadTrigger.onNext(())
+        
         guard let indexPath = indexPath(of: .repoCollection) else {
             XCTFail()
             return
         }
+        
         selectMenuTrigger.onNext(indexPath)
         
         // assert
@@ -120,10 +130,12 @@ final class MainViewModelTests: XCTestCase {
     func test_selectMenuTriggerInvoked_toUsers() {
         // act
         loadTrigger.onNext(())
+        
         guard let indexPath = indexPath(of: .users) else {
             XCTFail()
             return
         }
+        
         selectMenuTrigger.onNext(indexPath)
         
         // assert
@@ -133,15 +145,16 @@ final class MainViewModelTests: XCTestCase {
     func test_selectMenuTriggerInvoked_toLogin() {
         // act
         loadTrigger.onNext(())
+        
         guard let indexPath = indexPath(of: .login) else {
             XCTFail()
             return
         }
+        
         selectMenuTrigger.onNext(indexPath)
         
         // assert
         XCTAssert(navigator.toLoginCalled)
     }
-    
 }
 

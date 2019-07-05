@@ -20,7 +20,6 @@ final class LoginViewControllerTests: XCTestCase {
 
     func test_ibOutlets() {
         _ = viewController.view
-        XCTAssert(true)
         XCTAssertNotNil(viewController.usernameTextField)
         XCTAssertNotNil(viewController.usernameValidationLabel)
         XCTAssertNotNil(viewController.passwordTextField)

@@ -18,7 +18,6 @@ final class UserCellTests: XCTestCase {
     }
 
     func test_ibOutlets() {
-        XCTAssert(true)
         XCTAssertNotNil(cell)
         XCTAssertNotNil(cell.nameLabel)
         XCTAssertNotNil(cell.genderLabel)

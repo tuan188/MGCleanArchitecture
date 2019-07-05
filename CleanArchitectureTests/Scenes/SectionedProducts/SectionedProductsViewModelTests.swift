@@ -175,6 +175,7 @@ final class SectionedProductsViewModelTests: XCTestCase {
         reloadTrigger.onNext(())
         useCase.getProductListCalled = false
         loadMoreTrigger.onNext(())
+        
         // assert
         XCTAssertFalse(useCase.loadMoreProductListCalled)
     }

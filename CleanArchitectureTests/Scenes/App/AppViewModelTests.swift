@@ -29,12 +29,15 @@ final class AppViewModelTests: XCTestCase {
         navigator = AppNavigatorMock()
         useCase = AppUseCaseMock()
         viewModel = AppViewModel(navigator: navigator, useCase: useCase)
-        disposeBag = DisposeBag()
         
         input = AppViewModel.Input(
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete()
         )
+        
         output = viewModel.transform(input)
+        
+        disposeBag = DisposeBag()
+        
         output.toMain.drive().disposed(by: disposeBag)
     }
     

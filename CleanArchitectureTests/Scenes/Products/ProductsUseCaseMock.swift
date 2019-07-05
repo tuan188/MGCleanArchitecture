@@ -19,6 +19,7 @@ final class ProductsUseCaseMock: ProductsUseCaseType {
         let items = [
             Product().with { $0.id = 1 }
         ]
+        
         let page = PagingInfo<Product>(page: 1, items: items)
         return Observable.just(page)
     }()
@@ -36,6 +37,7 @@ final class ProductsUseCaseMock: ProductsUseCaseType {
         let items = [
             Product().with { $0.id = 2 }
         ]
+        
         let page = PagingInfo<Product>(page: 2, items: items)
         return Observable.just(page)
     }()

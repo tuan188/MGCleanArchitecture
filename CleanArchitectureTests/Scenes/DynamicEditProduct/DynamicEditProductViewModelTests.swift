@@ -151,6 +151,7 @@ final class DynamicEditProductViewModelTests: XCTestCase {
     }
     
     func test_updateTrigger_not_update() {
+        // arrange
         useCase.validateNameReturnValue = ValidationResult.invalid([TestError()])
         useCase.validatePriceReturnValue = ValidationResult.invalid([TestError()])
         
@@ -185,5 +186,4 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         XCTAssert(useCase.updateCalled)
         XCTAssert(error is TestError)
     }
-    
 }
