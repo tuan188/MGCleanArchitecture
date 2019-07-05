@@ -40,6 +40,7 @@ final class UserListViewController: UIViewController, BindableType {
             $0.refreshFooter = nil
             $0.refreshHeader = nil
         }
+        
         tableView.rx
             .setDelegate(self)
             .disposed(by: rx.disposeBag)
@@ -65,24 +66,31 @@ final class UserListViewController: UIViewController, BindableType {
                     }
             }
             .disposed(by: rx.disposeBag)
+        
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
+        
         output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
+        
         output.isReloading
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.isLoadingMore
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.fetchItems
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.selectedUser
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.isEmpty
             .drive()
             .disposed(by: rx.disposeBag)

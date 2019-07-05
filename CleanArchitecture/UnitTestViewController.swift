@@ -21,12 +21,14 @@ final class UnitTestViewController: UIViewController {
             $0.textAlignment = .center
             $0.font = UIFont.systemFont(ofSize: 40, weight: .thin)
         }
+        
         view.addSubview(testingLabel)
         
         indicator = UIActivityIndicatorView().then {
             $0.style = .gray
             $0.startAnimating()
         }
+        
         view.addSubview(indicator)
         
         // constraint

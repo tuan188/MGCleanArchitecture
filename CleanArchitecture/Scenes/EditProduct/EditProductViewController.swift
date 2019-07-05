@@ -54,28 +54,36 @@ final class EditProductViewController: UITableViewController, BindableType {
         output.name
             .drive(nameTextField.rx.text)
             .disposed(by: rx.disposeBag)
+        
         output.price
             .map { String($0) }
             .drive(priceTextField.rx.text)
             .disposed(by: rx.disposeBag)
+        
         output.nameValidation
             .drive(nameValidatorBinder)
             .disposed(by: rx.disposeBag)
+        
         output.priceValidation
             .drive(priceValidatorBinder)
             .disposed(by: rx.disposeBag)
+        
         output.isUpdateEnabled
             .drive(updateButton.rx.isEnabled)
             .disposed(by: rx.disposeBag)
+        
         output.updatedProduct
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.cancel
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
+        
         output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)

@@ -52,18 +52,23 @@ final class LoginViewController: UIViewController, BindableType {
         output.usernameValidation
             .drive(usernameValidationBinder)
             .disposed(by: rx.disposeBag)
+        
         output.passwordValidation
             .drive(passwordValidationBinder)
             .disposed(by: rx.disposeBag)
+        
         output.login
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.isLoginEnabled
             .drive(loginButton.rx.isEnabled)
             .disposed(by: rx.disposeBag)
+        
         output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
+        
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)

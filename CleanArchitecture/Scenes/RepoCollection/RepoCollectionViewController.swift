@@ -22,20 +22,34 @@ final class RepoCollectionViewController: UIViewController, BindableType {
     private var repoList = [Repo]()
     private let imagePreheater = ImagePreheater()
     
-    struct Options {
-        var itemSpacing: CGFloat = 8
-        var lineSpacing: CGFloat = 8
+    struct LayoutOptions {
+        var itemSpacing: CGFloat = 16
+        var lineSpacing: CGFloat = 16
         var itemsPerRow: Int = 2
         
         var sectionInsets = UIEdgeInsets(
-            top: 10.0,
-            left: 10.0,
-            bottom: 10.0,
-            right: 10.0
+            top: 16.0,
+            left: 16.0,
+            bottom: 16.0,
+            right: 16.0
         )
+        
+        var itemSize: CGSize {
+            let screenSize = UIScreen.main.bounds
+            
+            let paddingSpace = sectionInsets.left
+                + sectionInsets.right
+                + CGFloat(itemsPerRow - 1) * itemSpacing
+            
+            let availableWidth = screenSize.width - paddingSpace
+            let widthPerItem = availableWidth / CGFloat(itemsPerRow)
+            let heightPerItem = widthPerItem
+            
+            return CGSize(width: widthPerItem, height: heightPerItem)
+        }
     }
     
-    private var options = Options()
+    private var layoutOptions = LayoutOptions()
 
     // MARK: - Life Cycle
     
@@ -126,33 +140,25 @@ extension RepoCollectionViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenSize = UIScreen.main.bounds
-        let paddingSpace = options.sectionInsets.left
-            + options.sectionInsets.right
-            + CGFloat(options.itemsPerRow - 1) * options.itemSpacing
-        let availableWidth = screenSize.width - paddingSpace
-        let widthPerItem = availableWidth / CGFloat(options.itemsPerRow)
-        let heightPerItem = widthPerItem
-        
-        return CGSize(width: widthPerItem, height: heightPerItem)
+        return layoutOptions.itemSize
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return options.sectionInsets
+        return layoutOptions.sectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return options.lineSpacing
+        return layoutOptions.lineSpacing
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return options.itemSpacing
+        return layoutOptions.itemSpacing
     }
     
 }
@@ -165,7 +171,6 @@ extension RepoCollectionViewController: UICollectionViewDataSourcePrefetching {
             .compactMap { URL(string: $0) }
         
         imagePreheater.startPreheating(with: urls)
-        
         print("Preheat", urls)
     }
     

@@ -44,6 +44,7 @@ final class SectionedProductsViewController: UIViewController, BindableType {
             $0.register(cellType: SectionedProductCell.self)
             $0.register(headerFooterViewType: ProductHeaderView.self)
         }
+        
         tableView.rx
             .setDelegate(self)
             .disposed(by: rx.disposeBag)
@@ -75,6 +76,7 @@ final class SectionedProductsViewController: UIViewController, BindableType {
                                                      cellType: SectionedProductCell.self)
                     .then {
                         $0.bindViewModel(ProductViewModel(product: product))
+                        
                         $0.editProductAction = {
                             self?.editProductTrigger.onNext(indexPath)
                         }
@@ -93,30 +95,39 @@ final class SectionedProductsViewController: UIViewController, BindableType {
             }
             .drive(tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
+        
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
+        
         output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
+        
         output.isReloading
             .drive(tableView.isRefreshing)
             .disposed(by: rx.disposeBag)
+        
         output.isLoadingMore
             .drive(tableView.isLoadingMore)
             .disposed(by: rx.disposeBag)
+        
         output.fetchItems
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.selectedProduct
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.isEmpty
             .drive(tableView.isEmpty)
             .disposed(by: rx.disposeBag)
+        
         output.editedProduct
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.updatedProduct
             .drive()
             .disposed(by: rx.disposeBag)

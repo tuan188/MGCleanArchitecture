@@ -74,6 +74,7 @@ extension DynamicEditProductViewModel: ViewModelType {
         let nameValidation = validate(object: name,
                                       trigger: input.updateTrigger,
                                       validator: useCase.validate(name:))
+        
         let priceValidation = validate(object: price,
                                        trigger: input.updateTrigger,
                                        validator: useCase.validate(price:))

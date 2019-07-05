@@ -42,6 +42,7 @@ final class StaticProductDetailViewController: UITableViewController, BindableTy
         output.name
             .drive(nameLabel.rx.text)
             .disposed(by: rx.disposeBag)
+        
         output.price
             .drive(priceLabel.rx.text)
             .disposed(by: rx.disposeBag)

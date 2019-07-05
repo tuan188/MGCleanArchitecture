@@ -18,13 +18,16 @@ struct SectionedProductsNavigator: SectionedProductsNavigatorType {
     func toProductDetail(product: Product) {
         let vc: StaticProductDetailViewController = assembler
             .resolve(navigationController: navigationController, product: product)
+        
         navigationController.pushViewController(vc, animated: true)
     }
     
     func toEditProduct(_ product: Product) {
         let nav = UINavigationController()
+        
         let vc: DynamicEditProductViewController = assembler
             .resolve(navigationController: nav, product: product)
+        
         nav.viewControllers = [vc]
         navigationController.present(nav, animated: true, completion: nil)
     }

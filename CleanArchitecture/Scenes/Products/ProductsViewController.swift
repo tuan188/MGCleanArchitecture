@@ -41,6 +41,7 @@ final class ProductsViewController: UIViewController, BindableType {
             $0.rowHeight = UITableView.automaticDimension
             $0.register(cellType: ProductCell.self)
         }
+        
         tableView.rx
             .setDelegate(self)
             .disposed(by: rx.disposeBag)
@@ -65,39 +66,50 @@ final class ProductsViewController: UIViewController, BindableType {
                     cellType: ProductCell.self)
                     .then {
                         $0.bindViewModel(ProductViewModel(product: product))
+                        
                         $0.editProductAction = {
                             self.editProductTrigger.onNext(IndexPath(row: index, section: 0))
                         }
+                        
                         $0.deleteProductAction = {
                             self.deleteProductTrigger.onNext(IndexPath(row: index, section: 0))
                         }
                     }
             }
             .disposed(by: rx.disposeBag)
+        
         output?.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
+        
         output?.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
+        
         output?.isReloading
             .drive(tableView.isRefreshing)
             .disposed(by: rx.disposeBag)
+        
         output?.isLoadingMore
             .drive(tableView.isLoadingMore)
             .disposed(by: rx.disposeBag)
+        
         output?.fetchItems
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output?.selectedProduct
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output?.isEmpty
             .drive(tableView.isEmpty)
             .disposed(by: rx.disposeBag)
+        
         output?.editedProduct
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output?.deletedProduct
             .drive()
             .disposed(by: rx.disposeBag)

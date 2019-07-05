@@ -91,6 +91,7 @@ extension SectionedProductsViewModel: ViewModelType {
             .do(onNext: { product in
                 var productList = page.value.items
                 let productModel = ProductModel(product: product, edited: true)
+                
                 if let index = productList.firstIndex(of: productModel) {
                     productList[index] = productModel
                     let updatedPage = PagingInfo(page: page.value.page, items: productList)

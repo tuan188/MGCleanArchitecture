@@ -24,10 +24,13 @@ extension EditProductAssembler {
                  product: Product,
                  delegate: PublishSubject<EditProductDelegate>) -> EditProductViewController {
         let vc = EditProductViewController.instantiate()
+        
         let vm: EditProductViewModel = resolve(navigationController: navigationController,
                                                product: product,
                                                delegate: delegate)
+        
         vc.bindViewModel(to: vm)
+        
         return vc
     }
     

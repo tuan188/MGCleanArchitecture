@@ -71,24 +71,31 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
         output.cancel
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.cells
             .drive(cellsBinder)
             .disposed(by: rx.disposeBag)
+        
         output.updatedProduct
             .drive()
             .disposed(by: rx.disposeBag)
+        
         output.nameValidation
             .drive(nameValidatorBinder)
             .disposed(by: rx.disposeBag)
+        
         output.priceValidation
             .drive(priceValidatorBinder)
             .disposed(by: rx.disposeBag)
+        
         output.isUpdateEnabled
             .drive(updateButton.rx.isEnabled)
             .disposed(by: rx.disposeBag)
+        
         output.error
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
+        
         output.isLoading
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
@@ -142,18 +149,22 @@ extension DynamicEditProductViewController: UITableViewDataSource {
                     $0.nameTextField.backgroundColor = viewModel.backgroundColor
                     $0.validationLabel.text = viewModel.text
                 }
+            
             cell.nameTextField.rx.text.orEmpty
                 .subscribe(onNext: { [unowned self] text in
                     self.dataTrigger.onNext(DynamicEditProductViewModel.DataType.name(text))
                 })
                 .disposed(by: cell.disposeBag)
+            
             cell.nameTextField.rx.controlEvent(UIControl.Event.editingDidEnd)
                 .subscribe(onNext: { [unowned self] _ in
                     self.endEditTrigger.onNext(())
                 })
                 .disposed(by: cell.disposeBag)
+            
             nameTextField = cell.nameTextField
             nameValidationLabel = cell.validationLabel
+            
             return cell
         case let .price(price):
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: EditProductPriceCell.self)
@@ -162,18 +173,22 @@ extension DynamicEditProductViewController: UITableViewDataSource {
                     $0.priceTextField.backgroundColor = viewModel.backgroundColor
                     $0.validationLabel.text = viewModel.text
                 }
+            
             cell.priceTextField.rx.text.orEmpty
                 .subscribe(onNext: { [unowned self] text in
                     self.dataTrigger.onNext(DynamicEditProductViewModel.DataType.price(text))
                 })
                 .disposed(by: cell.disposeBag)
+            
             cell.priceTextField.rx.controlEvent(UIControl.Event.editingDidEnd)
                 .subscribe(onNext: { [unowned self] _ in
                     self.endEditTrigger.onNext(())
                 })
                 .disposed(by: cell.disposeBag)
+            
             priceTextField = cell.priceTextField
             priceValidationLabel = cell.validationLabel
+            
             return cell
         }
     }
