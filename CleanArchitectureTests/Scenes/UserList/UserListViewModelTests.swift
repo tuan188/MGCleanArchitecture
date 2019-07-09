@@ -132,13 +132,13 @@ final class UserListViewModelTests: XCTestCase {
         let userList = try? output.userList.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.loadMoreUserListCalled)
+        XCTAssert(useCase.getUserListCalled)
         XCTAssertEqual(userList?.count, 2)
     }
 
     func test_loadMoreTrigger_loadMoreUserList_failedShowError() {
         // arrange
-        useCase.loadMoreUserListReturnValue = Observable.error(TestError())
+        useCase.getUserListReturnValue = Observable.error(TestError())
 
         // act
         loadTrigger.onNext(())
@@ -146,7 +146,7 @@ final class UserListViewModelTests: XCTestCase {
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.loadMoreUserListCalled)
+        XCTAssert(useCase.getUserListCalled)
         XCTAssert(error is TestError)
     }
 
@@ -160,7 +160,7 @@ final class UserListViewModelTests: XCTestCase {
         loadMoreTrigger.onNext(())
 
         // assert
-        XCTAssertFalse(useCase.loadMoreUserListCalled)
+        XCTAssertFalse(useCase.getUserListCalled)
     }
 
     func test_loadMoreTrigger_notLoadMoreUserListIfStillReloading() {
@@ -173,20 +173,20 @@ final class UserListViewModelTests: XCTestCase {
         loadMoreTrigger.onNext(())
         
         // assert
-        XCTAssertFalse(useCase.loadMoreUserListCalled)
+        XCTAssertFalse(useCase.getUserListCalled)
     }
 
     func test_loadMoreTrigger_notLoadMoreDocumentTypesStillLoadingMore() {
         // arrange
-        useCase.loadMoreUserListReturnValue = Observable.never()
+        useCase.getUserListReturnValue = Observable.never()
 
         // act
         loadMoreTrigger.onNext(())
-        useCase.loadMoreUserListCalled = false
+        useCase.getUserListCalled = false
         loadMoreTrigger.onNext(())
 
         // assert
-        XCTAssertFalse(useCase.loadMoreUserListCalled)
+        XCTAssertFalse(useCase.getUserListCalled)
     }
 
     func test_selectUserTrigger_toUserDetail() {

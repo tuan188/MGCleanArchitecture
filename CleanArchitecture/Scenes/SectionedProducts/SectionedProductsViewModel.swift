@@ -44,15 +44,15 @@ extension SectionedProductsViewModel: ViewModelType {
         let configOutput = configPagination(
             loadTrigger: input.loadTrigger,
             getItems: { _ in
-                self.useCase.getProductList()
+                self.useCase.getProductList(page: 1)
             },
             reloadTrigger: input.reloadTrigger,
             reloadItems: { _ in
-                self.useCase.getProductList()
+                self.useCase.getProductList(page: 1)
             },
             loadMoreTrigger: input.loadMoreTrigger,
             loadMoreItems: { _, page in
-                self.useCase.loadMoreProductList(page: page)
+                self.useCase.getProductList(page: page)
             },
             mapper: ProductModel.init(product:))
         

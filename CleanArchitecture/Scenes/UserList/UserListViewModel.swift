@@ -34,11 +34,9 @@ extension UserListViewModel: ViewModelType {
     func transform(_ input: Input) -> Output {
         let configOutput = configPagination(
             loadTrigger: input.loadTrigger,
-            getItems: useCase.getUserList,
             reloadTrigger: input.reloadTrigger,
-            reloadItems: useCase.getUserList,
             loadMoreTrigger: input.loadMoreTrigger,
-            loadMoreItems: useCase.loadMoreUserList)
+            getItems: useCase.getUserList)
         
         let (page, fetchItems, loadError, isLoading, isReloading, isLoadingMore) = configOutput
         

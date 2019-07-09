@@ -35,9 +35,8 @@ extension ReposViewModel: ViewModelType {
         let configOutput = configPagination(
             loadTrigger: input.loadTrigger,
             reloadTrigger: input.reloadTrigger,
-            getItems: useCase.getRepoList,
             loadMoreTrigger: input.loadMoreTrigger,
-            loadMoreItems: useCase.loadMoreRepoList)
+            getItems: useCase.getRepoList(page:))
         
         let (page, fetchItems, loadError, isLoading, isReloading, isLoadingMore) = configOutput
 

@@ -24,29 +24,11 @@ final class ProductsUseCaseMock: ProductsUseCaseType {
         return Observable.just(page)
     }()
     
-    func getProductList() -> Observable<PagingInfo<Product>> {
+    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
         getProductListCalled = true
         return getProductListReturnValue
     }
 
-    // MARK: - loadMoreProductList
-    
-    var loadMoreProductListCalled = false
-    
-    var loadMoreProductListReturnValue: Observable<PagingInfo<Product>> = {
-        let items = [
-            Product().with { $0.id = 2 }
-        ]
-        
-        let page = PagingInfo<Product>(page: 2, items: items)
-        return Observable.just(page)
-    }()
-    
-    func loadMoreProductList(page: Int) -> Observable<PagingInfo<Product>> {
-        loadMoreProductListCalled = true
-        return loadMoreProductListReturnValue
-    }
-    
     // MARK: - deleteProduct
     
     var deleteProductCalled = false

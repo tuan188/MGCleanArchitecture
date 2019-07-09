@@ -132,13 +132,13 @@ final class ReposViewModelTests: XCTestCase {
         let repoList = try? output.repoList.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.loadMoreRepoListCalled)
+        XCTAssert(useCase.getRepoListCalled)
         XCTAssertEqual(repoList?.count, 2)
     }
 
     func test_loadMoreTriggerInvoked_loadMoreRepoList_failedShowError() {
         // arrange
-        useCase.loadMoreRepoListReturnValue = Observable.error(TestError())
+        useCase.getRepoListReturnValue = Observable.error(TestError())
 
         // act
         loadTrigger.onNext(())
@@ -146,7 +146,7 @@ final class ReposViewModelTests: XCTestCase {
         let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
-        XCTAssert(useCase.loadMoreRepoListCalled)
+        XCTAssert(useCase.getRepoListCalled)
         XCTAssert(error is TestError)
     }
 
@@ -160,7 +160,7 @@ final class ReposViewModelTests: XCTestCase {
         loadMoreTrigger.onNext(())
 
         // assert
-        XCTAssertFalse(useCase.loadMoreRepoListCalled)
+        XCTAssertFalse(useCase.getRepoListCalled)
     }
 
     func test_loadMoreTriggerInvoked_notLoadMoreRepoListIfStillReloading() {
@@ -173,20 +173,20 @@ final class ReposViewModelTests: XCTestCase {
         loadMoreTrigger.onNext(())
         
         // assert
-        XCTAssertFalse(useCase.loadMoreRepoListCalled)
+        XCTAssertFalse(useCase.getRepoListCalled)
     }
 
     func test_loadMoreTriggerInvoked_notLoadMoreDocumentTypesStillLoadingMore() {
         // arrange
-        useCase.loadMoreRepoListReturnValue = Observable.never()
+        useCase.getRepoListReturnValue = Observable.never()
         
         // act
         loadMoreTrigger.onNext(())
-        useCase.loadMoreRepoListCalled = false
+        useCase.getRepoListCalled = false
         loadMoreTrigger.onNext(())
 
         // assert
-        XCTAssertFalse(useCase.loadMoreRepoListCalled)
+        XCTAssertFalse(useCase.getRepoListCalled)
     }
 
     func test_selectRepoTriggerInvoked_toRepoDetail() {

@@ -11,29 +11,11 @@ import RxSwift
 
 final class ReposUseCaseMock: ReposUseCaseType {
 
-    // MARK: - getRepoList
+    // MARK: - loadMoreRepoList
     
     var getRepoListCalled = false
     
     var getRepoListReturnValue: Observable<PagingInfo<Repo>> = {
-        let items = [
-            Repo().with { $0.id = 1 }
-        ]
-        
-        let page = PagingInfo<Repo>(page: 1, items: items)
-        return Observable.just(page)
-    }()
-    
-    func getRepoList() -> Observable<PagingInfo<Repo>> {
-        getRepoListCalled = true
-        return getRepoListReturnValue
-    }
-
-    // MARK: - loadMoreRepoList
-    
-    var loadMoreRepoListCalled = false
-    
-    var loadMoreRepoListReturnValue: Observable<PagingInfo<Repo>> = {
         let items = [
             Repo().with { $0.id = 2 }
         ]
@@ -42,8 +24,8 @@ final class ReposUseCaseMock: ReposUseCaseType {
         return Observable.just(page)
     }()
     
-    func loadMoreRepoList(page: Int) -> Observable<PagingInfo<Repo>> {
-        loadMoreRepoListCalled = true
-        return loadMoreRepoListReturnValue
+    func getRepoList(page: Int) -> Observable<PagingInfo<Repo>> {
+        getRepoListCalled = true
+        return getRepoListReturnValue
     }
 }
