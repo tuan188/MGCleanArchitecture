@@ -18,6 +18,8 @@ struct AppNavigator: AppNavigatorType {
         let nav = UINavigationController()
         let vc: MainViewController = assembler.resolve(navigationController: nav)
         nav.viewControllers.append(vc)
+        
         window.rootViewController = nav
+        window.makeKeyAndVisible()
     }
 }

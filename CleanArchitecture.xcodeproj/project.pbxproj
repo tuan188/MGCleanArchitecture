@@ -160,7 +160,7 @@
 		17DCDA4320FB346600E2602A /* Assembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCDA4220FB346600E2602A /* Assembler.swift */; };
 		17DCDA4520FB352300E2602A /* ReposAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCDA4420FB352300E2602A /* ReposAssembler.swift */; };
 		17DCDA4C20FB43CC00E2602A /* EditProductAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCDA4B20FB43CC00E2602A /* EditProductAssembler.swift */; };
-		17DF7EF922CEE87600771503 /* UIImageView+Nuke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF7EF822CEE87600771503 /* UIImageView+Nuke.swift */; };
+		17DF7EF922CEE87600771503 /* UIImageView+SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF7EF822CEE87600771503 /* UIImageView+SDWebImage.swift */; };
 		17E7593F213FDED00037EE4C /* RepoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7593E213FDED00037EE4C /* RepoViewModel.swift */; };
 		17EC212E20DCD50700F793FE /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EC212C20DCD50600F793FE /* ProductDetailViewModel.swift */; };
 		17EC213020DCD55100F793FE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EC212F20DCD55000F793FE /* ProductDetailViewController.swift */; };
@@ -359,7 +359,7 @@
 		17DCDA4220FB346600E2602A /* Assembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembler.swift; sourceTree = "<group>"; };
 		17DCDA4420FB352300E2602A /* ReposAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposAssembler.swift; sourceTree = "<group>"; };
 		17DCDA4B20FB43CC00E2602A /* EditProductAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProductAssembler.swift; sourceTree = "<group>"; };
-		17DF7EF822CEE87600771503 /* UIImageView+Nuke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Nuke.swift"; sourceTree = "<group>"; };
+		17DF7EF822CEE87600771503 /* UIImageView+SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+SDWebImage.swift"; sourceTree = "<group>"; };
 		17E7593E213FDED00037EE4C /* RepoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewModel.swift; sourceTree = "<group>"; };
 		17EC212C20DCD50600F793FE /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		17EC212F20DCD55000F793FE /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
@@ -519,7 +519,7 @@
 				176A23FB21DDBAF300016AFC /* ViewModelType+.swift */,
 				17CDA61E21EC215E0001FE4A /* Date+.swift */,
 				1777C07F21F022C60092F5B8 /* Observable+.swift */,
-				17DF7EF822CEE87600771503 /* UIImageView+Nuke.swift */,
+				17DF7EF822CEE87600771503 /* UIImageView+SDWebImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1199,7 +1199,6 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
-				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAlamofire/RxAlamofire.framework",
@@ -1207,6 +1206,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
 				"${BUILT_PRODUCTS_DIR}/Validator/Validator.framework",
 			);
@@ -1222,7 +1222,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
@@ -1230,6 +1229,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Validator.framework",
 			);
@@ -1262,7 +1262,7 @@
 				172172A620E4D559007D33A5 /* APIError.swift in Sources */,
 				1721726C20E47909007D33A5 /* ValidationError.swift in Sources */,
 				172DC27720C533C8009FC881 /* AppViewModel.swift in Sources */,
-				17DF7EF922CEE87600771503 /* UIImageView+Nuke.swift in Sources */,
+				17DF7EF922CEE87600771503 /* UIImageView+SDWebImage.swift in Sources */,
 				17CDA62F21EC2DBC0001FE4A /* Model.xcdatamodeld in Sources */,
 				172DC2D920C678DD009FC881 /* ProductsUseCase.swift in Sources */,
 				173CA58C21460F8B001AF22D /* DynamicEditProductUseCase.swift in Sources */,

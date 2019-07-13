@@ -17,13 +17,11 @@ def pods
     pod 'MJRefresh', '~> 3.2'
     pod 'Validator', '~> 3.1.1'
     
-    # Core Data
+    # Others
     pod 'MagicalRecord', '~> 2.3'
-    
-    #
     pod 'MBProgressHUD', '~> 1.1'
     pod 'ActionSheetPicker-3.0', '2.3'
-    pod 'Nuke', '~> 7.6'
+    pod 'SDWebImage', '~> 5.0'
 end
 
 def test_pods

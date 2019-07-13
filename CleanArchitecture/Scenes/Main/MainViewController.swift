@@ -30,6 +30,13 @@ final class MainViewController: UIViewController, BindableType {
         configView()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        SDImageCache.shared.clearMemory()
+        SDImageCache.shared.clearDisk()
+    }
+    
     deinit {
         logDeinit()
     }

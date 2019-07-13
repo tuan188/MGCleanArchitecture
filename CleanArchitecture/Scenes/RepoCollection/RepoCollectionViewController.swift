@@ -20,7 +20,6 @@ final class RepoCollectionViewController: UIViewController, BindableType {
     var viewModel: ReposViewModel!
     
     private var repoList = [Repo]()
-    private let imagePreheater = ImagePreheater()
     
     struct LayoutOptions {
         var itemSpacing: CGFloat = 16
@@ -170,7 +169,7 @@ extension RepoCollectionViewController: UICollectionViewDataSourcePrefetching {
             .map { repoList[$0.row].avatarURLString }
             .compactMap { URL(string: $0) }
         
-        imagePreheater.startPreheating(with: urls)
+        SDWebImagePrefetcher.shared.prefetchURLs(urls)
         print("Preheat", urls)
     }
     

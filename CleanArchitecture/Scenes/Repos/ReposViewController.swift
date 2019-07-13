@@ -20,7 +20,6 @@ final class ReposViewController: UIViewController, BindableType {
     var viewModel: ReposViewModel!
     
     private var repoList = [Repo]()
-    private let imagePreheater = ImagePreheater()
     
     // MARK: - Life Cycle
 
@@ -120,8 +119,7 @@ extension ReposViewController: UITableViewDataSourcePrefetching {
             .map { repoList[$0.row].avatarURLString }
             .compactMap { URL(string: $0) }
         
-        imagePreheater.startPreheating(with: urls)
-        
+        SDWebImagePrefetcher.shared.prefetchURLs(urls)
         print("Preheat", urls)
     }
     

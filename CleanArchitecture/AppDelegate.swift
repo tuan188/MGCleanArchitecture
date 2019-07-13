@@ -17,12 +17,22 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
         setupCoreData()
+//        configSDWebImageDownloader()
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
         
         if NSClassFromString("XCTest") != nil { // test
             window?.rootViewController = UnitTestViewController()
+            window?.makeKeyAndVisible()
         } else {
             bindViewModel()
         }
+    }
+    
+    private func configSDWebImageDownloader() {
+        let downloader = SDWebImageDownloader.shared
+        downloader.config.username = "username"
+        downloader.config.password = "password"
     }
     
     private func setupCoreData() {
@@ -32,9 +42,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func bindViewModel() {
         guard let window = window else { return }
+        
         let vm: AppViewModel = assembler.resolve(window: window)
         let input = AppViewModel.Input(loadTrigger: Driver.just(()))
         let output = vm.transform(input)
+        
         output.toMain
             .drive()
             .disposed(by: rx.disposeBag)
