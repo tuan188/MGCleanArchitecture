@@ -87,10 +87,6 @@ final class ReposViewController: UIViewController, BindableType {
             .drive(tableView.isLoadingMoreBottom)
             .disposed(by: rx.disposeBag)
         
-        output.fetchItems
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
         output.selectedRepo
             .drive()
             .disposed(by: rx.disposeBag)

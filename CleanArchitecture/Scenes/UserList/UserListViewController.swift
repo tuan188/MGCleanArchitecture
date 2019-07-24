@@ -83,10 +83,6 @@ final class UserListViewController: UIViewController, BindableType {
             .drive()
             .disposed(by: rx.disposeBag)
         
-        output.fetchItems
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
         output.selectedUser
             .drive()
             .disposed(by: rx.disposeBag)

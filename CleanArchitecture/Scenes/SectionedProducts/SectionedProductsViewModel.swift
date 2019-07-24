@@ -27,7 +27,6 @@ extension SectionedProductsViewModel: ViewModelType {
         let isLoading: Driver<Bool>
         let isReloading: Driver<Bool>
         let isLoadingMore: Driver<Bool>
-        let fetchItems: Driver<Void>
         let productSections: Driver<[ProductSection]>
         let selectedProduct: Driver<Void>
         let isEmpty: Driver<Bool>
@@ -41,34 +40,40 @@ extension SectionedProductsViewModel: ViewModelType {
     }
 
     func transform(_ input: Input) -> Output {
-        let configOutput = configPagination(
+        let activityIndicator = PageActivityIndicator()
+        let isLoading = activityIndicator.isLoading
+        let isReloading = activityIndicator.isReloading
+        let isLoadingMore = activityIndicator.isLoadingMore
+        
+        let errorTracker = ErrorTracker()
+        let error = errorTracker.asDriver()
+        
+        let pageSubject = BehaviorRelay(value: PagingInfo<ProductModel>(page: 1, items: []))
+        
+        let paginationResult = configPagination(
+            pageSubject: pageSubject,
+            pageActivityIndicator: activityIndicator,
+            errorTracker: errorTracker,
             loadTrigger: input.loadTrigger,
-            getItems: { _ in
-                self.useCase.getProductList(page: 1)
-            },
             reloadTrigger: input.reloadTrigger,
-            reloadItems: { _ in
-                self.useCase.getProductList(page: 1)
-            },
             loadMoreTrigger: input.loadMoreTrigger,
-            loadMoreItems: { _, page in
+            getItems: { _, page in
                 self.useCase.getProductList(page: page)
             },
-            mapper: ProductModel.init(product:))
+            mapper: ProductModel.init(product:)
+        )
         
-        let (page, fetchItems, loadError, isLoading, isReloading, isLoadingMore) = configOutput
+        let page = paginationResult.page
 
         let productSections = page
-            .map { $0.items.map { $0 } }
+            .map { $0.items }
             .map { [ProductSection(header: "Section1", productList: $0)] }
-            .asDriverOnErrorJustComplete()
         
         let selectedProduct = input.selectProductTrigger
             .withLatestFrom(productSections) {
                 return ($0, $1)
             }
-            .map { params -> ProductModel in
-                let (indexPath, productSections) = params
+            .map { indexPath, productSections -> ProductModel in
                 return productSections[indexPath.section].productList[indexPath.row]
             }
             .do(onNext: { product in
@@ -76,8 +81,7 @@ extension SectionedProductsViewModel: ViewModelType {
             })
             .mapToVoid()
         
-        let isEmpty = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
-                                         loadTrigger: Driver.merge(isLoading, isReloading),
+        let isEmpty = checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
                                          items: productSections)
         
         let editedProduct = input.editProductTrigger
@@ -89,23 +93,23 @@ extension SectionedProductsViewModel: ViewModelType {
         
         let updatedProduct = input.updatedProductTrigger
             .do(onNext: { product in
-                var productList = page.value.items
+                let page = pageSubject.value
+                var productList = page.items
                 let productModel = ProductModel(product: product, edited: true)
                 
                 if let index = productList.firstIndex(of: productModel) {
                     productList[index] = productModel
-                    let updatedPage = PagingInfo(page: page.value.page, items: productList)
-                    page.accept(updatedPage)
+                    let updatedPage = PagingInfo(page: page.page, items: productList)
+                    pageSubject.accept(updatedPage)
                 }
             })
             .mapToVoid()
 
         return Output(
-            error: loadError,
+            error: error,
             isLoading: isLoading,
             isReloading: isReloading,
             isLoadingMore: isLoadingMore,
-            fetchItems: fetchItems,
             productSections: productSections,
             selectedProduct: selectedProduct,
             isEmpty: isEmpty,

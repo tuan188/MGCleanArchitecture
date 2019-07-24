@@ -47,7 +47,6 @@ final class UserListViewModelTests: XCTestCase {
         output.isLoading.drive().disposed(by: disposeBag)
         output.isReloading.drive().disposed(by: disposeBag)
         output.isLoadingMore.drive().disposed(by: disposeBag)
-        output.fetchItems.drive().disposed(by: disposeBag)
         output.userList.drive().disposed(by: disposeBag)
         output.selectedUser.drive().disposed(by: disposeBag)
         output.isEmpty.drive().disposed(by: disposeBag)

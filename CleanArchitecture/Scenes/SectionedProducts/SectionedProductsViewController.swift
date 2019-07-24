@@ -112,10 +112,6 @@ final class SectionedProductsViewController: UIViewController, BindableType {
             .drive(tableView.isLoadingMore)
             .disposed(by: rx.disposeBag)
         
-        output.fetchItems
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
         output.selectedProduct
             .drive()
             .disposed(by: rx.disposeBag)

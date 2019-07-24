@@ -25,47 +25,37 @@ extension ReposViewModel: ViewModelType {
         let isLoading: Driver<Bool>
         let isReloading: Driver<Bool>
         let isLoadingMore: Driver<Bool>
-        let fetchItems: Driver<Void>
         let repoList: Driver<[Repo]>
         let selectedRepo: Driver<Void>
         let isEmpty: Driver<Bool>
     }
 
     func transform(_ input: Input) -> Output {
-        let configOutput = configPagination(
+        let paginationResult = configPagination(
             loadTrigger: input.loadTrigger,
             reloadTrigger: input.reloadTrigger,
             loadMoreTrigger: input.loadMoreTrigger,
             getItems: useCase.getRepoList(page:))
         
-        let (page, fetchItems, loadError, isLoading, isReloading, isLoadingMore) = configOutput
+        let (page, paginationError, isLoading, isReloading, isLoadingMore) = paginationResult.destructured
 
         let repoList = page
-            .map { $0.items.map { $0 } }
-            .asDriverOnErrorJustComplete()
+            .map { $0.items }
 
-        let selectedRepo = input.selectRepoTrigger
-            .withLatestFrom(repoList) {
-                return ($0, $1)
-            }
-            .map { indexPath, repoList in
-                return repoList[indexPath.row]
-            }
+        let selectedRepo = select(trigger: input.selectRepoTrigger, items: repoList)
             .do(onNext: { repo in
                 self.navigator.toRepoDetail(repo: repo)
             })
             .mapToVoid()
         
-        let isEmpty = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
-                                         loadTrigger: Driver.merge(isLoading, isReloading),
+        let isEmpty = checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
                                          items: repoList)
 
         return Output(
-            error: loadError,
+            error: paginationError,
             isLoading: isLoading,
             isReloading: isReloading,
             isLoadingMore: isLoadingMore,
-            fetchItems: fetchItems,
             repoList: repoList,
             selectedRepo: selectedRepo,
             isEmpty: isEmpty

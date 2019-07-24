@@ -27,7 +27,6 @@ extension ProductsViewModel: ViewModelType {
         let isLoading: Driver<Bool>
         let isReloading: Driver<Bool>
         let isLoadingMore: Driver<Bool>
-        let fetchItems: Driver<Void>
         let productList: Driver<[ProductModel]>
         let selectedProduct: Driver<Void>
         let editedProduct: Driver<Void>
@@ -36,97 +35,93 @@ extension ProductsViewModel: ViewModelType {
     }
 
     func transform(_ input: Input) -> Output {
-        let activityIndicator = ActivityIndicator()
-        let errorTracker = ErrorTracker()
+        let activityIndicator = PageActivityIndicator()
+        let isLoading = activityIndicator.isLoading
+        let isReloading = activityIndicator.isReloading
+        let isLoadingMore = activityIndicator.isLoadingMore
         
-        let configOutput = configPagination(
+        let errorTracker = ErrorTracker()
+        let error = errorTracker.asDriver()
+        
+        let pageSubject = BehaviorRelay(value: PagingInfo<ProductModel>(page: 1, items: []))
+        
+        let paginationResult = configPagination(
+            pageSubject: pageSubject,
+            pageActivityIndicator: activityIndicator,
+            errorTracker: errorTracker,
             loadTrigger: input.loadTrigger,
-            getItems: { _ in
-                self.useCase.getProductList(page: 1)
-            },
             reloadTrigger: input.reloadTrigger,
-            reloadItems: { _ in
-                self.useCase.getProductList(page: 1)
-            },
             loadMoreTrigger: input.loadMoreTrigger,
-            loadMoreItems: { _, page in
+            getItems: { _, page in
                 self.useCase.getProductList(page: page)
             },
-            mapper: ProductModel.init(product:))
+            mapper: ProductModel.init(product:)
+        )
         
-        let (page, fetchItems, loadError, isLoading, isReloading, isLoadingMore) = configOutput
+        let page = paginationResult.page
 
         let productList = page
-            .map { $0.items.map { $0 } }
-            .asDriverOnErrorJustComplete()
+            .map { $0.items }
         
-        let selectedProduct = input.selectProductTrigger
-            .withLatestFrom(productList) {
-                return ($0, $1)
-            }
-            .map { indexPath, productList in
-                return productList[indexPath.row]
-            }
+        let selectedProduct = select(trigger: input.selectProductTrigger, items: productList)
             .do(onNext: { product in
                 self.navigator.toProductDetail(product: product.product)
             })
             .mapToVoid()
         
-        let editedProduct = input.editProductTrigger
-            .withLatestFrom(productList) { indexPath, products -> Product in
-                return products[indexPath.row].product
-            }
+        let editedProduct = select(trigger: input.editProductTrigger, items: productList)
+            .map { $0.product }
             .flatMapLatest { product -> Driver<EditProductDelegate> in
                 self.navigator.toEditProduct(product)
             }
             .do(onNext: { delegate in
                 switch delegate {
                 case .updatedProduct(let product):
-                    var productList = page.value.items
+                    let page = pageSubject.value
+                    var productList = page.items
                     let productModel = ProductModel(product: product, edited: true)
                     
                     if let index = productList.firstIndex(of: productModel) {
                         productList[index] = productModel
-                        let updatedPage = PagingInfo(page: page.value.page, items: productList)
-                        page.accept(updatedPage)
+                        let updatedPage = PagingInfo(page: page.page, items: productList)
+                        pageSubject.accept(updatedPage)
                     }
                 }
             })
             .mapToVoid()
 
-        let isEmpty = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
-                                         loadTrigger: Driver.merge(isLoading, isReloading),
+        let isEmpty = checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
                                          items: productList)
         
-        let deletedProduct = input.deleteProductTrigger
-            .withLatestFrom(productList) { indexPath, productList in
-                return productList[indexPath.row].product
-            }
+        let deletedProduct = select(trigger: input.deleteProductTrigger, items: productList)
+            .map { $0.product }
             .flatMapLatest { product -> Driver<Product> in
                 return self.navigator.confirmDeleteProduct(product)
                     .map { product }
             }
             .flatMapLatest { product -> Driver<Product> in
                 return self.useCase.deleteProduct(id: product.id)
-                    .trackActivity(activityIndicator)
+                    .trackActivity(activityIndicator.loadingIndicator)
                     .trackError(errorTracker)
                     .map { _ in product }
                     .asDriverOnErrorJustComplete()
             }
             .do(onNext: { product in
-                var productList = page.value.items
+                let page = pageSubject.value
+                
+                var productList = page.items
                 productList.removeAll { $0.product.id == product.id }
-                let updatedPage = PagingInfo(page: page.value.page, items: productList)
-                page.accept(updatedPage)
+                
+                let updatedPage = PagingInfo(page: page.page, items: productList)
+                pageSubject.accept(updatedPage)
             })
             .mapToVoid()
 
         return Output(
-            error: loadError,
+            error: error,
             isLoading: isLoading,
             isReloading: isReloading,
             isLoadingMore: isLoadingMore,
-            fetchItems: fetchItems,
             productList: productList,
             selectedProduct: selectedProduct,
             editedProduct: editedProduct,

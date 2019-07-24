@@ -47,7 +47,6 @@ final class ReposViewModelTests: XCTestCase {
         output.isLoading.drive().disposed(by: disposeBag)
         output.isReloading.drive().disposed(by: disposeBag)
         output.isLoadingMore.drive().disposed(by: disposeBag)
-        output.fetchItems.drive().disposed(by: disposeBag)
         output.repoList.drive().disposed(by: disposeBag)
         output.selectedRepo.drive().disposed(by: disposeBag)
         output.isEmpty.drive().disposed(by: disposeBag)

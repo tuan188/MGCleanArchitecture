@@ -25,47 +25,37 @@ extension UserListViewModel: ViewModelType {
         let isLoading: Driver<Bool>
         let isReloading: Driver<Bool>
         let isLoadingMore: Driver<Bool>
-        let fetchItems: Driver<Void>
         let userList: Driver<[User]>
         let selectedUser: Driver<Void>
         let isEmpty: Driver<Bool>
     }
     
     func transform(_ input: Input) -> Output {
-        let configOutput = configPagination(
+        let paginationResult = configPagination(
             loadTrigger: input.loadTrigger,
             reloadTrigger: input.reloadTrigger,
             loadMoreTrigger: input.loadMoreTrigger,
             getItems: useCase.getUserList)
         
-        let (page, fetchItems, loadError, isLoading, isReloading, isLoadingMore) = configOutput
+        let (page, error, isLoading, isReloading, isLoadingMore) = paginationResult.destructured
         
         let userList = page
             .map { $0.items.map { $0 } }
-            .asDriverOnErrorJustComplete()
         
-        let selectedUser = input.selectUserTrigger
-            .withLatestFrom(userList) {
-                return ($0, $1)
-            }
-            .map { indexPath, userList in
-                return userList[indexPath.row]
-            }
+        let selectedUser = select(trigger: input.selectUserTrigger, items: userList)
             .do(onNext: { user in
                 self.navigator.toUserDetail(user: user)
             })
             .mapToVoid()
         
-        let isEmpty = checkIfDataIsEmpty(fetchItemsTrigger: fetchItems,
-                                         loadTrigger: Driver.merge(isLoading, isReloading),
+        let isEmpty = checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
                                          items: userList)
         
         return Output(
-            error: loadError,
+            error: error,
             isLoading: isLoading,
             isReloading: isReloading,
             isLoadingMore: isLoadingMore,
-            fetchItems: fetchItems,
             userList: userList,
             selectedUser: selectedUser,
             isEmpty: isEmpty

@@ -51,7 +51,6 @@ final class ProductsViewModelTests: XCTestCase {
         output.isLoading.drive().disposed(by: disposeBag)
         output.isReloading.drive().disposed(by: disposeBag)
         output.isLoadingMore.drive().disposed(by: disposeBag)
-        output.fetchItems.drive().disposed(by: disposeBag)
         output.productList.drive().disposed(by: disposeBag)
         output.selectedProduct.drive().disposed(by: disposeBag)
         output.isEmpty.drive().disposed(by: disposeBag)
