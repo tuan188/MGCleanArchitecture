@@ -40,5 +40,13 @@ final class DynamicEditProductUseCaseMock: DynamicEditProductUseCaseType {
         updateCalled = true
         return updateReturnValue
     }
+    
+    // MARK: - notifyUpdated
+    
+    var notifyUpdatedCalled = false
+    
+    func notifyUpdated(_ product: Product) {
+        notifyUpdatedCalled = true
+    }
 }
 

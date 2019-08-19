@@ -44,6 +44,7 @@ extension ProductsViewModel: ViewModelType {
         let error = errorTracker.asDriver()
         
         let pageSubject = BehaviorRelay(value: PagingInfo<ProductModel>(page: 1, items: []))
+        let updatedProductSubject = PublishSubject<Void>()
         
         let paginationResult = configPagination(
             pageSubject: pageSubject,
@@ -58,7 +59,12 @@ extension ProductsViewModel: ViewModelType {
             mapper: ProductModel.init(product:)
         )
         
-        let page = paginationResult.page
+        let page = Driver.merge(
+            paginationResult.page,
+            updatedProductSubject
+                .asDriverOnErrorJustComplete()
+                .withLatestFrom(pageSubject.asDriver())
+        )
 
         let productList = page
             .map { $0.items }
@@ -85,6 +91,7 @@ extension ProductsViewModel: ViewModelType {
                         productList[index] = productModel
                         let updatedPage = PagingInfo(page: page.page, items: productList)
                         pageSubject.accept(updatedPage)
+                        updatedProductSubject.onNext(())
                     }
                 }
             })

@@ -47,13 +47,11 @@ extension LoginViewModel: ViewModelType {
             validator: useCase.validate(password:)
         )
         
-        let validation = Driver.combineLatest([
-            usernameValidation,
-            passwordValidation
-        ])
-        .map { validations -> Bool in
-            validations.reduce(true, { $0 && $1.isValid })
-        }
+        let validation = Driver.and(
+            usernameValidation.map { $0.isValid },
+            passwordValidation.map { $0.isValid }
+        )
+        .startWith(true)
         
         let isLoginEnabled = Driver.merge(validation, isLoading.not())
         

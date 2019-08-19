@@ -165,8 +165,8 @@ extension RepoCollectionViewController: UICollectionViewDataSourcePrefetching {
             .map { repoList[$0.row].avatarURLString }
             .compactMap { URL(string: $0) }
         
-        SDWebImagePrefetcher.shared.prefetchURLs(urls)
         print("Preheat", urls)
+        SDWebImagePrefetcher.shared.prefetchURLs(urls)
     }
     
     func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {

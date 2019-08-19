@@ -172,6 +172,7 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         
         // assert
         XCTAssert(useCase.updateCalled)
+        XCTAssert(useCase.notifyUpdatedCalled)
     }
     
     func test_updateTrigger_update_fail_show_error() {

@@ -126,8 +126,7 @@ extension DynamicEditProductViewModel: ViewModelType {
                     .map { _ in product }
             }
             .do(onNext: { product in
-                print(Notification.Name.updatedProduct.rawValue)
-                NotificationCenter.default.post(name: Notification.Name.updatedProduct, object: product)
+                self.useCase.notifyUpdated(product)
                 self.navigator.dismiss()
             })
             .mapToVoid()

@@ -43,9 +43,7 @@ extension ReposViewModel: ViewModelType {
             .map { $0.items }
 
         let selectedRepo = select(trigger: input.selectRepoTrigger, items: repoList)
-            .do(onNext: { repo in
-                self.navigator.toRepoDetail(repo: repo)
-            })
+            .do(onNext: navigator.toRepoDetail)
             .mapToVoid()
         
         let isEmpty = checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),

@@ -43,9 +43,7 @@ extension UserListViewModel: ViewModelType {
             .map { $0.items.map { $0 } }
         
         let selectedUser = select(trigger: input.selectUserTrigger, items: userList)
-            .do(onNext: { user in
-                self.navigator.toUserDetail(user: user)
-            })
+            .do(onNext: navigator.toUserDetail)
             .mapToVoid()
         
         let isEmpty = checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),

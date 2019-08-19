@@ -10,6 +10,7 @@ protocol DynamicEditProductUseCaseType {
     func validate(name: String) -> ValidationResult
     func validate(price: String) -> ValidationResult
     func update(_ product: Product) -> Observable<Void>
+    func notifyUpdated(_ product: Product)
 }
 
 struct DynamicEditProductUseCase: DynamicEditProductUseCaseType {
@@ -31,5 +32,9 @@ struct DynamicEditProductUseCase: DynamicEditProductUseCaseType {
     func update(_ product: Product) -> Observable<Void> {
         print(product.name, product.price)
         return productRepository.update(product)
+    }
+    
+    func notifyUpdated(_ product: Product) {
+        NotificationCenter.default.post(name: Notification.Name.updatedProduct, object: product)
     }
 }

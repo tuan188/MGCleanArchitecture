@@ -115,8 +115,8 @@ extension ReposViewController: UITableViewDataSourcePrefetching {
             .map { repoList[$0.row].avatarURLString }
             .compactMap { URL(string: $0) }
         
-        SDWebImagePrefetcher.shared.prefetchURLs(urls)
         print("Preheat", urls)
+        SDWebImagePrefetcher.shared.prefetchURLs(urls)
     }
     
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
