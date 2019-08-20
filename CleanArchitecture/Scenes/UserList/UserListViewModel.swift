@@ -16,7 +16,6 @@ extension UserListViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<Void>
         let reloadTrigger: Driver<Void>
-        let loadMoreTrigger: Driver<Void>
         let selectUserTrigger: Driver<IndexPath>
     }
     
@@ -24,24 +23,19 @@ extension UserListViewModel: ViewModelType {
         let error: Driver<Error>
         let isLoading: Driver<Bool>
         let isReloading: Driver<Bool>
-        let isLoadingMore: Driver<Bool>
         let userList: Driver<[User]>
         let selectedUser: Driver<Void>
         let isEmpty: Driver<Bool>
     }
     
     func transform(_ input: Input) -> Output {
-        let paginationResult = configPagination(
+        let getListResult = getList(
             loadTrigger: input.loadTrigger,
             reloadTrigger: input.reloadTrigger,
-            loadMoreTrigger: input.loadMoreTrigger,
             getItems: useCase.getUserList)
         
-        let (page, error, isLoading, isReloading, isLoadingMore) = paginationResult.destructured
-        
-        let userList = page
-            .map { $0.items.map { $0 } }
-        
+        let (userList, error, isLoading, isReloading) = getListResult.destructured
+
         let selectedUser = select(trigger: input.selectUserTrigger, items: userList)
             .do(onNext: navigator.toUserDetail)
             .mapToVoid()
@@ -53,7 +47,6 @@ extension UserListViewModel: ViewModelType {
             error: error,
             isLoading: isLoading,
             isReloading: isReloading,
-            isLoadingMore: isLoadingMore,
             userList: userList,
             selectedUser: selectedUser,
             isEmpty: isEmpty

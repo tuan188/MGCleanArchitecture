@@ -7,15 +7,14 @@
 //
 
 protocol UserListUseCaseType {
-    func getUserList(page: Int) -> Observable<PagingInfo<User>>
+    func getUserList() -> Observable<[User]>
 }
 
 struct UserListUseCase: UserListUseCaseType {
     let userRepository: UserRepositoryType
     
-    func getUserList(page: Int) -> Observable<PagingInfo<User>> {
+    func getUserList() ->Observable<[User]> {
         return userRepository
             .getUsers()
-            .map { PagingInfo(page: page, items: $0) }
     }
 }

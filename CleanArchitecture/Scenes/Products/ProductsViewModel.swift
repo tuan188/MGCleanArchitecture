@@ -15,7 +15,7 @@ struct ProductsViewModel {
 extension ProductsViewModel: ViewModelType {
     struct Input {
         let loadTrigger: Driver<Void>
-        let reloadTrigger: Driver<Void>
+        let reloadTrigger: Driver<Void> 
         let loadMoreTrigger: Driver<Void>
         let selectProductTrigger: Driver<IndexPath>
         let editProductTrigger: Driver<IndexPath>

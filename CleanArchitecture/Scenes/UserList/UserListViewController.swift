@@ -38,7 +38,6 @@ final class UserListViewController: UIViewController, BindableType {
             $0.rowHeight = UITableView.automaticDimension
             $0.register(cellType: UserCell.self)
             $0.refreshFooter = nil
-            $0.refreshHeader = nil
         }
         
         tableView.rx
@@ -49,8 +48,7 @@ final class UserListViewController: UIViewController, BindableType {
     func bindViewModel() {
         let input = UserListViewModel.Input(
             loadTrigger: Driver.just(()),
-            reloadTrigger: Driver.empty(),
-            loadMoreTrigger: Driver.empty(),
+            reloadTrigger: tableView.loadMoreTopTrigger,
             selectUserTrigger: tableView.rx.itemSelected.asDriver()
         )
 
@@ -76,11 +74,7 @@ final class UserListViewController: UIViewController, BindableType {
             .disposed(by: rx.disposeBag)
         
         output.isReloading
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
-        output.isLoadingMore
-            .drive()
+            .drive(tableView.isLoadingMoreTop)
             .disposed(by: rx.disposeBag)
         
         output.selectedUser
