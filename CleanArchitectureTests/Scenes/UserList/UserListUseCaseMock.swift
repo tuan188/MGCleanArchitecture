@@ -15,16 +15,15 @@ final class UserListUseCaseMock: UserListUseCaseType {
 
     var getUserListCalled = false
 
-    var getUserListReturnValue: Observable<PagingInfo<User>> = {
+    var getUserListReturnValue: Observable<[User]> = {
         let items = [
             User().with { $0.id = "1" }
         ]
         
-        let page = PagingInfo<User>(page: 1, items: items)
-        return Observable.just(page)
+        return Observable.just(items)
     }()
 
-    func getUserList(page: Int) -> Observable<PagingInfo<User>> {
+    func getUserList() -> Observable<[User]> {
         getUserListCalled = true
         return getUserListReturnValue
     }

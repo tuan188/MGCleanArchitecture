@@ -23,7 +23,6 @@ final class UserListViewModelTests: XCTestCase {
     
     private let loadTrigger = PublishSubject<Void>()
     private let reloadTrigger = PublishSubject<Void>()
-    private let loadMoreTrigger = PublishSubject<Void>()
     private let selectUserTrigger = PublishSubject<IndexPath>()
 
     override func setUp() {
@@ -35,7 +34,6 @@ final class UserListViewModelTests: XCTestCase {
         input = UserListViewModel.Input(
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete(),
             reloadTrigger: reloadTrigger.asDriverOnErrorJustComplete(),
-            loadMoreTrigger: loadMoreTrigger.asDriverOnErrorJustComplete(),
             selectUserTrigger: selectUserTrigger.asDriverOnErrorJustComplete()
         )
 
@@ -46,7 +44,6 @@ final class UserListViewModelTests: XCTestCase {
         output.error.drive().disposed(by: disposeBag)
         output.isLoading.drive().disposed(by: disposeBag)
         output.isReloading.drive().disposed(by: disposeBag)
-        output.isLoadingMore.drive().disposed(by: disposeBag)
         output.userList.drive().disposed(by: disposeBag)
         output.selectedUser.drive().disposed(by: disposeBag)
         output.isEmpty.drive().disposed(by: disposeBag)
@@ -119,70 +116,6 @@ final class UserListViewModelTests: XCTestCase {
         reloadTrigger.onNext(())
         useCase.getUserListCalled = false
         reloadTrigger.onNext(())
-
-        // assert
-        XCTAssertFalse(useCase.getUserListCalled)
-    }
-
-    func test_loadMoreTrigger_loadMoreUserList() {
-        // act
-        loadTrigger.onNext(())
-        loadMoreTrigger.onNext(())
-        let userList = try? output.userList.toBlocking(timeout: 1).first()
-
-        // assert
-        XCTAssert(useCase.getUserListCalled)
-        XCTAssertEqual(userList?.count, 2)
-    }
-
-    func test_loadMoreTrigger_loadMoreUserList_failedShowError() {
-        // arrange
-        useCase.getUserListReturnValue = Observable.error(TestError())
-
-        // act
-        loadTrigger.onNext(())
-        loadMoreTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
-
-        // assert
-        XCTAssert(useCase.getUserListCalled)
-        XCTAssert(error is TestError)
-    }
-
-    func test_loadMoreTrigger_notLoadMoreUserListIfStillLoading() {
-        // arrange
-        useCase.getUserListReturnValue = Observable.never()
-
-        // act
-        loadTrigger.onNext(())
-        useCase.getUserListCalled = false
-        loadMoreTrigger.onNext(())
-
-        // assert
-        XCTAssertFalse(useCase.getUserListCalled)
-    }
-
-    func test_loadMoreTrigger_notLoadMoreUserListIfStillReloading() {
-        // arrange
-        useCase.getUserListReturnValue = Observable.never()
-
-        // act
-        reloadTrigger.onNext(())
-        useCase.getUserListCalled = false
-        loadMoreTrigger.onNext(())
-        
-        // assert
-        XCTAssertFalse(useCase.getUserListCalled)
-    }
-
-    func test_loadMoreTrigger_notLoadMoreDocumentTypesStillLoadingMore() {
-        // arrange
-        useCase.getUserListReturnValue = Observable.never()
-
-        // act
-        loadMoreTrigger.onNext(())
-        useCase.getUserListCalled = false
-        loadMoreTrigger.onNext(())
 
         // assert
         XCTAssertFalse(useCase.getUserListCalled)
