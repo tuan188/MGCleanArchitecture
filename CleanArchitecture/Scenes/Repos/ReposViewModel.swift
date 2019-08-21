@@ -31,13 +31,13 @@ extension ReposViewModel: ViewModelType {
     }
 
     func transform(_ input: Input) -> Output {
-        let paginationResult = configPagination(
+        let getPageResult = getPage(
             loadTrigger: input.loadTrigger,
             reloadTrigger: input.reloadTrigger,
             loadMoreTrigger: input.loadMoreTrigger,
             getItems: useCase.getRepoList(page:))
         
-        let (page, paginationError, isLoading, isReloading, isLoadingMore) = paginationResult.destructured
+        let (page, paginationError, isLoading, isReloading, isLoadingMore) = getPageResult.destructured
 
         let repoList = page
             .map { $0.items }

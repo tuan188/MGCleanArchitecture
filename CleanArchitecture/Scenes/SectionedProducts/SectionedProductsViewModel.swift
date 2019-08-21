@@ -51,7 +51,7 @@ extension SectionedProductsViewModel: ViewModelType {
         let pageSubject = BehaviorRelay(value: PagingInfo<ProductModel>(page: 1, items: []))
         let updatedProductSubject = PublishSubject<Void>()
         
-        let paginationResult = configPagination(
+        let getPageResult = getPage(
             pageSubject: pageSubject,
             pageActivityIndicator: activityIndicator,
             errorTracker: errorTracker,
@@ -65,7 +65,7 @@ extension SectionedProductsViewModel: ViewModelType {
         )
         
         let page = Driver.merge(
-            paginationResult.page,
+            getPageResult.page,
             updatedProductSubject
                 .asDriverOnErrorJustComplete()
                 .withLatestFrom(pageSubject.asDriver())
