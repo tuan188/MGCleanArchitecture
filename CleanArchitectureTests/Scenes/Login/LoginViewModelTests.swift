@@ -69,7 +69,7 @@ final class LoginViewModelTests: XCTestCase {
     
     func test_loginTrigger_validateUsernameFailed_disableLogin() {
         // arrange
-        useCase.validateUsernameReturnValue = ValidationResult.invalid([TestError()])
+        useCase.validateUsernameReturnValue = ValidationResult.invalid([TestValidationError()])
         
         // act
         usernameTrigger.onNext("")
@@ -84,7 +84,7 @@ final class LoginViewModelTests: XCTestCase {
     
     func test_loginTrigger_validatePasswordFailed_disableLogin() {
         // arrange
-        useCase.validatePasswordReturnValue = ValidationResult.invalid([TestError()])
+        useCase.validatePasswordReturnValue = ValidationResult.invalid([TestValidationError()])
         
         // act
         usernameTrigger.onNext("")
@@ -99,7 +99,7 @@ final class LoginViewModelTests: XCTestCase {
     
     func test_loginTrigger_disableLogin_notLogin() {
         // arrange
-        useCase.validatePasswordReturnValue = ValidationResult.invalid([TestError()])
+        useCase.validatePasswordReturnValue = ValidationResult.invalid([TestValidationError()])
         
         // act
         usernameTrigger.onNext("")

@@ -84,9 +84,7 @@ extension DynamicEditProductViewModel: ViewModelType {
             priceValidation
         ])
         .map {
-            $0.reduce(true) { result, validation -> Bool in
-                result && validation.isValid
-            }
+            $0.allSatisfy { $0.isValid }
         }
         .startWith(true)
         

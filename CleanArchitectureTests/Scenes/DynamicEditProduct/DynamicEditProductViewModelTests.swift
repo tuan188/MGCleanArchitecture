@@ -152,8 +152,8 @@ final class DynamicEditProductViewModelTests: XCTestCase {
     
     func test_updateTrigger_not_update() {
         // arrange
-        useCase.validateNameReturnValue = ValidationResult.invalid([TestError()])
-        useCase.validatePriceReturnValue = ValidationResult.invalid([TestError()])
+        useCase.validateNameReturnValue = ValidationResult.invalid([TestValidationError()])
+        useCase.validatePriceReturnValue = ValidationResult.invalid([TestValidationError()])
         
         // act
         dataTrigger.onNext(DynamicEditProductViewModel.DataType.name("foo"))

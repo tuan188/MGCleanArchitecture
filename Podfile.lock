@@ -51,7 +51,7 @@ PODS:
     - SDWebImage/Core (= 5.0.6)
   - SDWebImage/Core (5.0.6)
   - Then (2.4.0)
-  - Validator (3.1.1)
+  - Validator (3.2.1)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.3)
@@ -69,10 +69,10 @@ DEPENDENCIES:
   - RxDataSources (~> 4.0)
   - SDWebImage (~> 5.0)
   - Then (~> 2.4)
-  - Validator (~> 3.1.1)
+  - Validator (~> 3.2.1)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - ActionSheetPicker-3.0
     - Alamofire
     - Differentiator
@@ -127,8 +127,8 @@ SPEC CHECKSUMS:
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
   Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
-  Validator: b34ab17a8fffd0c1ffd8f9002ead4d1e02cd9e6e
+  Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
 
-PODFILE CHECKSUM: bc9c3ff050a2694e3efa806089011a36f40148d3
+PODFILE CHECKSUM: f336419822fb5d4f9ae2c6d23c253a480c73c531
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.3

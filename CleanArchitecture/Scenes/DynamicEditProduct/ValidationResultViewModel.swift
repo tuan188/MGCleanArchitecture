@@ -25,7 +25,7 @@ struct ValidationResultViewModel {
         case .valid:
             return " "
         case .invalid(let errors):
-            return errors.map { $0.localizedDescription }.joined(separator: "\n")
+            return errors.map { $0.message }.joined(separator: "\n")
         }
     }
 }

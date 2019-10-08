@@ -93,7 +93,7 @@ final class EditProductViewModelTests: XCTestCase {
     
     func test_nameTriggerInvoked_validateNameFailNotEnableUpdate() {
         // arrange
-        useCase.validateNameReturnValue = ValidationResult.invalid([TestError()])
+        useCase.validateNameReturnValue = ValidationResult.invalid([TestValidationError()])
         
         // act
         nameTrigger.onNext("foo")
@@ -116,7 +116,7 @@ final class EditProductViewModelTests: XCTestCase {
     
     func test_priceTriggerInvoked_validatePriceFailNotEnableUpdate() {
         // arrange
-        useCase.validatePriceReturnValue = ValidationResult.invalid([TestError()])
+        useCase.validatePriceReturnValue = ValidationResult.invalid([TestValidationError()])
         
         // act
         nameTrigger.onNext("foo")
@@ -141,7 +141,7 @@ final class EditProductViewModelTests: XCTestCase {
     
     func test_updateTriggerInvoked_notUpdateProduct() {
         // arrange
-        useCase.validateNameReturnValue = ValidationResult.invalid([TestError()])
+        useCase.validateNameReturnValue = ValidationResult.invalid([TestValidationError()])
         
         // act
         nameTrigger.onNext("foo")

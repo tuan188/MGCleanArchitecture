@@ -14,12 +14,12 @@ protocol LoginUseCaseType {
 
 struct LoginUseCase: LoginUseCaseType {
     func validate(username: String) -> ValidationResult {
-        let minLengthRule = ValidationRuleLength(min: 1, error: ValidationError.usernameMinLength)
+        let minLengthRule = ValidationRuleLength(min: 1, error: LoginValidationError.usernameMinLength)
         return username.validate(rule: minLengthRule)
     }
     
     func validate(password: String) -> ValidationResult {
-        let minLengthRule = ValidationRuleLength(min: 1, error: ValidationError.passwordMinLength)
+        let minLengthRule = ValidationRuleLength(min: 1, error: LoginValidationError.passwordMinLength)
         return password.validate(rule: minLengthRule)
     }
     

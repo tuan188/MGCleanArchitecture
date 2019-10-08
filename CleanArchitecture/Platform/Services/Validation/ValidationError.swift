@@ -8,20 +8,26 @@
 
 import UIKit
 
-enum ValidationError: Error {
+enum ProductValidationError: ValidationError {
     case productNameMinLength
     case productPriceMinValue
-    case usernameMinLength
-    case passwordMinLength
-}
-
-extension ValidationError: LocalizedError {
-    var errorDescription: String? {
+    
+    var message: String {
         switch self {
         case .productNameMinLength:
             return "Product name must be at least 5 characters."
         case .productPriceMinValue:
             return "Product price must be greater than 0."
+        }
+    }
+}
+
+enum LoginValidationError: ValidationError {
+    case usernameMinLength
+    case passwordMinLength
+    
+    var message: String {
+        switch self {
         case .usernameMinLength:
             return "Please enter your username."
         case .passwordMinLength:

@@ -7,7 +7,14 @@
 //
 
 import UIKit
+import Validator
 
 struct TestError: Error {
 
+}
+
+struct TestValidationError: ValidationError {
+    var message: String {
+        return "validation error"
+    }
 }

@@ -17,14 +17,14 @@ struct DynamicEditProductUseCase: DynamicEditProductUseCaseType {
     let productRepository: ProductRepositoryType
     
     func validate(name: String) -> ValidationResult {
-        let minLengthRule = ValidationRuleLength(min: 5, error: ValidationError.productNameMinLength)
+        let minLengthRule = ValidationRuleLength(min: 5, error: ProductValidationError.productNameMinLength)
         return name.validate(rule: minLengthRule)
     }
     
     func validate(price: String) -> ValidationResult {
         let priceNumber = Double(price) ?? 0.0
         if priceNumber <= 0 {
-            return ValidationResult.invalid([ValidationError.productPriceMinValue])
+            return ValidationResult.invalid([ProductValidationError.productPriceMinValue])
         }
         return ValidationResult.valid
     }
