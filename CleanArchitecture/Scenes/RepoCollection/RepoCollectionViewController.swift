@@ -54,7 +54,7 @@ final class RepoCollectionViewController: UIViewController, BindableType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cofigView()
+        configView()
     }
     
     deinit {
@@ -63,7 +63,7 @@ final class RepoCollectionViewController: UIViewController, BindableType {
     
     // MARK: - Methods
     
-    private func cofigView() {
+    private func configView() {
         collectionView.do {
             $0.register(cellType: RepoCollectionCell.self)
             $0.alwaysBounceVertical = true
@@ -73,6 +73,9 @@ final class RepoCollectionViewController: UIViewController, BindableType {
         collectionView.rx
             .setDelegate(self)
             .disposed(by: rx.disposeBag)
+        
+        view.backgroundColor = ColorCompatibility.systemBackground
+        collectionView.backgroundColor = ColorCompatibility.systemBackground
     }
     
     func bindViewModel() {

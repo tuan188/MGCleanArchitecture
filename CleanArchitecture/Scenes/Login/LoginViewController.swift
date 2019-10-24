@@ -38,6 +38,12 @@ final class LoginViewController: UIViewController, BindableType {
     private func configView() {
         usernameValidationLabel.text = ""
         passwordValidationLabel.text = ""
+        
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = .systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
     }
 
     func bindViewModel() {
@@ -83,7 +89,7 @@ extension LoginViewController {
             case .valid:
                 vc.usernameValidationLabel.text = ""
             case let .invalid(errors):
-                vc.usernameValidationLabel.text = errors.map { $0.localizedDescription }.joined(separator: "\n")
+                vc.usernameValidationLabel.text = errors.map { $0.message }.joined(separator: "\n")
             }
         }
     }
@@ -94,7 +100,7 @@ extension LoginViewController {
             case .valid:
                 vc.passwordValidationLabel.text = ""
             case let .invalid(errors):
-                vc.passwordValidationLabel.text = errors.map { $0.localizedDescription }.joined(separator: "\n")
+                vc.passwordValidationLabel.text = errors.map { $0.message }.joined(separator: "\n")
             }
         }
     }

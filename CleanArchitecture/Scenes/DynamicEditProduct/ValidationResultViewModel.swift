@@ -14,9 +14,9 @@ struct ValidationResultViewModel {
     var backgroundColor: UIColor {
         switch validationResult {
         case .valid:
-            return UIColor.white
+            return ColorCompatibility.systemBackground
         case .invalid:
-            return UIColor.yellow
+            return UIColor.yellow.withAlphaComponent(0.2)
         }
     }
     

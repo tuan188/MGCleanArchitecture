@@ -77,6 +77,7 @@
 		17368FCE20F33D6C00A4A3E9 /* RepoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17368FCD20F33D6C00A4A3E9 /* RepoCollectionViewController.swift */; };
 		17368FD120F33E4A00A4A3E9 /* RepoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17368FCF20F33E4A00A4A3E9 /* RepoCollectionCell.swift */; };
 		17368FD220F33E4A00A4A3E9 /* RepoCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17368FD020F33E4A00A4A3E9 /* RepoCollectionCell.xib */; };
+		173BC074236142A00051A4CA /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173BC073236142A00051A4CA /* UIColor+.swift */; };
 		173CA58A21460F8B001AF22D /* DynamicEditProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173CA58521460F8A001AF22D /* DynamicEditProductViewController.swift */; };
 		173CA58B21460F8B001AF22D /* DynamicEditProductAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173CA58621460F8A001AF22D /* DynamicEditProductAssembler.swift */; };
 		173CA58C21460F8B001AF22D /* DynamicEditProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173CA58721460F8A001AF22D /* DynamicEditProductUseCase.swift */; };
@@ -90,6 +91,7 @@
 		174103762140FF2300267731 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174103752140FF2300267731 /* ProductModel.swift */; };
 		1741037921410AEB00267731 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1741037821410AEB00267731 /* Double+.swift */; };
 		1741037B214119B200267731 /* UnitTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1741037A214119B200267731 /* UnitTestViewController.swift */; };
+		17609845236053EB00CBDC8D /* ColorCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17609844236053EB00CBDC8D /* ColorCompatibility.swift */; };
 		176A23FC21DDBAF300016AFC /* ViewModelType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176A23FB21DDBAF300016AFC /* ViewModelType+.swift */; };
 		1777C08021F022C60092F5B8 /* Observable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1777C07F21F022C60092F5B8 /* Observable+.swift */; };
 		177982C820CE1B830095CCA8 /* SectionedProductsUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177982C320CE1B820095CCA8 /* SectionedProductsUseCaseMock.swift */; };
@@ -276,6 +278,7 @@
 		17368FCD20F33D6C00A4A3E9 /* RepoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCollectionViewController.swift; sourceTree = "<group>"; };
 		17368FCF20F33E4A00A4A3E9 /* RepoCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoCollectionCell.swift; sourceTree = "<group>"; };
 		17368FD020F33E4A00A4A3E9 /* RepoCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepoCollectionCell.xib; sourceTree = "<group>"; };
+		173BC073236142A00051A4CA /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		173CA58521460F8A001AF22D /* DynamicEditProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicEditProductViewController.swift; sourceTree = "<group>"; };
 		173CA58621460F8A001AF22D /* DynamicEditProductAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicEditProductAssembler.swift; sourceTree = "<group>"; };
 		173CA58721460F8A001AF22D /* DynamicEditProductUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicEditProductUseCase.swift; sourceTree = "<group>"; };
@@ -289,6 +292,7 @@
 		174103752140FF2300267731 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		1741037821410AEB00267731 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		1741037A214119B200267731 /* UnitTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestViewController.swift; sourceTree = "<group>"; };
+		17609844236053EB00CBDC8D /* ColorCompatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCompatibility.swift; sourceTree = "<group>"; };
 		176A23FB21DDBAF300016AFC /* ViewModelType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModelType+.swift"; sourceTree = "<group>"; };
 		1777C07F21F022C60092F5B8 /* Observable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+.swift"; sourceTree = "<group>"; };
 		177982C320CE1B820095CCA8 /* SectionedProductsUseCaseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedProductsUseCaseMock.swift; sourceTree = "<group>"; };
@@ -520,6 +524,7 @@
 				17CDA61E21EC215E0001FE4A /* Date+.swift */,
 				1777C07F21F022C60092F5B8 /* Observable+.swift */,
 				17DF7EF822CEE87600771503 /* UIImageView+SDWebImage.swift */,
+				173BC073236142A00051A4CA /* UIColor+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -800,6 +805,7 @@
 		178002FC213FB92400D20209 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				17609844236053EB00CBDC8D /* ColorCompatibility.swift */,
 				178002FD213FB93E00D20209 /* EmptyDataView.swift */,
 				178002FF213FB94C00D20209 /* EmptyDataView.xib */,
 			);
@@ -1255,6 +1261,7 @@
 				178F401321FAEB94009EE0F7 /* MainNavigator.swift in Sources */,
 				17368FD120F33E4A00A4A3E9 /* RepoCollectionCell.swift in Sources */,
 				17CDA61421EC20500001FE4A /* UserListViewController.swift in Sources */,
+				173BC074236142A00051A4CA /* UIColor+.swift in Sources */,
 				172DC22920C4DDF9009FC881 /* AppDelegate.swift in Sources */,
 				172DC27820C533C8009FC881 /* AppUseCase.swift in Sources */,
 				172DC28120C53DB1009FC881 /* MainUseCase.swift in Sources */,
@@ -1279,6 +1286,7 @@
 				172172A020E4C65E007D33A5 /* APIService.swift in Sources */,
 				170A6B9E20FB51B8003ECCF2 /* AppAssembler.swift in Sources */,
 				173CA58B21460F8B001AF22D /* DynamicEditProductAssembler.swift in Sources */,
+				17609845236053EB00CBDC8D /* ColorCompatibility.swift in Sources */,
 				170A6B9C20FB4D4E003ECCF2 /* ProductDetailAssembler.swift in Sources */,
 				178F566521EF0F8D008D22AB /* LoginAssembler.swift in Sources */,
 				1721727920E49245007D33A5 /* ReposNavigator.swift in Sources */,
@@ -1558,7 +1566,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -1572,7 +1580,7 @@
 				INFOPLIST_FILE = CleanArchitecture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.CleanArchitecture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CleanArchitecture/Bridging-Header.h";
@@ -1588,7 +1596,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -1602,7 +1610,7 @@
 				INFOPLIST_FILE = CleanArchitecture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.CleanArchitecture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CleanArchitecture/Bridging-Header.h";

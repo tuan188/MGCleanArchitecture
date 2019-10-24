@@ -22,6 +22,6 @@ struct ProductViewModel {
     }
     
     var backgroundColor: UIColor {
-        return product.edited ? UIColor.yellow.withAlphaComponent(0.5) : UIColor.white
+        return product.edited ? UIColor.yellow.withAlphaComponent(0.2) : ColorCompatibility.systemBackground
     }
 }

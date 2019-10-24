@@ -21,7 +21,7 @@ final class ProductsNavigatorMock: ProductsNavigatorType {
     // MARK: - toEditProduct
     
     var toEditProductCalled = false
-    var toEditProductReturnValue = Driver<EditProductDelegate>.empty()
+    var toEditProductReturnValue = Driver.just(EditProductDelegate.updatedProduct(Product().with { $0.id = 1 }))
     
     func toEditProduct(_ product: Product) -> Driver<EditProductDelegate> {
         toEditProductCalled = true

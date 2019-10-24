@@ -49,6 +49,8 @@ final class MainViewController: UIViewController, BindableType {
             $0.register(cellType: MenuCell.self)
             $0.delegate = self
         }
+        
+        view.backgroundColor = ColorCompatibility.systemBackground
     }
     
     func bindViewModel() {

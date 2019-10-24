@@ -48,6 +48,8 @@ final class SectionedProductsViewController: UIViewController, BindableType {
         tableView.rx
             .setDelegate(self)
             .disposed(by: rx.disposeBag)
+        
+        view.backgroundColor = ColorCompatibility.systemBackground
     }
 
     func bindViewModel() {

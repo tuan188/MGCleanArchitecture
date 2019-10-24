@@ -17,6 +17,10 @@ final class ProductCell: UITableViewCell, NibReusable {
     
     var editProductAction: (() -> Void)?
     var deleteProductAction: (() -> Void)?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
 
     func bindViewModel(_ viewModel: ProductViewModel?) {
         if let viewModel = viewModel {
@@ -28,7 +32,7 @@ final class ProductCell: UITableViewCell, NibReusable {
             nameLabel.text = ""
             priceLabel.text = ""
             iconImageView.image = nil
-            backgroundColor = UIColor.white
+            backgroundColor = ColorCompatibility.systemBackground
         }
     }
     

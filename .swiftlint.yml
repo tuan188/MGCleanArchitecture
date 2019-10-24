@@ -88,7 +88,7 @@ opt_in_rules: # some rules are only opt-in
   - no_fallthrough_only
   # - no_grouping_extension
   - notification_center_detachment
-  - number_separator
+  # - number_separator
   # - object_literal
   - opening_brace
   - operator_usage_whitespace

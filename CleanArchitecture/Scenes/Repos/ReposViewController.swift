@@ -45,6 +45,8 @@ final class ReposViewController: UIViewController, BindableType {
         tableView.rx
             .setDelegate(self)
             .disposed(by: rx.disposeBag)
+        
+        view.backgroundColor = ColorCompatibility.systemBackground
     }
 
     func bindViewModel() {
