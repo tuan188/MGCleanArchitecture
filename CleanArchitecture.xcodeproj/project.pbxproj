@@ -108,6 +108,8 @@
 		17800300213FB94C00D20209 /* EmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 178002FF213FB94C00D20209 /* EmptyDataView.xib */; };
 		17800302213FBA8200D20209 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17800301213FBA8200D20209 /* UITableView+.swift */; };
 		17800304213FBE6C00D20209 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17800303213FBE6C00D20209 /* UICollectionView+.swift */; };
+		178ABB6823628EA90076C200 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178ABB6723628EA90076C200 /* Storage.swift */; };
+		178ABB6A236290E10076C200 /* CacheStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178ABB69236290E10076C200 /* CacheStorage.swift */; };
 		178F401221FAEB94009EE0F7 /* MainAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F401021FAEB93009EE0F7 /* MainAssembler.swift */; };
 		178F401321FAEB94009EE0F7 /* MainNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F401121FAEB93009EE0F7 /* MainNavigator.swift */; };
 		178F566521EF0F8D008D22AB /* LoginAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F566021EF0F8C008D22AB /* LoginAssembler.swift */; };
@@ -309,6 +311,8 @@
 		178002FF213FB94C00D20209 /* EmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyDataView.xib; sourceTree = "<group>"; };
 		17800301213FBA8200D20209 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		17800303213FBE6C00D20209 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
+		178ABB6723628EA90076C200 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		178ABB69236290E10076C200 /* CacheStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheStorage.swift; sourceTree = "<group>"; };
 		178F401021FAEB93009EE0F7 /* MainAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAssembler.swift; sourceTree = "<group>"; };
 		178F401121FAEB93009EE0F7 /* MainNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigator.swift; sourceTree = "<group>"; };
 		178F566021EF0F8C008D22AB /* LoginAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAssembler.swift; sourceTree = "<group>"; };
@@ -560,6 +564,8 @@
 				172DC27220C5333F009FC881 /* Scenes */,
 				172DC22820C4DDF9009FC881 /* AppDelegate.swift */,
 				17CDA63621EC47330001FE4A /* AppSettings.swift */,
+				178ABB6723628EA90076C200 /* Storage.swift */,
+				178ABB69236290E10076C200 /* CacheStorage.swift */,
 				1741037A214119B200267731 /* UnitTestViewController.swift */,
 				172DC22F20C4DDFA009FC881 /* Assets.xcassets */,
 				172DC23120C4DDFA009FC881 /* LaunchScreen.storyboard */,
@@ -1286,12 +1292,14 @@
 				172172A020E4C65E007D33A5 /* APIService.swift in Sources */,
 				170A6B9E20FB51B8003ECCF2 /* AppAssembler.swift in Sources */,
 				173CA58B21460F8B001AF22D /* DynamicEditProductAssembler.swift in Sources */,
+				178ABB6A236290E10076C200 /* CacheStorage.swift in Sources */,
 				17609845236053EB00CBDC8D /* ColorCompatibility.swift in Sources */,
 				170A6B9C20FB4D4E003ECCF2 /* ProductDetailAssembler.swift in Sources */,
 				178F566521EF0F8D008D22AB /* LoginAssembler.swift in Sources */,
 				1721727920E49245007D33A5 /* ReposNavigator.swift in Sources */,
 				1721727020E49038007D33A5 /* Repo.swift in Sources */,
 				173CA58D21460F8B001AF22D /* DynamicEditProductNavigator.swift in Sources */,
+				178ABB6823628EA90076C200 /* Storage.swift in Sources */,
 				170A6BA620FB58D7003ECCF2 /* StaticProductDetailAssembler.swift in Sources */,
 				17CDA61F21EC215E0001FE4A /* Date+.swift in Sources */,
 				173CA5962146601C001AF22D /* EditProductPriceCell.swift in Sources */,
