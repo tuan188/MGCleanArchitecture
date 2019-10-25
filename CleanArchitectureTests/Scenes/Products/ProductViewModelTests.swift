@@ -22,7 +22,6 @@ final class ProductViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.name, product.name)
         XCTAssertEqual(viewModel.price, product.price.currency)
         XCTAssertNil(viewModel.icon)
-        XCTAssertEqual(viewModel.backgroundColor, UIColor.white)
     }
     
     func test_edited_product() {
@@ -31,7 +30,6 @@ final class ProductViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.name, product.name)
         XCTAssertEqual(viewModel.price, product.price.currency)
         XCTAssertNotNil(viewModel.icon)
-        XCTAssertEqual(viewModel.backgroundColor, UIColor.yellow.withAlphaComponent(0.5))
     }
 
 }
