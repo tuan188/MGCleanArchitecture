@@ -18,7 +18,7 @@ struct Repo {
     var avatarURLString = ""
 }
 
-extension Repo: Then { }
+extension Repo: Then, Equatable { }
 
 extension Repo: Mappable {
     
