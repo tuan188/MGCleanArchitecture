@@ -6,6 +6,8 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
+import ObjectMapper
+
 struct Product {
     var id = 0
     var name = ""
@@ -13,3 +15,15 @@ struct Product {
 }
 
 extension Product: Then { }
+
+extension Product: Mappable {
+    init?(map: Map) {
+        self.init()
+    }
+    
+    mutating func mapping(map: Map) {
+        id <- map["id"]
+        name <- map["name"]
+        price <- map["price"]
+    }
+}

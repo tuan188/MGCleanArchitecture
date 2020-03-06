@@ -43,3 +43,18 @@ final class ProductRepository: ProductRepositoryType {
         return Observable.just(())
     }
 }
+
+final class LocalProductRepository: ProductRepositoryType {
+    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
+        return API.shared.getProductList(API.GetProductListInput())
+            .map { PagingInfo(page: 1, items: $0) }
+    }
+    
+    func deleteProduct(id: Int) -> Observable<Void> {
+        return Observable.just(())
+    }
+    
+    func update(_ product: Product) -> Observable<Void> {
+        return Observable.just(())
+    }
+}

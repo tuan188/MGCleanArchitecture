@@ -9,5 +9,6 @@
 extension API {
     enum Urls {
         static let getRepoList = "https://api.github.com/search/repositories"
+        static let getProductList = "http://localhost:3000/products"
     }
 }
