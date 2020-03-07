@@ -4,14 +4,14 @@ PODS:
   - Differentiator (4.0.1)
   - MagicalRecord (2.3.0)
   - MBProgressHUD (1.2.0)
-  - MGAPIService (2.2.0):
+  - MGAPIService (2.2.1):
     - ObjectMapper (~> 3.5)
     - RxAlamofire (~> 5.1)
     - RxSwift (~> 5.1)
-  - MGArchitecture (1.3.0):
+  - MGArchitecture (1.3.1):
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
-  - MGLoadMore (1.3.0):
+  - MGLoadMore (1.3.1):
     - MJRefresh (~> 3.2)
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
@@ -57,9 +57,9 @@ DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.3)
   - MagicalRecord (= 2.3.0)
   - MBProgressHUD (~> 1.2)
-  - MGAPIService (~> 2.2.0)
-  - MGArchitecture (~> 1.3.0)
-  - MGLoadMore (~> 1.3.0)
+  - MGAPIService (~> 2.2.1)
+  - MGArchitecture (~> 1.3.1)
+  - MGLoadMore (~> 1.3.1)
   - MJRefresh (~> 3.2)
   - Mockingjay (from `https://github.com/anhnc55/Mockingjay.git`, branch `swift_5`)
   - "NSObject+Rx (~> 5.0)"
@@ -111,9 +111,9 @@ SPEC CHECKSUMS:
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  MGAPIService: 9831706552cc6d59b7d83da6ecb072eb27b92109
-  MGArchitecture: cf5fa89e5c4947d6b565087c6822e3b75b1f258a
-  MGLoadMore: 9cc799ff39cbc5b2bacd25c6c053e4d43d856c76
+  MGAPIService: 2ea8217d3bb8cde33bf47e6579882a73a9cccebb
+  MGArchitecture: 0fa04fdeea21f26469b8faab16ba48752af31499
+  MGLoadMore: a12ea88793ed989f2afd73b958aaf70e12048a7d
   MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
   Mockingjay: 0660815ee4907b2f0c1ac988126061bb3e19b7aa
   "NSObject+Rx": 2eb2cf51fd1c554118449a7fbc36e4cd620b9e94
@@ -129,6 +129,6 @@ SPEC CHECKSUMS:
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
 
-PODFILE CHECKSUM: 44e671f2adf4ec4a37742951a95468b9696aa387
+PODFILE CHECKSUM: b04ea51f7a1edc5238e4132f32e35e0bfb71d585
 
 COCOAPODS: 1.9.0
