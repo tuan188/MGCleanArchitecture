@@ -140,6 +140,9 @@
 		17BD35102105D83A0042CAEB /* ProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BD350F2105D83A0042CAEB /* ProductRepository.swift */; };
 		17C0F25321424D8A0047C902 /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0F25221424D8A0047C902 /* ProductHeaderView.swift */; };
 		17C0F25521424D960047C902 /* ProductHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17C0F25421424D960047C902 /* ProductHeaderView.xib */; };
+		17CD5FA224A5697300BA2496 /* ValidatingUserName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD5FA124A5697300BA2496 /* ValidatingUserName.swift */; };
+		17CD5FA424A5697B00BA2496 /* ValidatingPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD5FA324A5697B00BA2496 /* ValidatingPassword.swift */; };
+		17CD5FA624A5698A00BA2496 /* LoggingIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD5FA524A5698A00BA2496 /* LoggingIn.swift */; };
 		17CDA61421EC20500001FE4A /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA60E21EC204F0001FE4A /* UserListViewController.swift */; };
 		17CDA61521EC20500001FE4A /* UserListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA60F21EC204F0001FE4A /* UserListUseCase.swift */; };
 		17CDA61621EC20500001FE4A /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA61021EC204F0001FE4A /* UserViewModel.swift */; };
@@ -351,6 +354,9 @@
 		17BD350F2105D83A0042CAEB /* ProductRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepository.swift; sourceTree = "<group>"; };
 		17C0F25221424D8A0047C902 /* ProductHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
 		17C0F25421424D960047C902 /* ProductHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductHeaderView.xib; sourceTree = "<group>"; };
+		17CD5FA124A5697300BA2496 /* ValidatingUserName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingUserName.swift; sourceTree = "<group>"; };
+		17CD5FA324A5697B00BA2496 /* ValidatingPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingPassword.swift; sourceTree = "<group>"; };
+		17CD5FA524A5698A00BA2496 /* LoggingIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingIn.swift; sourceTree = "<group>"; };
 		17CDA60E21EC204F0001FE4A /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		17CDA60F21EC204F0001FE4A /* UserListUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListUseCase.swift; sourceTree = "<group>"; };
 		17CDA61021EC204F0001FE4A /* UserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -469,8 +475,8 @@
 		170B307520FA3EA100D39001 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				17BB259624A4EBA4002E3CD9 /* UserDefault */,
 				176E8BD724A393D700B1F709 /* Gateways */,
+				17BB259624A4EBA4002E3CD9 /* UserDefault */,
 				1721726D20E487FD007D33A5 /* API */,
 				177A12E321E4524A007F1559 /* CoreData */,
 				17BB3A6620FF568700C5F8B0 /* Repositories */,
@@ -763,6 +769,7 @@
 		176E8BD524A3576600B1F709 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				17CD5FA024A5692B00BA2496 /* Login */,
 				17BB259724A4EC67002E3CD9 /* App */,
 				176E8BD924A3963F00B1F709 /* User */,
 				176E8BD824A3948700B1F709 /* Validator */,
@@ -948,6 +955,16 @@
 				17BB3A6A20FF57DD00C5F8B0 /* RepositoriesAssembler.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		17CD5FA024A5692B00BA2496 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				17CD5FA124A5697300BA2496 /* ValidatingUserName.swift */,
+				17CD5FA324A5697B00BA2496 /* ValidatingPassword.swift */,
+				17CD5FA524A5698A00BA2496 /* LoggingIn.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		17CDA60D21EC203D0001FE4A /* UserList */ = {
@@ -1329,6 +1346,7 @@
 				17EC215920DCECBC00F793FE /* ProductDetailNavigator.swift in Sources */,
 				17A4E5E420C90AD4003DE0EA /* SectionedProductsNavigator.swift in Sources */,
 				178F401321FAEB94009EE0F7 /* MainNavigator.swift in Sources */,
+				17CD5FA224A5697300BA2496 /* ValidatingUserName.swift in Sources */,
 				17368FD120F33E4A00A4A3E9 /* RepoCollectionCell.swift in Sources */,
 				17CDA61421EC20500001FE4A /* UserListViewController.swift in Sources */,
 				173BC074236142A00051A4CA /* UIColor+.swift in Sources */,
@@ -1354,6 +1372,7 @@
 				173CA58E21460F8B001AF22D /* DynamicEditProductViewModel.swift in Sources */,
 				17E7593F213FDED00037EE4C /* RepoViewModel.swift in Sources */,
 				1741037921410AEB00267731 /* Double+.swift in Sources */,
+				17CD5FA424A5697B00BA2496 /* ValidatingPassword.swift in Sources */,
 				172172A020E4C65E007D33A5 /* APIService.swift in Sources */,
 				170A6B9E20FB51B8003ECCF2 /* AppAssembler.swift in Sources */,
 				173CA58B21460F8B001AF22D /* DynamicEditProductAssembler.swift in Sources */,
@@ -1391,6 +1410,7 @@
 				1721728920E4964B007D33A5 /* RepoCell.swift in Sources */,
 				1721727B20E49245007D33A5 /* ReposUseCase.swift in Sources */,
 				17D80D2A20DF98D7009E68F0 /* EditProductUseCase.swift in Sources */,
+				17CD5FA624A5698A00BA2496 /* LoggingIn.swift in Sources */,
 				1721727A20E49245007D33A5 /* ReposViewModel.swift in Sources */,
 				17EC214B20DCDEE700F793FE /* ProductNameCell.swift in Sources */,
 				17CDA61C21EC207F0001FE4A /* UserCell.swift in Sources */,
