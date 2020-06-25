@@ -24,7 +24,7 @@ extension AppViewModel: ViewModelType {
     func transform(_ input: Input) -> Output {
         let toMain = input.loadTrigger
             .map { _ in
-                self.useCase.checkIfFirstRun()
+                self.useCase.checkFirstRun()
             }
             .flatMapLatest { firstRun -> Driver<Bool> in
                 if firstRun {
@@ -36,7 +36,7 @@ extension AppViewModel: ViewModelType {
             }
             .do(onNext: { firstRun in
                 if firstRun {
-                    self.useCase.setDidInit()
+                    self.useCase.setFirstRun()
                 }
             })
             .mapToVoid()

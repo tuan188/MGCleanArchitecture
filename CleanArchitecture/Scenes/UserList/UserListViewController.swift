@@ -62,7 +62,7 @@ final class UserListViewController: UIViewController, BindableType {
                     for: IndexPath(row: index, section: 0),
                     cellType: UserCell.self)
                     .then {
-                        $0.bindViewModel(UserViewModel(user: user))
+                        $0.bindViewModel(user)
                     }
             }
             .disposed(by: rx.disposeBag)

@@ -10,11 +10,10 @@ protocol UserListUseCaseType {
     func getUserList() -> Observable<[User]>
 }
 
-struct UserListUseCase: UserListUseCaseType {
-    let userRepository: UserRepositoryType
+struct UserListUseCase: UserListUseCaseType, GettingUsers {
+    let userGatewayType: UserGatewayType
     
-    func getUserList() ->Observable<[User]> {
-        return userRepository
-            .getUsers()
+    func getUserList() -> Observable<[User]> {
+        return getUsers()
     }
 }

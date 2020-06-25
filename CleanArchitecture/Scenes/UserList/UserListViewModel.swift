@@ -23,7 +23,7 @@ extension UserListViewModel: ViewModelType {
         let error: Driver<Error>
         let isLoading: Driver<Bool>
         let isReloading: Driver<Bool>
-        let userList: Driver<[User]>
+        let userList: Driver<[UserViewModel]>
         let selectedUser: Driver<Void>
         let isEmpty: Driver<Bool>
     }
@@ -35,6 +35,9 @@ extension UserListViewModel: ViewModelType {
             getItems: useCase.getUserList)
         
         let (userList, error, isLoading, isReloading) = getListResult.destructured
+        
+        let userViewModelList = userList
+            .map { $0.map(UserViewModel.init) }
 
         let selectedUser = select(trigger: input.selectUserTrigger, items: userList)
             .do(onNext: navigator.toUserDetail)
@@ -47,7 +50,7 @@ extension UserListViewModel: ViewModelType {
             error: error,
             isLoading: isLoading,
             isReloading: isReloading,
-            userList: userList,
+            userList: userViewModelList,
             selectedUser: selectedUser,
             isEmpty: isEmpty
         )

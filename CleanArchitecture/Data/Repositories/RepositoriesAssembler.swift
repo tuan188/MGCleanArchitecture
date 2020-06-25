@@ -11,7 +11,7 @@ import UIKit
 protocol RepositoriesAssembler {
     func resolve() -> RepoRepositoryType
     func resolve() -> ProductRepositoryType
-    func resolve() -> UserRepositoryType
+    
 }
 
 extension RepositoriesAssembler where Self: DefaultAssembler {
@@ -21,10 +21,6 @@ extension RepositoriesAssembler where Self: DefaultAssembler {
     
     func resolve() -> ProductRepositoryType {
         return ProductRepository()
-    }
-    
-    func resolve() -> UserRepositoryType {
-        return UserRepository()
     }
     
 }

@@ -37,6 +37,6 @@ extension UserListAssembler where Self: DefaultAssembler {
     }
 
     func resolve() -> UserListUseCaseType {
-        return UserListUseCase(userRepository: resolve())
+        return UserListUseCase(userGatewayType: resolve())
     }
 }

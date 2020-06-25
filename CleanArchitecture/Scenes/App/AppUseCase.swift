@@ -7,21 +7,14 @@
 //
 
 protocol AppUseCaseType {
-    func checkIfFirstRun() -> Bool
-    func setDidInit()
+    func checkFirstRun() -> Bool
+    func setFirstRun()
     func initCoreData() -> Observable<Void>
 }
 
-struct AppUseCase: AppUseCaseType {
-    let userRepository: UserRepositoryType
-    
-    func checkIfFirstRun() -> Bool {
-        return !AppSettings.didInit
-    }
-    
-    func setDidInit() {
-        AppSettings.didInit = true
-    }
+struct AppUseCase: AppUseCaseType, CheckingFirstRun, SettingFirstRun, AddingUsers {
+    let appGateway: AppGatewayType
+    let userGatewayType: UserGatewayType
     
     func initCoreData() -> Observable<Void> {
         let users = [
@@ -38,6 +31,7 @@ struct AppUseCase: AppUseCaseType {
                  gender: .female,
                  birthday: Date.date(day: 29, month: 8, year: 1_985) ?? Date())
         ]
-        return userRepository.add(users)
+        
+        return userGatewayType.add(users)
     }
 }

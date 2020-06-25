@@ -8,12 +8,7 @@
 
 import MagicalRecord
 
-protocol UserRepositoryType {
-    func getUsers() -> Observable<[User]>
-    func add(_ users: [User]) -> Observable<Void>
-}
-
-struct UserRepository: UserRepositoryType {
+struct UserRepository {
     func getUsers() -> Observable<[User]> {
         return all()
     }

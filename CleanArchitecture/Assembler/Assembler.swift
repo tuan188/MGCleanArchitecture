@@ -7,6 +7,7 @@
 //
 
 protocol Assembler: class,
+    GatewaysAssembler,
     MainAssembler,
     ReposAssembler,
     EditProductAssembler,
