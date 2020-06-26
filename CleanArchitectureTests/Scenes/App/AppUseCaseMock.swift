@@ -11,31 +11,13 @@ import RxSwift
 
 final class AppUseCaseMock: AppUseCaseType {
 
-    // MARK: - checkFirstRun
+    // MARK: - addUserData
 
-    var checkFirstRunCalled = false
-    var checkFirstRunReturnValue = false
+    var addUserDataCalled = false
+    var addUserDataReturnValue = Observable.just(())
 
-    func checkFirstRun() -> Bool {
-        checkFirstRunCalled = true
-        return checkFirstRunReturnValue
-    }
-
-    // MARK: - setFirstRun
-
-    var setFirstRunCalled = false
-
-    func setFirstRun() {
-        setFirstRunCalled = true
-    }
-
-    // MARK: - initCoreData
-
-    var initCoreDataCalled = false
-    var initCoreDataReturnValue = Observable.just(())
-
-    func initCoreData() -> Observable<Void> {
-        initCoreDataCalled = true
-        return initCoreDataReturnValue
+    func addUserData() -> Observable<Void> {
+        addUserDataCalled = true
+        return addUserDataReturnValue
     }
 }

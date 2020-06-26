@@ -132,8 +132,6 @@
 		17A4E5E920C90BF9003DE0EA /* SectionedProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A4E5E720C90BF9003DE0EA /* SectionedProductCell.xib */; };
 		17A4E5EB20C90C08003DE0EA /* SectionedProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4E5EA20C90C08003DE0EA /* SectionedProductCell.swift */; };
 		17BB259524A4DDC5002E3CD9 /* AddingUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB259424A4DDC5002E3CD9 /* AddingUsers.swift */; };
-		17BB259924A4EC72002E3CD9 /* CheckingFirstRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB259824A4EC72002E3CD9 /* CheckingFirstRun.swift */; };
-		17BB259B24A4EDB8002E3CD9 /* SettingFirstRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB259A24A4EDB8002E3CD9 /* SettingFirstRun.swift */; };
 		17BB259D24A4EE35002E3CD9 /* AppGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB259C24A4EE35002E3CD9 /* AppGateway.swift */; };
 		17BB3A6920FF574F00C5F8B0 /* RepoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB3A6820FF574F00C5F8B0 /* RepoRepository.swift */; };
 		17BB3A6B20FF57DD00C5F8B0 /* RepositoriesAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB3A6A20FF57DD00C5F8B0 /* RepositoriesAssembler.swift */; };
@@ -143,6 +141,10 @@
 		17CD5FA224A5697300BA2496 /* ValidatingUserName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD5FA124A5697300BA2496 /* ValidatingUserName.swift */; };
 		17CD5FA424A5697B00BA2496 /* ValidatingPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD5FA324A5697B00BA2496 /* ValidatingPassword.swift */; };
 		17CD5FA624A5698A00BA2496 /* LoggingIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD5FA524A5698A00BA2496 /* LoggingIn.swift */; };
+		17CD5FA824A58C0D00BA2496 /* SettingUpUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD5FA724A58C0D00BA2496 /* SettingUpUserData.swift */; };
+		17CD5FAB24A596CC00BA2496 /* SettingUpUserDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD5FAA24A596CC00BA2496 /* SettingUpUserDataTests.swift */; };
+		17CD5FAF24A5977C00BA2496 /* AppGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD5FAE24A5977C00BA2496 /* AppGatewayMock.swift */; };
+		17CD5FB124A5979D00BA2496 /* UserGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD5FB024A5979D00BA2496 /* UserGatewayMock.swift */; };
 		17CDA61421EC20500001FE4A /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA60E21EC204F0001FE4A /* UserListViewController.swift */; };
 		17CDA61521EC20500001FE4A /* UserListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA60F21EC204F0001FE4A /* UserListUseCase.swift */; };
 		17CDA61621EC20500001FE4A /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA61021EC204F0001FE4A /* UserViewModel.swift */; };
@@ -346,8 +348,6 @@
 		17A4E5E720C90BF9003DE0EA /* SectionedProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionedProductCell.xib; sourceTree = "<group>"; };
 		17A4E5EA20C90C08003DE0EA /* SectionedProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedProductCell.swift; sourceTree = "<group>"; };
 		17BB259424A4DDC5002E3CD9 /* AddingUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingUsers.swift; sourceTree = "<group>"; };
-		17BB259824A4EC72002E3CD9 /* CheckingFirstRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckingFirstRun.swift; sourceTree = "<group>"; };
-		17BB259A24A4EDB8002E3CD9 /* SettingFirstRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingFirstRun.swift; sourceTree = "<group>"; };
 		17BB259C24A4EE35002E3CD9 /* AppGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGateway.swift; sourceTree = "<group>"; };
 		17BB3A6820FF574F00C5F8B0 /* RepoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoRepository.swift; sourceTree = "<group>"; };
 		17BB3A6A20FF57DD00C5F8B0 /* RepositoriesAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesAssembler.swift; sourceTree = "<group>"; };
@@ -357,6 +357,10 @@
 		17CD5FA124A5697300BA2496 /* ValidatingUserName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingUserName.swift; sourceTree = "<group>"; };
 		17CD5FA324A5697B00BA2496 /* ValidatingPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingPassword.swift; sourceTree = "<group>"; };
 		17CD5FA524A5698A00BA2496 /* LoggingIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingIn.swift; sourceTree = "<group>"; };
+		17CD5FA724A58C0D00BA2496 /* SettingUpUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUpUserData.swift; sourceTree = "<group>"; };
+		17CD5FAA24A596CC00BA2496 /* SettingUpUserDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUpUserDataTests.swift; sourceTree = "<group>"; };
+		17CD5FAE24A5977C00BA2496 /* AppGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGatewayMock.swift; sourceTree = "<group>"; };
+		17CD5FB024A5979D00BA2496 /* UserGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGatewayMock.swift; sourceTree = "<group>"; };
 		17CDA60E21EC204F0001FE4A /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		17CDA60F21EC204F0001FE4A /* UserListUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListUseCase.swift; sourceTree = "<group>"; };
 		17CDA61021EC204F0001FE4A /* UserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -584,6 +588,7 @@
 		172DC23C20C4DDFB009FC881 /* CleanArchitectureTests */ = {
 			isa = PBXGroup;
 			children = (
+				17CD5FAC24A5972300BA2496 /* Data */,
 				1B885D2322A9F13C002F4F10 /* Service */,
 				179E425221919F36005F60D0 /* Domain */,
 				172DC28620C53E2E009FC881 /* Scenes */,
@@ -899,6 +904,7 @@
 		179E425221919F36005F60D0 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				17CD5FA924A596A800BA2496 /* UseCases */,
 				179E425321919F41005F60D0 /* Model */,
 			);
 			path = Domain;
@@ -941,8 +947,7 @@
 		17BB259724A4EC67002E3CD9 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				17BB259824A4EC72002E3CD9 /* CheckingFirstRun.swift */,
-				17BB259A24A4EDB8002E3CD9 /* SettingFirstRun.swift */,
+				17CD5FA724A58C0D00BA2496 /* SettingUpUserData.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -965,6 +970,31 @@
 				17CD5FA524A5698A00BA2496 /* LoggingIn.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		17CD5FA924A596A800BA2496 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				17CD5FAA24A596CC00BA2496 /* SettingUpUserDataTests.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		17CD5FAC24A5972300BA2496 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				17CD5FAD24A5972C00BA2496 /* Gateways */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		17CD5FAD24A5972C00BA2496 /* Gateways */ = {
+			isa = PBXGroup;
+			children = (
+				17CD5FAE24A5977C00BA2496 /* AppGatewayMock.swift */,
+				17CD5FB024A5979D00BA2496 /* UserGatewayMock.swift */,
+			);
+			path = Gateways;
 			sourceTree = "<group>";
 		};
 		17CDA60D21EC203D0001FE4A /* UserList */ = {
@@ -1227,12 +1257,14 @@
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Mockingjay/Mockingjay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
+				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mockingjay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1350,7 +1382,6 @@
 				17368FD120F33E4A00A4A3E9 /* RepoCollectionCell.swift in Sources */,
 				17CDA61421EC20500001FE4A /* UserListViewController.swift in Sources */,
 				173BC074236142A00051A4CA /* UIColor+.swift in Sources */,
-				17BB259B24A4EDB8002E3CD9 /* SettingFirstRun.swift in Sources */,
 				172DC22920C4DDF9009FC881 /* AppDelegate.swift in Sources */,
 				172DC27820C533C8009FC881 /* AppUseCase.swift in Sources */,
 				172DC28120C53DB1009FC881 /* MainUseCase.swift in Sources */,
@@ -1387,6 +1418,7 @@
 				178ABB6823628EA90076C200 /* Storage.swift in Sources */,
 				170A6BA620FB58D7003ECCF2 /* StaticProductDetailAssembler.swift in Sources */,
 				17CDA61F21EC215E0001FE4A /* Date+.swift in Sources */,
+				17CD5FA824A58C0D00BA2496 /* SettingUpUserData.swift in Sources */,
 				173CA5962146601C001AF22D /* EditProductPriceCell.swift in Sources */,
 				172172A220E4D248007D33A5 /* APIInput.swift in Sources */,
 				173CA58A21460F8B001AF22D /* DynamicEditProductViewController.swift in Sources */,
@@ -1421,7 +1453,6 @@
 				17CDA63321EC31250001FE4A /* MagicalRecord+Rx.swift in Sources */,
 				176E8BDF24A3AC4F00B1F709 /* GatewaysAssembler.swift in Sources */,
 				172DC28020C53DB1009FC881 /* MainViewModel.swift in Sources */,
-				17BB259924A4EC72002E3CD9 /* CheckingFirstRun.swift in Sources */,
 				172DC27920C533C8009FC881 /* AppNavigator.swift in Sources */,
 				172DC2BA20C62C64009FC881 /* UIViewController+.swift in Sources */,
 				17800304213FBE6C00D20209 /* UICollectionView+.swift in Sources */,
@@ -1472,6 +1503,7 @@
 				172DC29620C53E5D009FC881 /* AppUseCaseMock.swift in Sources */,
 				1B885D2522A9F14E002F4F10 /* ServiceHelper.swift in Sources */,
 				17F4CABD214B8E05009212A4 /* DynamicEditProductUseCaseMock.swift in Sources */,
+				17CD5FB124A5979D00BA2496 /* UserGatewayMock.swift in Sources */,
 				177982CA20CE1B830095CCA8 /* SectionedProductCellTests.swift in Sources */,
 				17EC214320DCD86600F793FE /* ProductDetailViewModelTests.swift in Sources */,
 				172DC29020C53E4F009FC881 /* MainNavigatorMock.swift in Sources */,
@@ -1487,6 +1519,7 @@
 				172DC28E20C53E4F009FC881 /* MainUseCaseMock.swift in Sources */,
 				172DC28D20C53E4F009FC881 /* MainViewControllerTests.swift in Sources */,
 				178F566F21EF0FB2008D22AB /* LoginUseCaseMock.swift in Sources */,
+				17CD5FAB24A596CC00BA2496 /* SettingUpUserDataTests.swift in Sources */,
 				1706D2B520E213D4001798FB /* EditProductViewModelTests.swift in Sources */,
 				17F4CAC0214B8E05009212A4 /* DynamicEditProductViewModelTests.swift in Sources */,
 				172DC2E920C67E6A009FC881 /* ProductsViewControllerTests.swift in Sources */,
@@ -1503,6 +1536,7 @@
 				1706D2B320E213D4001798FB /* EditProductNavigatorMock.swift in Sources */,
 				17CDA62A21EC239B0001FE4A /* UserListViewControllerTests.swift in Sources */,
 				17EC214420DCD86600F793FE /* ProductDetailUseCaseMock.swift in Sources */,
+				17CD5FAF24A5977C00BA2496 /* AppGatewayMock.swift in Sources */,
 				17EC215720DCECA300F793FE /* ProductDetailNavigatorMock.swift in Sources */,
 				17D80D1C20DF9164009E68F0 /* StaticProductDetailUseCaseMock.swift in Sources */,
 				17CDA62921EC239B0001FE4A /* UserListViewModelTests.swift in Sources */,

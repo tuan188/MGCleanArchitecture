@@ -41,35 +41,11 @@ final class AppViewModelTests: XCTestCase {
         output.toMain.drive().disposed(by: disposeBag)
     }
     
-    func test_loadTriggerInvoked_firstRun_initCoreData() {
-        // arrange
-        useCase.checkFirstRunReturnValue = true
-        
+    func test_loadTrigger_addUserData() {
         // act
         loadTrigger.onNext(())
         
         // assert
-        XCTAssert(useCase.checkFirstRunCalled)
-        XCTAssert(useCase.setFirstRunCalled)
-        XCTAssert(useCase.initCoreDataCalled)
+        XCTAssert(useCase.addUserDataCalled)
     }
-    
-    func test_loadTriggerInvoked_notFirstRun_notInitCoreData() {
-        // act
-        loadTrigger.onNext(())
-        
-        // assert
-        XCTAssert(useCase.checkFirstRunCalled)
-        XCTAssertFalse(useCase.setFirstRunCalled)
-        XCTAssertFalse(useCase.initCoreDataCalled)
-    }
-    
-    func test_loadTriggerInvoked_toMain() {
-        // act
-        loadTrigger.onNext(())
-        
-        // assert
-        XCTAssert(navigator.toMainCalled)
-    }
-    
 }

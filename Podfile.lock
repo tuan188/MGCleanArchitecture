@@ -47,6 +47,8 @@ PODS:
   - RxRelay (5.1.0):
     - RxSwift (~> 5)
   - RxSwift (5.1.0)
+  - RxTest (5.1.1):
+    - RxSwift (~> 5)
   - SDWebImage (5.6.0):
     - SDWebImage/Core (= 5.6.0)
   - SDWebImage/Core (5.6.0)
@@ -67,6 +69,7 @@ DEPENDENCIES:
   - Reusable (~> 4.1)
   - RxBlocking (~> 5.1)
   - RxDataSources (~> 4.0)
+  - RxTest (~> 5.1)
   - SDWebImage (~> 5.6)
   - Then (~> 2.4)
   - Validator (~> 3.2.1)
@@ -91,6 +94,7 @@ SPEC REPOS:
     - RxDataSources
     - RxRelay
     - RxSwift
+    - RxTest
     - SDWebImage
     - Then
     - Validator
@@ -125,10 +129,11 @@ SPEC CHECKSUMS:
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxRelay: a168bd6caf712d00c676ac344e9295afc93b418e
   RxSwift: ad5874f24bb0dbffd1e9bb8443604e3578796c7a
+  RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
   SDWebImage: 21b19f56b4226cdfe3aefe4e6848dc43ed129a86
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
 
-PODFILE CHECKSUM: b04ea51f7a1edc5238e4132f32e35e0bfb71d585
+PODFILE CHECKSUM: 4b929fe4c16db0b6c29c755f8aa77bc94b27f52e
 
 COCOAPODS: 1.9.3

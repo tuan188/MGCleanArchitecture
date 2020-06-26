@@ -26,6 +26,6 @@ extension AppAssembler where Self: DefaultAssembler {
     }
     
     func resolve() -> AppUseCaseType {
-        return AppUseCase(appGateway: resolve(), userGatewayType: resolve())
+        return AppUseCase(appGateway: resolve(), userGateway: resolve())
     }
 }

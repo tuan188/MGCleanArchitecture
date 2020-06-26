@@ -23,23 +23,10 @@ extension AppViewModel: ViewModelType {
     
     func transform(_ input: Input) -> Output {
         let toMain = input.loadTrigger
-            .map { _ in
-                self.useCase.checkFirstRun()
+            .flatMapLatest {
+                self.useCase.addUserData()
+                    .asDriverOnErrorJustComplete()
             }
-            .flatMapLatest { firstRun -> Driver<Bool> in
-                if firstRun {
-                    return self.useCase.initCoreData()
-                        .asDriverOnErrorJustComplete()
-                        .map { _ in firstRun }
-                }
-                return Driver.just(firstRun)
-            }
-            .do(onNext: { firstRun in
-                if firstRun {
-                    self.useCase.setFirstRun()
-                }
-            })
-            .mapToVoid()
             .do(onNext: self.navigator.toMain)
         
         return Output(toMain: toMain)
