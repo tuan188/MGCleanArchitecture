@@ -19,7 +19,7 @@ final class ReposViewController: UIViewController, BindableType {
     
     var viewModel: ReposViewModel!
     
-    private var repoList = [Repo]()
+    private var repoList = [RepoViewModel]()
     
     // MARK: - Life Cycle
 
@@ -68,7 +68,7 @@ final class ReposViewController: UIViewController, BindableType {
                     for: IndexPath(row: index, section: 0),
                     cellType: RepoCell.self)
                     .then {
-                        $0.bindViewModel(RepoViewModel(repo: repo))
+                        $0.bindViewModel(repo)
                     }
             }
             .disposed(by: rx.disposeBag)
@@ -114,8 +114,7 @@ extension ReposViewController: StoryboardSceneBased {
 extension ReposViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         let urls = indexPaths
-            .map { repoList[$0.row].avatarURLString }
-            .compactMap { URL(string: $0) }
+            .compactMap { repoList[$0.row].url }
         
         print("Preheat", urls)
         SDWebImagePrefetcher.shared.prefetchURLs(urls)

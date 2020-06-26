@@ -19,7 +19,7 @@ final class RepoCollectionViewController: UIViewController, BindableType {
     
     var viewModel: ReposViewModel!
     
-    private var repoList = [Repo]()
+    private var repoList = [RepoViewModel]()
     
     struct LayoutOptions {
         var itemSpacing: CGFloat = 16
@@ -96,7 +96,7 @@ final class RepoCollectionViewController: UIViewController, BindableType {
                 return collectionView.dequeueReusableCell(for: IndexPath(row: index, section: 0),
                                                           cellType: RepoCollectionCell.self)
                     .then {
-                        $0.bindViewModel(RepoViewModel(repo: repo))
+                        $0.bindViewModel(repo)
                     }
             }
             .disposed(by: rx.disposeBag)
@@ -165,8 +165,7 @@ extension RepoCollectionViewController: UICollectionViewDelegate, UICollectionVi
 extension RepoCollectionViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         let urls = indexPaths
-            .map { repoList[$0.row].avatarURLString }
-            .compactMap { URL(string: $0) }
+            .compactMap { repoList[$0.row].url }
         
         print("Preheat", urls)
         SDWebImagePrefetcher.shared.prefetchURLs(urls)

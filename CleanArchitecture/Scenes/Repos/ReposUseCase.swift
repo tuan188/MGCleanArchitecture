@@ -10,11 +10,11 @@ protocol ReposUseCaseType {
     func getRepoList(page: Int) -> Observable<PagingInfo<Repo>>
 }
 
-struct ReposUseCase: ReposUseCaseType {
-    let repository: RepoRepositoryType
+struct ReposUseCase: ReposUseCaseType, GettingRepoList {
+    let repoGateway: RepoGatewayType
     
     func getRepoList(page: Int) -> Observable<PagingInfo<Repo>> {
-        return repository.getRepoList(page: page, perPage: 10, useCache: page == 1)
+        return getRepoList(page: page, perPage: 10, usingCache: page == 1)
     }
 }
 

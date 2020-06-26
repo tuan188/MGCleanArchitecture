@@ -11,6 +11,7 @@ import UIKit
 protocol GatewaysAssembler {
     func resolve() -> UserGatewayType
     func resolve() -> AppGatewayType
+    func resolve() -> RepoGatewayType
 }
 
 extension GatewaysAssembler where Self: DefaultAssembler {
@@ -20,5 +21,9 @@ extension GatewaysAssembler where Self: DefaultAssembler {
     
     func resolve() -> AppGatewayType {
         return AppGateway()
+    }
+    
+    func resolve() -> RepoGatewayType {
+        return RepoGateway()
     }
 }

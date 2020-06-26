@@ -91,6 +91,10 @@
 		174103762140FF2300267731 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174103752140FF2300267731 /* ProductModel.swift */; };
 		1741037921410AEB00267731 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1741037821410AEB00267731 /* Double+.swift */; };
 		1741037B214119B200267731 /* UnitTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1741037A214119B200267731 /* UnitTestViewController.swift */; };
+		175472B524A5B08F00DF48CC /* GettingRepoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175472B424A5B08F00DF48CC /* GettingRepoList.swift */; };
+		175472B724A5B0CA00DF48CC /* RepoGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175472B624A5B0CA00DF48CC /* RepoGateway.swift */; };
+		175472BB24A5D65B00DF48CC /* GettingRepoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175472BA24A5D65B00DF48CC /* GettingRepoListTests.swift */; };
+		175472BD24A5D6BB00DF48CC /* RepoGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175472BC24A5D6BB00DF48CC /* RepoGatewayMock.swift */; };
 		17609845236053EB00CBDC8D /* ColorCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17609844236053EB00CBDC8D /* ColorCompatibility.swift */; };
 		176A23FC21DDBAF300016AFC /* ViewModelType+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176A23FB21DDBAF300016AFC /* ViewModelType+.swift */; };
 		176E8BDB24A3965900B1F709 /* GettingUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176E8BDA24A3965900B1F709 /* GettingUsers.swift */; };
@@ -307,6 +311,10 @@
 		174103752140FF2300267731 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		1741037821410AEB00267731 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		1741037A214119B200267731 /* UnitTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestViewController.swift; sourceTree = "<group>"; };
+		175472B424A5B08F00DF48CC /* GettingRepoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingRepoList.swift; sourceTree = "<group>"; };
+		175472B624A5B0CA00DF48CC /* RepoGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoGateway.swift; sourceTree = "<group>"; };
+		175472BA24A5D65B00DF48CC /* GettingRepoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingRepoListTests.swift; sourceTree = "<group>"; };
+		175472BC24A5D6BB00DF48CC /* RepoGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoGatewayMock.swift; sourceTree = "<group>"; };
 		17609844236053EB00CBDC8D /* ColorCompatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCompatibility.swift; sourceTree = "<group>"; };
 		176A23FB21DDBAF300016AFC /* ViewModelType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModelType+.swift"; sourceTree = "<group>"; };
 		176E8BDA24A3965900B1F709 /* GettingUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingUsers.swift; sourceTree = "<group>"; };
@@ -589,7 +597,6 @@
 			isa = PBXGroup;
 			children = (
 				17CD5FAC24A5972300BA2496 /* Data */,
-				1B885D2322A9F13C002F4F10 /* Service */,
 				179E425221919F36005F60D0 /* Domain */,
 				172DC28620C53E2E009FC881 /* Scenes */,
 				172DC23F20C4DDFB009FC881 /* Info.plist */,
@@ -771,6 +778,22 @@
 			path = DynamicEditProduct;
 			sourceTree = "<group>";
 		};
+		175472B824A5D64100DF48CC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				17CD5FAA24A596CC00BA2496 /* SettingUpUserDataTests.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		175472B924A5D64900DF48CC /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+				175472BA24A5D65B00DF48CC /* GettingRepoListTests.swift */,
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
 		176E8BD524A3576600B1F709 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
@@ -786,6 +809,7 @@
 		176E8BD624A357FA00B1F709 /* Repo */ = {
 			isa = PBXGroup;
 			children = (
+				175472B424A5B08F00DF48CC /* GettingRepoList.swift */,
 			);
 			path = Repo;
 			sourceTree = "<group>";
@@ -793,6 +817,7 @@
 		176E8BD724A393D700B1F709 /* Gateways */ = {
 			isa = PBXGroup;
 			children = (
+				175472B624A5B0CA00DF48CC /* RepoGateway.swift */,
 				176E8BDC24A396BE00B1F709 /* UserGateway.swift */,
 				17BB259C24A4EE35002E3CD9 /* AppGateway.swift */,
 				176E8BDE24A3AC4F00B1F709 /* GatewaysAssembler.swift */,
@@ -975,7 +1000,8 @@
 		17CD5FA924A596A800BA2496 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				17CD5FAA24A596CC00BA2496 /* SettingUpUserDataTests.swift */,
+				175472B924A5D64900DF48CC /* Repo */,
+				175472B824A5D64100DF48CC /* App */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -983,6 +1009,7 @@
 		17CD5FAC24A5972300BA2496 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				1B885D2322A9F13C002F4F10 /* API */,
 				17CD5FAD24A5972C00BA2496 /* Gateways */,
 			);
 			path = Data;
@@ -993,6 +1020,7 @@
 			children = (
 				17CD5FAE24A5977C00BA2496 /* AppGatewayMock.swift */,
 				17CD5FB024A5979D00BA2496 /* UserGatewayMock.swift */,
+				175472BC24A5D6BB00DF48CC /* RepoGatewayMock.swift */,
 			);
 			path = Gateways;
 			sourceTree = "<group>";
@@ -1079,13 +1107,13 @@
 			path = DynamicEditProduct;
 			sourceTree = "<group>";
 		};
-		1B885D2322A9F13C002F4F10 /* Service */ = {
+		1B885D2322A9F13C002F4F10 /* API */ = {
 			isa = PBXGroup;
 			children = (
 				1B885D2622A9F236002F4F10 /* API+Repo */,
 				1B885D2422A9F14E002F4F10 /* ServiceHelper.swift */,
 			);
-			path = Service;
+			path = API;
 			sourceTree = "<group>";
 		};
 		1B885D2622A9F236002F4F10 /* API+Repo */ = {
@@ -1390,6 +1418,7 @@
 				1721726C20E47909007D33A5 /* ValidationError.swift in Sources */,
 				172DC27720C533C8009FC881 /* AppViewModel.swift in Sources */,
 				17DF7EF922CEE87600771503 /* UIImageView+SDWebImage.swift in Sources */,
+				175472B524A5B08F00DF48CC /* GettingRepoList.swift in Sources */,
 				17CDA62F21EC2DBC0001FE4A /* Model.xcdatamodeld in Sources */,
 				172DC2D920C678DD009FC881 /* ProductsUseCase.swift in Sources */,
 				173CA58C21460F8B001AF22D /* DynamicEditProductUseCase.swift in Sources */,
@@ -1486,6 +1515,7 @@
 				17CDA63721EC47330001FE4A /* AppSettings.swift in Sources */,
 				17DCDA4520FB352300E2602A /* ReposAssembler.swift in Sources */,
 				176E8BDB24A3965900B1F709 /* GettingUsers.swift in Sources */,
+				175472B724A5B0CA00DF48CC /* RepoGateway.swift in Sources */,
 				17BB259524A4DDC5002E3CD9 /* AddingUsers.swift in Sources */,
 				17CDA61721EC20500001FE4A /* UserListNavigator.swift in Sources */,
 				17CDA61621EC20500001FE4A /* UserViewModel.swift in Sources */,
@@ -1514,6 +1544,7 @@
 				17EC214220DCD86600F793FE /* ProductDetailViewControllerTests.swift in Sources */,
 				1721728520E492DD007D33A5 /* ReposNavigatorMock.swift in Sources */,
 				17CDA62821EC239B0001FE4A /* UserListNavigatorMock.swift in Sources */,
+				175472BD24A5D6BB00DF48CC /* RepoGatewayMock.swift in Sources */,
 				178F567121EF0FB2008D22AB /* LoginViewModelTests.swift in Sources */,
 				172DC2C320C67034009FC881 /* ProductCellTests.swift in Sources */,
 				172DC28E20C53E4F009FC881 /* MainUseCaseMock.swift in Sources */,
@@ -1544,6 +1575,7 @@
 				17F4CABF214B8E05009212A4 /* DynamicEditProductViewControllerTests.swift in Sources */,
 				17EC214820DCDC1600F793FE /* ProductDetailCellsTests.swift in Sources */,
 				1706D2B620E213D4001798FB /* EditProductViewControllerTests.swift in Sources */,
+				175472BB24A5D65B00DF48CC /* GettingRepoListTests.swift in Sources */,
 				1721728320E492DD007D33A5 /* ReposViewControllerTests.swift in Sources */,
 				172DC2EB20C67E6A009FC881 /* ProductsViewModelTests.swift in Sources */,
 				177982D620CE5A980095CCA8 /* SectionedProductsViewModelTests.swift in Sources */,

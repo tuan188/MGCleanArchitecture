@@ -22,6 +22,7 @@ final class SettingUpUserDataTests: XCTestCase, SettingUpUserData {
     private var appGatewayMock: AppGatewayMock!
     private var userGatewayMock: UserGatewayMock!
     private var disposeBag: DisposeBag!
+    private var scheduler: TestScheduler!
     
     // Output Observers
     private var addUserDataOutput: TestableObserver<Void>!
@@ -29,10 +30,11 @@ final class SettingUpUserDataTests: XCTestCase, SettingUpUserData {
     override func setUpWithError() throws {
         appGatewayMock = AppGatewayMock()
         userGatewayMock = UserGatewayMock()
+        
+        scheduler = TestScheduler(initialClock: 0)
         disposeBag = DisposeBag()
         
-        let testScheduler = TestScheduler(initialClock: 0)
-        addUserDataOutput = testScheduler.createObserver(Void.self)
+        addUserDataOutput = scheduler.createObserver(Void.self)
     }
     
     func test_addUserData_firstRun() {

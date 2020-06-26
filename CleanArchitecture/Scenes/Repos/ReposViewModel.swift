@@ -25,7 +25,7 @@ extension ReposViewModel: ViewModelType {
         let isLoading: Driver<Bool>
         let isReloading: Driver<Bool>
         let isLoadingMore: Driver<Bool>
-        let repoList: Driver<[Repo]>
+        let repoList: Driver<[RepoViewModel]>
         let selectedRepo: Driver<Void>
         let isEmpty: Driver<Bool>
     }
@@ -41,6 +41,9 @@ extension ReposViewModel: ViewModelType {
 
         let repoList = page
             .map { $0.items }
+            
+        let repoViewModelList = repoList
+            .map { $0.map(RepoViewModel.init) }
 
         let selectedRepo = select(trigger: input.selectRepoTrigger, items: repoList)
             .do(onNext: navigator.toRepoDetail)
@@ -54,7 +57,7 @@ extension ReposViewModel: ViewModelType {
             isLoading: isLoading,
             isReloading: isReloading,
             isLoadingMore: isLoadingMore,
-            repoList: repoList,
+            repoList: repoViewModelList,
             selectedRepo: selectedRepo,
             isEmpty: isEmpty
         )

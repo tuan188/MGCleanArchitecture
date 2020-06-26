@@ -1,0 +1,44 @@
+//
+//  GettingRepoListTests.swift
+//  CleanArchitectureTests
+//
+//  Created by Tuan Truong on 6/26/20.
+//  Copyright © 2020 Sun Asterisk. All rights reserved.
+//
+
+@testable import CleanArchitecture
+import XCTest
+import RxTest
+
+final class GettingRepoListTests: XCTestCase, GettingRepoList {
+    
+    var repoGateway: RepoGatewayType {
+        return repoGatewayMock
+    }
+    
+    private var repoGatewayMock: RepoGatewayMock!
+    private var disposeBag: DisposeBag!
+    private var scheduler: TestScheduler!
+    
+    // Output Observers
+    private var getRepoListOutput: TestableObserver<PagingInfo<Repo>>!
+
+    override func setUpWithError() throws {
+        repoGatewayMock = RepoGatewayMock()
+        
+        disposeBag = DisposeBag()
+        scheduler = TestScheduler(initialClock: 0)
+        
+        getRepoListOutput = scheduler.createObserver(PagingInfo<Repo>.self)
+    }
+
+    func test_getRepoList() {
+        // act
+        self.getRepoList(page: 1, perPage: 10, usingCache: false)
+            .subscribe(getRepoListOutput)
+            .disposed(by: disposeBag)
+
+        // assert
+        XCTAssert(repoGatewayMock.getRepoListCalled)
+    }
+}

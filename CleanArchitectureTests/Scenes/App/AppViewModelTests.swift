@@ -10,6 +10,7 @@
 import XCTest
 import RxSwift
 import RxBlocking
+import RxTest
 
 final class AppViewModelTests: XCTestCase {
     
@@ -20,7 +21,9 @@ final class AppViewModelTests: XCTestCase {
     private var input: AppViewModel.Input!
     private var output: AppViewModel.Output!
     
+    private var scheduler: TestScheduler!
     private var disposeBag: DisposeBag!
+    private var toMainOutput: TestableObserver<Void>!
     
     private let loadTrigger = PublishSubject<Void>()
     
@@ -36,9 +39,11 @@ final class AppViewModelTests: XCTestCase {
         
         output = viewModel.transform(input)
         
+        scheduler = TestScheduler(initialClock: 0)
         disposeBag = DisposeBag()
         
-        output.toMain.drive().disposed(by: disposeBag)
+        toMainOutput = scheduler.createObserver(Void.self)
+        output.toMain.drive(toMainOutput).disposed(by: disposeBag)
     }
     
     func test_loadTrigger_addUserData() {
@@ -47,5 +52,6 @@ final class AppViewModelTests: XCTestCase {
         
         // assert
         XCTAssert(useCase.addUserDataCalled)
+        XCTAssertEqual(toMainOutput.events.count, 1)
     }
 }
