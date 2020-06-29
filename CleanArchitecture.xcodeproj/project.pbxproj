@@ -498,7 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				176E8BD724A393D700B1F709 /* Gateways */,
-				17BB259624A4EBA4002E3CD9 /* UserDefault */,
+				17BB259624A4EBA4002E3CD9 /* UserDefaults */,
 				1721726D20E487FD007D33A5 /* API */,
 				177A12E321E4524A007F1559 /* CoreData */,
 				17BB3A6620FF568700C5F8B0 /* Repositories */,
@@ -513,7 +513,6 @@
 				172172A120E4D248007D33A5 /* APIInput.swift */,
 				172172A320E4D48C007D33A5 /* APIOutput.swift */,
 				172172A520E4D559007D33A5 /* APIError.swift */,
-				172172A920E4D706007D33A5 /* APIUrls.swift */,
 				172172A720E4D6A0007D33A5 /* API+Repo.swift */,
 				177283FC2407B50E0064AA17 /* API+Product.swift */,
 			);
@@ -588,13 +587,13 @@
 		172DC22720C4DDF9009FC881 /* CleanArchitecture */ = {
 			isa = PBXGroup;
 			children = (
-				17DCDA4120FB344200E2602A /* Assembler */,
+				176C2DAA24A9D56F008DB836 /* Config */,
 				173746A921071D6900B41621 /* Support */,
-				172172AB20E4E0E1007D33A5 /* Extensions */,
 				170B307420FA3E7400D39001 /* Domain */,
 				170B307520FA3EA100D39001 /* Data */,
 				172DC27220C5333F009FC881 /* Scenes */,
 				172DC22820C4DDF9009FC881 /* AppDelegate.swift */,
+				17DCDA4220FB346600E2602A /* Assembler.swift */,
 				1741037A214119B200267731 /* UnitTestViewController.swift */,
 				172DC22F20C4DDFA009FC881 /* Assets.xcassets */,
 				172DC23120C4DDFA009FC881 /* LaunchScreen.storyboard */,
@@ -766,8 +765,8 @@
 		173746A921071D6900B41621 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				172172AB20E4E0E1007D33A5 /* Extensions */,
 				172DC2BB20C62CFD009FC881 /* Utils.swift */,
-				17EF7B2B21479A3A005DFB79 /* Notifications.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -820,6 +819,16 @@
 				175472BA24A5D65B00DF48CC /* GettingRepoListTests.swift */,
 			);
 			path = Repo;
+			sourceTree = "<group>";
+		};
+		176C2DAA24A9D56F008DB836 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				172172A920E4D706007D33A5 /* APIUrls.swift */,
+				17EF7B2B21479A3A005DFB79 /* Notifications.swift */,
+				17609844236053EB00CBDC8D /* ColorCompatibility.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		176E8BD524A3576600B1F709 /* UseCases */ = {
@@ -926,7 +935,6 @@
 		178002FC213FB92400D20209 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				17609844236053EB00CBDC8D /* ColorCompatibility.swift */,
 				178002FD213FB93E00D20209 /* EmptyDataView.swift */,
 				178002FF213FB94C00D20209 /* EmptyDataView.xib */,
 			);
@@ -989,14 +997,14 @@
 			path = SectionedProducts;
 			sourceTree = "<group>";
 		};
-		17BB259624A4EBA4002E3CD9 /* UserDefault */ = {
+		17BB259624A4EBA4002E3CD9 /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
 				17CDA63621EC47330001FE4A /* AppSettings.swift */,
 				178ABB6723628EA90076C200 /* Storage.swift */,
 				178ABB69236290E10076C200 /* CacheStorage.swift */,
 			);
-			path = UserDefault;
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		17BB259724A4EC67002E3CD9 /* App */ = {
@@ -1104,14 +1112,6 @@
 				17DCDA4B20FB43CC00E2602A /* EditProductAssembler.swift */,
 			);
 			path = EditProduct;
-			sourceTree = "<group>";
-		};
-		17DCDA4120FB344200E2602A /* Assembler */ = {
-			isa = PBXGroup;
-			children = (
-				17DCDA4220FB346600E2602A /* Assembler.swift */,
-			);
-			path = Assembler;
 			sourceTree = "<group>";
 		};
 		17EC214D20DCE52D00F793FE /* StaticProductDetail */ = {
