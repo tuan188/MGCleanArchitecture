@@ -8,11 +8,7 @@
 
 import UIKit
 
-protocol RepoRepositoryType {
-    func getRepoList(page: Int, perPage: Int, usingCache: Bool) -> Observable<PagingInfo<Repo>>
-}
-
-final class RepoRepository: RepoRepositoryType {
+final class RepoRepository {
     func getRepoList(page: Int, perPage: Int, usingCache: Bool) -> Observable<PagingInfo<Repo>> {
         let input = API.GetRepoListInput(page: page, perPage: perPage)
         input.useCache = usingCache

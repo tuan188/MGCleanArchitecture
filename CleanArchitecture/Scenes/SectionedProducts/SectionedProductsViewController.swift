@@ -20,7 +20,7 @@ final class SectionedProductsViewController: UIViewController, BindableType {
     
     var viewModel: SectionedProductsViewModel!
     
-    private typealias ProductSectionModel = SectionModel<String, ProductModel>
+    private typealias ProductSectionModel = SectionModel<String, ProductViewModel>
     private var dataSource: RxTableViewSectionedReloadDataSource<ProductSectionModel>?
     private let editProductTrigger = PublishSubject<IndexPath>()
     
@@ -77,7 +77,7 @@ final class SectionedProductsViewController: UIViewController, BindableType {
                 return tableView.dequeueReusableCell(for: indexPath,
                                                      cellType: SectionedProductCell.self)
                     .then {
-                        $0.bindViewModel(ProductViewModel(product: product))
+                        $0.bindViewModel(product)
                         
                         $0.editProductAction = {
                             self?.editProductTrigger.onNext(indexPath)

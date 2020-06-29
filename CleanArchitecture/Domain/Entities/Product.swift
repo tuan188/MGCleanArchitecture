@@ -14,7 +14,7 @@ struct Product {
     var price = 0.0
 }
 
-extension Product: Then { }
+extension Product: Then, Equatable { }
 
 extension Product: Mappable {
     init?(map: Map) {

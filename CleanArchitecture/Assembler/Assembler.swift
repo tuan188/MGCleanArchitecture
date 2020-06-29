@@ -16,7 +16,6 @@ protocol Assembler: class,
     SectionedProductsAssembler,
     StaticProductDetailAssembler,
     DynamicEditProductAssembler,
-    RepositoriesAssembler,
     UserListAssembler,
     LoginAssembler,
     AppAssembler {

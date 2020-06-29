@@ -14,7 +14,7 @@ protocol DynamicEditProductUseCaseType {
 }
 
 struct DynamicEditProductUseCase: DynamicEditProductUseCaseType {
-    let productRepository: ProductRepositoryType
+    let productRepository: ProductRepository
     
     func validate(name: String) -> ValidationResult {
         let minLengthRule = ValidationRuleLength(min: 5, error: ProductValidationError.productNameMinLength)

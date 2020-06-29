@@ -41,4 +41,18 @@ final class GettingRepoListTests: XCTestCase, GettingRepoList {
         // assert
         XCTAssert(repoGatewayMock.getRepoListCalled)
     }
+    
+    func test_getRepoList_error() {
+        // arrange
+        repoGatewayMock.getRepoListReturnValue = Observable.error(TestError())
+        
+        // act
+        self.getRepoList(page: 1, perPage: 10, usingCache: false)
+            .subscribe(getRepoListOutput)
+            .disposed(by: disposeBag)
+
+        // assert
+        XCTAssert(repoGatewayMock.getRepoListCalled)
+        XCTAssertEqual(getRepoListOutput.events, [.error(0, TestError())])
+    }
 }

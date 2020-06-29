@@ -50,6 +50,6 @@ extension EditProductAssembler where Self: DefaultAssembler {
     }
     
     func resolve() -> EditProductUseCaseType {
-        return EditProductUseCase(productRepository: resolve())
+        return EditProductUseCase(productRepository: ProductRepository())
     }
 }

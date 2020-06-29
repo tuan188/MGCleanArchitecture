@@ -10,11 +10,7 @@ protocol SectionedProductsUseCaseType {
     func getProductList(page: Int) -> Observable<PagingInfo<Product>>
 }
 
-struct SectionedProductsUseCase: SectionedProductsUseCaseType {
-    let productRepository: ProductRepositoryType
-    
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
-        return productRepository.getProductList(page: page)
-    }
+struct SectionedProductsUseCase: SectionedProductsUseCaseType, GettingProductList {
+    let productGateway: ProductGatewayType
 }
 

@@ -19,9 +19,11 @@ final class SectionedProductCell: UITableViewCell, NibReusable {
         if let viewModel = viewModel {
             nameLabel.text = viewModel.name
             priceLabel.text = viewModel.price
+            backgroundColor = viewModel.backgroundColor
         } else {
             nameLabel.text = ""
             priceLabel.text = ""
+            backgroundColor = ColorCompatibility.systemBackground
         }
     }
     

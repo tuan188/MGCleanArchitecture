@@ -27,7 +27,7 @@ extension ProductsViewModel: ViewModelType {
         let isLoading: Driver<Bool>
         let isReloading: Driver<Bool>
         let isLoadingMore: Driver<Bool>
-        let productList: Driver<[ProductModel]>
+        let productList: Driver<[ProductViewModel]>
         let selectedProduct: Driver<Void>
         let editedProduct: Driver<Void>
         let isEmpty: Driver<Bool>
@@ -68,6 +68,9 @@ extension ProductsViewModel: ViewModelType {
 
         let productList = page
             .map { $0.items }
+        
+        let productViewModelList = productList
+            .map { $0.map(ProductViewModel.init) }
         
         let selectedProduct = select(trigger: input.selectProductTrigger, items: productList)
             .do(onNext: { product in
@@ -129,7 +132,7 @@ extension ProductsViewModel: ViewModelType {
             isLoading: isLoading,
             isReloading: isReloading,
             isLoadingMore: isLoadingMore,
-            productList: productList,
+            productList: productViewModelList,
             selectedProduct: selectedProduct,
             editedProduct: editedProduct,
             isEmpty: isEmpty,

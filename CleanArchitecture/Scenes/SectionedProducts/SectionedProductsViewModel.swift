@@ -27,7 +27,7 @@ extension SectionedProductsViewModel: ViewModelType {
         let isLoading: Driver<Bool>
         let isReloading: Driver<Bool>
         let isLoadingMore: Driver<Bool>
-        let productSections: Driver<[ProductSection]>
+        let productSections: Driver<[ProductViewModelSection]>
         let selectedProduct: Driver<Void>
         let isEmpty: Driver<Bool>
         let editedProduct: Driver<Void>
@@ -37,6 +37,11 @@ extension SectionedProductsViewModel: ViewModelType {
     struct ProductSection {
         let header: String
         let productList: [ProductModel]
+    }
+    
+    struct ProductViewModelSection {
+        let header: String
+        let productList: [ProductViewModel]
     }
 
     func transform(_ input: Input) -> Output {
@@ -75,6 +80,14 @@ extension SectionedProductsViewModel: ViewModelType {
             .map { $0.items }
             .map { [ProductSection(header: "Section1", productList: $0)] }
         
+        let productViewModelSections = productSections
+            .map {
+                return $0.map { section in
+                    return ProductViewModelSection(header: section.header,
+                                                   productList: section.productList.map(ProductViewModel.init))
+                }
+            }
+            
         let selectedProduct = input.selectProductTrigger
             .withLatestFrom(productSections) {
                 return ($0, $1)
@@ -117,7 +130,7 @@ extension SectionedProductsViewModel: ViewModelType {
             isLoading: isLoading,
             isReloading: isReloading,
             isLoadingMore: isLoadingMore,
-            productSections: productSections,
+            productSections: productViewModelSections,
             selectedProduct: selectedProduct,
             isEmpty: isEmpty,
             editedProduct: editedProduct,

@@ -67,7 +67,7 @@ final class ProductsViewController: UIViewController, BindableType {
                     for: IndexPath(row: index, section: 0),
                     cellType: ProductCell.self)
                     .then {
-                        $0.bindViewModel(ProductViewModel(product: product))
+                        $0.bindViewModel(product)
                         
                         $0.editProductAction = {
                             self.editProductTrigger.onNext(IndexPath(row: index, section: 0))

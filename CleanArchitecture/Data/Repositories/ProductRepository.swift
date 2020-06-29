@@ -8,13 +8,7 @@
 
 import UIKit
 
-protocol ProductRepositoryType {
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>>
-    func deleteProduct(id: Int) -> Observable<Void>
-    func update(_ product: Product) -> Observable<Void>
-}
-
-final class ProductRepository: ProductRepositoryType {
+final class ProductRepository {
     func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
         return Observable.create { observer in
             DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: {
@@ -44,7 +38,7 @@ final class ProductRepository: ProductRepositoryType {
     }
 }
 
-final class LocalProductRepository: ProductRepositoryType {
+final class LocalProductRepository {
     func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
         return API.shared.getProductList(API.GetProductListInput())
             .map { PagingInfo(page: 1, items: $0) }
