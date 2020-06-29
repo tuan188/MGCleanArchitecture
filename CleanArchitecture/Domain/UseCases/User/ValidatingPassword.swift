@@ -14,7 +14,7 @@ protocol ValidatingPassword {
 
 extension ValidatingPassword {
     func validatePassword(_ password: String) -> ValidationResult {
-        let minLengthRule = ValidationRuleLength(min: 1, error: LoginValidationError.passwordMinLength)
+        let minLengthRule = ValidationRuleLength(min: 1, error: UserValidationError.passwordMinLength)
         return password.validate(rule: minLengthRule)
     }
 }

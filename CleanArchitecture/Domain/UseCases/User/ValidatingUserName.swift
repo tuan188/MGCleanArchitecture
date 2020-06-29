@@ -14,7 +14,7 @@ protocol ValidatingUserName {
 
 extension ValidatingUserName {
     func validateUserName(_ username: String) -> ValidationResult {
-        let minLengthRule = ValidationRuleLength(min: 1, error: LoginValidationError.usernameMinLength)
+        let minLengthRule = ValidationRuleLength(min: 1, error: UserValidationError.usernameMinLength)
         return username.validate(rule: minLengthRule)
     }
 }
