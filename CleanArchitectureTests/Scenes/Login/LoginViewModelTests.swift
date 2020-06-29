@@ -10,16 +10,24 @@
 import XCTest
 import RxSwift
 import RxBlocking
+import RxTest
 
 final class LoginViewModelTests: XCTestCase {
     private var viewModel: LoginViewModel!
     private var navigator: LoginNavigatorMock!
     private var useCase: LoginUseCaseMock!
-    
     private var input: LoginViewModel.Input!
     private var output: LoginViewModel.Output!
     
     private var disposeBag: DisposeBag!
+    private var scheduler: TestScheduler!
+    
+    private var usernameValidationOutput: TestableObserver<ValidationResult>!
+    private var passwordValidationOutput: TestableObserver<ValidationResult>!
+    private var loginOutput: TestableObserver<Void>!
+    private var isLoginEnabledOutput: TestableObserver<Bool>!
+    private var isLoadingOutput: TestableObserver<Bool>!
+    private var errorOutput: TestableObserver<Error>!
     
     private let usernameTrigger = PublishSubject<String>()
     private let passwordTrigger = PublishSubject<String>()
@@ -40,19 +48,39 @@ final class LoginViewModelTests: XCTestCase {
         output = viewModel.transform(input)
         
         disposeBag = DisposeBag()
+        scheduler = TestScheduler(initialClock: 0)
         
-        output.usernameValidation.drive().disposed(by: disposeBag)
-        output.passwordValidation.drive().disposed(by: disposeBag)
-        output.login.drive().disposed(by: disposeBag)
-        output.isLoginEnabled.drive().disposed(by: disposeBag)
-        output.isLoading.drive().disposed(by: disposeBag)
-        output.error.drive().disposed(by: disposeBag)
+        usernameValidationOutput = scheduler.createObserver(ValidationResult.self)
+        passwordValidationOutput = scheduler.createObserver(ValidationResult.self)
+        loginOutput = scheduler.createObserver(Void.self)
+        isLoginEnabledOutput = scheduler.createObserver(Bool.self)
+        isLoadingOutput = scheduler.createObserver(Bool.self)
+        errorOutput = scheduler.createObserver(Error.self)
+        
+        output.usernameValidation.drive(usernameValidationOutput).disposed(by: disposeBag)
+        output.passwordValidation.drive(passwordValidationOutput).disposed(by: disposeBag)
+        output.login.drive(loginOutput).disposed(by: disposeBag)
+        output.isLoginEnabled.drive(isLoginEnabledOutput).disposed(by: disposeBag)
+        output.isLoading.drive(isLoadingOutput).disposed(by: disposeBag)
+        output.error.drive(errorOutput).disposed(by: disposeBag)
+    }
+    
+    private func startTriggers() {
+        scheduler.createColdObservable([.next(0, "foo")])
+            .bind(to: usernameTrigger)
+            .disposed(by: disposeBag)
+        scheduler.createColdObservable([.next(0, "bar")])
+            .bind(to: passwordTrigger)
+            .disposed(by: disposeBag)
+        scheduler.createColdObservable([.next(10, ())])
+            .bind(to: loginTrigger)
+            .disposed(by: disposeBag)
+        scheduler.start()
     }
     
     func test_loginTrigger_validateUsername() {
         // act
-        usernameTrigger.onNext("")
-        loginTrigger.onNext(())
+        startTriggers()
         
         // assert
         XCTAssert(useCase.validateUsernameCalled)
@@ -60,8 +88,7 @@ final class LoginViewModelTests: XCTestCase {
     
     func test_loginTrigger_validatePassword() {
         // act
-        passwordTrigger.onNext("")
-        loginTrigger.onNext(())
+        startTriggers()
         
         // assert
         XCTAssert(useCase.validatePasswordCalled)
@@ -72,14 +99,12 @@ final class LoginViewModelTests: XCTestCase {
         useCase.validateUsernameReturnValue = ValidationResult.invalid([TestValidationError()])
         
         // act
-        usernameTrigger.onNext("")
-        passwordTrigger.onNext("")
-        loginTrigger.onNext(())
-        
-        let loginEnabled = try? output.isLoginEnabled.toBlocking(timeout: 1).first()
+        startTriggers()
         
         // assert
-        XCTAssertEqual(loginEnabled, false)
+        XCTAssertEqual(isLoginEnabledOutput.events, [.next(0, true), .next(10, false), .next(10, false)])
+        XCTAssertEqual(isLoginEnabledOutput.events.last, .next(10, false))
+        XCTAssertFalse(useCase.loginCalled)
     }
     
     func test_loginTrigger_validatePasswordFailed_disableLogin() {
@@ -87,34 +112,16 @@ final class LoginViewModelTests: XCTestCase {
         useCase.validatePasswordReturnValue = ValidationResult.invalid([TestValidationError()])
         
         // act
-        usernameTrigger.onNext("")
-        passwordTrigger.onNext("")
-        loginTrigger.onNext(())
-        
-        let loginEnabled = try? output.isLoginEnabled.toBlocking(timeout: 1).first()
+        startTriggers()
         
         // assert
-        XCTAssertEqual(loginEnabled, false)
-    }
-    
-    func test_loginTrigger_disableLogin_notLogin() {
-        // arrange
-        useCase.validatePasswordReturnValue = ValidationResult.invalid([TestValidationError()])
-        
-        // act
-        usernameTrigger.onNext("")
-        passwordTrigger.onNext("")
-        loginTrigger.onNext(())
-        
-        // assert
+        XCTAssertEqual(isLoginEnabledOutput.events.last, .next(10, false))
         XCTAssertFalse(useCase.loginCalled)
     }
     
     func test_loginTrigger_login() {
         // act
-        usernameTrigger.onNext("")
-        passwordTrigger.onNext("")
-        loginTrigger.onNext(())
+        startTriggers()
         
         // assert
         XCTAssert(useCase.loginCalled)
@@ -126,33 +133,12 @@ final class LoginViewModelTests: XCTestCase {
         useCase.loginReturnValue = Observable<Void>.never()
         
         // act
-        usernameTrigger.onNext("")
-        passwordTrigger.onNext("")
-        loginTrigger.onNext(())
-        
-        let isLoading = try? output.isLoading.toBlocking(timeout: 1).first()
+        startTriggers()
         
         // assert
         XCTAssert(useCase.loginCalled)
-        XCTAssertEqual(isLoading, true)
-    }
-    
-    func test_loginTrigger_loading_disableLogin() {
-        // arrange
-        useCase.loginReturnValue = Observable<Void>.never()
-        
-        // act
-        usernameTrigger.onNext("")
-        passwordTrigger.onNext("")
-        loginTrigger.onNext(())
-        
-        let isLoading = try? output.isLoading.toBlocking(timeout: 1).first()
-        let isLoginEnabled = try? output.isLoginEnabled.toBlocking(timeout: 1).first()
-        
-        // assert
-        XCTAssert(useCase.loginCalled)
-        XCTAssertEqual(isLoading, true)
-        XCTAssertEqual(isLoginEnabled, false)
+        XCTAssertEqual(isLoadingOutput.events, [.next(0, false), .next(10, true)])
+        XCTAssertEqual(isLoginEnabledOutput.events.last, .next(10, false))
     }
     
     func test_loginTrigger_login_failedShowError() {
@@ -160,15 +146,11 @@ final class LoginViewModelTests: XCTestCase {
         useCase.loginReturnValue = Observable.error(TestError())
         
         // act
-        usernameTrigger.onNext("")
-        passwordTrigger.onNext("")
-        loginTrigger.onNext(())
-        
-        let error = try? output.error.toBlocking(timeout: 1).first()
+        startTriggers()
         
         // assert
         XCTAssert(useCase.loginCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(errorOutput.events.last?.value.element is TestError)
         XCTAssertFalse(navigator.toMainCalled)
     }
     
