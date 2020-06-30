@@ -12,23 +12,18 @@ protocol EditProductUseCaseType {
     func update(_ product: Product) -> Observable<Void>
 }
 
-struct EditProductUseCase: EditProductUseCaseType {
-    let productRepository: ProductRepository
+struct EditProductUseCase: EditProductUseCaseType, ValidatingProductName, ValidatingProductPrice, UpdatingProduct {
+    let productGateway: ProductGatewayType
     
     func validate(name: String) -> ValidationResult {
-        let minLengthRule = ValidationRuleLength(min: 5, error: ProductValidationError.productNameMinLength)
-        return name.validate(rule: minLengthRule)
+        return validateProductName(name)
     }
     
     func validate(price: String) -> ValidationResult {
-        let priceNumber = Double(price) ?? 0.0
-        if priceNumber <= 0 {
-            return ValidationResult.invalid([ProductValidationError.productPriceMinValue])
-        }
-        return ValidationResult.valid
+        return validateProductPrice(price)
     }
     
     func update(_ product: Product) -> Observable<Void> {
-        return productRepository.update(product)
+        return updateProduct(product)
     }
 }
