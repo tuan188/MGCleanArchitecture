@@ -10,6 +10,7 @@
 import XCTest
 import RxSwift
 import RxBlocking
+import RxTest
 
 final class ProductsViewModelTests: XCTestCase {
     private var viewModel: ProductsViewModel!
@@ -20,6 +21,17 @@ final class ProductsViewModelTests: XCTestCase {
     private var output: ProductsViewModel.Output!
     
     private var disposeBag: DisposeBag!
+    private var scheduler: TestScheduler!
+    
+    private var errorOutput: TestableObserver<Error>!
+    private var isLoadingOutput: TestableObserver<Bool>!
+    private var isReloadingOutput: TestableObserver<Bool>!
+    private var isLoadingMoreOutput: TestableObserver<Bool>!
+    private var productListOutput: TestableObserver<[ProductViewModel]>!
+    private var selectedProductOutput: TestableObserver<Void>!
+    private var editedProductOutput: TestableObserver<Void>!
+    private var isEmptyOutput: TestableObserver<Bool>!
+    private var deletedProductOutput: TestableObserver<Void>!
     
     private let loadTrigger = PublishSubject<Void>()
     private let reloadTrigger = PublishSubject<Void>()
@@ -46,26 +58,69 @@ final class ProductsViewModelTests: XCTestCase {
         output = viewModel.transform(input)
         
         disposeBag = DisposeBag()
+        scheduler = TestScheduler(initialClock: 0)
         
-        output.error.drive().disposed(by: disposeBag)
-        output.isLoading.drive().disposed(by: disposeBag)
-        output.isReloading.drive().disposed(by: disposeBag)
-        output.isLoadingMore.drive().disposed(by: disposeBag)
-        output.productList.drive().disposed(by: disposeBag)
-        output.selectedProduct.drive().disposed(by: disposeBag)
-        output.isEmpty.drive().disposed(by: disposeBag)
-        output.editedProduct.drive().disposed(by: disposeBag)
-        output.deletedProduct.drive().disposed(by: disposeBag)
+        errorOutput = scheduler.createObserver(Error.self)
+        isLoadingOutput = scheduler.createObserver(Bool.self)
+        isReloadingOutput = scheduler.createObserver(Bool.self)
+        isLoadingMoreOutput = scheduler.createObserver(Bool.self)
+        productListOutput = scheduler.createObserver([ProductViewModel].self)
+        selectedProductOutput = scheduler.createObserver(Void.self)
+        editedProductOutput = scheduler.createObserver(Void.self)
+        isEmptyOutput = scheduler.createObserver(Bool.self)
+        deletedProductOutput = scheduler.createObserver(Void.self)
+        
+        output.error.drive(errorOutput).disposed(by: disposeBag)
+        output.isLoading.drive(isLoadingOutput).disposed(by: disposeBag)
+        output.isReloading.drive(isReloadingOutput).disposed(by: disposeBag)
+        output.isLoadingMore.drive(isLoadingMoreOutput).disposed(by: disposeBag)
+        output.productList.drive(productListOutput).disposed(by: disposeBag)
+        output.selectedProduct.drive(selectedProductOutput).disposed(by: disposeBag)
+        output.isEmpty.drive(isEmptyOutput).disposed(by: disposeBag)
+        output.editedProduct.drive(editedProductOutput).disposed(by: disposeBag)
+        output.deletedProduct.drive(deletedProductOutput).disposed(by: disposeBag)
+    }
+    
+    private func startTriggers(load: Recorded<Event<Void>>? = nil,
+                               reload: Recorded<Event<Void>>? = nil,
+                               loadMore: Recorded<Event<Void>>? = nil,
+                               selectProduct: Recorded<Event<IndexPath>>? = nil,
+                               editProduct: Recorded<Event<IndexPath>>? = nil,
+                               deleteProduct: Recorded<Event<IndexPath>>? = nil) {
+        if let load = load {
+            scheduler.createColdObservable([load]).bind(to: loadTrigger).disposed(by: disposeBag)
+        }
+        
+        if let reload = reload {
+            scheduler.createColdObservable([reload]).bind(to: reloadTrigger).disposed(by: disposeBag)
+        }
+        
+        if let loadMore = loadMore {
+            scheduler.createColdObservable([loadMore]).bind(to: loadMoreTrigger).disposed(by: disposeBag)
+        }
+        
+        if let selectProduct = selectProduct {
+            scheduler.createColdObservable([selectProduct]).bind(to: selectProductTrigger).disposed(by: disposeBag)
+        }
+        
+        if let editProduct = editProduct {
+            scheduler.createColdObservable([editProduct]).bind(to: editProductTrigger).disposed(by: disposeBag)
+        }
+        
+        if let deleteProduct = deleteProduct {
+            scheduler.createColdObservable([deleteProduct]).bind(to: deleteProductTrigger).disposed(by: disposeBag)
+        }
+        
+        scheduler.start()
     }
 
     func test_loadTriggerInvoked_getProductList() {
         // act
-        loadTrigger.onNext(())
-        let productList = try? output.productList.toBlocking(timeout: 1).first()
+        startTriggers(load: .next(0, ()))
         
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssertEqual(productList?.count, 1)
+        XCTAssertEqual(productListOutput.lastEventElement?.count, 1)
     }
 
     func test_loadTriggerInvoked_getProductList_failedShowError() {
@@ -73,22 +128,20 @@ final class ProductsViewModelTests: XCTestCase {
         useCase.getProductListReturnValue = Observable.error(TestError())
 
         // act
-        loadTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
+        startTriggers(load: .next(0, ()))
 
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(errorOutput.lastEventElement is TestError)
     }
 
     func test_reloadTriggerInvoked_getProductList() {
         // act
-        reloadTrigger.onNext(())
-        let productList = try? output.productList.toBlocking(timeout: 1).first()
+        startTriggers(reload: .next(0, ()))
 
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssertEqual(productList?.count, 1)
+        XCTAssertEqual(productListOutput.lastEventElement?.count, 1)
     }
 
     func test_reloadTriggerInvoked_getProductList_failedShowError() {
@@ -96,12 +149,11 @@ final class ProductsViewModelTests: XCTestCase {
         useCase.getProductListReturnValue = Observable.error(TestError())
 
         // act
-        reloadTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
+        startTriggers(reload: .next(0, ()))
 
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(errorOutput.lastEventElement is TestError)
     }
 
     func test_reloadTriggerInvoked_notGetProductListIfStillLoading() {
@@ -132,13 +184,11 @@ final class ProductsViewModelTests: XCTestCase {
 
     func test_loadMoreTriggerInvoked_loadMoreProductList() {
         // act
-        loadTrigger.onNext(())
-        loadMoreTrigger.onNext(())
-        let productList = try? output.productList.toBlocking(timeout: 1).first()
+        startTriggers(load: .next(0, ()), loadMore: .next(10, ()))
 
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssertEqual(productList?.count, 2)
+        XCTAssertEqual(productListOutput.lastEventElement?.count, 2)
     }
 
     func test_loadMoreTriggerInvoked_loadMoreProductList_failedShowError() {
@@ -146,13 +196,11 @@ final class ProductsViewModelTests: XCTestCase {
         useCase.getProductListReturnValue = Observable.error(TestError())
 
         // act
-        loadTrigger.onNext(())
-        loadMoreTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
+        startTriggers(load: .next(0, ()), loadMore: .next(10, ()))
 
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(errorOutput.lastEventElement is TestError)
     }
 
     func test_loadMoreTriggerInvoked_notLoadMoreProductListIfStillLoading() {
@@ -196,8 +244,7 @@ final class ProductsViewModelTests: XCTestCase {
 
     func test_selectProductTriggerInvoked_toProductDetail() {
         // act
-        loadTrigger.onNext(())
-        selectProductTrigger.onNext(IndexPath(row: 0, section: 0))
+        startTriggers(load: .next(0, ()), selectProduct: .next(10, IndexPath(row: 0, section: 0)))
 
         // assert
         XCTAssert(navigator.toProductDetailCalled)
@@ -205,8 +252,7 @@ final class ProductsViewModelTests: XCTestCase {
     
     func test_editProductTriggerInvoked_editProduct() {
         // act
-        loadTrigger.onNext(())
-        editProductTrigger.onNext(IndexPath(row: 0, section: 0))
+        startTriggers(load: .next(0, ()), editProduct: .next(10, IndexPath(row: 0, section: 0)))
 
         // assert
         XCTAssert(navigator.toEditProductCalled)
@@ -214,8 +260,7 @@ final class ProductsViewModelTests: XCTestCase {
     
     func test_deletedProductInvoked_deleteProduct() {
         // act
-        loadTrigger.onNext(())
-        deleteProductTrigger.onNext(IndexPath(row: 0, section: 0))
+        startTriggers(load: .next(0, ()), deleteProduct: .next(10, IndexPath(row: 0, section: 0)))
 
         // assert
         XCTAssert(navigator.confirmDeleteProductCalled)

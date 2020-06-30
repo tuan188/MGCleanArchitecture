@@ -45,8 +45,8 @@ final class GettingProductListTests: XCTestCase, GettingProductList {
 
         // act
         self.getProductList(page: 1)
-        .subscribe(getProductListOutput)
-        .disposed(by: disposeBag)
+            .subscribe(getProductListOutput)
+            .disposed(by: disposeBag)
 
         // assert
         XCTAssert(productGatewayMock.getProductListCalled)
