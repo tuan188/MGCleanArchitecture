@@ -31,6 +31,7 @@ struct ProductGateway: ProductGatewayType {
                 observer.onNext(page)
                 observer.onCompleted()
             })
+            
             return Disposables.create()
         }
     }
@@ -48,7 +49,7 @@ struct LocalAPIProductGateway: ProductGatewayType {
 
     func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
         return API.shared.getProductList(API.GetProductListInput())
-        .map { PagingInfo(page: 1, items: $0) }
+            .map { PagingInfo(page: 1, items: $0) }
     }
     
     func deleteProduct(id: Int) -> Observable<Void> {
