@@ -148,8 +148,6 @@
 		17A4E5EB20C90C08003DE0EA /* SectionedProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4E5EA20C90C08003DE0EA /* SectionedProductCell.swift */; };
 		17BB259524A4DDC5002E3CD9 /* AddingUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB259424A4DDC5002E3CD9 /* AddingUsers.swift */; };
 		17BB259D24A4EE35002E3CD9 /* AppGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB259C24A4EE35002E3CD9 /* AppGateway.swift */; };
-		17BB3A6920FF574F00C5F8B0 /* RepoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB3A6820FF574F00C5F8B0 /* RepoRepository.swift */; };
-		17BD35102105D83A0042CAEB /* ProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BD350F2105D83A0042CAEB /* ProductRepository.swift */; };
 		17C0F25321424D8A0047C902 /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0F25221424D8A0047C902 /* ProductHeaderView.swift */; };
 		17C0F25521424D960047C902 /* ProductHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17C0F25421424D960047C902 /* ProductHeaderView.xib */; };
 		17CD5FA224A5697300BA2496 /* ValidatingUserName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD5FA124A5697300BA2496 /* ValidatingUserName.swift */; };
@@ -378,8 +376,6 @@
 		17A4E5EA20C90C08003DE0EA /* SectionedProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedProductCell.swift; sourceTree = "<group>"; };
 		17BB259424A4DDC5002E3CD9 /* AddingUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingUsers.swift; sourceTree = "<group>"; };
 		17BB259C24A4EE35002E3CD9 /* AppGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGateway.swift; sourceTree = "<group>"; };
-		17BB3A6820FF574F00C5F8B0 /* RepoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoRepository.swift; sourceTree = "<group>"; };
-		17BD350F2105D83A0042CAEB /* ProductRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepository.swift; sourceTree = "<group>"; };
 		17C0F25221424D8A0047C902 /* ProductHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
 		17C0F25421424D960047C902 /* ProductHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductHeaderView.xib; sourceTree = "<group>"; };
 		17CD5FA124A5697300BA2496 /* ValidatingUserName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatingUserName.swift; sourceTree = "<group>"; };
@@ -511,7 +507,6 @@
 				17BB259624A4EBA4002E3CD9 /* UserDefaults */,
 				1721726D20E487FD007D33A5 /* API */,
 				177A12E321E4524A007F1559 /* CoreData */,
-				17BB3A6620FF568700C5F8B0 /* Repositories */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1032,15 +1027,6 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		17BB3A6620FF568700C5F8B0 /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-				17BB3A6820FF574F00C5F8B0 /* RepoRepository.swift */,
-				17BD350F2105D83A0042CAEB /* ProductRepository.swift */,
-			);
-			path = Repositories;
-			sourceTree = "<group>";
-		};
 		17CD5FA024A5692B00BA2496 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -1471,7 +1457,6 @@
 				17A4E5EB20C90C08003DE0EA /* SectionedProductCell.swift in Sources */,
 				17CDA61921EC20500001FE4A /* UserListViewModel.swift in Sources */,
 				1777C08021F022C60092F5B8 /* Observable+.swift in Sources */,
-				17BB3A6920FF574F00C5F8B0 /* RepoRepository.swift in Sources */,
 				172DC2AF20C62A01009FC881 /* Product.swift in Sources */,
 				1741037B214119B200267731 /* UnitTestViewController.swift in Sources */,
 				173CA58E21460F8B001AF22D /* DynamicEditProductViewModel.swift in Sources */,
@@ -1527,7 +1512,6 @@
 				17C0F25321424D8A0047C902 /* ProductHeaderView.swift in Sources */,
 				17EC212E20DCD50700F793FE /* ProductDetailViewModel.swift in Sources */,
 				17EC213020DCD55100F793FE /* ProductDetailViewController.swift in Sources */,
-				17BD35102105D83A0042CAEB /* ProductRepository.swift in Sources */,
 				17CDA63321EC31250001FE4A /* MagicalRecord+Rx.swift in Sources */,
 				176E8BDF24A3AC4F00B1F709 /* GatewaysAssembler.swift in Sources */,
 				172DC28020C53DB1009FC881 /* MainViewModel.swift in Sources */,

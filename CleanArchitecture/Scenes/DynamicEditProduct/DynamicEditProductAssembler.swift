@@ -38,6 +38,6 @@ extension DynamicEditProductAssembler where Self: DefaultAssembler {
     }
 
     func resolve() -> DynamicEditProductUseCaseType {
-        return DynamicEditProductUseCase(productRepository: ProductRepository())
+        return DynamicEditProductUseCase(productGateway: resolve())
     }
 }

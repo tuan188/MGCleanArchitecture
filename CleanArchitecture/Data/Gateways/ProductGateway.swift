@@ -15,17 +15,47 @@ protocol ProductGatewayType {
 }
 
 struct ProductGateway: ProductGatewayType {
-    let productRepository = ProductRepository()
-    
     func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
-        return productRepository.getProductList(page: page)
+        return Observable.create { observer in
+            DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: {
+                let products = Array(0...9)
+                    .map { $0 + (page - 1) * 10 }
+                    .map { id in
+                        Product().with {
+                            $0.id = id
+                            $0.name = "Product \(id)"
+                            $0.price = Double(id * 2)
+                        }
+                    }
+                let page = PagingInfo<Product>(page: page, items: products)
+                observer.onNext(page)
+                observer.onCompleted()
+            })
+            return Disposables.create()
+        }
     }
     
     func deleteProduct(id: Int) -> Observable<Void> {
-        return productRepository.deleteProduct(id: id)
+        return Observable.just(())
     }
     
     func update(_ product: Product) -> Observable<Void> {
-        return productRepository.update(product)
+        return Observable.just(())
+    }
+}
+
+struct LocalAPIProductGateway: ProductGatewayType {
+
+    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
+        return API.shared.getProductList(API.GetProductListInput())
+        .map { PagingInfo(page: 1, items: $0) }
+    }
+    
+    func deleteProduct(id: Int) -> Observable<Void> {
+        return Observable.just(())
+    }
+    
+    func update(_ product: Product) -> Observable<Void> {
+        return Observable.just(())
     }
 }
