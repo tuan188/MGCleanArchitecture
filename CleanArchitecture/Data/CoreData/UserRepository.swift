@@ -19,14 +19,14 @@ struct UserRepository {
 }
 
 extension UserRepository: CoreDataRepository {
-    static func map(from item: User, to entity: UserEntity) {
+    static func map(from item: User, to entity: CDUser) {
         entity.id = item.id
         entity.name = item.name
         entity.gender = Int64(item.gender.rawValue)
         entity.birthday = item.birthday
     }
     
-    static func item(from entity: UserEntity) -> User? {
+    static func item(from entity: CDUser) -> User? {
         guard let id = entity.id else { return nil }
         return User(
             id: id,
