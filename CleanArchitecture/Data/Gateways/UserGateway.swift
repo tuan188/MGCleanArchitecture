@@ -13,14 +13,6 @@ protocol UserGatewayType {
     func add(_ users: [User]) -> Observable<Void>
 }
 
-struct UserGateway: UserGatewayType {
-    private let userRepository = UserRepository()
-    
-    func getUsers() -> Observable<[User]> {
-        return userRepository.getUsers()
-    }
-    
-    func add(_ users: [User]) -> Observable<Void> {
-        return userRepository.add(users)
-    }
+struct UserGateway: UserGatewayType, UserRepository {
+   
 }
