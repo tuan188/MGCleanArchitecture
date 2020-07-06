@@ -69,15 +69,15 @@ protocol ProductGatewayType {
 }
 ```
 
-Note: For simplicity we put the Gateway protocols and implementations in the same files. In fact, Gateway protocols should be at the Domain layer and implementations at the Data layer.
+_Note: For simplicity we put the Gateway protocols and implementations in the same files. In fact, Gateway protocols should be at the Domain Layer and implementations at the Data Layer._
 
 ### Data Layer
 
 <img width="500" alt="Data Layer" src="images/data.png">
 
-Data Layer contains Gateway Implementations and one or many Data Stores. Gateways are responsible for coordinating data from different Data Stores. Data Store can be Remote or Local (for example persistent database). Data Layer depends only on the Domain Layer
+Data Layer contains Gateway Implementations and one or many Data Stores. Gateways are responsible for coordinating data from different Data Stores. Data Store can be Remote or Local (for example persistent database). Data Layer depends only on the Domain Layer.
 
-#### Gateway Implementations.
+#### Gateway Implementations
 
 ```swift
 struct ProductGateway: ProductGatewayType {
@@ -122,7 +122,7 @@ extension API {
 }
 ```
 
-Map JSON Data to Domain Entities using ObjectMapper
+Map JSON Data to Domain Entities using ObjectMapper:
 
 ```swift
 import ObjectMapper 
@@ -140,9 +140,11 @@ extension Product: Mappable {
 }
 ```
 
-Note: again, for simplicity we put entities and mappings in the same files and use entities as data models for APIs. You can create data models for APIs and map to entities.
+_Note: Again, for simplicity we put entities and mappings in the same files and use entities as data models for APIs. You can create data models for APIs and map to entities._
 
 #### CoreData Repositories
+
+Map CoreData Entities to Domain Entities and vice versa:
 
 ```swift
 import MagicalRecord
@@ -179,29 +181,6 @@ extension UserRepository where Self.ModelType == User, Self.EntityType == CDUser
 }
 ```
 
-Map CoreData Entities to Domain Entities and vice versa
-
-```swift
-extension UserRepository: CoreDataRepository {
-    static func map(from item: User, to entity: CDUser) {
-        entity.id = item.id
-        entity.name = item.name
-        entity.gender = Int64(item.gender.rawValue)
-        entity.birthday = item.birthday
-    }
-    
-    static func item(from entity: CDUser) -> User? {
-        guard let id = entity.id else { return nil }
-        return User(
-            id: id,
-            name: entity.name ?? "",
-            gender: Gender(rawValue: Int(entity.gender)) ?? Gender.unknown,
-            birthday: entity.birthday ?? Date()
-        )
-    }
-}
-```
-
 ### Presentation Layer
 
 <img width="500" alt="Presentation Layer" src="images/presentation.png">
@@ -219,7 +198,7 @@ In the current example, Presentation is implemented with the MVVM pattern and he
 * ViewModel should also manage any navigation logic like deciding when it is time to navigate to a different view.
 [Source](https://www.tutorialspoint.com/mvvm/mvvm_responsibilities.htm)
 
-ViewModel performs pure transformation of a user Input to the Output
+ViewModel performs pure transformation of a user Input to the Output:
 
 ```swift
 public protocol ViewModelType {
@@ -286,6 +265,12 @@ extension ProductsViewModel: ViewModelType {
         
         let productViewModelList = productList
             .map { $0.map(ProductViewModel.init) }
+	    
+	let selectedProduct = select(trigger: input.selectProductTrigger, items: productList)
+            .do(onNext: { product in
+                self.navigator.toProductDetail(product: product.product)
+            })
+            .mapToVoid()
         ...
     }
 }
@@ -311,7 +296,7 @@ extension ProductsAssembler {
 }
 ```
 
-ViewModels provide data and functionality to be used by views
+ViewModels provide data and functionality to be used by views:
 
 ```swift
 struct UserViewModel {
@@ -334,7 +319,7 @@ struct UserViewModel {
 #### Scene Use Case
 Scene Use Case acts as an intermediary between the Presentation Layer and the Domain Layer. It includes individual use cases for each screen, which makes testing the ViewModel easier.
 
-Scene Use Case uses the Facade pattern:
+Scene Use Case uses the Facade pattern.
 
 ```swift
 protocol ProductsUseCaseType {
@@ -380,8 +365,7 @@ final class GettingProductListTests: XCTestCase, GettingProductList {
 import RxBlocking
 
 final class ReposViewModelTests: XCTestCase {
-    
-	  ...
+    ...
 
     func test_loadTriggerInvoked_getRepoList() {
         // act
@@ -437,7 +421,7 @@ final class ReposViewModelTests: XCTestCase {
         ...
     - /Config
         - APIUrls.swift
-    	  - Notifications.swift
+    	- Notifications.swift
     - /Support
         - /Extension
             - UIViewController+.swift
