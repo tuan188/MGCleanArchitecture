@@ -1,4 +1,4 @@
-# Clean Architecture (MVVM + RxSwift)
+# iOS Clean Architecture (MVVM + RxSwift)
 
 ## Installation
 ```
