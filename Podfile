@@ -7,21 +7,21 @@ def pods
     pod 'MGLoadMore', '~> 1.3.1'
     
     # Rx
-    pod 'NSObject+Rx', '~> 5.0'
+    pod 'NSObject+Rx', '~> 5.1'
     pod 'RxDataSources', '~> 4.0'
     
     # Core
     pod 'ObjectMapper', '~> 3.5'
     pod 'Reusable', '~> 4.1'
-    pod 'Then', '~> 2.4'
-    pod 'MJRefresh', '~> 3.2'
+    pod 'Then', '~> 2.7'
+    pod 'MJRefresh', '~> 3.4.3'
     pod 'Validator', '~> 3.2.1'
     
     # Others
     pod 'MagicalRecord', '2.3.0'
     pod 'MBProgressHUD', '~> 1.2'
     pod 'ActionSheetPicker-3.0', '2.3'
-    pod 'SDWebImage', '~> 5.6'
+    pod 'SDWebImage', '~> 5.8.3'
 end
 
 def test_pods

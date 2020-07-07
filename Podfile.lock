@@ -15,16 +15,16 @@ PODS:
     - MJRefresh (~> 3.2)
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
-  - MJRefresh (3.3.1)
+  - MJRefresh (3.4.3)
   - Mockingjay (2.0.1):
     - Mockingjay/Core (= 2.0.1)
     - Mockingjay/XCTest (= 2.0.1)
   - Mockingjay/Core (2.0.1)
   - Mockingjay/XCTest (2.0.1):
     - Mockingjay/Core
-  - "NSObject+Rx (5.0.2)":
-    - RxSwift (~> 5.0)
-  - ObjectMapper (3.5.1)
+  - "NSObject+Rx (5.1.0)":
+    - RxSwift (~> 5.1)
+  - ObjectMapper (3.5.3)
   - Reusable (4.1.1):
     - Reusable/Storyboard (= 4.1.1)
     - Reusable/View (= 4.1.1)
@@ -35,24 +35,24 @@ PODS:
   - RxAlamofire/Core (5.1.0):
     - Alamofire (~> 4.8)
     - RxSwift (~> 5.0)
-  - RxBlocking (5.1.0):
+  - RxBlocking (5.1.1):
     - RxSwift (~> 5)
-  - RxCocoa (5.1.0):
+  - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
   - RxDataSources (4.0.1):
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
-  - RxRelay (5.1.0):
+  - RxRelay (5.1.1):
     - RxSwift (~> 5)
-  - RxSwift (5.1.0)
+  - RxSwift (5.1.1)
   - RxTest (5.1.1):
     - RxSwift (~> 5)
-  - SDWebImage (5.6.0):
-    - SDWebImage/Core (= 5.6.0)
-  - SDWebImage/Core (5.6.0)
-  - Then (2.6.0)
+  - SDWebImage (5.8.3):
+    - SDWebImage/Core (= 5.8.3)
+  - SDWebImage/Core (5.8.3)
+  - Then (2.7.0)
   - Validator (3.2.1)
 
 DEPENDENCIES:
@@ -118,20 +118,20 @@ SPEC CHECKSUMS:
   MGAPIService: 2ea8217d3bb8cde33bf47e6579882a73a9cccebb
   MGArchitecture: 0fa04fdeea21f26469b8faab16ba48752af31499
   MGLoadMore: a12ea88793ed989f2afd73b958aaf70e12048a7d
-  MJRefresh: eeda70fbf0ad277f3178cef1cd0c3532591d6237
+  MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
   Mockingjay: 0660815ee4907b2f0c1ac988126061bb3e19b7aa
-  "NSObject+Rx": 2eb2cf51fd1c554118449a7fbc36e4cd620b9e94
-  ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
+  "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
+  ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
   Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
   RxAlamofire: a2d7621de4c23a0c6e7b476b504acc32838ee341
-  RxBlocking: 5ef131267220f92ef68531dd6afeaf407cd6b41a
-  RxCocoa: 13d2a4d7546a34b8ececae8c281e4ea1dbb94f2b
+  RxBlocking: 5f700a78cad61ce253ebd37c9a39b5ccc76477b4
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
-  RxRelay: a168bd6caf712d00c676ac344e9295afc93b418e
-  RxSwift: ad5874f24bb0dbffd1e9bb8443604e3578796c7a
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
-  SDWebImage: 21b19f56b4226cdfe3aefe4e6848dc43ed129a86
-  Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
+  SDWebImage: 112503ec94a5a2a41869503844a15e8d8f1ead5c
+  Then: acfe0be7e98221c6204e12f8161459606d5d822d
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
 
 PODFILE CHECKSUM: 4b929fe4c16db0b6c29c755f8aa77bc94b27f52e
