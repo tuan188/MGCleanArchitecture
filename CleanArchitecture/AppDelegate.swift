@@ -19,13 +19,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         setupCoreData()
 //        configSDWebImageDownloader()
         
-        window = UIWindow(frame: UIScreen.main.bounds)
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        self.window = window
         
         if NSClassFromString("XCTest") != nil { // test
-            window?.rootViewController = UnitTestViewController()
-            window?.makeKeyAndVisible()
+            window.rootViewController = UnitTestViewController()
+            window.makeKeyAndVisible()
         } else {
-            bindViewModel()
+            bindViewModel(window: window)
         }
     }
     
@@ -40,9 +41,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         MagicalRecord.setLoggingLevel(MagicalRecordLoggingLevel.error)
     }
 
-    private func bindViewModel() {
-        guard let window = window else { return }
-        
+    private func bindViewModel(window: UIWindow) {
         let vm: AppViewModel = assembler.resolve(window: window)
         let input = AppViewModel.Input(loadTrigger: Driver.just(()))
         let output = vm.transform(input)
