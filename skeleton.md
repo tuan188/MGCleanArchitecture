@@ -1,4 +1,4 @@
-# Creating a Skeleton Project
+# Tutorial - Creating a Skeleton Project
 
 To create a skeleton project named MyApp, do the following steps.
 
@@ -78,4 +78,6 @@ fi
 
 <img width="700" alt="Swiftlint Run Script" src="images/swiftlint_run_script.png">
 
-Done. Now you can build or run to see the result.
+Done 🎉
+
+Now you can build or run to see the result.
