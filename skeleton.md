@@ -1,11 +1,11 @@
-# Creating A Skeleton Project
+# Creating a Skeleton Project
 
-To create a skeleton for a new project named MyApp, do the following steps.
+To create a skeleton project named MyApp, do the following steps.
 
 _Note: This tutorial applies to Xcode 11.5_
 
 ### Step 1:
-Open Xcode and create a new project using Single View App template.
+Open Xcode and create a new project using Single View App template, choose Storyboard and Include Unit Tests.
 
 <img width="600" alt="New Xcode Project" src="images/new_project.png">
 
@@ -28,6 +28,10 @@ Run command:
 ```
 $ igen template skeleton MyApp
 ```
+
+Result:
+
+<img width="500" alt="Result" src="images/result.png">
 
 ### Step 6:
 Select and drag files and folders from Sources to MyApp project. Choose Create Bridging Header.
