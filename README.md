@@ -449,6 +449,8 @@ final class ReposViewModelTests: XCTestCase {
 
 * [Tutorial: Creating a skeleton project](skeleton.md)
 
+<img alt="Skeleton Project" src="images/skeleton.png">
+
 
 ## Code Generator
 * [GitHub - tuan188/MGiGen: A code generator for iOS app](https://github.com/tuan188/MGiGen)
