@@ -10,19 +10,19 @@ $ open ~/Library/Developer/Xcode/Templates/File\ Templates/Custom\ Templates
 
 ## Using igen
 
-Install  [igen](https://github.com/tuan188/MGiGen)
+Install [igen](https://github.com/tuan188/MGiGen)
 
-Run command to install:
-
-```
-igen xcode install-templates
+Run install command:
 
 ```
-
-Uninstall templates:
+$ igen xcode install-templates
 
 ```
-igen xcode uninstall-templates
+
+Uninstall:
+
+```
+$ igen xcode uninstall-templates
 
 ```
 
