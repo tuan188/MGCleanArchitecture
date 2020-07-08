@@ -447,7 +447,7 @@ final class ReposViewModelTests: XCTestCase {
 
 ## Skeleton Project
 
-* [Creating a skeleton project](skeleton.md)
+* [Tutorial: Creating a skeleton project](skeleton.md)
 
 
 ## Code Generator
