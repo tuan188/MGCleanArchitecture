@@ -78,4 +78,4 @@ fi
 
 <img width="700" alt="Swiftlint Run Script" src="images/swiftlint_run_script.png">
 
-Done.
+Done. Now you can build or run to see the result.
