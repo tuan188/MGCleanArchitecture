@@ -31,7 +31,7 @@ $ igen template skeleton MyApp
 
 Result:
 
-<img width="500" alt="Result" src="images/result.png">
+<img width="700" alt="Result" src="images/result.png">
 
 ### Step 6:
 Select and drag files and folders from Sources to MyApp project. Choose Create Bridging Header.
