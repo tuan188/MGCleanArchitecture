@@ -16,6 +16,7 @@ def pods
     pod 'Then', '~> 2.7'
     pod 'MJRefresh', '~> 3.4.3'
     pod 'Validator', '~> 3.2.1'
+    pod 'ValidatedPropertyKit'
     
     # Others
     pod 'MagicalRecord', '2.3.0'

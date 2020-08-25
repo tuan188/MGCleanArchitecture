@@ -6,6 +6,8 @@
 //  Copyright © 2019 Sun Asterisk. All rights reserved.
 //
 
+import Validator
+
 extension ViewModelType {
     func validate<T>(object: Driver<T>,
                      trigger: Driver<Void>,

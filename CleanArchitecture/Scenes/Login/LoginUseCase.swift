@@ -6,18 +6,20 @@
 //  Copyright © 2019 Sun Asterisk. All rights reserved.
 //
 
+import ValidatedPropertyKit
+
 protocol LoginUseCaseType {
-    func validate(username: String) -> ValidationResult
-    func validate(password: String) -> ValidationResult
-    func login(username: String, password: String) -> Observable<Void>
+    func validateUserName(_ username: String) -> Result<String, ValidationError>
+    func validatePassword(_ password: String) -> Result<String, ValidationError>
+    func login(dto: LoginDto) -> Observable<Void>
 }
 
-struct LoginUseCase: LoginUseCaseType, ValidatingUserName, ValidatingPassword, LoggingIn {
-    func validate(username: String) -> ValidationResult {
-        return validateUserName(username)
+struct LoginUseCase: LoginUseCaseType, LoggingIn {
+    func validateUserName(_ username: String) -> Result<String, ValidationError> {
+        return LoginDto.validateUserName(username)
     }
     
-    func validate(password: String) -> ValidationResult {
-        return validatePassword(password)
+    func validatePassword(_ password: String) -> Result<String, ValidationError> {
+        return LoginDto.validatePassword(password)
     }
 }

@@ -13,7 +13,11 @@ protocol LoggingIn {
 }
 
 extension LoggingIn {
-    func login(username: String, password: String) -> Observable<Void> {
+    func login(dto: LoginDto) -> Observable<Void> {
+        if let error = dto.validationError {
+            return Observable.error(error)
+        }
+        
         return Observable.create { observer in
             DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: {
                 observer.onNext(())

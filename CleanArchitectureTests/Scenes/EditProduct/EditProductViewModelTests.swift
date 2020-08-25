@@ -11,6 +11,7 @@ import XCTest
 import RxSwift
 import RxBlocking
 import RxTest
+import Validator
 
 final class EditProductViewModelTests: XCTestCase {
     

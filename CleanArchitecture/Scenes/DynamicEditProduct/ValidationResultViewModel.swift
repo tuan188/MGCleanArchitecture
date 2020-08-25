@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Validator
 
 struct ValidationResultViewModel {
     let validationResult: ValidationResult

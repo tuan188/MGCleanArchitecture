@@ -53,6 +53,7 @@ PODS:
     - SDWebImage/Core (= 5.8.3)
   - SDWebImage/Core (5.8.3)
   - Then (2.7.0)
+  - ValidatedPropertyKit (0.0.4)
   - Validator (3.2.1)
 
 DEPENDENCIES:
@@ -62,16 +63,17 @@ DEPENDENCIES:
   - MGAPIService (~> 2.2.1)
   - MGArchitecture (~> 1.3.1)
   - MGLoadMore (~> 1.3.1)
-  - MJRefresh (~> 3.2)
+  - MJRefresh (~> 3.4.3)
   - Mockingjay (from `https://github.com/anhnc55/Mockingjay.git`, branch `swift_5`)
-  - "NSObject+Rx (~> 5.0)"
+  - "NSObject+Rx (~> 5.1)"
   - ObjectMapper (~> 3.5)
   - Reusable (~> 4.1)
   - RxBlocking (~> 5.1)
   - RxDataSources (~> 4.0)
   - RxTest (~> 5.1)
-  - SDWebImage (~> 5.6)
-  - Then (~> 2.4)
+  - SDWebImage (~> 5.8.3)
+  - Then (~> 2.7)
+  - ValidatedPropertyKit
   - Validator (~> 3.2.1)
 
 SPEC REPOS:
@@ -97,6 +99,7 @@ SPEC REPOS:
     - RxTest
     - SDWebImage
     - Then
+    - ValidatedPropertyKit
     - Validator
 
 EXTERNAL SOURCES:
@@ -132,8 +135,9 @@ SPEC CHECKSUMS:
   RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
   SDWebImage: 112503ec94a5a2a41869503844a15e8d8f1ead5c
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
+  ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
 
-PODFILE CHECKSUM: 4b929fe4c16db0b6c29c755f8aa77bc94b27f52e
+PODFILE CHECKSUM: 574a20b1eb84ebc2ecd79ecfbb9371473ddb1eea
 
 COCOAPODS: 1.9.3

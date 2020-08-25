@@ -10,6 +10,7 @@
 import XCTest
 import RxSwift
 import RxBlocking
+import Validator
 
 final class DynamicEditProductViewModelTests: XCTestCase {
     private var viewModel: DynamicEditProductViewModel!

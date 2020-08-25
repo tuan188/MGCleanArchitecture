@@ -8,6 +8,7 @@
 
 @testable import CleanArchitecture
 import RxSwift
+import Validator
 
 final class EditProductUseCaseMock: EditProductUseCaseType {
     

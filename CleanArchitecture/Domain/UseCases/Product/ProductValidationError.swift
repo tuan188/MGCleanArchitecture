@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Validator
 
 enum ProductValidationError: ValidationError {
     case productNameMinLength

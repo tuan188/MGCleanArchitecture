@@ -6,6 +6,8 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
+import Validator
+
 protocol DynamicEditProductUseCaseType {
     func validate(name: String) -> ValidationResult
     func validate(price: String) -> ValidationResult

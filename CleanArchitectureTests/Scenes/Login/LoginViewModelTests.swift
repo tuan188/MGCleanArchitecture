@@ -11,6 +11,7 @@ import XCTest
 import RxSwift
 import RxBlocking
 import RxTest
+import ValidatedPropertyKit
 
 final class LoginViewModelTests: XCTestCase {
     private var viewModel: LoginViewModel!
@@ -22,8 +23,8 @@ final class LoginViewModelTests: XCTestCase {
     private var disposeBag: DisposeBag!
     private var scheduler: TestScheduler!
     
-    private var usernameValidationOutput: TestableObserver<ValidationResult>!
-    private var passwordValidationOutput: TestableObserver<ValidationResult>!
+    private var usernameValidationMessageOutput: TestableObserver<String>!
+    private var passwordValidationMessageOutput: TestableObserver<String>!
     private var loginOutput: TestableObserver<Void>!
     private var isLoginEnabledOutput: TestableObserver<Bool>!
     private var isLoadingOutput: TestableObserver<Bool>!
@@ -45,24 +46,23 @@ final class LoginViewModelTests: XCTestCase {
             loginTrigger: loginTrigger.asDriverOnErrorJustComplete()
         )
         
-        output = viewModel.transform(input)
-        
         disposeBag = DisposeBag()
         scheduler = TestScheduler(initialClock: 0)
         
-        usernameValidationOutput = scheduler.createObserver(ValidationResult.self)
-        passwordValidationOutput = scheduler.createObserver(ValidationResult.self)
+        output = viewModel.transform(input, disposeBag: disposeBag)
+        
+        usernameValidationMessageOutput = scheduler.createObserver(String.self)
+        passwordValidationMessageOutput = scheduler.createObserver(String.self)
         loginOutput = scheduler.createObserver(Void.self)
         isLoginEnabledOutput = scheduler.createObserver(Bool.self)
         isLoadingOutput = scheduler.createObserver(Bool.self)
         errorOutput = scheduler.createObserver(Error.self)
         
-        output.usernameValidation.drive(usernameValidationOutput).disposed(by: disposeBag)
-        output.passwordValidation.drive(passwordValidationOutput).disposed(by: disposeBag)
-        output.login.drive(loginOutput).disposed(by: disposeBag)
-        output.isLoginEnabled.drive(isLoginEnabledOutput).disposed(by: disposeBag)
-        output.isLoading.drive(isLoadingOutput).disposed(by: disposeBag)
-        output.error.drive(errorOutput).disposed(by: disposeBag)
+        output.$usernameValidationMessage.subscribe(usernameValidationMessageOutput).disposed(by: disposeBag)
+        output.$passwordValidationMessage.subscribe(passwordValidationMessageOutput).disposed(by: disposeBag)
+        output.$isLoginEnabled.subscribe(isLoginEnabledOutput).disposed(by: disposeBag)
+        output.$isLoading.subscribe(isLoadingOutput).disposed(by: disposeBag)
+        output.$error.unwrap().subscribe(errorOutput).disposed(by: disposeBag)
     }
     
     private func startTriggers() {
@@ -83,7 +83,7 @@ final class LoginViewModelTests: XCTestCase {
         startTriggers()
         
         // assert
-        XCTAssert(useCase.validateUsernameCalled)
+        XCTAssert(useCase.validateUserNameCalled)
     }
     
     func test_loginTrigger_validatePassword() {
@@ -96,20 +96,20 @@ final class LoginViewModelTests: XCTestCase {
     
     func test_loginTrigger_validateUsernameFailed_disableLogin() {
         // arrange
-        useCase.validateUsernameReturnValue = ValidationResult.invalid([TestValidationError()])
+        useCase.validateUserNameReturnValue = .failure(ValidationError(message: "invalid username"))
         
         // act
         startTriggers()
         
         // assert
-        XCTAssertEqual(isLoginEnabledOutput.events, [.next(0, true), .next(10, false), .next(10, false)])
+        XCTAssertEqual(isLoginEnabledOutput.events, [.next(0, true), .next(10, false)])
         XCTAssertEqual(isLoginEnabledOutput.events.last, .next(10, false))
         XCTAssertFalse(useCase.loginCalled)
     }
     
     func test_loginTrigger_validatePasswordFailed_disableLogin() {
         // arrange
-        useCase.validatePasswordReturnValue = ValidationResult.invalid([TestValidationError()])
+        useCase.validatePasswordReturnValue = .failure(ValidationError(message: "invalid password"))
         
         // act
         startTriggers()

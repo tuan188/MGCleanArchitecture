@@ -8,6 +8,7 @@
 
 import UIKit
 import Reusable
+import Validator
 
 final class EditProductViewController: UITableViewController, BindableType {
     

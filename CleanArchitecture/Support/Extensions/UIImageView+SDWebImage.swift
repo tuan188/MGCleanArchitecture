@@ -10,8 +10,6 @@ import UIKit
 
 extension UIImageView {
     func setImage(with url: URL?, completion: (() -> Void)? = nil) {
-        self.backgroundColor = backgroundColor
-        
         self.sd_setImage(with: url, placeholderImage: nil, options: .refreshCached) { (_, _, _, _) in
             completion?()
         }

@@ -8,8 +8,9 @@
 
 import UIKit
 import Reusable
+import Validator
 
-final class LoginViewController: UIViewController, BindableType {
+final class LoginViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
     @IBOutlet weak var usernameTextField: UITextField!
@@ -53,55 +54,47 @@ final class LoginViewController: UIViewController, BindableType {
             loginTrigger: loginButton.rx.tap.asDriver()
         )
         
-        let output = viewModel.transform(input)
+        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
         
-        output.usernameValidation
-            .drive(usernameValidationBinder)
+        output.$usernameValidationMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(usernameValidationMessageBinder)
             .disposed(by: rx.disposeBag)
         
-        output.passwordValidation
-            .drive(passwordValidationBinder)
+        output.$passwordValidationMessage
+            .observeOn(MainScheduler.instance)
+            .subscribe(passwordValidationMessageBinder)
             .disposed(by: rx.disposeBag)
         
-        output.login
-            .drive()
+        output.$isLoginEnabled
+            .observeOn(MainScheduler.instance)
+            .subscribe(loginButton.rx.isEnabled)
             .disposed(by: rx.disposeBag)
         
-        output.isLoginEnabled
-            .drive(loginButton.rx.isEnabled)
+        output.$isLoading
+            .observeOn(MainScheduler.instance)
+            .subscribe(rx.isLoading)
             .disposed(by: rx.disposeBag)
         
-        output.isLoading
-            .drive(rx.isLoading)
-            .disposed(by: rx.disposeBag)
-        
-        output.error
-            .drive(rx.error)
+        output.$error
+            .observeOn(MainScheduler.instance)
+            .unwrap()
+            .subscribe(rx.error)
             .disposed(by: rx.disposeBag)
     }
 }
 
 // MARK: - Binders
 extension LoginViewController {
-    var usernameValidationBinder: Binder<ValidationResult> {
-        return Binder(self) { vc, result in
-            switch result {
-            case .valid:
-                vc.usernameValidationLabel.text = ""
-            case let .invalid(errors):
-                vc.usernameValidationLabel.text = errors.map { $0.message }.joined(separator: "\n")
-            }
+    var usernameValidationMessageBinder: Binder<String> {
+        return Binder(self) { vc, message in
+            vc.usernameValidationLabel.text = message
         }
     }
     
-    var passwordValidationBinder: Binder<ValidationResult> {
-        return Binder(self) { vc, result in
-            switch result {
-            case .valid:
-                vc.passwordValidationLabel.text = ""
-            case let .invalid(errors):
-                vc.passwordValidationLabel.text = errors.map { $0.message }.joined(separator: "\n")
-            }
+    var passwordValidationMessageBinder: Binder<String> {
+        return Binder(self) { vc, message in
+            vc.passwordValidationLabel.text = message
         }
     }
 }
