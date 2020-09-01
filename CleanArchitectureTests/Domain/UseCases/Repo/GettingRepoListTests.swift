@@ -34,7 +34,7 @@ final class GettingRepoListTests: XCTestCase, GettingRepoList {
 
     func test_getRepoList() {
         // act
-        self.getRepoList(page: 1, perPage: 10, usingCache: false)
+        self.getRepoList(dto: GetPageDto(page: 1, perPage: 10, usingCache: false))
             .subscribe(getRepoListOutput)
             .disposed(by: disposeBag)
 
@@ -47,7 +47,7 @@ final class GettingRepoListTests: XCTestCase, GettingRepoList {
         repoGatewayMock.getRepoListReturnValue = Observable.error(TestError())
         
         // act
-        self.getRepoList(page: 1, perPage: 10, usingCache: false)
+        self.getRepoList(dto: GetPageDto(page: 1, perPage: 10, usingCache: false))
             .subscribe(getRepoListOutput)
             .disposed(by: disposeBag)
 

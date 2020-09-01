@@ -28,7 +28,7 @@ final class ProductGatewayMock: ProductGatewayType {
     var deleteProductCalled = false
     var deleteProductReturnValue = Observable.just(())
 
-    func deleteProduct(id: Int) -> Observable<Void> {
+    func deleteProduct(dto: DeleteProductDto) -> Observable<Void> {
         deleteProductCalled = true
         return deleteProductReturnValue
     }

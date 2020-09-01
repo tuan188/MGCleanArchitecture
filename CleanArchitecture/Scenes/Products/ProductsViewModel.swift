@@ -111,7 +111,7 @@ extension ProductsViewModel: ViewModelType {
                     .map { product }
             }
             .flatMapLatest { product -> Driver<Product> in
-                return self.useCase.deleteProduct(id: product.id)
+                return self.useCase.deleteProduct(dto: DeleteProductDto(id: product.id))
                     .trackActivity(activityIndicator.loadingIndicator)
                     .trackError(errorTracker)
                     .map { _ in product }

@@ -13,7 +13,7 @@ protocol GettingRepoList {
 }
 
 extension GettingRepoList {
-    func getRepoList(page: Int, perPage: Int, usingCache: Bool) -> Observable<PagingInfo<Repo>> {
-        return repoGateway.getRepoList(page: page, perPage: perPage, usingCache: usingCache)
+    func getRepoList(dto: GetPageDto) -> Observable<PagingInfo<Repo>> {
+        return repoGateway.getRepoList(dto: dto)
     }
 }

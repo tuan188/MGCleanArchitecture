@@ -8,7 +8,7 @@
 
 protocol ProductsUseCaseType {
     func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>>
-    func deleteProduct(id: Int) -> Observable<Void>
+    func deleteProduct(dto: DeleteProductDto) -> Observable<Void>
 }
 
 struct ProductsUseCase: ProductsUseCaseType, GettingProductList, DeletingProduct {

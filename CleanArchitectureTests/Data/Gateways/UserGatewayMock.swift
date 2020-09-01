@@ -26,7 +26,7 @@ final class UserGatewayMock: UserGatewayType {
     var addCalled = false
     var addReturnValue = Observable.just(())
 
-    func add(_ users: [User]) -> Observable<Void> {
+    func add(dto: AddUserDto) -> Observable<Void> {
         addCalled = true
         return addReturnValue
     }

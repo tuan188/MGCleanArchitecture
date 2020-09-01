@@ -7,13 +7,31 @@
 //
 
 import UIKit
+import ValidatedPropertyKit
+
+struct DeleteProductDto: Dto {
+    @Validated(Validation.greater(0))
+    var id: Int?
+    
+    var validatedProperties: [ValidatedProperty] {
+        return [_id]
+    }
+    
+    init(id: Int) {
+        self.id = id
+    }
+}
 
 protocol DeletingProduct {
     var productGateway: ProductGatewayType { get }
 }
 
 extension DeletingProduct {
-    func deleteProduct(id: Int) -> Observable<Void> {
-        return productGateway.deleteProduct(id: id)
+    func deleteProduct(dto: DeleteProductDto) -> Observable<Void> {
+        if let error = dto.validationError {
+            return Observable.error(error)
+        }
+        
+        return productGateway.deleteProduct(dto: dto)
     }
 }

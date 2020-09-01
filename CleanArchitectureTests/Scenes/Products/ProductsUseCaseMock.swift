@@ -33,7 +33,7 @@ final class ProductsUseCaseMock: ProductsUseCaseType {
     var deleteProductCalled = false
     var deleteProductReturnValue: Observable<Void> = Observable.empty()
     
-    func deleteProduct(id: Int) -> Observable<Void> {
+    func deleteProduct(dto: DeleteProductDto) -> Observable<Void> {
         deleteProductCalled = true
         return deleteProductReturnValue
     }

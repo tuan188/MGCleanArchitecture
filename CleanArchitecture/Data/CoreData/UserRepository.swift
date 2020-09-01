@@ -17,7 +17,8 @@ extension UserRepository where Self.ModelType == User, Self.EntityType == CDUser
         return all()
     }
 
-    func add(_ users: [User]) -> Observable<Void> {
+    func add(dto: AddUserDto) -> Observable<Void> {
+        guard let users = dto.users else { return Observable.empty() }
         return addAll(users)
     }
     

@@ -14,7 +14,7 @@ struct ReposUseCase: ReposUseCaseType, GettingRepoList {
     let repoGateway: RepoGatewayType
     
     func getRepoList(page: Int) -> Observable<PagingInfo<Repo>> {
-        return getRepoList(page: page, perPage: 10, usingCache: page == 1)
+        return getRepoList(dto: GetPageDto(page: page, perPage: 10, usingCache: true))
     }
 }
 

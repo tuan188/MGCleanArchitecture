@@ -9,11 +9,13 @@
 import UIKit
 
 protocol RepoGatewayType {
-    func getRepoList(page: Int, perPage: Int, usingCache: Bool) -> Observable<PagingInfo<Repo>>
+    func getRepoList(dto: GetPageDto) -> Observable<PagingInfo<Repo>>
 }
 
 struct RepoGateway: RepoGatewayType {
-    func getRepoList(page: Int, perPage: Int, usingCache: Bool) -> Observable<PagingInfo<Repo>> {
+    func getRepoList(dto: GetPageDto) -> Observable<PagingInfo<Repo>> {
+        let (page, perPage, usingCache) = (dto.page, dto.perPage, dto.usingCache)
+        
         let input = API.GetRepoListInput(page: page, perPage: perPage)
         input.useCache = usingCache
         

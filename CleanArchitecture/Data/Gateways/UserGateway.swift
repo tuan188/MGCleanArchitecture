@@ -10,7 +10,7 @@ import UIKit
 
 protocol UserGatewayType {
     func getUsers() -> Observable<[User]>
-    func add(_ users: [User]) -> Observable<Void>
+    func add(dto: AddUserDto) -> Observable<Void>
 }
 
 struct UserGateway: UserGatewayType, UserRepository {

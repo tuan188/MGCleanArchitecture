@@ -51,6 +51,6 @@ extension SettingUpUserData {
                  birthday: Date.date(day: 29, month: 8, year: 1_985) ?? Date())
         ]
         
-        return userGateway.add(users)
+        return userGateway.add(dto: AddUserDto(users: users))
     }
 }

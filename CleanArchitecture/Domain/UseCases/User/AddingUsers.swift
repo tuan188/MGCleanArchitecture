@@ -7,13 +7,31 @@
 //
 
 import UIKit
+import ValidatedPropertyKit
+
+struct AddUserDto: Dto {
+    @Validated(Validation.nonEmpty)
+    var users: [User]?
+    
+    var validatedProperties: [ValidatedProperty] {
+        return [_users]
+    }
+    
+    init(users: [User]) {
+        self.users = users
+    }
+}
 
 protocol AddingUsers {
     var userGatewayType: UserGatewayType { get }
 }
 
 extension AddingUsers {
-    func add(_ users: [User]) -> Observable<Void> {
-        return userGatewayType.add(users)
+    func add(dto: AddUserDto) -> Observable<Void> {
+        if let error = dto.validationError {
+            return Observable.error(error)
+        }
+        
+        return userGatewayType.add(dto: dto)
     }
 }

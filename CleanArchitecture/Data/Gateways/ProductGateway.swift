@@ -10,7 +10,7 @@ import UIKit
 
 protocol ProductGatewayType {
     func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>>
-    func deleteProduct(id: Int) -> Observable<Void>
+    func deleteProduct(dto: DeleteProductDto) -> Observable<Void>
     func update(_ product: ProductDto) -> Observable<Void>
 }
 
@@ -38,7 +38,7 @@ struct ProductGateway: ProductGatewayType {
         }
     }
     
-    func deleteProduct(id: Int) -> Observable<Void> {
+    func deleteProduct(dto: DeleteProductDto) -> Observable<Void> {
         return Observable.just(())
     }
     
@@ -54,7 +54,7 @@ struct LocalAPIProductGateway: ProductGatewayType {
             .map { PagingInfo(page: 1, items: $0) }
     }
     
-    func deleteProduct(id: Int) -> Observable<Void> {
+    func deleteProduct(dto: DeleteProductDto) -> Observable<Void> {
         return Observable.just(())
     }
     
