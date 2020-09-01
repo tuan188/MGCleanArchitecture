@@ -8,9 +8,9 @@
 
 import UIKit
 import Reusable
-import Validator
+import ValidatedPropertyKit
 
-final class DynamicEditProductViewController: UIViewController, BindableType {
+final class DynamicEditProductViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
     
@@ -29,7 +29,7 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
     
     private let dataTrigger = PublishSubject<DynamicEditProductViewModel.DataType>()
     private let endEditTrigger = PublishSubject<Void>()
-    private var cells = [DynamicEditProductViewModel.CellType]()
+    private var cells = [DynamicEditProductViewModel.Cell]()
     
     // MARK: - Life Cycle
 
@@ -56,48 +56,52 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
-        let loadTrigger = endEditTrigger.map { DynamicEditProductViewModel.TriggerType.endEditing }
-            .asDriverOnErrorJustComplete()
-            .startWith(DynamicEditProductViewModel.TriggerType.load)
+        let loadTrigger = Driver.merge(
+            endEditTrigger.map { DynamicEditProductViewModel.TriggerType.endEditing }
+                .asDriverOnErrorJustComplete(),
+            rx.viewWillAppear
+                .take(1)
+                .map { _ in DynamicEditProductViewModel.TriggerType.load }
+                .asDriverOnErrorJustComplete()
+        )
         
         let input = DynamicEditProductViewModel.Input(
             loadTrigger: loadTrigger,
             updateTrigger: updateButton.rx.tap.asDriver(),
             cancelTrigger: cancelButton.rx.tap.asDriver(),
-            dataTrigger: dataTrigger.asDriverOnErrorJustComplete()
+            data: dataTrigger.asDriverOnErrorJustComplete()
         )
         
-        let output = viewModel.transform(input)
+        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
         
-        output.cancel
-            .drive()
+        output.$cellCollection
+            .asDriver()
+            .drive(cellCollectionBinder)
             .disposed(by: rx.disposeBag)
         
-        output.cells
-            .drive(cellsBinder)
+        output.$nameValidation
+            .asDriver()
+            .drive(nameValidationBinder)
             .disposed(by: rx.disposeBag)
         
-        output.updatedProduct
-            .drive()
+        output.$priceValidation
+            .asDriver()
+            .drive(priceValidationBinder)
             .disposed(by: rx.disposeBag)
         
-        output.nameValidation
-            .drive(nameValidatorBinder)
-            .disposed(by: rx.disposeBag)
-        
-        output.priceValidation
-            .drive(priceValidatorBinder)
-            .disposed(by: rx.disposeBag)
-        
-        output.isUpdateEnabled
+        output.$isUpdateEnabled
+            .asDriver()
             .drive(updateButton.rx.isEnabled)
             .disposed(by: rx.disposeBag)
         
-        output.error
+        output.$error
+            .asDriver()
+            .unwrap()
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
         
-        output.isLoading
+        output.$isLoading
+            .asDriver()
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
     }
@@ -105,7 +109,7 @@ final class DynamicEditProductViewController: UIViewController, BindableType {
 
 // MARK: - Binders
 extension DynamicEditProductViewController {
-    var nameValidatorBinder: Binder<ValidationResult> {
+    var nameValidationBinder: Binder<ValidationResult> {
         return Binder(self) { vc, validation in
             let viewModel = ValidationResultViewModel(validationResult: validation)
             vc.nameTextField?.backgroundColor = viewModel.backgroundColor
@@ -113,7 +117,7 @@ extension DynamicEditProductViewController {
         }
     }
     
-    var priceValidatorBinder: Binder<ValidationResult> {
+    var priceValidationBinder: Binder<ValidationResult> {
         return Binder(self) { vc, validation in
             let viewModel = ValidationResultViewModel(validationResult: validation)
             vc.priceTextField?.backgroundColor = viewModel.backgroundColor
@@ -121,11 +125,11 @@ extension DynamicEditProductViewController {
         }
     }
     
-    var cellsBinder: Binder<([DynamicEditProductViewModel.CellType], Bool)> {
-        return Binder(self) { vc, args in
-            let (cells, needReload) = args
-            vc.cells = cells
-            if needReload {
+    var cellCollectionBinder: Binder<DynamicEditProductViewModel.CellCollection> {
+        return Binder(self) { vc, cellCollection in
+            vc.cells = cellCollection.cells
+            
+            if cellCollection.needsReloading {
                 vc.tableView.reloadData()
             }
         }
@@ -139,10 +143,10 @@ extension DynamicEditProductViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellType = cells[indexPath.row]
-        let viewModel = ValidationResultViewModel(validationResult: cellType.validationResult)
+        let cell = cells[indexPath.row]
+        let viewModel = ValidationResultViewModel(validationResult: cell.validationResult)
         
-        switch cellType.dataType {
+        switch cell.dataType {
         case let .name(name):
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: EditProductNameCell.self)
                 .then {

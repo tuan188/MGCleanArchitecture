@@ -8,9 +8,9 @@
 
 import UIKit
 import Reusable
-import Validator
+import RxViewController
 
-final class EditProductViewController: UITableViewController, BindableType {
+final class EditProductViewController: UITableViewController, Bindable {
     
     // MARK: - IBOutlets
     
@@ -30,7 +30,7 @@ final class EditProductViewController: UITableViewController, BindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     deinit {
         logDeinit()
     }
@@ -39,9 +39,9 @@ final class EditProductViewController: UITableViewController, BindableType {
 
     func bindViewModel() {
         let input = EditProductViewModel.Input(
-            loadTrigger: Driver.just(()),
-            nameTrigger: nameTextField.rx.text.orEmpty.asDriver(),
-            priceTrigger: priceTextField.rx.text.orEmpty.asDriver(),
+            loadTrigger: rx.viewWillAppear.take(1).mapToVoid().asDriverOnErrorJustComplete(),
+            name: nameTextField.rx.text.orEmpty.asDriver(),
+            price: priceTextField.rx.text.orEmpty.asDriver(),
             updateTrigger: updateButton.rx.tap
                 .throttle(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
                 .asDriverOnErrorJustComplete(),
@@ -50,42 +50,42 @@ final class EditProductViewController: UITableViewController, BindableType {
                 .asDriverOnErrorJustComplete()
         )
         
-        let output = viewModel.transform(input)
+        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
         
-        output.name
+        output.$name
+            .asDriver()
             .drive(nameTextField.rx.text)
             .disposed(by: rx.disposeBag)
         
-        output.price
+        output.$price
             .map { String($0) }
+            .asDriverOnErrorJustComplete()
             .drive(priceTextField.rx.text)
             .disposed(by: rx.disposeBag)
         
-        output.nameValidation
-            .drive(nameValidatorBinder)
+        output.$nameValidation
+            .asDriver()
+            .drive(nameValidationBinder)
             .disposed(by: rx.disposeBag)
         
-        output.priceValidation
-            .drive(priceValidatorBinder)
+        output.$priceValidation
+            .asDriver()
+            .drive(priceValidationBinder)
             .disposed(by: rx.disposeBag)
         
-        output.isUpdateEnabled
+        output.$isUpdateEnabled
+            .asDriver()
             .drive(updateButton.rx.isEnabled)
             .disposed(by: rx.disposeBag)
         
-        output.updatedProduct
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
-        output.cancel
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
-        output.error
+        output.$error
+            .asDriver()
+            .unwrap()
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
         
-        output.isLoading
+        output.$isLoading
+            .asDriver()
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
     }
@@ -93,17 +93,17 @@ final class EditProductViewController: UITableViewController, BindableType {
 
 // MARK: - Binders
 extension EditProductViewController {
-    var nameValidatorBinder: Binder<ValidationResult> {
-        return Binder(self) { vc, validation in
-            let viewModel = ValidationResultViewModel(validationResult: validation)
+    var nameValidationBinder: Binder<ValidationResult> {
+        return Binder(self) { vc, result in
+            let viewModel = ValidationResultViewModel(validationResult: result)
             vc.nameTextField.backgroundColor = viewModel.backgroundColor
             vc.nameValidationLabel.text = viewModel.text
         }
     }
     
-    var priceValidatorBinder: Binder<ValidationResult> {
-        return Binder(self) { vc, validation in
-            let viewModel = ValidationResultViewModel(validationResult: validation)
+    var priceValidationBinder: Binder<ValidationResult> {
+        return Binder(self) { vc, result in
+            let viewModel = ValidationResultViewModel(validationResult: result)
             vc.priceTextField.backgroundColor = viewModel.backgroundColor
             vc.priceValidationLabel.text = viewModel.text
         }

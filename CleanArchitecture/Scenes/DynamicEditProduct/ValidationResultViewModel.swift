@@ -7,26 +7,26 @@
 //
 
 import UIKit
-import Validator
+import ValidatedPropertyKit
 
 struct ValidationResultViewModel {
     let validationResult: ValidationResult
     
     var backgroundColor: UIColor {
         switch validationResult {
-        case .valid:
+        case .success:
             return ColorCompatibility.systemBackground
-        case .invalid:
+        case .failure:
             return UIColor.yellow.withAlphaComponent(0.2)
         }
     }
     
     var text: String {
         switch validationResult {
-        case .valid:
+        case .success:
             return " "
-        case .invalid(let errors):
-            return errors.map { $0.message }.joined(separator: "\n")
+        case .failure(let error):
+            return error.description
         }
     }
 }

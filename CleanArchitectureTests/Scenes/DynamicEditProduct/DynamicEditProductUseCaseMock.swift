@@ -8,36 +8,35 @@
 
 @testable import CleanArchitecture
 import RxSwift
-import Validator
 
 final class DynamicEditProductUseCaseMock: DynamicEditProductUseCaseType {
     
-    // MARK: - validate name
+    // MARK: - validateName
     
     var validateNameCalled = false
-    var validateNameReturnValue = ValidationResult.valid
+    var validateNameReturnValue = ValidationResult.success(())
     
-    func validate(name: String) -> ValidationResult {
+    func validateName(_ name: String) -> ValidationResult {
         validateNameCalled = true
         return validateNameReturnValue
     }
     
-    // MARK: - validate price
+    // MARK: - validatePrice
     
     var validatePriceCalled = false
-    var validatePriceReturnValue = ValidationResult.valid
+    var validatePriceReturnValue = ValidationResult.success(())
     
-    func validate(price: String) -> ValidationResult {
+    func validatePrice(_ price: String) -> ValidationResult {
         validatePriceCalled = true
         return validatePriceReturnValue
     }
     
-    // MARK: - update product
+    // MARK: - update
     
     var updateCalled = false
-    var updateReturnValue: Observable<Void> = Observable.just(())
+    var updateReturnValue = Observable.just(())
     
-    func update(_ product: Product) -> Observable<Void> {
+    func update(_ product: ProductDto) -> Observable<Void> {
         updateCalled = true
         return updateReturnValue
     }
@@ -50,4 +49,3 @@ final class DynamicEditProductUseCaseMock: DynamicEditProductUseCaseType {
         notifyUpdatedCalled = true
     }
 }
-

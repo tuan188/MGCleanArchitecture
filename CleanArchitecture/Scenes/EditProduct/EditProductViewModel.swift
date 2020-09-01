@@ -6,7 +6,7 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
-import Validator
+import ValidatedPropertyKit
 
 enum EditProductDelegate {
     case updatedProduct(Product)
@@ -20,64 +20,77 @@ struct EditProductViewModel {
 }
 
 // MARK: - ViewModelType
-extension EditProductViewModel: ViewModelType {
+extension EditProductViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>
-        let nameTrigger: Driver<String>
-        let priceTrigger: Driver<String>
+        let name: Driver<String>
+        let price: Driver<String>
         let updateTrigger: Driver<Void>
         let cancelTrigger: Driver<Void>
     }
 
     struct Output {
-        let name: Driver<String>
-        let price: Driver<Double>
-        let nameValidation: Driver<ValidationResult>
-        let priceValidation: Driver<ValidationResult>
-        let isUpdateEnabled: Driver<Bool>
-        let updatedProduct: Driver<Void>
-        let cancel: Driver<Void>
-        let error: Driver<Error>
-        let isLoading: Driver<Bool>
+        @Property var name = ""
+        @Property var price = 0.0
+        @Property var nameValidation = ValidationResult.success(())
+        @Property var priceValidation = ValidationResult.success(())
+        @Property var isUpdateEnabled = true
+        @Property var error: Error?
+        @Property var isLoading = false
     }
 
-    func transform(_ input: Input) -> Output {
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        var output = Output(name: product.name, price: product.price)
         let errorTracker = ErrorTracker()
         let activityIndicator = ActivityIndicator()
         
-        let name = input.loadTrigger
-            .map { self.product.name }
+        let name = Driver.merge(
+            input.name,
+            input.loadTrigger.map { self.product.name }
+        )
         
-        let price = input.loadTrigger
-            .map { self.product.price }
+        let price = Driver.merge(
+            input.price,
+            input.loadTrigger.map { String(self.product.price) }
+        )
         
-        let nameValidation = validate(object: input.nameTrigger,
-                                      trigger: input.updateTrigger,
-                                      validator: useCase.validate(name:))
+        let nameValidation = Driver.combineLatest(name, input.updateTrigger)
+            .map { $0.0 }
+            .map(useCase.validateName(_:))
+            .do(onNext: { result in
+                output.nameValidation = result
+            })
         
-        let priceValidation = validate(object: input.priceTrigger,
-                                       trigger: input.updateTrigger,
-                                       validator: useCase.validate(price:))
+        let priceValidation = Driver.combineLatest(price, input.updateTrigger)
+            .map { $0.0 }
+            .map(useCase.validatePrice(_:))
+            .do(onNext: { result in
+                output.priceValidation = result
+            })
         
         let isUpdateEnabled = Driver.and(
             nameValidation.map { $0.isValid },
             priceValidation.map { $0.isValid }
         )
         .startWith(true)
+        .do(onNext: { isEnabled in
+            output.isUpdateEnabled = isEnabled
+        })
         
-        let updatedProduct = input.updateTrigger
+        input.updateTrigger
             .withLatestFrom(isUpdateEnabled)
             .filter { $0 }
             .withLatestFrom(Driver.combineLatest(
-                input.nameTrigger,
-                input.priceTrigger
+                name,
+                price
             ))
             .flatMapLatest { name, price -> Driver<Product> in
                 let product = self.product.with {
                     $0.name = name
                     $0.price = Double(price) ?? 0.0
                 }
-                return self.useCase.update(product)
+                
+                return self.useCase.update(product.toDto())
                     .trackError(errorTracker)
                     .trackActivity(activityIndicator)
                     .asDriverOnErrorJustComplete()
@@ -87,24 +100,24 @@ extension EditProductViewModel: ViewModelType {
                 self.delegate.onNext(EditProductDelegate.updatedProduct(product))
                 self.navigator.dismiss()
             })
-            .mapToVoid()
+            .drive()
+            .disposed(by: disposeBag)
         
-        let cancel = input.cancelTrigger
+        input.cancelTrigger
             .do(onNext: navigator.dismiss)
+            .drive()
+            .disposed(by: disposeBag)
         
-        let error = errorTracker.asDriver()
-        let isLoading = activityIndicator.asDriver()
+        errorTracker
+            .asDriver()
+            .drive(output.$error)
+            .disposed(by: disposeBag)
+            
+        activityIndicator
+            .asDriver()
+            .drive(output.$isLoading)
+            .disposed(by: disposeBag)
         
-        return Output(
-            name: name,
-            price: price,
-            nameValidation: nameValidation,
-            priceValidation: priceValidation,
-            isUpdateEnabled: isUpdateEnabled,
-            updatedProduct: updatedProduct,
-            cancel: cancel,
-            error: error,
-            isLoading: isLoading
-        )
+        return output
     }
 }

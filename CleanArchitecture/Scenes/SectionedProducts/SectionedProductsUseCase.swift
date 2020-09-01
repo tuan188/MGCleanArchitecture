@@ -7,7 +7,7 @@
 //
 
 protocol SectionedProductsUseCaseType {
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>>
+    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>>
 }
 
 struct SectionedProductsUseCase: SectionedProductsUseCaseType, GettingProductList {

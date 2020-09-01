@@ -54,7 +54,8 @@ extension ProductsViewModel: ViewModelType {
             reloadTrigger: input.reloadTrigger,
             loadMoreTrigger: input.loadMoreTrigger,
             getItems: { _, page in
-                self.useCase.getProductList(page: page)
+                let dto = GetPageDto().with { $0.page = page }
+                return self.useCase.getProductList(dto: dto)
             },
             mapper: ProductModel.init(product:)
         )

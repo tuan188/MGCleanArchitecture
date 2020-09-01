@@ -49,6 +49,9 @@ PODS:
   - RxSwift (5.1.1)
   - RxTest (5.1.1):
     - RxSwift (~> 5)
+  - RxViewController (1.0.0):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
   - SDWebImage (5.8.3):
     - SDWebImage/Core (= 5.8.3)
   - SDWebImage/Core (5.8.3)
@@ -71,6 +74,7 @@ DEPENDENCIES:
   - RxBlocking (~> 5.1)
   - RxDataSources (~> 4.0)
   - RxTest (~> 5.1)
+  - RxViewController
   - SDWebImage (~> 5.8.3)
   - Then (~> 2.7)
   - ValidatedPropertyKit
@@ -97,6 +101,7 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - RxTest
+    - RxViewController
     - SDWebImage
     - Then
     - ValidatedPropertyKit
@@ -133,11 +138,12 @@ SPEC CHECKSUMS:
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
+  RxViewController: 7330a46e5c31cd680db169da4c9fc8676e975a81
   SDWebImage: 112503ec94a5a2a41869503844a15e8d8f1ead5c
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
   Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
 
-PODFILE CHECKSUM: 574a20b1eb84ebc2ecd79ecfbb9371473ddb1eea
+PODFILE CHECKSUM: aa3cfee72602bbd1c2c7a1f08f040a13306e2621
 
 COCOAPODS: 1.9.3

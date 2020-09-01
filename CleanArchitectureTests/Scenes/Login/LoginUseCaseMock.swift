@@ -15,9 +15,9 @@ final class LoginUseCaseMock: LoginUseCaseType {
     // MARK: - validateUserName
     
     var validateUserNameCalled = false
-    var validateUserNameReturnValue = Result<String, ValidationError>.success("")
+    var validateUserNameReturnValue = ValidationResult.success(())
     
-    func validateUserName(_ username: String) -> Result<String, ValidationError> {
+    func validateUserName(_ username: String) -> ValidationResult {
         validateUserNameCalled = true
         return validateUserNameReturnValue
     }
@@ -25,9 +25,9 @@ final class LoginUseCaseMock: LoginUseCaseType {
     // MARK: - validatePassword
     
     var validatePasswordCalled = false
-    var validatePasswordReturnValue = Result<String, ValidationError>.success("")
+    var validatePasswordReturnValue = ValidationResult.success(())
     
-    func validatePassword(_ password: String) -> Result<String, ValidationError> {
+    func validatePassword(_ password: String) -> ValidationResult {
         validatePasswordCalled = true
         return validatePasswordReturnValue
     }

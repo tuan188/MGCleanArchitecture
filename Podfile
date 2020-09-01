@@ -9,6 +9,7 @@ def pods
     # Rx
     pod 'NSObject+Rx', '~> 5.1'
     pod 'RxDataSources', '~> 4.0'
+    pod 'RxViewController'
     
     # Core
     pod 'ObjectMapper', '~> 3.5'

@@ -30,7 +30,7 @@ final class GettingProductListTests: XCTestCase, GettingProductList {
     
     func test_getProductList() {
         // act
-        self.getProductList(page: 1)
+        self.getProductList(dto: GetPageDto(page: 1))
             .subscribe(getProductListOutput)
             .disposed(by: disposeBag)
 
@@ -44,7 +44,7 @@ final class GettingProductListTests: XCTestCase, GettingProductList {
         productGatewayMock.getProductListReturnValue = Observable.error(TestError())
 
         // act
-        self.getProductList(page: 1)
+        self.getProductList(dto: GetPageDto(page: 1))
             .subscribe(getProductListOutput)
             .disposed(by: disposeBag)
 

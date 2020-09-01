@@ -10,7 +10,7 @@
 import XCTest
 import RxSwift
 import RxBlocking
-import Validator
+import ValidatedPropertyKit
 
 final class DynamicEditProductViewModelTests: XCTestCase {
     private var viewModel: DynamicEditProductViewModel!
@@ -37,47 +37,31 @@ final class DynamicEditProductViewModelTests: XCTestCase {
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete(),
             updateTrigger: updateTrigger.asDriverOnErrorJustComplete(),
             cancelTrigger: cancelTrigger.asDriverOnErrorJustComplete(),
-            dataTrigger: dataTrigger.asDriverOnErrorJustComplete()
+            data: dataTrigger.asDriverOnErrorJustComplete()
         )
         
-        output = viewModel.transform(input)
-        
         disposeBag = DisposeBag()
-        
-        output.nameValidation.drive().disposed(by: disposeBag)
-        output.priceValidation.drive().disposed(by: disposeBag)
-        output.isUpdateEnabled.drive().disposed(by: disposeBag)
-        output.updatedProduct.drive().disposed(by: disposeBag)
-        output.cancel.drive().disposed(by: disposeBag)
-        output.error.drive().disposed(by: disposeBag)
-        output.isLoading.drive().disposed(by: disposeBag)
-        output.cells.drive().disposed(by: disposeBag)
+        output = viewModel.transform(input, disposeBag: disposeBag)
     }
     
     func test_loadTrigger_cells_need_reload() {
         // act
         loadTrigger.onNext(.load)
-        
-        let args = try? output.cells.toBlocking(timeout: 1).first()
-        let cells = args?.0
-        let needReload = args?.1
+        let cellCollection = output.cellCollection
         
         // assert
-        XCTAssertEqual(cells?.count, 2)
-        XCTAssertEqual(needReload, true)
+        XCTAssertEqual(cellCollection.cells.count, 2)
+        XCTAssertEqual(cellCollection.needsReloading, true)
     }
     
     func test_loadTrigger_cells_no_need_reload() {
         // act
         loadTrigger.onNext(.endEditing)
-        
-        let args = try? output.cells.toBlocking(timeout: 1).first()
-        let cells = args?.0
-        let needReload = args?.1
+        let cellCollection = output.cellCollection
         
         // assert
-        XCTAssertEqual(cells?.count, 2)
-        XCTAssertEqual(needReload, false)
+        XCTAssertEqual(cellCollection.cells.count, 2)
+        XCTAssertEqual(cellCollection.needsReloading, false)
     }
     
     func test_cancelTrigger_dismiss() {
@@ -93,12 +77,12 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         let productName = "foo"
         dataTrigger.onNext(DynamicEditProductViewModel.DataType.name(productName))
         loadTrigger.onNext(.endEditing)
-        let args = try? output.cells.toBlocking(timeout: 1).first()
-        let cells = args?.0
+        let cellCollection = output.cellCollection
         
         // assert
-        if let dataType = cells?[0].dataType,
-            case let DynamicEditProductViewModel.DataType.name(name) = dataType {
+        XCTAssertEqual(cellCollection.cells.count, 2)
+        
+        if case let DynamicEditProductViewModel.DataType.name(name) = cellCollection.cells[0].dataType {
             XCTAssertEqual(name, productName)
         } else {
             XCTFail()
@@ -120,12 +104,12 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         let productPrice = "1.0"
         dataTrigger.onNext(DynamicEditProductViewModel.DataType.price(productPrice))
         loadTrigger.onNext(.endEditing)
-        let args = try? output.cells.toBlocking(timeout: 1).first()
-        let cells = args?.0
+        let cellCollection = output.cellCollection
         
         // assert
-        if let dataType = cells?[1].dataType,
-            case let DynamicEditProductViewModel.DataType.price(price) = dataType {
+        XCTAssertEqual(cellCollection.cells.count, 2)
+        
+        if case let DynamicEditProductViewModel.DataType.price(price) = cellCollection.cells[1].dataType {
             XCTAssertEqual(price, String(Double(productPrice) ?? 0))
         } else {
             XCTFail()
@@ -145,25 +129,25 @@ final class DynamicEditProductViewModelTests: XCTestCase {
     func test_loadTriggerInvoked_enableUpdateByDefault() {
         // act
         loadTrigger.onNext(.load)
-        let updateEnable = try? output.isUpdateEnabled.toBlocking(timeout: 1).first()
         
         // assert
-        XCTAssertEqual(updateEnable, true)
+        XCTAssertEqual(output.isUpdateEnabled, true)
     }
     
     func test_updateTrigger_not_update() {
         // arrange
-        useCase.validateNameReturnValue = ValidationResult.invalid([TestValidationError()])
-        useCase.validatePriceReturnValue = ValidationResult.invalid([TestValidationError()])
+        useCase.validateNameReturnValue = ValidationResult.failure(ValidationError(message: ""))
+        useCase.validatePriceReturnValue = ValidationResult.failure(ValidationError(message: ""))
         
         // act
         dataTrigger.onNext(DynamicEditProductViewModel.DataType.name("foo"))
         dataTrigger.onNext(DynamicEditProductViewModel.DataType.price("1.0"))
         updateTrigger.onNext(())
-        let updateEnable = try? output.isUpdateEnabled.toBlocking(timeout: 1).first()
         
         // assert
-        XCTAssertEqual(updateEnable, false)
+        XCTAssertFalse(output.nameValidation.isValid)
+        XCTAssertFalse(output.priceValidation.isValid)
+        XCTAssertEqual(output.isUpdateEnabled, false)
         XCTAssertFalse(useCase.updateCalled)
     }
     
@@ -182,10 +166,9 @@ final class DynamicEditProductViewModelTests: XCTestCase {
         
         // act
         updateTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssert(useCase.updateCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(output.error is TestError)
     }
 }

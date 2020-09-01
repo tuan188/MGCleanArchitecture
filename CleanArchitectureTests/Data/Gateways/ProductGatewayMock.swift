@@ -18,7 +18,7 @@ final class ProductGatewayMock: ProductGatewayType {
         PagingInfo(page: 1, items: [Product()])
     )
 
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
+    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>> {
         getProductListCalled = true
         return getProductListReturnValue
     }
@@ -38,7 +38,7 @@ final class ProductGatewayMock: ProductGatewayType {
     var updateCalled = false
     var updateReturnValue = Observable.just(())
 
-    func update(_ product: Product) -> Observable<Void> {
+    func update(_ product: ProductDto) -> Observable<Void> {
         updateCalled = true
         return updateReturnValue
     }

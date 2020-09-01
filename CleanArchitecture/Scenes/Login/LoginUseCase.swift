@@ -9,17 +9,17 @@
 import ValidatedPropertyKit
 
 protocol LoginUseCaseType {
-    func validateUserName(_ username: String) -> Result<String, ValidationError>
-    func validatePassword(_ password: String) -> Result<String, ValidationError>
+    func validateUserName(_ username: String) -> ValidationResult
+    func validatePassword(_ password: String) -> ValidationResult
     func login(dto: LoginDto) -> Observable<Void>
 }
 
 struct LoginUseCase: LoginUseCaseType, LoggingIn {
-    func validateUserName(_ username: String) -> Result<String, ValidationError> {
-        return LoginDto.validateUserName(username)
+    func validateUserName(_ username: String) -> ValidationResult {
+        return LoginDto.validateUserName(username).mapToVoid()
     }
     
-    func validatePassword(_ password: String) -> Result<String, ValidationError> {
-        return LoginDto.validatePassword(password)
+    func validatePassword(_ password: String) -> ValidationResult {
+        return LoginDto.validatePassword(password).mapToVoid()
     }
 }

@@ -11,7 +11,7 @@ import XCTest
 import RxSwift
 import RxBlocking
 import RxTest
-import Validator
+import ValidatedPropertyKit
 
 final class EditProductViewModelTests: XCTestCase {
     
@@ -53,15 +53,15 @@ final class EditProductViewModelTests: XCTestCase {
         
         input = EditProductViewModel.Input(
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete(),
-            nameTrigger: nameTrigger.asDriverOnErrorJustComplete(),
-            priceTrigger: priceTrigger.asDriverOnErrorJustComplete(),
+            name: nameTrigger.asDriverOnErrorJustComplete(),
+            price: priceTrigger.asDriverOnErrorJustComplete(),
             updateTrigger: updateTrigger.asDriverOnErrorJustComplete(),
             cancelTrigger: cancelTrigger.asDriverOnErrorJustComplete()
         )
         
-        output = viewModel.transform(input)
-        
         disposeBag = DisposeBag()
+        output = viewModel.transform(input, disposeBag: disposeBag)
+        
         scheduler = TestScheduler(initialClock: 0)
         
         nameOutput = scheduler.createObserver(String.self)
@@ -74,15 +74,13 @@ final class EditProductViewModelTests: XCTestCase {
         errorOutput = scheduler.createObserver(Error.self)
         isLoadingOutput = scheduler.createObserver(Bool.self)
         
-        output.name.drive(nameOutput).disposed(by: disposeBag)
-        output.price.drive(priceOutput).disposed(by: disposeBag)
-        output.nameValidation.drive(nameValidationOutput).disposed(by: disposeBag)
-        output.priceValidation.drive(priceValidationOutput).disposed(by: disposeBag)
-        output.isUpdateEnabled.drive(isUpdateEnabledOutput).disposed(by: disposeBag)
-        output.updatedProduct.drive(updatedProductOutput).disposed(by: disposeBag)
-        output.cancel.drive(cancelOutput).disposed(by: disposeBag)
-        output.error.drive(errorOutput).disposed(by: disposeBag)
-        output.isLoading.drive(isLoadingOutput).disposed(by: disposeBag)
+        output.$name.asDriver().drive(nameOutput).disposed(by: disposeBag)
+        output.$price.asDriver().drive(priceOutput).disposed(by: disposeBag)
+        output.$nameValidation.asDriver().drive(nameValidationOutput).disposed(by: disposeBag)
+        output.$priceValidation.asDriver().drive(priceValidationOutput).disposed(by: disposeBag)
+        output.$isUpdateEnabled.asDriver().drive(isUpdateEnabledOutput).disposed(by: disposeBag)
+        output.$error.asDriver().unwrap().drive(errorOutput).disposed(by: disposeBag)
+        output.$isLoading.asDriver().drive(isLoadingOutput).disposed(by: disposeBag)
     }
     
     private func startTriggers(load: Recorded<Event<Void>>? = nil,
@@ -140,16 +138,18 @@ final class EditProductViewModelTests: XCTestCase {
     
     func test_nameTriggerInvoked_validateNameFailNotEnableUpdate() {
         // arrange
-        useCase.validateNameReturnValue = ValidationResult.invalid([TestValidationError()])
+        useCase.validateNameReturnValue = ValidationResult.failure(ValidationError(message: ""))
         
         // act
         startTriggers(
             name: .next(0, "Foo"),
             price: .next(0, "10"),
-            update: .next(10, ())
+            update: .next(0, ())
         )
         
         // assert
+        XCTAssertFalse(output.nameValidation.isValid)
+        XCTAssert(output.priceValidation.isValid)
         XCTAssertEqual(isUpdateEnabledOutput.lastEventElement, false)
     }
     
@@ -166,7 +166,7 @@ final class EditProductViewModelTests: XCTestCase {
     
     func test_priceTriggerInvoked_validatePriceFailNotEnableUpdate() {
         // arrange
-        useCase.validatePriceReturnValue = ValidationResult.invalid([TestValidationError()])
+        useCase.validatePriceReturnValue = ValidationResult.failure(ValidationError(message: ""))
         
         // act
         startTriggers(
@@ -193,7 +193,7 @@ final class EditProductViewModelTests: XCTestCase {
     
     func test_updateTriggerInvoked_notUpdateProduct() {
         // arrange
-        useCase.validateNameReturnValue = ValidationResult.invalid([TestValidationError()])
+        useCase.validateNameReturnValue = ValidationResult.failure(ValidationError(message: ""))
         
         // act
         startTriggers(

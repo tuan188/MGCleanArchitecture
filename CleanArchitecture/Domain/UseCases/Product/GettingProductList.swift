@@ -13,7 +13,7 @@ protocol GettingProductList {
 }
 
 extension GettingProductList {
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
-        return productGateway.getProductList(page: page)
+    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>> {
+        return productGateway.getProductList(dto: dto)
     }
 }

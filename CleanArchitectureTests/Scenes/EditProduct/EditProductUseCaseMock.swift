@@ -8,37 +8,36 @@
 
 @testable import CleanArchitecture
 import RxSwift
-import Validator
 
 final class EditProductUseCaseMock: EditProductUseCaseType {
     
-    // MARK: - validate
+    // MARK: - validateName
     
     var validateNameCalled = false
-    var validateNameReturnValue = ValidationResult.valid
+    var validateNameReturnValue = ValidationResult.success(())
     
-    func validate(name: String) -> ValidationResult {
+    func validateName(_ name: String) -> ValidationResult {
         validateNameCalled = true
         return validateNameReturnValue
     }
     
-    // MARK: - validate
-    var validatePriceCalled = false
-    var validatePriceReturnValue = ValidationResult.valid
+    // MARK: - validatePrice
     
-    func validate(price: String) -> ValidationResult {
+    var validatePriceCalled = false
+    var validatePriceReturnValue = ValidationResult.success(())
+    
+    func validatePrice(_ price: String) -> ValidationResult {
         validatePriceCalled = true
         return validatePriceReturnValue
     }
     
-    // MARK: - save
-    var updateCalled = false
-    var updateReturnValue: Observable<Void> = Observable.just(())
+    // MARK: - update
     
-    func update(_ product: Product) -> Observable<Void> {
+    var updateCalled = false
+    var updateReturnValue = Observable.just(())
+    
+    func update(_ product: ProductDto) -> Observable<Void> {
         updateCalled = true
         return updateReturnValue
     }
-    
 }
-

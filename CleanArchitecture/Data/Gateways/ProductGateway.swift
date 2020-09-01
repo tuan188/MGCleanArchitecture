@@ -9,13 +9,15 @@
 import UIKit
 
 protocol ProductGatewayType {
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>>
+    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>>
     func deleteProduct(id: Int) -> Observable<Void>
-    func update(_ product: Product) -> Observable<Void>
+    func update(_ product: ProductDto) -> Observable<Void>
 }
 
 struct ProductGateway: ProductGatewayType {
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
+    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>> {
+        let page = dto.page
+        
         return Observable.create { observer in
             DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: {
                 let products = Array(0...9)
@@ -40,14 +42,14 @@ struct ProductGateway: ProductGatewayType {
         return Observable.just(())
     }
     
-    func update(_ product: Product) -> Observable<Void> {
+    func update(_ product: ProductDto) -> Observable<Void> {
         return Observable.just(())
     }
 }
 
 struct LocalAPIProductGateway: ProductGatewayType {
 
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
+    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>> {
         return API.shared.getProductList(API.GetProductListInput())
             .map { PagingInfo(page: 1, items: $0) }
     }
@@ -56,7 +58,7 @@ struct LocalAPIProductGateway: ProductGatewayType {
         return Observable.just(())
     }
     
-    func update(_ product: Product) -> Observable<Void> {
+    func update(_ product: ProductDto) -> Observable<Void> {
         return Observable.just(())
     }
 }

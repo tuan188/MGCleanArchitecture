@@ -13,7 +13,7 @@ protocol UpdatingProduct {
 }
 
 extension UpdatingProduct {
-    func updateProduct(_ product: Product) -> Observable<Void> {
+    func updateProduct(_ product: ProductDto) -> Observable<Void> {
         return productGateway.update(product)
     }
 }

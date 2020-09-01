@@ -10,7 +10,7 @@
 import RxSwift
 
 final class SectionedProductsUseCaseMock: SectionedProductsUseCaseType {
-
+    
     // MARK: - getProductList
     
     var getProductListCalled = false
@@ -24,7 +24,7 @@ final class SectionedProductsUseCaseMock: SectionedProductsUseCaseType {
         return Observable.just(page)
     }()
     
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
+    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>> {
         getProductListCalled = true
         return getProductListReturnValue
     }

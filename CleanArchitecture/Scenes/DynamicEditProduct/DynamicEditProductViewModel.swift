@@ -6,8 +6,6 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
-import Validator
-
 struct DynamicEditProductViewModel {
     let navigator: DynamicEditProductNavigatorType
     let useCase: DynamicEditProductUseCaseType
@@ -15,23 +13,21 @@ struct DynamicEditProductViewModel {
 }
 
 // MARK: - ViewModelType
-extension DynamicEditProductViewModel: ViewModelType {
+extension DynamicEditProductViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<TriggerType>
         let updateTrigger: Driver<Void>
         let cancelTrigger: Driver<Void>
-        let dataTrigger: Driver<DataType>
+        let data: Driver<DataType>
     }
 
     struct Output {
-        let nameValidation: Driver<ValidationResult>
-        let priceValidation: Driver<ValidationResult>
-        let isUpdateEnabled: Driver<Bool>
-        let updatedProduct: Driver<Void>
-        let cancel: Driver<Void>
-        let error: Driver<Error>
-        let isLoading: Driver<Bool>
-        let cells: Driver<([CellType], Bool)>
+        @Property var nameValidation = ValidationResult.success(())
+        @Property var priceValidation = ValidationResult.success(())
+        @Property var isUpdateEnabled = true
+        @Property var error: Error?
+        @Property var isLoading = false
+        @Property var cellCollection = CellCollection()
     }
     
     enum DataType {
@@ -39,9 +35,14 @@ extension DynamicEditProductViewModel: ViewModelType {
         case price(String)
     }
     
-    struct CellType {
+    struct Cell {
         let dataType: DataType
         let validationResult: ValidationResult
+    }
+    
+    struct CellCollection {
+        var cells: [Cell] = []
+        var needsReloading = false
     }
     
     enum TriggerType {
@@ -49,11 +50,12 @@ extension DynamicEditProductViewModel: ViewModelType {
         case endEditing
     }
 
-    func transform(_ input: Input) -> Output {
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        var output = Output()
         let errorTracker = ErrorTracker()
         let activityIndicator = ActivityIndicator()
         
-        let name = input.dataTrigger
+        let name = input.data
             .map { data -> String? in
                 if case let DataType.name(name) = data {
                     return name
@@ -63,7 +65,7 @@ extension DynamicEditProductViewModel: ViewModelType {
             .unwrap()
             .startWith(self.product.name)
         
-        let price = input.dataTrigger
+        let price = input.data
             .map { data -> String? in
                 if case let DataType.price(price) = data {
                     return price
@@ -73,13 +75,19 @@ extension DynamicEditProductViewModel: ViewModelType {
             .unwrap()
             .startWith(String(self.product.price))
         
-        let nameValidation = validate(object: name,
-                                      trigger: input.updateTrigger,
-                                      validator: useCase.validate(name:))
+        let nameValidation = Driver.combineLatest(name, input.updateTrigger)
+            .map { $0.0 }
+            .map(useCase.validateName(_:))
+            .do(onNext: { result in
+                return output.nameValidation = result
+            })
         
-        let priceValidation = validate(object: price,
-                                       trigger: input.updateTrigger,
-                                       validator: useCase.validate(price:))
+        let priceValidation = Driver.combineLatest(price, input.updateTrigger)
+            .map { $0.0 }
+            .map(useCase.validatePrice(_:))
+            .do(onNext: { result in
+                output.priceValidation = result
+            })
         
         let isUpdateEnabled = Driver.combineLatest([
             nameValidation,
@@ -89,6 +97,9 @@ extension DynamicEditProductViewModel: ViewModelType {
             $0.allSatisfy { $0.isValid }
         }
         .startWith(true)
+        .do(onNext: { isEnabled in
+            output.isUpdateEnabled = isEnabled
+        })
         
         let product = Driver.combineLatest(name, price)
             .map { name, price in
@@ -99,27 +110,31 @@ extension DynamicEditProductViewModel: ViewModelType {
                 )
             }
         
-        let cells = input.loadTrigger
-            .withLatestFrom(Driver.combineLatest(product, nameValidation, priceValidation))
-            .map { product, nameValidation, priceValidation -> [CellType] in
+        input.loadTrigger
+            .withLatestFrom(product)
+            .map { product -> [Cell] in
                 return [
-                    CellType(dataType: .name(product.name), validationResult: nameValidation),
-                    CellType(dataType: .price(String(product.price)), validationResult: priceValidation)
+                    Cell(dataType: .name(product.name), validationResult: output.nameValidation),
+                    Cell(dataType: .price(String(product.price)), validationResult: output.priceValidation)
                 ]
             }
             .withLatestFrom(input.loadTrigger) {
-                ($0, $1 == .load)
+                CellCollection(cells: $0, needsReloading: $1 == .load)
             }
+            .drive(output.$cellCollection)
+            .disposed(by: disposeBag)
         
-        let cancel = input.cancelTrigger
+        input.cancelTrigger
             .do(onNext: navigator.dismiss)
+            .drive()
+            .disposed(by: disposeBag)
         
-        let updatedProduct = input.updateTrigger
+        input.updateTrigger
             .withLatestFrom(isUpdateEnabled)
             .filter { $0 }
             .withLatestFrom(product)
             .flatMapLatest { product in
-                self.useCase.update(product)
+                self.useCase.update(product.toDto())
                     .trackError(errorTracker)
                     .trackActivity(activityIndicator)
                     .asDriverOnErrorJustComplete()
@@ -129,20 +144,19 @@ extension DynamicEditProductViewModel: ViewModelType {
                 self.useCase.notifyUpdated(product)
                 self.navigator.dismiss()
             })
-            .mapToVoid()
+            .drive()
+            .disposed(by: disposeBag)
         
-        let error = errorTracker.asDriver()
-        let isLoading = activityIndicator.asDriver()
+        errorTracker.asDriver()
+            .asDriver()
+            .drive(output.$error)
+            .disposed(by: disposeBag)
         
-        return Output(
-            nameValidation: nameValidation,
-            priceValidation: priceValidation,
-            isUpdateEnabled: isUpdateEnabled,
-            updatedProduct: updatedProduct,
-            cancel: cancel,
-            error: error,
-            isLoading: isLoading,
-            cells: cells
-        )
+        activityIndicator
+            .asDriver()
+            .drive(output.$isLoading)
+            .disposed(by: disposeBag)
+        
+        return output
     }
 }

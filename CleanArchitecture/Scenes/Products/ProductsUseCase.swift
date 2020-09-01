@@ -7,7 +7,7 @@
 //
 
 protocol ProductsUseCaseType {
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>>
+    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>>
     func deleteProduct(id: Int) -> Observable<Void>
 }
 
