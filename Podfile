@@ -16,7 +16,6 @@ def pods
     pod 'Reusable', '~> 4.1'
     pod 'Then', '~> 2.7'
     pod 'MJRefresh', '~> 3.4.3'
-    pod 'Validator', '~> 3.2.1'
     pod 'ValidatedPropertyKit'
     
     # Others

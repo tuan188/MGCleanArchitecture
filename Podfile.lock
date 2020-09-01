@@ -57,7 +57,6 @@ PODS:
   - SDWebImage/Core (5.8.3)
   - Then (2.7.0)
   - ValidatedPropertyKit (0.0.4)
-  - Validator (3.2.1)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.3)
@@ -78,7 +77,6 @@ DEPENDENCIES:
   - SDWebImage (~> 5.8.3)
   - Then (~> 2.7)
   - ValidatedPropertyKit
-  - Validator (~> 3.2.1)
 
 SPEC REPOS:
   trunk:
@@ -105,7 +103,6 @@ SPEC REPOS:
     - SDWebImage
     - Then
     - ValidatedPropertyKit
-    - Validator
 
 EXTERNAL SOURCES:
   Mockingjay:
@@ -142,8 +139,7 @@ SPEC CHECKSUMS:
   SDWebImage: 112503ec94a5a2a41869503844a15e8d8f1ead5c
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
-  Validator: 80a6f567220c962dfd2d9928ae98a8c1d164f6f4
 
-PODFILE CHECKSUM: aa3cfee72602bbd1c2c7a1f08f040a13306e2621
+PODFILE CHECKSUM: eddf693cd5b8b6b441587768fcdda261715a804e
 
 COCOAPODS: 1.9.3
