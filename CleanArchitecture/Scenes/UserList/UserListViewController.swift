@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-final class UserListViewController: UIViewController, BindableType {
+final class UserListViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
     
@@ -54,9 +54,10 @@ final class UserListViewController: UIViewController, BindableType {
             selectUserTrigger: tableView.rx.itemSelected.asDriver()
         )
 
-        let output = viewModel.transform(input)
+        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
         
-        output.userList
+        output.$userList
+            .asDriver()
             .drive(tableView.rx.items) { tableView, index, user in
                 return tableView.dequeueReusableCell(
                     for: IndexPath(row: index, section: 0),
@@ -67,23 +68,24 @@ final class UserListViewController: UIViewController, BindableType {
             }
             .disposed(by: rx.disposeBag)
         
-        output.error
+        output.$error
+            .asDriver()
+            .unwrap()
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
         
-        output.isLoading
+        output.$isLoading
+            .asDriver()
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
         
-        output.isReloading
+        output.$isReloading
+            .asDriver()
             .drive(tableView.isLoadingMoreTop)
             .disposed(by: rx.disposeBag)
         
-        output.selectedUser
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
-        output.isEmpty
+        output.$isEmpty
+            .asDriver()
             .drive()
             .disposed(by: rx.disposeBag)
     }

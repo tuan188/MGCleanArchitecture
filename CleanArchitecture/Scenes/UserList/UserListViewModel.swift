@@ -12,7 +12,7 @@ struct UserListViewModel {
 }
 
 // MARK: - ViewModelType
-extension UserListViewModel: ViewModelType {
+extension UserListViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>
         let reloadTrigger: Driver<Void>
@@ -20,39 +20,49 @@ extension UserListViewModel: ViewModelType {
     }
     
     struct Output {
-        let error: Driver<Error>
-        let isLoading: Driver<Bool>
-        let isReloading: Driver<Bool>
-        let userList: Driver<[UserViewModel]>
-        let selectedUser: Driver<Void>
-        let isEmpty: Driver<Bool>
+        @Property var error: Error?
+        @Property var isLoading = false
+        @Property var isReloading = false
+        @Property var userList = [UserViewModel]()
+        @Property var isEmpty = false
     }
     
-    func transform(_ input: Input) -> Output {
-        let getListResult = getList(
-            loadTrigger: input.loadTrigger,
-            reloadTrigger: input.reloadTrigger,
-            getItems: useCase.getUserList)
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        let getListInput = GetListInput(loadTrigger: input.loadTrigger,
+                                        reloadTrigger: input.reloadTrigger,
+                                        getItems: useCase.getUserList)
+        let getListResult = getList(input: getListInput)
         
         let (userList, error, isLoading, isReloading) = getListResult.destructured
         
-        let userViewModelList = userList
+        error
+            .drive(output.$error)
+            .disposed(by: disposeBag)
+        
+        isLoading
+            .drive(output.$isLoading)
+            .disposed(by: disposeBag)
+        
+        isReloading
+            .drive(output.$isReloading)
+            .disposed(by: disposeBag)
+        
+        userList
             .map { $0.map(UserViewModel.init) }
+            .drive(output.$userList)
+            .disposed(by: disposeBag)
 
-        let selectedUser = select(trigger: input.selectUserTrigger, items: userList)
+        select(trigger: input.selectUserTrigger, items: userList)
             .do(onNext: navigator.toUserDetail)
-            .mapToVoid()
+            .drive()
+            .disposed(by: disposeBag)
         
-        let isEmpty = checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
-                                         items: userList)
+        checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
+                           items: userList)
+            .drive(output.$isEmpty)
+            .disposed(by: disposeBag)
         
-        return Output(
-            error: error,
-            isLoading: isLoading,
-            isReloading: isReloading,
-            userList: userViewModelList,
-            selectedUser: selectedUser,
-            isEmpty: isEmpty
-        )
+        return output
     }
 }

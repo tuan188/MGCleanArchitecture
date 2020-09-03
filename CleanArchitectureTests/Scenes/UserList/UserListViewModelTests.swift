@@ -37,26 +37,17 @@ final class UserListViewModelTests: XCTestCase {
             selectUserTrigger: selectUserTrigger.asDriverOnErrorJustComplete()
         )
 
-        output = viewModel.transform(input)
-
         disposeBag = DisposeBag()
-        
-        output.error.drive().disposed(by: disposeBag)
-        output.isLoading.drive().disposed(by: disposeBag)
-        output.isReloading.drive().disposed(by: disposeBag)
-        output.userList.drive().disposed(by: disposeBag)
-        output.selectedUser.drive().disposed(by: disposeBag)
-        output.isEmpty.drive().disposed(by: disposeBag)
+        output = viewModel.transform(input, disposeBag: disposeBag)
     }
 
     func test_loadTrigger_getUserList() {
         // act
         loadTrigger.onNext(())
-        let userList = try? output.userList.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssert(useCase.getUserListCalled)
-        XCTAssertEqual(userList?.count, 1)
+        XCTAssertEqual(output.userList.count, 1)
     }
 
     func test_loadTrigger_getUserList_failedShowError() {
@@ -65,21 +56,19 @@ final class UserListViewModelTests: XCTestCase {
 
         // act
         loadTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getUserListCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(output.error is TestError)
     }
 
     func test_reloadTrigger_getUserList() {
         // act
         reloadTrigger.onNext(())
-        let userList = try? output.userList.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getUserListCalled)
-        XCTAssertEqual(userList?.count, 1)
+        XCTAssertEqual(output.userList.count, 1)
     }
 
     func test_reloadTrigger_getUserList_failedShowError() {
@@ -88,11 +77,10 @@ final class UserListViewModelTests: XCTestCase {
 
         // act
         reloadTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getUserListCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(output.error is TestError)
     }
 
     func test_reloadTrigger_notGetUserListIfStillLoading() {

@@ -155,6 +155,7 @@
 		17A4E5EB20C90C08003DE0EA /* SectionedProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4E5EA20C90C08003DE0EA /* SectionedProductCell.swift */; };
 		17A9E49B2500978D005E25F5 /* ViewModel+GetPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9E49A2500978D005E25F5 /* ViewModel+GetPage.swift */; };
 		17A9E49D25009EF3005E25F5 /* ViewModel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9E49C25009EF3005E25F5 /* ViewModel+.swift */; };
+		17A9E49F2500C0C3005E25F5 /* ViewModel+GetList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9E49E2500C0C3005E25F5 /* ViewModel+GetList.swift */; };
 		17BB259524A4DDC5002E3CD9 /* AddingUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB259424A4DDC5002E3CD9 /* AddingUsers.swift */; };
 		17BB259D24A4EE35002E3CD9 /* AppGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB259C24A4EE35002E3CD9 /* AppGateway.swift */; };
 		17C0F25321424D8A0047C902 /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0F25221424D8A0047C902 /* ProductHeaderView.swift */; };
@@ -390,6 +391,7 @@
 		17A4E5EA20C90C08003DE0EA /* SectionedProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedProductCell.swift; sourceTree = "<group>"; };
 		17A9E49A2500978D005E25F5 /* ViewModel+GetPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+GetPage.swift"; sourceTree = "<group>"; };
 		17A9E49C25009EF3005E25F5 /* ViewModel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+.swift"; sourceTree = "<group>"; };
+		17A9E49E2500C0C3005E25F5 /* ViewModel+GetList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+GetList.swift"; sourceTree = "<group>"; };
 		17BB259424A4DDC5002E3CD9 /* AddingUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingUsers.swift; sourceTree = "<group>"; };
 		17BB259C24A4EE35002E3CD9 /* AppGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGateway.swift; sourceTree = "<group>"; };
 		17C0F25221424D8A0047C902 /* ProductHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
@@ -800,6 +802,7 @@
 				172E24D724F4BD4300E62C5E /* ViewModel.swift */,
 				17A9E49C25009EF3005E25F5 /* ViewModel+.swift */,
 				17A9E49A2500978D005E25F5 /* ViewModel+GetPage.swift */,
+				17A9E49E2500C0C3005E25F5 /* ViewModel+GetList.swift */,
 				172E24D924F4BDE300E62C5E /* Bindable.swift */,
 				172E24DB24F4E29C00E62C5E /* Property.swift */,
 			);
@@ -1523,6 +1526,7 @@
 				173CA58A21460F8B001AF22D /* DynamicEditProductViewController.swift in Sources */,
 				172172AA20E4D706007D33A5 /* APIUrls.swift in Sources */,
 				178F566721EF0F8D008D22AB /* LoginViewModel.swift in Sources */,
+				17A9E49F2500C0C3005E25F5 /* ViewModel+GetList.swift in Sources */,
 				17D80D2920DF98D7009E68F0 /* EditProductViewModel.swift in Sources */,
 				172DC2A120C555A1009FC881 /* MenuCell.swift in Sources */,
 				17DCDA4320FB346600E2602A /* Assembler.swift in Sources */,
