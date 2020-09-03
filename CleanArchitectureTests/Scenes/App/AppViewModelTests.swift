@@ -37,13 +37,11 @@ final class AppViewModelTests: XCTestCase {
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete()
         )
         
-        output = viewModel.transform(input)
+        disposeBag = DisposeBag()
+        output = viewModel.transform(input, disposeBag: disposeBag)
         
         scheduler = TestScheduler(initialClock: 0)
-        disposeBag = DisposeBag()
-        
         toMainOutput = scheduler.createObserver(Void.self)
-        output.toMain.drive(toMainOutput).disposed(by: disposeBag)
     }
     
     func test_loadTrigger_addUserData() {
@@ -52,6 +50,6 @@ final class AppViewModelTests: XCTestCase {
         
         // assert
         XCTAssert(useCase.addUserDataCalled)
-        XCTAssertEqual(toMainOutput.events.count, 1)
+        XCTAssert(navigator.toMainCalled)
     }
 }

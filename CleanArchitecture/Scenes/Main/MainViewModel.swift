@@ -11,7 +11,7 @@ struct MainViewModel {
     let useCase: MainUseCaseType
 }
 
-// MARK: - ViewModelType
+// MARK: - ViewModel
 extension MainViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>

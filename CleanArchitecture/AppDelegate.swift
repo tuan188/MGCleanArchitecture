@@ -44,11 +44,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private func bindViewModel(window: UIWindow) {
         let vm: AppViewModel = assembler.resolve(window: window)
         let input = AppViewModel.Input(loadTrigger: Driver.just(()))
-        let output = vm.transform(input)
-        
-        output.toMain
-            .drive()
-            .disposed(by: rx.disposeBag)
+        _ = vm.transform(input, disposeBag: rx.disposeBag)
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

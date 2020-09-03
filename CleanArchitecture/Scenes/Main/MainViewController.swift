@@ -10,7 +10,7 @@ import UIKit
 import Reusable
 import RxDataSources
 
-final class MainViewController: UIViewController, BindableType {
+final class MainViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
     
