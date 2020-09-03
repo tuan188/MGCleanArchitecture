@@ -59,7 +59,7 @@ final class MainViewController: UIViewController, BindableType {
             selectMenuTrigger: tableView.rx.itemSelected.asDriver()
         )
         
-        let output = viewModel.transform(input)
+        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
         
         let dataSource = RxTableViewSectionedReloadDataSource<MainMenuSectionModel>(
             configureCell: { (_, tableView, indexPath, menu) -> UITableViewCell in
@@ -73,17 +73,14 @@ final class MainViewController: UIViewController, BindableType {
         
         self.dataSource = dataSource
         
-        output.menuSections
+        output.$menuSections
+            .asDriver()
             .map {
                 $0.map { section in
                     MainMenuSectionModel(model: section.title, items: section.menus)
                 }
             }
             .drive(tableView.rx.items(dataSource: dataSource))
-            .disposed(by: rx.disposeBag)
-        
-        output.selectedMenu
-            .drive()
             .disposed(by: rx.disposeBag)
     }
 }

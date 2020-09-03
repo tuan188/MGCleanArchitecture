@@ -12,26 +12,29 @@ struct MainViewModel {
 }
 
 // MARK: - ViewModelType
-extension MainViewModel: ViewModelType {
+extension MainViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>
         let selectMenuTrigger: Driver<IndexPath>
     }
     
     struct Output {
-        let menuSections: Driver<[MenuSection]>
-        let selectedMenu: Driver<Void>
+        @Property var menuSections = [MenuSection]()
     }
 
-    func transform(_ input: Input) -> Output {
-        let menuSections = input.loadTrigger
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        
+        input.loadTrigger
             .map {
                 self.menuSections()
             }
+            .drive(output.$menuSections)
+            .disposed(by: disposeBag)
         
-        let selectedMenu = input.selectMenuTrigger
-            .withLatestFrom(menuSections) { indexPath, menuSections in
-                menuSections[indexPath.section].menus[indexPath.row]
+        input.selectMenuTrigger
+            .map { indexPath in
+                output.menuSections[indexPath.section].menus[indexPath.row]
             }
             .do(onNext: { menu in
                 switch menu {
@@ -49,12 +52,10 @@ extension MainViewModel: ViewModelType {
                     self.navigator.toLogin()
                 }
             })
-            .mapToVoid()
-        
-        return Output(
-            menuSections: menuSections,
-            selectedMenu: selectedMenu
-        )
+            .drive()
+            .disposed(by: disposeBag)
+            
+        return output
     }
     
     func menuSections() -> [MenuSection] {

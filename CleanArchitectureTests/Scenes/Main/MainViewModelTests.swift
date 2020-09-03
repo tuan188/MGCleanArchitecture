@@ -36,21 +36,16 @@ final class MainViewModelTests: XCTestCase {
             selectMenuTrigger: selectMenuTrigger.asDriverOnErrorJustComplete()
         )
         
-        output = viewModel.transform(input)
-        
         disposeBag = DisposeBag()
-        
-        output.menuSections.drive().disposed(by: disposeBag)
-        output.selectedMenu.drive().disposed(by: disposeBag)
+        output = viewModel.transform(input, disposeBag: disposeBag)
     }
     
     func test_loadTriggerInvoked_loadMenuList() {
         // act
         loadTrigger.onNext(())
-        let menuSections = try? output.menuSections.toBlocking(timeout: 1).first()
         
         // assert
-        XCTAssertEqual(menuSections?.count, 4)
+        XCTAssertEqual(output.menuSections.count, 4)
     }
     
     private func indexPath(of menu: MainViewModel.Menu) -> IndexPath? {

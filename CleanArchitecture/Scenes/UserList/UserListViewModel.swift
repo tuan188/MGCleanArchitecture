@@ -11,7 +11,7 @@ struct UserListViewModel {
     let useCase: UserListUseCaseType
 }
 
-// MARK: - ViewModelType
+// MARK: - ViewModel
 extension UserListViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>
