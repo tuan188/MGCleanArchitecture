@@ -13,7 +13,7 @@ struct LoginViewModel {
     let useCase: LoginUseCaseType
 }
 
-// MARK: - ViewModelType
+// MARK: - ViewModel
 extension LoginViewModel: ViewModel {
     struct Input {
         let usernameTrigger: Driver<String>

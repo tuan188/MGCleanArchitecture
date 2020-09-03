@@ -153,6 +153,8 @@
 		17A4E5E520C90AD4003DE0EA /* SectionedProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4E5E120C90AD4003DE0EA /* SectionedProductsUseCase.swift */; };
 		17A4E5E920C90BF9003DE0EA /* SectionedProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17A4E5E720C90BF9003DE0EA /* SectionedProductCell.xib */; };
 		17A4E5EB20C90C08003DE0EA /* SectionedProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A4E5EA20C90C08003DE0EA /* SectionedProductCell.swift */; };
+		17A9E49B2500978D005E25F5 /* ViewModel+GetPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9E49A2500978D005E25F5 /* ViewModel+GetPage.swift */; };
+		17A9E49D25009EF3005E25F5 /* ViewModel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9E49C25009EF3005E25F5 /* ViewModel+.swift */; };
 		17BB259524A4DDC5002E3CD9 /* AddingUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB259424A4DDC5002E3CD9 /* AddingUsers.swift */; };
 		17BB259D24A4EE35002E3CD9 /* AppGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BB259C24A4EE35002E3CD9 /* AppGateway.swift */; };
 		17C0F25321424D8A0047C902 /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0F25221424D8A0047C902 /* ProductHeaderView.swift */; };
@@ -386,6 +388,8 @@
 		17A4E5E120C90AD4003DE0EA /* SectionedProductsUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedProductsUseCase.swift; sourceTree = "<group>"; };
 		17A4E5E720C90BF9003DE0EA /* SectionedProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionedProductCell.xib; sourceTree = "<group>"; };
 		17A4E5EA20C90C08003DE0EA /* SectionedProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionedProductCell.swift; sourceTree = "<group>"; };
+		17A9E49A2500978D005E25F5 /* ViewModel+GetPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+GetPage.swift"; sourceTree = "<group>"; };
+		17A9E49C25009EF3005E25F5 /* ViewModel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+.swift"; sourceTree = "<group>"; };
 		17BB259424A4DDC5002E3CD9 /* AddingUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingUsers.swift; sourceTree = "<group>"; };
 		17BB259C24A4EE35002E3CD9 /* AppGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGateway.swift; sourceTree = "<group>"; };
 		17C0F25221424D8A0047C902 /* ProductHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
@@ -794,6 +798,8 @@
 				172172AB20E4E0E1007D33A5 /* Extensions */,
 				172DC2BB20C62CFD009FC881 /* Utils.swift */,
 				172E24D724F4BD4300E62C5E /* ViewModel.swift */,
+				17A9E49C25009EF3005E25F5 /* ViewModel+.swift */,
+				17A9E49A2500978D005E25F5 /* ViewModel+GetPage.swift */,
 				172E24D924F4BDE300E62C5E /* Bindable.swift */,
 				172E24DB24F4E29C00E62C5E /* Property.swift */,
 			);
@@ -1490,6 +1496,7 @@
 				1777C08021F022C60092F5B8 /* Observable+.swift in Sources */,
 				172DC2AF20C62A01009FC881 /* Product.swift in Sources */,
 				1741037B214119B200267731 /* UnitTestViewController.swift in Sources */,
+				17A9E49D25009EF3005E25F5 /* ViewModel+.swift in Sources */,
 				173CA58E21460F8B001AF22D /* DynamicEditProductViewModel.swift in Sources */,
 				17E7593F213FDED00037EE4C /* RepoViewModel.swift in Sources */,
 				1741037921410AEB00267731 /* Double+.swift in Sources */,
@@ -1546,6 +1553,7 @@
 				17EC212E20DCD50700F793FE /* ProductDetailViewModel.swift in Sources */,
 				17EC213020DCD55100F793FE /* ProductDetailViewController.swift in Sources */,
 				17CDA63321EC31250001FE4A /* MagicalRecord+Rx.swift in Sources */,
+				17A9E49B2500978D005E25F5 /* ViewModel+GetPage.swift in Sources */,
 				176E8BDF24A3AC4F00B1F709 /* GatewaysAssembler.swift in Sources */,
 				172DC28020C53DB1009FC881 /* MainViewModel.swift in Sources */,
 				172DC27920C533C8009FC881 /* AppNavigator.swift in Sources */,

@@ -11,8 +11,8 @@ struct ReposViewModel {
     let useCase: ReposUseCaseType
 }
 
-// MARK: - ViewModelType
-extension ReposViewModel: ViewModelType {
+// MARK: - ViewModel
+extension ReposViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>
         let reloadTrigger: Driver<Void>
@@ -21,45 +21,58 @@ extension ReposViewModel: ViewModelType {
     }
 
     struct Output {
-        let error: Driver<Error>
-        let isLoading: Driver<Bool>
-        let isReloading: Driver<Bool>
-        let isLoadingMore: Driver<Bool>
-        let repoList: Driver<[RepoViewModel]>
-        let selectedRepo: Driver<Void>
-        let isEmpty: Driver<Bool>
+        @Property var error: Error?
+        @Property var isLoading: Bool = false
+        @Property var isReloading: Bool = false
+        @Property var isLoadingMore: Bool = false
+        @Property var repoList: [RepoViewModel] = []
+        @Property var isEmpty: Bool = false
     }
 
-    func transform(_ input: Input) -> Output {
-        let getPageResult = getPage(
-            loadTrigger: input.loadTrigger,
-            reloadTrigger: input.reloadTrigger,
-            loadMoreTrigger: input.loadMoreTrigger,
-            getItems: useCase.getRepoList(page:))
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        
+        let getPageInput = GetPageInput(loadTrigger: input.loadTrigger,
+                                        reloadTrigger: input.reloadTrigger,
+                                        loadMoreTrigger: input.loadMoreTrigger,
+                                        getItems: useCase.getRepoList(page:))
+        let getPageResult = getPage(input: getPageInput)
         
         let (page, paginationError, isLoading, isReloading, isLoadingMore) = getPageResult.destructured
 
         let repoList = page
             .map { $0.items }
-            
-        let repoViewModelList = repoList
-            .map { $0.map(RepoViewModel.init) }
-
-        let selectedRepo = select(trigger: input.selectRepoTrigger, items: repoList)
-            .do(onNext: navigator.toRepoDetail)
-            .mapToVoid()
         
-        let isEmpty = checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
-                                         items: repoList)
+        paginationError
+            .drive(output.$error)
+            .disposed(by: disposeBag)
+        
+        isLoading
+            .drive(output.$isLoading)
+            .disposed(by: disposeBag)
+        
+        isReloading
+            .drive(output.$isReloading)
+            .disposed(by: disposeBag)
+        
+        isLoadingMore
+            .drive(output.$isLoadingMore)
+            .disposed(by: disposeBag)
+            
+        repoList
+            .map { $0.map(RepoViewModel.init) }
+            .drive(output.$repoList)
+            .disposed(by: disposeBag)
 
-        return Output(
-            error: paginationError,
-            isLoading: isLoading,
-            isReloading: isReloading,
-            isLoadingMore: isLoadingMore,
-            repoList: repoViewModelList,
-            selectedRepo: selectedRepo,
-            isEmpty: isEmpty
-        )
+        select(trigger: input.selectRepoTrigger, items: repoList)
+            .do(onNext: navigator.toRepoDetail)
+            .drive()
+            .disposed(by: disposeBag)
+        
+        checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading), items: repoList)
+            .drive(output.$isEmpty)
+            .disposed(by: disposeBag)
+
+        return output
     }
 }

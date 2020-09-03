@@ -86,9 +86,10 @@ final class RepoCollectionViewController: UIViewController, BindableType {
             selectRepoTrigger: collectionView.rx.itemSelected.asDriver()
         )
         
-        let output = viewModel.transform(input)
+        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
         
-        output.repoList
+        output.$repoList
+            .asDriver()
             .do(onNext: { [unowned self] repoList in
                 self.repoList = repoList
             })
@@ -101,27 +102,29 @@ final class RepoCollectionViewController: UIViewController, BindableType {
             }
             .disposed(by: rx.disposeBag)
         
-        output.error
+        output.$error
+            .asDriver()
+            .unwrap()
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
         
-        output.isLoading
+        output.$isLoading
+            .asDriver()
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
         
-        output.isReloading
+        output.$isReloading
+            .asDriver()
             .drive(collectionView.isRefreshing)
             .disposed(by: rx.disposeBag)
         
-        output.isLoadingMore
+        output.$isLoadingMore
+            .asDriver()
             .drive(collectionView.isLoadingMore)
             .disposed(by: rx.disposeBag)
         
-        output.selectedRepo
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
-        output.isEmpty
+        output.$isEmpty
+            .asDriver()
             .drive(collectionView.isEmpty)
             .disposed(by: rx.disposeBag)
     }

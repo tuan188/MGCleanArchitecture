@@ -39,27 +39,17 @@ final class ReposViewModelTests: XCTestCase {
             selectRepoTrigger: selectRepoTrigger.asDriverOnErrorJustComplete()
         )
         
-        output = viewModel.transform(input)
-        
         disposeBag = DisposeBag()
-        
-        output.error.drive().disposed(by: disposeBag)
-        output.isLoading.drive().disposed(by: disposeBag)
-        output.isReloading.drive().disposed(by: disposeBag)
-        output.isLoadingMore.drive().disposed(by: disposeBag)
-        output.repoList.drive().disposed(by: disposeBag)
-        output.selectedRepo.drive().disposed(by: disposeBag)
-        output.isEmpty.drive().disposed(by: disposeBag)
+        output = viewModel.transform(input, disposeBag: disposeBag)
     }
 
     func test_loadTriggerInvoked_getRepoList() {
         // act
         loadTrigger.onNext(())
-        let repoList = try? output.repoList.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssert(useCase.getRepoListCalled)
-        XCTAssertEqual(repoList?.count, 1)
+        XCTAssertEqual(output.repoList.count, 1)
     }
 
     func test_loadTriggerInvoked_getRepoList_failedShowError() {
@@ -68,21 +58,19 @@ final class ReposViewModelTests: XCTestCase {
 
         // act
         loadTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getRepoListCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(output.error is TestError)
     }
 
     func test_reloadTriggerInvoked_getRepoList() {
         // act
         reloadTrigger.onNext(())
-        let repoList = try? output.repoList.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getRepoListCalled)
-        XCTAssertEqual(repoList?.count, 1)
+        XCTAssertEqual(output.repoList.count, 1)
     }
 
     func test_reloadTriggerInvoked_getRepoList_failedShowError() {
@@ -91,11 +79,10 @@ final class ReposViewModelTests: XCTestCase {
 
         // act
         reloadTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getRepoListCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(output.error is TestError)
     }
 
     func test_reloadTriggerInvoked_notGetRepoListIfStillLoading() {
@@ -128,11 +115,10 @@ final class ReposViewModelTests: XCTestCase {
         // act
         loadTrigger.onNext(())
         loadMoreTrigger.onNext(())
-        let repoList = try? output.repoList.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getRepoListCalled)
-        XCTAssertEqual(repoList?.count, 2)
+        XCTAssertEqual(output.repoList.count, 2)
     }
 
     func test_loadMoreTriggerInvoked_loadMoreRepoList_failedShowError() {
@@ -142,11 +128,10 @@ final class ReposViewModelTests: XCTestCase {
         // act
         loadTrigger.onNext(())
         loadMoreTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getRepoListCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(output.error is TestError)
     }
 
     func test_loadMoreTriggerInvoked_notLoadMoreRepoListIfStillLoading() {

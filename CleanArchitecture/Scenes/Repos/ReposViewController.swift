@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-final class ReposViewController: UIViewController, BindableType {
+final class ReposViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
     
@@ -57,9 +57,10 @@ final class ReposViewController: UIViewController, BindableType {
             selectRepoTrigger: tableView.rx.itemSelected.asDriver()
         )
         
-        let output = viewModel.transform(input)
+        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
         
-        output.repoList
+        output.$repoList
+            .asDriver()
             .do(onNext: { [unowned self] repoList in
                 self.repoList = repoList
             })
@@ -73,27 +74,29 @@ final class ReposViewController: UIViewController, BindableType {
             }
             .disposed(by: rx.disposeBag)
         
-        output.error
+        output.$error
+            .asDriver()
+            .unwrap()
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
         
-        output.isLoading
+        output.$isLoading
+            .asDriver()
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
         
-        output.isReloading
+        output.$isReloading
+            .asDriver()
             .drive(tableView.isLoadingMoreTop)
             .disposed(by: rx.disposeBag)
         
-        output.isLoadingMore
+        output.$isLoadingMore
+            .asDriver()
             .drive(tableView.isLoadingMoreBottom)
             .disposed(by: rx.disposeBag)
         
-        output.selectedRepo
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
-        output.isEmpty
+        output.$isEmpty
+            .asDriver()
             .drive(tableView.isEmpty)
             .disposed(by: rx.disposeBag)
     }

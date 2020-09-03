@@ -12,7 +12,7 @@ struct DynamicEditProductViewModel {
     let product: Product
 }
 
-// MARK: - ViewModelType
+// MARK: - ViewModel
 extension DynamicEditProductViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<TriggerType>
