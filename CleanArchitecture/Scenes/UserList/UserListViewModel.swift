@@ -23,7 +23,7 @@ extension UserListViewModel: ViewModel {
         @Property var error: Error?
         @Property var isLoading = false
         @Property var isReloading = false
-        @Property var userList = [UserViewModel]()
+        @Property var userList = [UserItemViewModel]()
         @Property var isEmpty = false
     }
     
@@ -49,7 +49,7 @@ extension UserListViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         userList
-            .map { $0.map(UserViewModel.init) }
+            .map { $0.map(UserItemViewModel.init) }
             .drive(output.$userList)
             .disposed(by: disposeBag)
 

@@ -167,7 +167,7 @@
 		17CD5FB124A5979D00BA2496 /* UserGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CD5FB024A5979D00BA2496 /* UserGatewayMock.swift */; };
 		17CDA61421EC20500001FE4A /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA60E21EC204F0001FE4A /* UserListViewController.swift */; };
 		17CDA61521EC20500001FE4A /* UserListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA60F21EC204F0001FE4A /* UserListUseCase.swift */; };
-		17CDA61621EC20500001FE4A /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA61021EC204F0001FE4A /* UserViewModel.swift */; };
+		17CDA61621EC20500001FE4A /* UserItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA61021EC204F0001FE4A /* UserItemViewModel.swift */; };
 		17CDA61721EC20500001FE4A /* UserListNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA61121EC204F0001FE4A /* UserListNavigator.swift */; };
 		17CDA61821EC20500001FE4A /* UserListAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA61221EC204F0001FE4A /* UserListAssembler.swift */; };
 		17CDA61921EC20500001FE4A /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA61321EC204F0001FE4A /* UserListViewModel.swift */; };
@@ -198,7 +198,7 @@
 		17DCDA4520FB352300E2602A /* ReposAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCDA4420FB352300E2602A /* ReposAssembler.swift */; };
 		17DCDA4C20FB43CC00E2602A /* EditProductAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCDA4B20FB43CC00E2602A /* EditProductAssembler.swift */; };
 		17DF7EF922CEE87600771503 /* UIImageView+SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DF7EF822CEE87600771503 /* UIImageView+SDWebImage.swift */; };
-		17E7593F213FDED00037EE4C /* RepoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7593E213FDED00037EE4C /* RepoViewModel.swift */; };
+		17E7593F213FDED00037EE4C /* RepoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7593E213FDED00037EE4C /* RepoItemViewModel.swift */; };
 		17EC212E20DCD50700F793FE /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EC212C20DCD50600F793FE /* ProductDetailViewModel.swift */; };
 		17EC213020DCD55100F793FE /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EC212F20DCD55000F793FE /* ProductDetailViewController.swift */; };
 		17EC213320DCD5D800F793FE /* ProductDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EC213120DCD5D700F793FE /* ProductDetailUseCase.swift */; };
@@ -403,7 +403,7 @@
 		17CD5FB024A5979D00BA2496 /* UserGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGatewayMock.swift; sourceTree = "<group>"; };
 		17CDA60E21EC204F0001FE4A /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		17CDA60F21EC204F0001FE4A /* UserListUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListUseCase.swift; sourceTree = "<group>"; };
-		17CDA61021EC204F0001FE4A /* UserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		17CDA61021EC204F0001FE4A /* UserItemViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserItemViewModel.swift; sourceTree = "<group>"; };
 		17CDA61121EC204F0001FE4A /* UserListNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListNavigator.swift; sourceTree = "<group>"; };
 		17CDA61221EC204F0001FE4A /* UserListAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListAssembler.swift; sourceTree = "<group>"; };
 		17CDA61321EC204F0001FE4A /* UserListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
@@ -434,7 +434,7 @@
 		17DCDA4420FB352300E2602A /* ReposAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposAssembler.swift; sourceTree = "<group>"; };
 		17DCDA4B20FB43CC00E2602A /* EditProductAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProductAssembler.swift; sourceTree = "<group>"; };
 		17DF7EF822CEE87600771503 /* UIImageView+SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+SDWebImage.swift"; sourceTree = "<group>"; };
-		17E7593E213FDED00037EE4C /* RepoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewModel.swift; sourceTree = "<group>"; };
+		17E7593E213FDED00037EE4C /* RepoItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoItemViewModel.swift; sourceTree = "<group>"; };
 		17EC212C20DCD50600F793FE /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		17EC212F20DCD55000F793FE /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		17EC213120DCD5D700F793FE /* ProductDetailUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailUseCase.swift; sourceTree = "<group>"; };
@@ -547,7 +547,7 @@
 				1721727620E49244007D33A5 /* ReposUseCase.swift */,
 				1721727320E49243007D33A5 /* ReposViewController.swift */,
 				1721727520E49244007D33A5 /* ReposViewModel.swift */,
-				17E7593E213FDED00037EE4C /* RepoViewModel.swift */,
+				17E7593E213FDED00037EE4C /* RepoItemViewModel.swift */,
 				1721728720E4964B007D33A5 /* RepoCell.swift */,
 				1721728820E4964B007D33A5 /* RepoCell.xib */,
 				17DCDA4420FB352300E2602A /* ReposAssembler.swift */,
@@ -1105,7 +1105,7 @@
 				17CDA60F21EC204F0001FE4A /* UserListUseCase.swift */,
 				17CDA60E21EC204F0001FE4A /* UserListViewController.swift */,
 				17CDA61321EC204F0001FE4A /* UserListViewModel.swift */,
-				17CDA61021EC204F0001FE4A /* UserViewModel.swift */,
+				17CDA61021EC204F0001FE4A /* UserItemViewModel.swift */,
 				17CDA61A21EC207F0001FE4A /* UserCell.swift */,
 				17CDA61B21EC207F0001FE4A /* UserCell.xib */,
 			);
@@ -1501,7 +1501,7 @@
 				1741037B214119B200267731 /* UnitTestViewController.swift in Sources */,
 				17A9E49D25009EF3005E25F5 /* ViewModel+.swift in Sources */,
 				173CA58E21460F8B001AF22D /* DynamicEditProductViewModel.swift in Sources */,
-				17E7593F213FDED00037EE4C /* RepoViewModel.swift in Sources */,
+				17E7593F213FDED00037EE4C /* RepoItemViewModel.swift in Sources */,
 				1741037921410AEB00267731 /* Double+.swift in Sources */,
 				172172A020E4C65E007D33A5 /* APIService.swift in Sources */,
 				170A6B9E20FB51B8003ECCF2 /* AppAssembler.swift in Sources */,
@@ -1597,7 +1597,7 @@
 				175472B724A5B0CA00DF48CC /* RepoGateway.swift in Sources */,
 				17BB259524A4DDC5002E3CD9 /* AddingUsers.swift in Sources */,
 				17CDA61721EC20500001FE4A /* UserListNavigator.swift in Sources */,
-				17CDA61621EC20500001FE4A /* UserViewModel.swift in Sources */,
+				17CDA61621EC20500001FE4A /* UserItemViewModel.swift in Sources */,
 				1720C7B824FC8B4800D616B2 /* Validation+Collection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

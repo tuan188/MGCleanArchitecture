@@ -25,7 +25,7 @@ extension ReposViewModel: ViewModel {
         @Property var isLoading: Bool = false
         @Property var isReloading: Bool = false
         @Property var isLoadingMore: Bool = false
-        @Property var repoList: [RepoViewModel] = []
+        @Property var repoList: [RepoItemViewModel] = []
         @Property var isEmpty: Bool = false
     }
 
@@ -60,7 +60,7 @@ extension ReposViewModel: ViewModel {
             .disposed(by: disposeBag)
             
         repoList
-            .map { $0.map(RepoViewModel.init) }
+            .map { $0.map(RepoItemViewModel.init) }
             .drive(output.$repoList)
             .disposed(by: disposeBag)
 

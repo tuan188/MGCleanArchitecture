@@ -17,7 +17,7 @@ final class UserCell: UITableViewCell, NibReusable {
         super.awakeFromNib()
     }
     
-    func bindViewModel(_ viewModel: UserViewModel?) {
+    func bindViewModel(_ viewModel: UserItemViewModel?) {
         nameLabel.text = viewModel?.name
         genderLabel.text = viewModel?.gender
         birthdayLabel.text = viewModel?.birthday

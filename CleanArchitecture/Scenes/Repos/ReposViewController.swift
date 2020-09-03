@@ -19,7 +19,7 @@ final class ReposViewController: UIViewController, Bindable {
     
     var viewModel: ReposViewModel!
     
-    private var repoList = [RepoViewModel]()
+    private var repoList = [RepoItemViewModel]()
     
     // MARK: - Life Cycle
 

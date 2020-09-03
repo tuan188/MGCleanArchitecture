@@ -19,7 +19,7 @@ final class RepoCollectionViewController: UIViewController, BindableType {
     
     var viewModel: ReposViewModel!
     
-    private var repoList = [RepoViewModel]()
+    private var repoList = [RepoItemViewModel]()
     
     struct LayoutOptions {
         var itemSpacing: CGFloat = 16

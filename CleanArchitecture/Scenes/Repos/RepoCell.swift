@@ -12,7 +12,7 @@ final class RepoCell: UITableViewCell, NibReusable {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var avatarURLStringImageView: UIImageView!
     
-    func bindViewModel(_ viewModel: RepoViewModel?) {
+    func bindViewModel(_ viewModel: RepoItemViewModel?) {
         if let viewModel = viewModel {
             nameLabel.text = viewModel.name
             avatarURLStringImageView.setImage(with: viewModel.url)
