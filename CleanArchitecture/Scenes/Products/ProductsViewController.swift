@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-final class ProductsViewController: UIViewController, BindableType {
+final class ProductsViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
 
@@ -59,9 +59,10 @@ final class ProductsViewController: UIViewController, BindableType {
             deleteProductTrigger: deleteProductTrigger.asDriverOnErrorJustComplete()
         )
         
-        let output = viewModel?.transform(input)
+        let output = viewModel?.transform(input, disposeBag: rx.disposeBag)
         
-        output?.productList
+        output?.$productList
+            .asDriver()
             .drive(tableView.rx.items) { [unowned self] tableView, index, product in
                 return tableView.dequeueReusableCell(
                     for: IndexPath(row: index, section: 0),
@@ -80,36 +81,30 @@ final class ProductsViewController: UIViewController, BindableType {
             }
             .disposed(by: rx.disposeBag)
         
-        output?.error
+        output?.$error
+            .asDriver()
+            .unwrap()
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
         
-        output?.isLoading
+        output?.$isLoading
+            .asDriver()
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
         
-        output?.isReloading
+        output?.$isReloading
+            .asDriver()
             .drive(tableView.isRefreshing)
             .disposed(by: rx.disposeBag)
         
-        output?.isLoadingMore
+        output?.$isLoadingMore
+            .asDriver()
             .drive(tableView.isLoadingMore)
             .disposed(by: rx.disposeBag)
         
-        output?.selectedProduct
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
-        output?.isEmpty
+        output?.$isEmpty
+            .asDriver()
             .drive(tableView.isEmpty)
-            .disposed(by: rx.disposeBag)
-        
-        output?.editedProduct
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
-        output?.deletedProduct
-            .drive()
             .disposed(by: rx.disposeBag)
     }
 

@@ -20,7 +20,7 @@ final class SectionedProductsViewController: UIViewController, BindableType {
     
     var viewModel: SectionedProductsViewModel!
     
-    private typealias ProductSectionModel = SectionModel<String, ProductViewModel>
+    private typealias ProductSectionModel = SectionModel<String, ProductItemViewModel>
     private var dataSource: RxTableViewSectionedReloadDataSource<ProductSectionModel>?
     private let editProductTrigger = PublishSubject<IndexPath>()
     

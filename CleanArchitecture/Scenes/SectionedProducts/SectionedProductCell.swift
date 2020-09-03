@@ -15,7 +15,7 @@ final class SectionedProductCell: UITableViewCell, NibReusable {
     
     var editProductAction: (() -> Void)?
     
-    func bindViewModel(_ viewModel: ProductViewModel?) {
+    func bindViewModel(_ viewModel: ProductItemViewModel?) {
         if let viewModel = viewModel {
             nameLabel.text = viewModel.name
             priceLabel.text = viewModel.price

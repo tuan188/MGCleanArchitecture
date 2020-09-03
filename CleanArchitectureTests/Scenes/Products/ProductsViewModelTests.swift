@@ -27,7 +27,7 @@ final class ProductsViewModelTests: XCTestCase {
     private var isLoadingOutput: TestableObserver<Bool>!
     private var isReloadingOutput: TestableObserver<Bool>!
     private var isLoadingMoreOutput: TestableObserver<Bool>!
-    private var productListOutput: TestableObserver<[ProductViewModel]>!
+    private var productListOutput: TestableObserver<[ProductItemViewModel]>!
     private var selectedProductOutput: TestableObserver<Void>!
     private var editedProductOutput: TestableObserver<Void>!
     private var isEmptyOutput: TestableObserver<Bool>!
@@ -55,30 +55,27 @@ final class ProductsViewModelTests: XCTestCase {
             deleteProductTrigger: deleteProductTrigger.asDriverOnErrorJustComplete()
         )
         
-        output = viewModel.transform(input)
-        
         disposeBag = DisposeBag()
+        output = viewModel.transform(input, disposeBag: disposeBag)
+        
         scheduler = TestScheduler(initialClock: 0)
         
         errorOutput = scheduler.createObserver(Error.self)
         isLoadingOutput = scheduler.createObserver(Bool.self)
         isReloadingOutput = scheduler.createObserver(Bool.self)
         isLoadingMoreOutput = scheduler.createObserver(Bool.self)
-        productListOutput = scheduler.createObserver([ProductViewModel].self)
+        productListOutput = scheduler.createObserver([ProductItemViewModel].self)
         selectedProductOutput = scheduler.createObserver(Void.self)
         editedProductOutput = scheduler.createObserver(Void.self)
         isEmptyOutput = scheduler.createObserver(Bool.self)
         deletedProductOutput = scheduler.createObserver(Void.self)
         
-        output.error.drive(errorOutput).disposed(by: disposeBag)
-        output.isLoading.drive(isLoadingOutput).disposed(by: disposeBag)
-        output.isReloading.drive(isReloadingOutput).disposed(by: disposeBag)
-        output.isLoadingMore.drive(isLoadingMoreOutput).disposed(by: disposeBag)
-        output.productList.drive(productListOutput).disposed(by: disposeBag)
-        output.selectedProduct.drive(selectedProductOutput).disposed(by: disposeBag)
-        output.isEmpty.drive(isEmptyOutput).disposed(by: disposeBag)
-        output.editedProduct.drive(editedProductOutput).disposed(by: disposeBag)
-        output.deletedProduct.drive(deletedProductOutput).disposed(by: disposeBag)
+        output.$error.asDriver().unwrap().drive(errorOutput).disposed(by: disposeBag)
+        output.$isLoading.asDriver().drive(isLoadingOutput).disposed(by: disposeBag)
+        output.$isReloading.asDriver().drive(isReloadingOutput).disposed(by: disposeBag)
+        output.$isLoadingMore.asDriver().drive(isLoadingMoreOutput).disposed(by: disposeBag)
+        output.$productList.asDriver().drive(productListOutput).disposed(by: disposeBag)
+        output.$isEmpty.asDriver().drive(isEmptyOutput).disposed(by: disposeBag)
     }
     
     private func startTriggers(load: Recorded<Event<Void>>? = nil,

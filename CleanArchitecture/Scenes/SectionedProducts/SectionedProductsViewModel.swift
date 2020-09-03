@@ -41,7 +41,7 @@ extension SectionedProductsViewModel: ViewModelType {
     
     struct ProductViewModelSection {
         let header: String
-        let productList: [ProductViewModel]
+        let productList: [ProductItemViewModel]
     }
 
     func transform(_ input: Input) -> Output {
@@ -85,7 +85,7 @@ extension SectionedProductsViewModel: ViewModelType {
             .map {
                 return $0.map { section in
                     return ProductViewModelSection(header: section.header,
-                                                   productList: section.productList.map(ProductViewModel.init))
+                                                   productList: section.productList.map(ProductItemViewModel.init))
                 }
             }
             

@@ -18,7 +18,7 @@ final class ProductViewModelTests: XCTestCase {
 
     func test_product() {
         let model = ProductModel(product: product, edited: false)
-        let viewModel = ProductViewModel(product: model)
+        let viewModel = ProductItemViewModel(product: model)
         XCTAssertEqual(viewModel.name, product.name)
         XCTAssertEqual(viewModel.price, product.price.currency)
         XCTAssertNil(viewModel.icon)
@@ -26,7 +26,7 @@ final class ProductViewModelTests: XCTestCase {
     
     func test_edited_product() {
         let model = ProductModel(product: product, edited: true)
-        let viewModel = ProductViewModel(product: model)
+        let viewModel = ProductItemViewModel(product: model)
         XCTAssertEqual(viewModel.name, product.name)
         XCTAssertEqual(viewModel.price, product.price.currency)
         XCTAssertNotNil(viewModel.icon)

@@ -22,7 +22,7 @@ final class ProductCell: UITableViewCell, NibReusable {
         super.awakeFromNib()
     }
 
-    func bindViewModel(_ viewModel: ProductViewModel?) {
+    func bindViewModel(_ viewModel: ProductItemViewModel?) {
         if let viewModel = viewModel {
             nameLabel.text = viewModel.name
             priceLabel.text = viewModel.price
