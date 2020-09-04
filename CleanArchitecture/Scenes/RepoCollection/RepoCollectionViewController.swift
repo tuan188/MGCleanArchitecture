@@ -9,7 +9,7 @@
 import UIKit
 import MJRefresh
 
-final class RepoCollectionViewController: UIViewController, BindableType {
+final class RepoCollectionViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
     

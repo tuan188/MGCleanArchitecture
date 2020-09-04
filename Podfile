@@ -2,7 +2,7 @@ platform :ios, '9.0'
 
 def pods
     # Clean Architecture
-    pod 'MGArchitecture', '~> 1.3.1'
+    pod 'MGArchitecture', '~> 2.0.0'
     pod 'MGAPIService', '~> 2.2.1'
     pod 'MGLoadMore', '~> 2.0.0'
     
