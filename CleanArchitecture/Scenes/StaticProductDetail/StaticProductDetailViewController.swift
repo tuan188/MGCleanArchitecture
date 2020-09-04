@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-final class StaticProductDetailViewController: UITableViewController, BindableType {
+final class StaticProductDetailViewController: UITableViewController, Bindable {
     
     // MARK: - IBOutlets
     
@@ -37,13 +37,15 @@ final class StaticProductDetailViewController: UITableViewController, BindableTy
             loadTrigger: Driver.just(())
         )
         
-        let output = viewModel.transform(input)
+        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
         
-        output.name
+        output.$name
+            .asDriver()
             .drive(nameLabel.rx.text)
             .disposed(by: rx.disposeBag)
         
-        output.price
+        output.$price
+            .asDriver()
             .drive(priceLabel.rx.text)
             .disposed(by: rx.disposeBag)
     }

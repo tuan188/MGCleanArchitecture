@@ -12,33 +12,35 @@ struct ProductDetailViewModel {
     let product: Product
 }
 
-// MARK: - ViewModelType
-extension ProductDetailViewModel: ViewModelType {
+// MARK: - ViewModel
+extension ProductDetailViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>
     }
 
     struct Output {
-        let cells: Driver<[CellType]>
+        @Property var cells = [Cell]()
     }
 
-    enum CellType {
+    enum Cell {
         case name(String)
         case price(String)
     }
 
-    func transform(_ input: Input) -> Output {
-        let product = input.loadTrigger
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        
+        input.loadTrigger
             .map { self.product }
-        
-        let cells = product
-            .map { product -> [CellType] in
-                var cells = [CellType]()
-                cells.append(CellType.name(product.name))
-                cells.append(CellType.price(product.price.currency))
-                return cells
+            .map { product -> [Cell] in
+                return [
+                    Cell.name(product.name),
+                    Cell.price(product.price.currency)
+                ]
             }
+            .drive(output.$cells)
+            .disposed(by: disposeBag)
         
-        return Output(cells: cells)
+        return output
     }
 }

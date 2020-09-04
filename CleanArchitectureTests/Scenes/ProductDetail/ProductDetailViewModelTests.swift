@@ -36,31 +36,27 @@ final class ProductDetailViewModelTests: XCTestCase {
             loadTrigger: loadTrigger.asDriverOnErrorJustComplete()
         )
         
-        output = viewModel.transform(input)
-        
         disposeBag = DisposeBag()
-        
-        output.cells.drive().disposed(by: disposeBag)
+        output = viewModel.transform(input, disposeBag: disposeBag)
     }
 
     func test_loadTriggerInvoked_createCells() {
         // act
         loadTrigger.onNext(())
-        let cells = try? output.cells.toBlocking(timeout: 1).first()
+        let cells = output.cells
         var productName: String?
         var productPrice: String?
         
-        if let nameCellType = cells?[0],
-            case let ProductDetailViewModel.CellType.name(name) = nameCellType {
+        if case let ProductDetailViewModel.Cell.name(name) = cells[0] {
             productName = name
         }
-        if let priceCellType = cells?[1],
-            case let ProductDetailViewModel.CellType.price(price) = priceCellType {
+        
+        if case let ProductDetailViewModel.Cell.price(price) = cells[1] {
             productPrice = price
         }
 
         // assert
-        XCTAssertEqual(cells?.count, 2)
+        XCTAssertEqual(cells.count, 2)
         XCTAssertEqual(productName, product.name)
         XCTAssertEqual(productPrice, product.price.currency)
     }

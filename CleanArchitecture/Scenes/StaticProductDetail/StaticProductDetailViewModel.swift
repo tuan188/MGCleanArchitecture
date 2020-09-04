@@ -12,27 +12,31 @@ struct StaticProductDetailViewModel {
     let product: Product
 }
 
-// MARK: - ViewModelType
-extension StaticProductDetailViewModel: ViewModelType {
+// MARK: - ViewModel
+extension StaticProductDetailViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>
     }
 
     struct Output {
-        let name: Driver<String>
-        let price: Driver<String>
+        @Property var name = ""
+        @Property var price = ""
     }
 
-    func transform(_ input: Input) -> Output {
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        
         let product = input.loadTrigger
             .map { self.product }
         
-        let name = product.map { $0.name }
-        let price = product.map { $0.price.currency }
+        product.map { $0.name }
+            .drive(output.$name)
+            .disposed(by: disposeBag)
         
-        return Output(
-            name: name,
-            price: price
-        )
+        product.map { $0.price.currency }
+            .drive(output.$price)
+            .disposed(by: disposeBag)
+        
+        return output
     }
 }

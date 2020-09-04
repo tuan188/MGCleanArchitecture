@@ -19,7 +19,7 @@ struct EditProductViewModel {
     let delegate: PublishSubject<EditProductDelegate> // swiftlint:disable:this weak_delegate
 }
 
-// MARK: - ViewModelType
+// MARK: - ViewModel
 extension EditProductViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>

@@ -9,7 +9,7 @@
 import UIKit
 import Reusable
 
-final class ProductDetailViewController: UIViewController, BindableType {
+final class ProductDetailViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
 
@@ -44,12 +44,13 @@ final class ProductDetailViewController: UIViewController, BindableType {
     func bindViewModel() {
         let input = ProductDetailViewModel.Input(loadTrigger: Driver.just(()))
         
-        let output = viewModel.transform(input)
+        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
         
-        output.cells
-            .drive(tableView.rx.items) { tableView, index, cellType in
+        output.$cells
+            .asDriver()
+            .drive(tableView.rx.items) { tableView, index, cell in
                 let indexPath = IndexPath(row: index, section: 0)
-                switch cellType {
+                switch cell {
                 case let .name(name):
                     return tableView.dequeueReusableCell(for: indexPath,
                                                          cellType: ProductNameCell.self)
