@@ -10,7 +10,7 @@ import UIKit
 import Reusable
 import RxDataSources
 
-final class SectionedProductsViewController: UIViewController, BindableType {
+final class SectionedProductsViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
     
@@ -70,7 +70,7 @@ final class SectionedProductsViewController: UIViewController, BindableType {
             updatedProductTrigger: updatedProductTrigger
         )
         
-        let output = viewModel.transform(input)
+        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
         
         let dataSource = RxTableViewSectionedReloadDataSource<ProductSectionModel>(
             configureCell: { [weak self] (_, tableView, indexPath, product) -> UITableViewCell in
@@ -89,7 +89,8 @@ final class SectionedProductsViewController: UIViewController, BindableType {
         
         self.dataSource = dataSource
         
-        output.productSections
+        output.$productSections
+            .asDriver()
             .map {
                 $0.map { section in
                     ProductSectionModel(model: section.header, items: section.productList)
@@ -98,36 +99,30 @@ final class SectionedProductsViewController: UIViewController, BindableType {
             .drive(tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
         
-        output.error
+        output.$error
+            .asDriver()
+            .unwrap()
             .drive(rx.error)
             .disposed(by: rx.disposeBag)
         
-        output.isLoading
+        output.$isLoading
+            .asDriver()
             .drive(rx.isLoading)
             .disposed(by: rx.disposeBag)
         
-        output.isReloading
+        output.$isReloading
+            .asDriver()
             .drive(tableView.isRefreshing)
             .disposed(by: rx.disposeBag)
         
-        output.isLoadingMore
+        output.$isLoadingMore
+            .asDriver()
             .drive(tableView.isLoadingMore)
             .disposed(by: rx.disposeBag)
         
-        output.selectedProduct
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
-        output.isEmpty
+        output.$isEmpty
+            .asDriver()
             .drive(tableView.isEmpty)
-            .disposed(by: rx.disposeBag)
-        
-        output.editedProduct
-            .drive()
-            .disposed(by: rx.disposeBag)
-        
-        output.updatedProduct
-            .drive()
             .disposed(by: rx.disposeBag)
     }
 

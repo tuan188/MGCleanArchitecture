@@ -43,27 +43,17 @@ final class SectionedProductsViewModelTests: XCTestCase {
             updatedProductTrigger: updatedProductTrigger.asDriverOnErrorJustComplete()
         )
         
-        output = viewModel.transform(input)
-        
         disposeBag = DisposeBag()
-        
-        output.error.drive().disposed(by: disposeBag)
-        output.isLoading.drive().disposed(by: disposeBag)
-        output.isReloading.drive().disposed(by: disposeBag)
-        output.isLoadingMore.drive().disposed(by: disposeBag)
-        output.productSections.drive().disposed(by: disposeBag)
-        output.selectedProduct.drive().disposed(by: disposeBag)
-        output.isEmpty.drive().disposed(by: disposeBag)
+        output = viewModel.transform(input, disposeBag: disposeBag)
     }
 
     func test_loadTriggerInvoked_getProductList() {
         // act
         loadTrigger.onNext(())
-        let productSections = try? output.productSections.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssertEqual(productSections?[0].productList.count, 1)
+        XCTAssertEqual(output.productSections[0].productList.count, 1)
     }
 
     func test_loadTriggerInvoked_getProductList_failedShowError() {
@@ -72,21 +62,19 @@ final class SectionedProductsViewModelTests: XCTestCase {
 
         // act
         loadTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(output.error is TestError)
     }
 
     func test_reloadTriggerInvoked_getProductList() {
         // act
         reloadTrigger.onNext(())
-        let productSections = try? output.productSections.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssertEqual(productSections?[0].productList.count, 1)
+        XCTAssertEqual(output.productSections[0].productList.count, 1)
     }
 
     func test_reloadTriggerInvoked_getProductList_failedShowError() {
@@ -95,11 +83,10 @@ final class SectionedProductsViewModelTests: XCTestCase {
 
         // act
         reloadTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(output.error is TestError)
     }
 
     func test_reloadTriggerInvoked_notGetProductListIfStillLoading() {
@@ -132,11 +119,10 @@ final class SectionedProductsViewModelTests: XCTestCase {
         // act
         loadTrigger.onNext(())
         loadMoreTrigger.onNext(())
-        let productSections = try? output.productSections.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssertEqual(productSections?[0].productList.count, 2)
+        XCTAssertEqual(output.productSections[0].productList.count, 2)
     }
 
     func test_loadMoreTriggerInvoked_loadMoreProductList_failedShowError() {
@@ -146,11 +132,10 @@ final class SectionedProductsViewModelTests: XCTestCase {
         // act
         loadTrigger.onNext(())
         loadMoreTrigger.onNext(())
-        let error = try? output.error.toBlocking(timeout: 1).first()
 
         // assert
         XCTAssert(useCase.getProductListCalled)
-        XCTAssert(error is TestError)
+        XCTAssert(output.error is TestError)
     }
 
     func test_loadMoreTriggerInvoked_notLoadMoreProductListIfStillLoading() {

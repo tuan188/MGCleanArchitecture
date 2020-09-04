@@ -11,7 +11,7 @@ struct ProductsViewModel {
     let useCase: ProductsUseCaseType
 }
 
-// MARK: - ViewModelType
+// MARK: - ViewModel
 extension ProductsViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>

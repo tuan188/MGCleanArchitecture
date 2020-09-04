@@ -11,8 +11,8 @@ struct SectionedProductsViewModel {
     let useCase: SectionedProductsUseCaseType
 }
 
-// MARK: - ViewModelType
-extension SectionedProductsViewModel: ViewModelType {
+// MARK: - ViewModel
+extension SectionedProductsViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>
         let reloadTrigger: Driver<Void>
@@ -23,15 +23,12 @@ extension SectionedProductsViewModel: ViewModelType {
     }
 
     struct Output {
-        let error: Driver<Error>
-        let isLoading: Driver<Bool>
-        let isReloading: Driver<Bool>
-        let isLoadingMore: Driver<Bool>
-        let productSections: Driver<[ProductViewModelSection]>
-        let selectedProduct: Driver<Void>
-        let isEmpty: Driver<Bool>
-        let editedProduct: Driver<Void>
-        let updatedProduct: Driver<Void>
+        @Property var error: Error?
+        @Property var isLoading = false
+        @Property var isReloading = false
+        @Property var isLoadingMore = false
+        @Property var productSections = [ProductViewModelSection]()
+        @Property var isEmpty = false
     }
 
     struct ProductSection {
@@ -44,19 +41,26 @@ extension SectionedProductsViewModel: ViewModelType {
         let productList: [ProductItemViewModel]
     }
 
-    func transform(_ input: Input) -> Output {
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
         let activityIndicator = PageActivityIndicator()
         let isLoading = activityIndicator.isLoading
         let isReloading = activityIndicator.isReloading
-        let isLoadingMore = activityIndicator.isLoadingMore
+        
+        activityIndicator.isLoadingMore
+            .drive(output.$isLoadingMore)
+            .disposed(by: disposeBag)
         
         let errorTracker = ErrorTracker()
-        let error = errorTracker.asDriver()
-        
+        errorTracker
+            .asDriver()
+            .drive(output.$error)
+            .disposed(by: disposeBag)
+    
         let pageSubject = BehaviorRelay(value: PagingInfo<ProductModel>(page: 1, items: []))
         let updatedProductSubject = PublishSubject<Void>()
         
-        let getPageResult = getPage(
+        let getPageInput = GetPageInput(
             pageSubject: pageSubject,
             pageActivityIndicator: activityIndicator,
             errorTracker: errorTracker,
@@ -70,6 +74,8 @@ extension SectionedProductsViewModel: ViewModelType {
             mapper: ProductModel.init(product:)
         )
         
+        let getPageResult = getPage(input: getPageInput)
+        
         let page = Driver.merge(
             getPageResult.page,
             updatedProductSubject
@@ -81,15 +87,17 @@ extension SectionedProductsViewModel: ViewModelType {
             .map { $0.items }
             .map { [ProductSection(header: "Section1", productList: $0)] }
         
-        let productViewModelSections = productSections
+        productSections
             .map {
                 return $0.map { section in
                     return ProductViewModelSection(header: section.header,
                                                    productList: section.productList.map(ProductItemViewModel.init))
                 }
             }
+            .drive(output.$productSections)
+            .disposed(by: disposeBag)
             
-        let selectedProduct = input.selectProductTrigger
+        input.selectProductTrigger
             .withLatestFrom(productSections) {
                 return ($0, $1)
             }
@@ -99,19 +107,23 @@ extension SectionedProductsViewModel: ViewModelType {
             .do(onNext: { product in
                 self.navigator.toProductDetail(product: product.product)
             })
-            .mapToVoid()
+            .drive()
+            .disposed(by: disposeBag)
         
-        let isEmpty = checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
-                                         items: productSections)
+        checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
+                           items: productSections)
+            .drive(output.$isEmpty)
+            .disposed(by: disposeBag)
         
-        let editedProduct = input.editProductTrigger
+        input.editProductTrigger
             .withLatestFrom(productSections) { indexPath, productSections -> Product in
                 return productSections[indexPath.section].productList[indexPath.row].product
             }
             .do(onNext: self.navigator.toEditProduct)
-            .mapToVoid()
+            .drive()
+            .disposed(by: disposeBag)
         
-        let updatedProduct = input.updatedProductTrigger
+        input.updatedProductTrigger
             .do(onNext: { product in
                 let page = pageSubject.value
                 var productList = page.items
@@ -124,19 +136,10 @@ extension SectionedProductsViewModel: ViewModelType {
                     updatedProductSubject.onNext(())
                 }
             })
-            .mapToVoid()
+            .drive()
+            .disposed(by: disposeBag)
 
-        return Output(
-            error: error,
-            isLoading: isLoading,
-            isReloading: isReloading,
-            isLoadingMore: isLoadingMore,
-            productSections: productViewModelSections,
-            selectedProduct: selectedProduct,
-            isEmpty: isEmpty,
-            editedProduct: editedProduct,
-            updatedProduct: updatedProduct
-        )
+        return output
     }
 }
 
