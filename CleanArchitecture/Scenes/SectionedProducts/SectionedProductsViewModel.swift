@@ -47,6 +47,14 @@ extension SectionedProductsViewModel: ViewModel {
         let isLoading = activityIndicator.isLoading
         let isReloading = activityIndicator.isReloading
         
+        isLoading
+            .drive(output.$isLoading)
+            .disposed(by: disposeBag)
+        
+        isReloading
+            .drive(output.$isReloading)
+            .disposed(by: disposeBag)
+        
         activityIndicator.isLoadingMore
             .drive(output.$isLoadingMore)
             .disposed(by: disposeBag)

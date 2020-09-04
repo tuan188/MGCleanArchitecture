@@ -13,7 +13,7 @@ final class ReposViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var tableView: RefreshTableView!
+    @IBOutlet weak var tableView: PagingTableView!
     
     // MARK: - Properties
     
@@ -40,6 +40,7 @@ final class ReposViewController: UIViewController, Bindable {
             $0.rowHeight = UITableView.automaticDimension
             $0.register(cellType: RepoCell.self)
             $0.prefetchDataSource = self
+            $0.refreshHeader = RefreshAutoHeader()
         }
         
         tableView.rx
@@ -52,8 +53,8 @@ final class ReposViewController: UIViewController, Bindable {
     func bindViewModel() {
         let input = ReposViewModel.Input(
             loadTrigger: Driver.just(()),
-            reloadTrigger: tableView.loadMoreTopTrigger,
-            loadMoreTrigger: tableView.loadMoreBottomTrigger,
+            reloadTrigger: tableView.refreshTrigger,
+            loadMoreTrigger: tableView.loadMoreTrigger,
             selectRepoTrigger: tableView.rx.itemSelected.asDriver()
         )
         
@@ -87,12 +88,12 @@ final class ReposViewController: UIViewController, Bindable {
         
         output.$isReloading
             .asDriver()
-            .drive(tableView.isLoadingMoreTop)
+            .drive(tableView.isRefreshing)
             .disposed(by: rx.disposeBag)
         
         output.$isLoadingMore
             .asDriver()
-            .drive(tableView.isLoadingMoreBottom)
+            .drive(tableView.isLoadingMore)
             .disposed(by: rx.disposeBag)
         
         output.$isEmpty

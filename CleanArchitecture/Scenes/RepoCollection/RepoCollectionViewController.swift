@@ -13,7 +13,7 @@ final class RepoCollectionViewController: UIViewController, BindableType {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var collectionView: LoadMoreCollectionView!
+    @IBOutlet weak var collectionView: PagingCollectionView!
     
     // MARK: - Properties
     

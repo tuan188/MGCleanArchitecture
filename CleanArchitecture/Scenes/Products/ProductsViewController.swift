@@ -13,7 +13,7 @@ final class ProductsViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
 
-    @IBOutlet weak var tableView: LoadMoreTableView!
+    @IBOutlet weak var tableView: PagingTableView!
     
     // MARK: - Properties
 

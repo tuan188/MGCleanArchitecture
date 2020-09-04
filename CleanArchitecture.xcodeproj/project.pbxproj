@@ -185,6 +185,7 @@
 		17CDA63321EC31250001FE4A /* MagicalRecord+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA63221EC31250001FE4A /* MagicalRecord+Rx.swift */; };
 		17CDA63521EC3CB40001FE4A /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA63421EC3CB40001FE4A /* UserRepository.swift */; };
 		17CDA63721EC47330001FE4A /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CDA63621EC47330001FE4A /* AppSettings.swift */; };
+		17D0BC942501CC8C00212955 /* PagingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D0BC932501CC8C00212955 /* PagingTableView.swift */; };
 		17D80D1320DF8FEA009E68F0 /* StaticProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D1220DF8FE9009E68F0 /* StaticProductDetailViewModel.swift */; };
 		17D80D1A20DF9164009E68F0 /* StaticProductDetailNavigatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D1520DF9162009E68F0 /* StaticProductDetailNavigatorMock.swift */; };
 		17D80D1C20DF9164009E68F0 /* StaticProductDetailUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D1720DF9162009E68F0 /* StaticProductDetailUseCaseMock.swift */; };
@@ -194,6 +195,7 @@
 		17D80D2920DF98D7009E68F0 /* EditProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D2520DF98D6009E68F0 /* EditProductViewModel.swift */; };
 		17D80D2A20DF98D7009E68F0 /* EditProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D2620DF98D7009E68F0 /* EditProductUseCase.swift */; };
 		17D80D2B20DF98D7009E68F0 /* EditProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D80D2720DF98D7009E68F0 /* EditProductViewController.swift */; };
+		17D9BEDF2501D846009DD702 /* PagingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D9BEDE2501D846009DD702 /* PagingCollectionView.swift */; };
 		17DCDA4320FB346600E2602A /* Assembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCDA4220FB346600E2602A /* Assembler.swift */; };
 		17DCDA4520FB352300E2602A /* ReposAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCDA4420FB352300E2602A /* ReposAssembler.swift */; };
 		17DCDA4C20FB43CC00E2602A /* EditProductAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DCDA4B20FB43CC00E2602A /* EditProductAssembler.swift */; };
@@ -421,6 +423,7 @@
 		17CDA63221EC31250001FE4A /* MagicalRecord+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MagicalRecord+Rx.swift"; sourceTree = "<group>"; };
 		17CDA63421EC3CB40001FE4A /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		17CDA63621EC47330001FE4A /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		17D0BC932501CC8C00212955 /* PagingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingTableView.swift; sourceTree = "<group>"; };
 		17D80D1220DF8FE9009E68F0 /* StaticProductDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProductDetailViewModel.swift; sourceTree = "<group>"; };
 		17D80D1520DF9162009E68F0 /* StaticProductDetailNavigatorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProductDetailNavigatorMock.swift; sourceTree = "<group>"; };
 		17D80D1720DF9162009E68F0 /* StaticProductDetailUseCaseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticProductDetailUseCaseMock.swift; sourceTree = "<group>"; };
@@ -430,6 +433,7 @@
 		17D80D2520DF98D6009E68F0 /* EditProductViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProductViewModel.swift; sourceTree = "<group>"; };
 		17D80D2620DF98D7009E68F0 /* EditProductUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProductUseCase.swift; sourceTree = "<group>"; };
 		17D80D2720DF98D7009E68F0 /* EditProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProductViewController.swift; sourceTree = "<group>"; };
+		17D9BEDE2501D846009DD702 /* PagingCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingCollectionView.swift; sourceTree = "<group>"; };
 		17DCDA4220FB346600E2602A /* Assembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembler.swift; sourceTree = "<group>"; };
 		17DCDA4420FB352300E2602A /* ReposAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposAssembler.swift; sourceTree = "<group>"; };
 		17DCDA4B20FB43CC00E2602A /* EditProductAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProductAssembler.swift; sourceTree = "<group>"; };
@@ -797,6 +801,7 @@
 		173746A921071D6900B41621 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				17D0BC922501CC8000212955 /* PagingTableView */,
 				172172AB20E4E0E1007D33A5 /* Extensions */,
 				172DC2BB20C62CFD009FC881 /* Utils.swift */,
 				172E24D724F4BD4300E62C5E /* ViewModel.swift */,
@@ -1122,6 +1127,15 @@
 				17CDA62421EC239A0001FE4A /* UserListViewModelTests.swift */,
 			);
 			path = UserList;
+			sourceTree = "<group>";
+		};
+		17D0BC922501CC8000212955 /* PagingTableView */ = {
+			isa = PBXGroup;
+			children = (
+				17D0BC932501CC8C00212955 /* PagingTableView.swift */,
+				17D9BEDE2501D846009DD702 /* PagingCollectionView.swift */,
+			);
+			path = PagingTableView;
 			sourceTree = "<group>";
 		};
 		17D80D1420DF908B009E68F0 /* StaticProductDetail */ = {
@@ -1589,11 +1603,13 @@
 				17EF7B2C21479A3A005DFB79 /* Notifications.swift in Sources */,
 				174103762140FF2300267731 /* ProductModel.swift in Sources */,
 				1745F21C24A5FF4400229824 /* ProductGateway.swift in Sources */,
+				17D0BC942501CC8C00212955 /* PagingTableView.swift in Sources */,
 				178F401221FAEB94009EE0F7 /* MainAssembler.swift in Sources */,
 				172DC2D720C678DD009FC881 /* ProductsViewController.swift in Sources */,
 				17CDA63721EC47330001FE4A /* AppSettings.swift in Sources */,
 				17DCDA4520FB352300E2602A /* ReposAssembler.swift in Sources */,
 				176E8BDB24A3965900B1F709 /* GettingUsers.swift in Sources */,
+				17D9BEDF2501D846009DD702 /* PagingCollectionView.swift in Sources */,
 				175472B724A5B0CA00DF48CC /* RepoGateway.swift in Sources */,
 				17BB259524A4DDC5002E3CD9 /* AddingUsers.swift in Sources */,
 				17CDA61721EC20500001FE4A /* UserListNavigator.swift in Sources */,

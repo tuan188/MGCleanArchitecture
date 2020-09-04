@@ -14,7 +14,7 @@ final class SectionedProductsViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var tableView: LoadMoreTableView!
+    @IBOutlet weak var tableView: PagingTableView!
     
     // MARK: - Properties
     
@@ -63,7 +63,7 @@ final class SectionedProductsViewController: UIViewController, Bindable {
         
         let input = SectionedProductsViewModel.Input(
             loadTrigger: Driver.just(()),
-            reloadTrigger: tableView.refreshTrigger,
+            reloadTrigger: tableView.refreshTrigger.debug(),
             loadMoreTrigger: tableView.loadMoreTrigger,
             selectProductTrigger: tableView.rx.itemSelected.asDriver(),
             editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete(),

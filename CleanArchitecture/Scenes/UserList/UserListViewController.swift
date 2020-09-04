@@ -13,7 +13,7 @@ final class UserListViewController: UIViewController, Bindable {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var tableView: RefreshTableView!
+    @IBOutlet weak var tableView: PagingTableView!
 
     // MARK: - Properties
     
@@ -38,6 +38,7 @@ final class UserListViewController: UIViewController, Bindable {
             $0.rowHeight = UITableView.automaticDimension
             $0.register(cellType: UserCell.self)
             $0.refreshFooter = nil
+            $0.removeRefreshControl()
         }
         
         tableView.rx
@@ -50,7 +51,7 @@ final class UserListViewController: UIViewController, Bindable {
     func bindViewModel() {
         let input = UserListViewModel.Input(
             loadTrigger: Driver.just(()),
-            reloadTrigger: tableView.loadMoreTopTrigger,
+            reloadTrigger: tableView.refreshTrigger,
             selectUserTrigger: tableView.rx.itemSelected.asDriver()
         )
 
@@ -81,7 +82,7 @@ final class UserListViewController: UIViewController, Bindable {
         
         output.$isReloading
             .asDriver()
-            .drive(tableView.isLoadingMoreTop)
+            .drive(tableView.isRefreshing)
             .disposed(by: rx.disposeBag)
         
         output.$isEmpty
