@@ -11,7 +11,7 @@ PODS:
   - MGArchitecture (1.3.1):
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
-  - MGLoadMore (1.3.1):
+  - MGLoadMore (2.0.0):
     - MJRefresh (~> 3.2)
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
@@ -64,7 +64,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.2)
   - MGAPIService (~> 2.2.1)
   - MGArchitecture (~> 1.3.1)
-  - MGLoadMore (~> 1.3.1)
+  - MGLoadMore (~> 2.0.0)
   - MJRefresh (~> 3.4.3)
   - Mockingjay (from `https://github.com/anhnc55/Mockingjay.git`, branch `swift_5`)
   - "NSObject+Rx (~> 5.1)"
@@ -122,7 +122,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MGAPIService: 2ea8217d3bb8cde33bf47e6579882a73a9cccebb
   MGArchitecture: 0fa04fdeea21f26469b8faab16ba48752af31499
-  MGLoadMore: a12ea88793ed989f2afd73b958aaf70e12048a7d
+  MGLoadMore: 2a8732f6a0c26cfe972353a97de5afced8a55f8b
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
   Mockingjay: 0660815ee4907b2f0c1ac988126061bb3e19b7aa
   "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
@@ -140,6 +140,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
 
-PODFILE CHECKSUM: eddf693cd5b8b6b441587768fcdda261715a804e
+PODFILE CHECKSUM: a1a2e13b0a425da3d0cab1037dbfb6eabd42aefe
 
 COCOAPODS: 1.9.3
