@@ -6,7 +6,7 @@
 //  Copyright © 2020 Sun Asterisk. All rights reserved.
 //
 
-import UIKit
+import Dto
 import ValidatedPropertyKit
 
 struct DeleteProductDto: Dto {

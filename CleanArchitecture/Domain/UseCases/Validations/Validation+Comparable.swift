@@ -8,9 +8,9 @@
 
 import ValidatedPropertyKit
 
-public extension Validation where Value: Comparable {
+extension Validation where Value: Comparable {
     
-    static func greaterOrEqual(_ comparableValue: Value, message: String) -> Validation {
+    public static func greaterOrEqual(_ comparableValue: Value, message: String) -> Validation {
         return .init { value in
             if value >= comparableValue {
                 return .success(())
@@ -20,7 +20,7 @@ public extension Validation where Value: Comparable {
         }
     }
     
-    static func greater(_ comparableValue: Value, message: String) -> Validation {
+    public static func greater(_ comparableValue: Value, message: String) -> Validation {
         return .init { value in
             if value > comparableValue {
                 return .success(())

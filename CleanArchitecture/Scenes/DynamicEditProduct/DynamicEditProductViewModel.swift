@@ -6,6 +6,8 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
+import Dto
+
 struct DynamicEditProductViewModel {
     let navigator: DynamicEditProductNavigatorType
     let useCase: DynamicEditProductUseCaseType

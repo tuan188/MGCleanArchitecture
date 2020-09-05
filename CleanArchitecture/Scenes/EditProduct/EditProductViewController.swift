@@ -8,6 +8,7 @@
 
 import UIKit
 import Reusable
+import Dto
 import RxViewController
 
 final class EditProductViewController: UITableViewController, Bindable {

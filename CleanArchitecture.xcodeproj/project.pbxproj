@@ -36,8 +36,6 @@
 		172172A620E4D559007D33A5 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172172A520E4D559007D33A5 /* APIError.swift */; };
 		172172A820E4D6A0007D33A5 /* API+Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172172A720E4D6A0007D33A5 /* API+Repo.swift */; };
 		172172AA20E4D706007D33A5 /* APIUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172172A920E4D706007D33A5 /* APIUrls.swift */; };
-		1726E98924F78E3C00AB2176 /* ValidatedProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1726E98824F78E3C00AB2176 /* ValidatedProperty.swift */; };
-		1726E98B24F78E6600AB2176 /* Result+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1726E98A24F78E6600AB2176 /* Result+.swift */; };
 		172DC22920C4DDF9009FC881 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172DC22820C4DDF9009FC881 /* AppDelegate.swift */; };
 		172DC23020C4DDFA009FC881 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 172DC22F20C4DDFA009FC881 /* Assets.xcassets */; };
 		172DC23320C4DDFA009FC881 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172DC23120C4DDFA009FC881 /* LaunchScreen.storyboard */; };
@@ -77,7 +75,6 @@
 		172DC2EB20C67E6A009FC881 /* ProductsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172DC2E720C67E6A009FC881 /* ProductsViewModelTests.swift */; };
 		172DC2ED20C67EAA009FC881 /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 172DC2EC20C67EAA009FC881 /* Product.storyboard */; };
 		172E24D424F4B4E800E62C5E /* LoginDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E24D324F4B4E800E62C5E /* LoginDto.swift */; };
-		172E24D624F4B4F200E62C5E /* Dto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E24D524F4B4F200E62C5E /* Dto.swift */; };
 		172E24DE24F5F69300E62C5E /* GetPageDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E24DD24F5F69300E62C5E /* GetPageDto.swift */; };
 		172E24E024F602BE00E62C5E /* ProductDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E24DF24F602BE00E62C5E /* ProductDto.swift */; };
 		172E24E224F6034D00E62C5E /* Validation+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172E24E124F6034D00E62C5E /* Validation+String.swift */; };
@@ -261,8 +258,6 @@
 		172172A520E4D559007D33A5 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		172172A720E4D6A0007D33A5 /* API+Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+Repo.swift"; sourceTree = "<group>"; };
 		172172A920E4D706007D33A5 /* APIUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIUrls.swift; sourceTree = "<group>"; };
-		1726E98824F78E3C00AB2176 /* ValidatedProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatedProperty.swift; sourceTree = "<group>"; };
-		1726E98A24F78E6600AB2176 /* Result+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+.swift"; sourceTree = "<group>"; };
 		172DC22520C4DDF9009FC881 /* CleanArchitecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanArchitecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		172DC22820C4DDF9009FC881 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		172DC22F20C4DDFA009FC881 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -307,7 +302,6 @@
 		172DC2E720C67E6A009FC881 /* ProductsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsViewModelTests.swift; sourceTree = "<group>"; };
 		172DC2EC20C67EAA009FC881 /* Product.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Product.storyboard; sourceTree = "<group>"; };
 		172E24D324F4B4E800E62C5E /* LoginDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDto.swift; sourceTree = "<group>"; };
-		172E24D524F4B4F200E62C5E /* Dto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dto.swift; sourceTree = "<group>"; };
 		172E24DD24F5F69300E62C5E /* GetPageDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPageDto.swift; sourceTree = "<group>"; };
 		172E24DF24F602BE00E62C5E /* ProductDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDto.swift; sourceTree = "<group>"; };
 		172E24E124F6034D00E62C5E /* Validation+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Validation+String.swift"; sourceTree = "<group>"; };
@@ -766,8 +760,6 @@
 				172E24E124F6034D00E62C5E /* Validation+String.swift */,
 				1720C7B724FC8B4800D616B2 /* Validation+Collection.swift */,
 				172E24E424F6362400E62C5E /* Validation+Comparable.swift */,
-				1726E98824F78E3C00AB2176 /* ValidatedProperty.swift */,
-				1726E98A24F78E6600AB2176 /* Result+.swift */,
 			);
 			path = Validations;
 			sourceTree = "<group>";
@@ -871,7 +863,6 @@
 				17BB259724A4EC67002E3CD9 /* App */,
 				176E8BD924A3963F00B1F709 /* User */,
 				176E8BD624A357FA00B1F709 /* Repo */,
-				172E24D524F4B4F200E62C5E /* Dto.swift */,
 				172E24DD24F5F69300E62C5E /* GetPageDto.swift */,
 			);
 			path = UseCases;
@@ -1392,6 +1383,7 @@
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/Dto/Dto.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MGAPIService/MGAPIService.framework",
 				"${BUILT_PRODUCTS_DIR}/MGArchitecture/MGArchitecture.framework",
@@ -1416,6 +1408,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dto.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGAPIService.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGArchitecture.framework",
@@ -1449,18 +1442,15 @@
 			files = (
 				172E24E224F6034D00E62C5E /* Validation+String.swift in Sources */,
 				17EC215520DCE58800F793FE /* StaticProductDetailUseCase.swift in Sources */,
-				1726E98924F78E3C00AB2176 /* ValidatedProperty.swift in Sources */,
 				172172A820E4D6A0007D33A5 /* API+Repo.swift in Sources */,
 				172DC29820C53FF4009FC881 /* Storyboards.swift in Sources */,
 				177982D220CE359E0095CCA8 /* SectionedProductsViewController.swift in Sources */,
 				17EC215920DCECBC00F793FE /* ProductDetailNavigator.swift in Sources */,
 				17A4E5E420C90AD4003DE0EA /* SectionedProductsNavigator.swift in Sources */,
 				178F401321FAEB94009EE0F7 /* MainNavigator.swift in Sources */,
-				1726E98B24F78E6600AB2176 /* Result+.swift in Sources */,
 				17368FD120F33E4A00A4A3E9 /* RepoCollectionCell.swift in Sources */,
 				17CDA61421EC20500001FE4A /* UserListViewController.swift in Sources */,
 				173BC074236142A00051A4CA /* UIColor+.swift in Sources */,
-				172E24D624F4B4F200E62C5E /* Dto.swift in Sources */,
 				172DC22920C4DDF9009FC881 /* AppDelegate.swift in Sources */,
 				172DC27820C533C8009FC881 /* AppUseCase.swift in Sources */,
 				176C2DB024A9EE37008DB836 /* UpdatingProduct.swift in Sources */,

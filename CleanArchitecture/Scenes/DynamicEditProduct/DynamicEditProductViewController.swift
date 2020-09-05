@@ -8,6 +8,7 @@
 
 import UIKit
 import Reusable
+import Dto
 import ValidatedPropertyKit
 
 final class DynamicEditProductViewController: UIViewController, Bindable {

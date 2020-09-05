@@ -8,11 +8,11 @@
 
 import ValidatedPropertyKit
 
-public extension Validation where Value == String {
-    static func matches(_ pattern: String,
-                        options: NSRegularExpression.Options = .init(),
-                        matchingOptions: NSRegularExpression.MatchingOptions = .init(),
-                        message: String) -> Validation {
+extension Validation where Value == String {
+    public static func matches(_ pattern: String,
+                               options: NSRegularExpression.Options = .init(),
+                               matchingOptions: NSRegularExpression.MatchingOptions = .init(),
+                               message: String) -> Validation {
         guard let regularExpression = try? NSRegularExpression(pattern: pattern, options: options) else {
             return .init { _ in .failure("Invalid regular expression: \(pattern)") }
         }
@@ -24,9 +24,9 @@ public extension Validation where Value == String {
         )
     }
     
-    static func matches(_ regex: NSRegularExpression,
-                        matchingOptions: NSRegularExpression.MatchingOptions = .init(),
-                        message: String) -> Validation {
+    public static func matches(_ regex: NSRegularExpression,
+                               matchingOptions: NSRegularExpression.MatchingOptions = .init(),
+                               message: String) -> Validation {
         return .init { value in
             let firstMatchIsAvailable = regex.firstMatch(
                 in: value,
@@ -42,7 +42,7 @@ public extension Validation where Value == String {
         }
     }
     
-    static func isNumber(message: String) -> Validation {
+    public static func isNumber(message: String) -> Validation {
         return self.matches(#"[+-]?\d+(\.\d+)?([Ee][+-]?\d+)?"#, message: message)
     }
 }

@@ -2,6 +2,8 @@ PODS:
   - ActionSheetPicker-3.0 (2.3.0)
   - Alamofire (4.9.1)
   - Differentiator (4.0.1)
+  - Dto (0.1.0):
+    - ValidatedPropertyKit (~> 0.0.4)
   - MagicalRecord (2.3.0)
   - MBProgressHUD (1.2.0)
   - MGAPIService (2.2.1):
@@ -60,6 +62,7 @@ PODS:
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (= 2.3)
+  - Dto
   - MagicalRecord (= 2.3.0)
   - MBProgressHUD (~> 1.2)
   - MGAPIService (~> 2.2.1)
@@ -83,6 +86,7 @@ SPEC REPOS:
     - ActionSheetPicker-3.0
     - Alamofire
     - Differentiator
+    - Dto
     - MagicalRecord
     - MBProgressHUD
     - MGAPIService
@@ -118,6 +122,7 @@ SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  Dto: a17939b7ab00e836040a531a42f517ce7fd527aa
   MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MGAPIService: 2ea8217d3bb8cde33bf47e6579882a73a9cccebb
@@ -140,6 +145,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
 
-PODFILE CHECKSUM: 1a13fbe4bf0ab2c143c28b0f2bfd15f60863a4e5
+PODFILE CHECKSUM: 8ae4638128178c4f7b85691120440f7cee6c3d8b
 
 COCOAPODS: 1.9.3

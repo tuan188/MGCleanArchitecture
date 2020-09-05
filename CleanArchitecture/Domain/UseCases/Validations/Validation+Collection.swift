@@ -8,9 +8,9 @@
 
 import ValidatedPropertyKit
 
-public extension Validation where Value: Collection {
+extension Validation where Value: Collection {
     
-    static func nonEmpty(message: String) -> Validation {
+    public static func nonEmpty(message: String) -> Validation {
         return .init { value in
             if !value.isEmpty {
                 return .success(())
@@ -20,7 +20,7 @@ public extension Validation where Value: Collection {
         }
     }
     
-    static func minLength(min: Int, message: String) -> Validation {
+    public static func minLength(min: Int, message: String) -> Validation {
         return .init { value in
             if value.count >= min {
                 return .success(())
@@ -30,7 +30,7 @@ public extension Validation where Value: Collection {
         }
     }
     
-    static func maxLength(max: Int, message: String) -> Validation {
+    public static func maxLength(max: Int, message: String) -> Validation {
         return .init { value in
             if value.count <= max {
                 return .success(())
