@@ -79,7 +79,6 @@ DEPENDENCIES:
   - RxViewController
   - SDWebImage (~> 5.8.3)
   - Then (~> 2.7)
-  - ValidatedPropertyKit
 
 SPEC REPOS:
   trunk:
@@ -145,6 +144,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
 
-PODFILE CHECKSUM: 8ae4638128178c4f7b85691120440f7cee6c3d8b
+PODFILE CHECKSUM: 1dec47e1af309eaaf70e084bdbc525e487110576
 
 COCOAPODS: 1.9.3
