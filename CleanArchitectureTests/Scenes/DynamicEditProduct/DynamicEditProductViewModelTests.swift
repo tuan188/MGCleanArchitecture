@@ -10,6 +10,7 @@
 import XCTest
 import RxSwift
 import RxBlocking
+import Dto
 import ValidatedPropertyKit
 
 final class DynamicEditProductViewModelTests: XCTestCase {

@@ -8,6 +8,7 @@
 
 @testable import CleanArchitecture
 import RxSwift
+import Dto
 import ValidatedPropertyKit
 
 final class LoginUseCaseMock: LoginUseCaseType {

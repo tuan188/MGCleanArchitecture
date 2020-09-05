@@ -11,6 +11,7 @@ import XCTest
 import RxSwift
 import RxBlocking
 import RxTest
+import Dto
 import ValidatedPropertyKit
 
 final class EditProductViewModelTests: XCTestCase {
