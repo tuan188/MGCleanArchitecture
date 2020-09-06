@@ -426,6 +426,84 @@ struct ProductsUseCase: ProductsUseCaseType, GettingProductList, DeletingProduct
 }
 ```
 
+#### ViewController
+
+Data binding is performed in the bindViewModel method of the ViewController:
+
+```swift
+final class ProductsViewController: UIViewController, Bindable {
+    ...
+    
+    var viewModel: ProductsViewModel!
+    
+    private var editProductTrigger = PublishSubject<IndexPath>()
+    private var deleteProductTrigger = PublishSubject<IndexPath>()
+    
+    ...
+    
+    func bindViewModel() {
+        let input = ProductsViewModel.Input(
+            loadTrigger: Driver.just(()),
+            reloadTrigger: tableView.refreshTrigger,
+            loadMoreTrigger: tableView.loadMoreTrigger,
+            selectProductTrigger: tableView.rx.itemSelected.asDriver(),
+            editProductTrigger: editProductTrigger.asDriverOnErrorJustComplete(),
+            deleteProductTrigger: deleteProductTrigger.asDriverOnErrorJustComplete()
+        )
+        
+        let output = viewModel?.transform(input, disposeBag: rx.disposeBag)
+        
+        output?.$productList
+            .asDriver()
+            .drive(tableView.rx.items) { [unowned self] tableView, index, product in
+                return tableView.dequeueReusableCell(
+                    for: IndexPath(row: index, section: 0),
+                    cellType: ProductCell.self)
+                    .then {
+                        $0.bindViewModel(product)
+                        
+                        $0.editProductAction = {
+                            self.editProductTrigger.onNext(IndexPath(row: index, section: 0))
+                        }
+                        
+                        $0.deleteProductAction = {
+                            self.deleteProductTrigger.onNext(IndexPath(row: index, section: 0))
+                        }
+                    }
+            }
+            .disposed(by: rx.disposeBag)
+        
+        output?.$error
+            .asDriver()
+            .unwrap()
+            .drive(rx.error)
+            .disposed(by: rx.disposeBag)
+        
+        output?.$isLoading
+            .asDriver()
+            .drive(rx.isLoading)
+            .disposed(by: rx.disposeBag)
+        
+        output?.$isReloading
+            .asDriver()
+            .drive(tableView.isRefreshing)
+            .disposed(by: rx.disposeBag)
+        
+        output?.$isLoadingMore
+            .asDriver()
+            .drive(tableView.isLoadingMore)
+            .disposed(by: rx.disposeBag)
+        
+        output?.$isEmpty
+            .asDriver()
+            .drive(tableView.isEmpty)
+            .disposed(by: rx.disposeBag)
+    }
+    
+    ...
+}
+```
+
 ## Testing
 ### What to test?
 In this architecture, we can test Use Cases, ViewModels and Entities (if they contain business logic) using RxTest.
