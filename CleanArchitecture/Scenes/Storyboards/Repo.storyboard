@@ -48,7 +48,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eB0-Db-WEZ" customClass="PagingCollectionView" customModule="CleanArchitecture" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eB0-Db-WEZ" customClass="PagingCollectionView" customModule="MGLoadMore">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AyF-2b-CqM">
@@ -72,7 +72,7 @@
                     <navigationItem key="navigationItem" id="vpZ-79-hch"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="collectionView" destination="eB0-Db-WEZ" id="cfj-Er-Ra3"/>
+                        <outlet property="collectionView" destination="eB0-Db-WEZ" id="7yd-Cj-lro"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KQl-W0-F8V" userLabel="First Responder" sceneMemberID="firstResponder"/>

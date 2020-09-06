@@ -1,9 +1,9 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 
 def pods
     # Clean Architecture
-    pod 'MGArchitecture', '~> 2.0.0'
-    pod 'MGAPIService', '~> 2.2.1'
+    pod 'MGArchitecture', '~> 2.0.1'
+    pod 'MGAPIService', '~> 3.0.0'
     pod 'MGLoadMore', '~> 2.0.0'
     pod 'Dto'
     
@@ -13,10 +13,8 @@ def pods
     pod 'RxViewController'
     
     # Core
-    pod 'ObjectMapper', '~> 3.5'
     pod 'Reusable', '~> 4.1'
     pod 'Then', '~> 2.7'
-    pod 'MJRefresh', '~> 3.4.3'
     
     # Others
     pod 'MagicalRecord', '2.3.0'

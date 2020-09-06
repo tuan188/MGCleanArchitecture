@@ -22,7 +22,7 @@ struct ReposNavigator: ReposNavigatorType {
     }
 
     func toRepoDetail(repo: Repo) {
-
+        print(#function)
     }
     
     func toRepoCollection() {

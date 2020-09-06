@@ -20,7 +20,7 @@ extension API {
         init() {
             super.init(urlString: API.Urls.getProductList,
                        parameters: nil,
-                       requestType: .get,
+                       method: .get,
                        requireAccessToken: true)
         }
     }

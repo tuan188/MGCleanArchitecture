@@ -25,7 +25,7 @@ extension API {
             ]
             super.init(urlString: API.Urls.getRepoList,
                        parameters: params,
-                       requestType: .get,
+                       method: .get,
                        requireAccessToken: true)
         }
     }

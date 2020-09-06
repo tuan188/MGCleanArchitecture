@@ -1,23 +1,23 @@
 PODS:
   - ActionSheetPicker-3.0 (2.3.0)
-  - Alamofire (4.9.1)
+  - Alamofire (5.2.2)
   - Differentiator (4.0.1)
   - Dto (0.1.0):
     - ValidatedPropertyKit (~> 0.0.4)
   - MagicalRecord (2.3.0)
   - MBProgressHUD (1.2.0)
-  - MGAPIService (2.2.1):
-    - ObjectMapper (~> 3.5)
-    - RxAlamofire (~> 5.1)
+  - MGAPIService (3.0.0):
+    - ObjectMapper (~> 4.2)
+    - RxAlamofire (~> 5.6)
     - RxSwift (~> 5.1)
-  - MGArchitecture (2.0.0):
+  - MGArchitecture (2.0.1):
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
   - MGLoadMore (2.0.0):
     - MJRefresh (~> 3.2)
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
-  - MJRefresh (3.4.3)
+  - MJRefresh (3.5.0)
   - Mockingjay (2.0.1):
     - Mockingjay/Core (= 2.0.1)
     - Mockingjay/XCTest (= 2.0.1)
@@ -26,17 +26,17 @@ PODS:
     - Mockingjay/Core
   - "NSObject+Rx (5.1.0)":
     - RxSwift (~> 5.1)
-  - ObjectMapper (3.5.3)
+  - ObjectMapper (4.2.0)
   - Reusable (4.1.1):
     - Reusable/Storyboard (= 4.1.1)
     - Reusable/View (= 4.1.1)
   - Reusable/Storyboard (4.1.1)
   - Reusable/View (4.1.1)
-  - RxAlamofire (5.1.0):
-    - RxAlamofire/Core (= 5.1.0)
-  - RxAlamofire/Core (5.1.0):
-    - Alamofire (~> 4.8)
-    - RxSwift (~> 5.0)
+  - RxAlamofire (5.6.1):
+    - RxAlamofire/Core (= 5.6.1)
+  - RxAlamofire/Core (5.6.1):
+    - Alamofire (~> 5.2)
+    - RxSwift (~> 5.1)
   - RxBlocking (5.1.1):
     - RxSwift (~> 5)
   - RxCocoa (5.1.1):
@@ -65,13 +65,11 @@ DEPENDENCIES:
   - Dto
   - MagicalRecord (= 2.3.0)
   - MBProgressHUD (~> 1.2)
-  - MGAPIService (~> 2.2.1)
-  - MGArchitecture (~> 2.0.0)
+  - MGAPIService (~> 3.0.0)
+  - MGArchitecture (~> 2.0.1)
   - MGLoadMore (~> 2.0.0)
-  - MJRefresh (~> 3.4.3)
   - Mockingjay (from `https://github.com/anhnc55/Mockingjay.git`, branch `swift_5`)
   - "NSObject+Rx (~> 5.1)"
-  - ObjectMapper (~> 3.5)
   - Reusable (~> 4.1)
   - RxBlocking (~> 5.1)
   - RxDataSources (~> 4.0)
@@ -119,20 +117,20 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Dto: a17939b7ab00e836040a531a42f517ce7fd527aa
   MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  MGAPIService: 2ea8217d3bb8cde33bf47e6579882a73a9cccebb
-  MGArchitecture: 03e7e2ebd65575afd028016b8952ed306af44d15
+  MGAPIService: 83684387a742af98b944f5badfa566cc2e146318
+  MGArchitecture: 7d586fc5fe15c3fa86dc06b0e6a06d7aafbf8051
   MGLoadMore: 2a8732f6a0c26cfe972353a97de5afced8a55f8b
-  MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
+  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
   Mockingjay: 0660815ee4907b2f0c1ac988126061bb3e19b7aa
   "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
-  ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
-  RxAlamofire: a2d7621de4c23a0c6e7b476b504acc32838ee341
+  RxAlamofire: 0531dddf378c84270e97e897333678f1cfaec3ba
   RxBlocking: 5f700a78cad61ce253ebd37c9a39b5ccc76477b4
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
@@ -144,6 +142,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
 
-PODFILE CHECKSUM: 1dec47e1af309eaaf70e084bdbc525e487110576
+PODFILE CHECKSUM: b1acaab20afec7a1bab032abb0d39880f952ae3d
 
 COCOAPODS: 1.9.3

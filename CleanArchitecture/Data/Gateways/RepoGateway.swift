@@ -17,7 +17,7 @@ struct RepoGateway: RepoGatewayType {
         let (page, perPage, usingCache) = (dto.page, dto.perPage, dto.usingCache)
         
         let input = API.GetRepoListInput(page: page, perPage: perPage)
-        input.useCache = usingCache
+        input.usingCache = usingCache
         
         return API.shared.getRepoList(input)
             .map { $0.repos }
