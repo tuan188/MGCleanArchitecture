@@ -52,8 +52,8 @@ protocol GettingProductList {
 }
 
 extension GettingProductList {
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
-        return productGateway.getProductList(page: page)
+    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>> {
+        return productGateway.getProductList(dto: dto)
     }
 }
 ```
@@ -63,9 +63,9 @@ Generally gateway is just another abstraction that will hide the actual implemen
 
 ```swift
 protocol ProductGatewayType {
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>>
-    func deleteProduct(id: Int) -> Observable<Void>
-    func update(_ product: Product) -> Observable<Void>
+    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>>
+    func deleteProduct(dto: DeleteProductDto) -> Observable<Void>
+    func update(_ product: ProductDto) -> Observable<Void>
 }
 ```
 
@@ -81,13 +81,13 @@ Data Layer contains Gateway Implementations and one or many Data Stores. Gateway
 
 ```swift
 struct ProductGateway: ProductGatewayType {
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
+    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>> {
         return API.shared.getProductList(API.GetProductListInput())
             .map { PagingInfo(page: 1, items: $0) }
     }
     
-    func deleteProduct(id: Int) -> Observable<Void> { ... }
-    func update(_ product: Product) -> Observable<Void> { ... }
+    func deleteProduct(dto: DeleteProductDto) -> Observable<Void> { ... }
+    func update(_ product: ProductDto) -> Observable<Void> { ... }
 }
 ```
 
@@ -104,19 +104,33 @@ enum AppSettings {
 
 ```swift
 extension API {
-    func getProductList(_ input: GetProductListInput) -> Observable<[Product]> {
+    func getRepoList(_ input: GetRepoListInput) -> Observable<GetRepoListOutput> {
         return request(input)
     }
 }
 
 // MARK: - GetRepoList
 extension API {
-    final class GetProductListInput: APIInput {
-        init() {
-            super.init(urlString: API.Urls.getProductList,
-                       parameters: nil,
+    final class GetRepoListInput: APIInput {
+        init(page: Int, perPage: Int = 10) {
+            let params: JSONDictionary = [
+                "q": "language:swift",
+                "per_page": perPage,
+                "page": page
+            ]
+            super.init(urlString: API.Urls.getRepoList,
+                       parameters: params,
                        requestType: .get,
                        requireAccessToken: true)
+        }
+    }
+    
+    final class GetRepoListOutput: APIOutput {
+        private(set) var repos: [Repo]?
+        
+        override func mapping(map: Map) {
+            super.mapping(map: map)
+            repos <- map["items"]
         }
     }
 }
@@ -158,7 +172,8 @@ extension UserRepository where Self.ModelType == User, Self.EntityType == CDUser
         return all()
     }
 
-    func add(_ users: [User]) -> Observable<Void> {
+    func add(dto: AddUserDto) -> Observable<Void> {
+        guard let users = dto.users else { return Observable.empty() }
         return addAll(users)
     }
     
@@ -201,11 +216,11 @@ In the current example, Presentation is implemented with the MVVM pattern and he
 ViewModel performs pure transformation of a user Input to the Output:
 
 ```swift
-public protocol ViewModelType {
+public protocol ViewModel {
     associatedtype Input
     associatedtype Output
     
-    func transform(_ input: Input) -> Output
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output
 }
 ```
 
@@ -215,8 +230,8 @@ struct ProductsViewModel {
     let useCase: ProductsUseCaseType
 }
 
-// MARK: - ViewModelType
-extension ProductsViewModel: ViewModelType {
+// MARK: - ViewModel
+extension ProductsViewModel: ViewModel {
     struct Input {
         let loadTrigger: Driver<Void>
         let reloadTrigger: Driver<Void> 
@@ -227,20 +242,43 @@ extension ProductsViewModel: ViewModelType {
     }
 
     struct Output {
-        let error: Driver<Error>
-        let isLoading: Driver<Bool>
-        let isReloading: Driver<Bool>
-        let isLoadingMore: Driver<Bool>
-        let productList: Driver<[ProductViewModel]>
-        let selectedProduct: Driver<Void>
-        let editedProduct: Driver<Void>
-        let isEmpty: Driver<Bool>
-        let deletedProduct: Driver<Void>
+        @Property var error: Error?
+        @Property var isLoading = false
+        @Property var isReloading = false
+        @Property var isLoadingMore = false
+        @Property var productList = [ProductItemViewModel]()
+        @Property var isEmpty = false
     }
 
-    func transform(_ input: Input) -> Output {
-        ...
-        let getPageResult = getPage(
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        
+        let activityIndicator = PageActivityIndicator()
+        let isLoading = activityIndicator.isLoading
+        let isReloading = activityIndicator.isReloading
+        
+        let errorTracker = ErrorTracker()
+        
+        isLoading
+            .drive(output.$isLoading)
+            .disposed(by: disposeBag)
+        
+        isReloading
+            .drive(output.$isReloading)
+            .disposed(by: disposeBag)
+        
+        activityIndicator.isLoadingMore
+            .drive(output.$isLoadingMore)
+            .disposed(by: disposeBag)
+        
+        errorTracker.asDriver()
+            .drive(output.$error)
+            .disposed(by: disposeBag)
+        
+        let pageSubject = BehaviorRelay(value: PagingInfo<ProductModel>(page: 1, items: []))
+        let updatedProductSubject = PublishSubject<Void>()
+        
+        let getPageInput = GetPageInput(
             pageSubject: pageSubject,
             pageActivityIndicator: activityIndicator,
             errorTracker: errorTracker,
@@ -248,10 +286,13 @@ extension ProductsViewModel: ViewModelType {
             reloadTrigger: input.reloadTrigger,
             loadMoreTrigger: input.loadMoreTrigger,
             getItems: { _, page in
-                self.useCase.getProductList(page: page)
+                let dto = GetPageDto().with { $0.page = page }
+                return self.useCase.getProductList(dto: dto)
             },
             mapper: ProductModel.init(product:)
         )
+        
+        let getPageResult = getPage(input: getPageInput)
         
         let page = Driver.merge(
             getPageResult.page,
@@ -263,15 +304,72 @@ extension ProductsViewModel: ViewModelType {
         let productList = page
             .map { $0.items }
         
-        let productViewModelList = productList
-            .map { $0.map(ProductViewModel.init) }
-	    
-	let selectedProduct = select(trigger: input.selectProductTrigger, items: productList)
+        productList
+            .map { products in products.map(ProductItemViewModel.init) }
+            .drive(output.$productList)
+            .disposed(by: disposeBag)
+        
+        select(trigger: input.selectProductTrigger, items: productList)
             .do(onNext: { product in
                 self.navigator.toProductDetail(product: product.product)
             })
-            .mapToVoid()
-        ...
+            .drive()
+            .disposed(by: disposeBag)
+        
+        select(trigger: input.editProductTrigger, items: productList)
+            .map { $0.product }
+            .flatMapLatest { product -> Driver<EditProductDelegate> in
+                self.navigator.toEditProduct(product)
+            }
+            .do(onNext: { delegate in
+                switch delegate {
+                case .updatedProduct(let product):
+                    let page = pageSubject.value
+                    var productList = page.items
+                    let productModel = ProductModel(product: product, edited: true)
+                    
+                    if let index = productList.firstIndex(of: productModel) {
+                        productList[index] = productModel
+                        let updatedPage = PagingInfo(page: page.page, items: productList)
+                        pageSubject.accept(updatedPage)
+                        updatedProductSubject.onNext(())
+                    }
+                }
+            })
+            .drive()
+            .disposed(by: disposeBag)
+
+        checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
+                           items: productList)
+            .drive(output.$isEmpty)
+            .disposed(by: disposeBag)
+        
+        select(trigger: input.deleteProductTrigger, items: productList)
+            .map { $0.product }
+            .flatMapLatest { product -> Driver<Product> in
+                return self.navigator.confirmDeleteProduct(product)
+                    .map { product }
+            }
+            .flatMapLatest { product -> Driver<Product> in
+                return self.useCase.deleteProduct(dto: DeleteProductDto(id: product.id))
+                    .trackActivity(activityIndicator.loadingIndicator)
+                    .trackError(errorTracker)
+                    .map { _ in product }
+                    .asDriverOnErrorJustComplete()
+            }
+            .do(onNext: { product in
+                let page = pageSubject.value
+                
+                var productList = page.items
+                productList.removeAll { $0.product.id == product.id }
+                
+                let updatedPage = PagingInfo(page: page.page, items: productList)
+                pageSubject.accept(updatedPage)
+            })
+            .drive()
+            .disposed(by: disposeBag)
+        
+        return output
     }
 }
 ```
@@ -299,19 +397,15 @@ extension ProductsAssembler {
 ViewModels provide data and functionality to be used by views:
 
 ```swift
-struct UserViewModel {
-    let user: User
+struct UserItemViewModel {
+    let name: String
+    let gender: String
+    let birthday: String
     
-    var name: String {
-        return user.name
-    }
-        
-    var gender: String {
-        return user.gender.name
-    }
-        
-    var birthday: String {
-        return user.birthday.dateString()
+    init(user: User) {
+        self.name = user.name
+        self.gender = user.gender.name
+        self.birthday = user.birthday.dateString()
     }
 }
 ```
@@ -323,8 +417,8 @@ Scene Use Case uses the Facade pattern.
 
 ```swift
 protocol ProductsUseCaseType {
-    func getProductList(page: Int) -> Observable<PagingInfo<Product>>
-    func deleteProduct(id: Int) -> Observable<Void>
+    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>>
+    func deleteProduct(dto: DeleteProductDto) -> Observable<Void>
 }
 
 struct ProductsUseCase: ProductsUseCaseType, GettingProductList, DeletingProduct {
@@ -334,7 +428,7 @@ struct ProductsUseCase: ProductsUseCaseType, GettingProductList, DeletingProduct
 
 ## Testing
 ### What to test?
-In this architecture, we can test Use Cases, ViewModels and Entities (if they contain business logic) using RxBlocking or RxTest.
+In this architecture, we can test Use Cases, ViewModels and Entities (if they contain business logic) using RxTest.
 
 #### Use Case
 
@@ -342,11 +436,26 @@ In this architecture, we can test Use Cases, ViewModels and Entities (if they co
 import RxTest
 
 final class GettingProductListTests: XCTestCase, GettingProductList {
-    ... 
+    var productGateway: ProductGatewayType {
+        return productGatewayMock
+    }
+    
+    private var productGatewayMock: ProductGatewayMock!
+    private var disposeBag: DisposeBag!
+    private var getProductListOutput: TestableObserver<PagingInfo<Product>>!
+    private var scheduler: TestScheduler!
+
+    override func setUpWithError() throws {
+        disposeBag = DisposeBag()
+        productGatewayMock = ProductGatewayMock()
+        
+        scheduler = TestScheduler(initialClock: 0)
+        getProductListOutput = scheduler.createObserver(PagingInfo<Product>.self)
+    }
 
     func test_getProductList() {
         // act
-        self.getProductList(page: 1)
+        self.getProductList(dto: GetPageDto(page: 1))
             .subscribe(getProductListOutput)
             .disposed(by: disposeBag)
 
@@ -354,8 +463,20 @@ final class GettingProductListTests: XCTestCase, GettingProductList {
         XCTAssert(productGatewayMock.getProductListCalled)
         XCTAssertEqual(getProductListOutput.events.first?.value.element?.items.count, 1)
     }
- 
-    ...
+    
+    func test_getProductList_fail() {
+        // assign
+        productGatewayMock.getProductListReturnValue = Observable.error(TestError())
+
+        // act
+        self.getProductList(dto: GetPageDto(page: 1))
+            .subscribe(getProductListOutput)
+            .disposed(by: disposeBag)
+
+        // assert
+        XCTAssert(productGatewayMock.getProductListCalled)
+        XCTAssertEqual(getProductListOutput.events, [.error(0, TestError())])
+    }
 }
 ```
 
@@ -370,11 +491,31 @@ final class ReposViewModelTests: XCTestCase {
     func test_loadTriggerInvoked_getRepoList() {
         // act
         loadTrigger.onNext(())
-        let repoList = try? output.repoList.toBlocking(timeout: 1).first()
         
         // assert
         XCTAssert(useCase.getRepoListCalled)
-        XCTAssertEqual(repoList?.count, 1)
+        XCTAssertEqual(output.repoList.count, 1)
+    }
+
+    func test_loadTriggerInvoked_getRepoList_failedShowError() {
+        // arrange
+        useCase.getRepoListReturnValue = Observable.error(TestError())
+
+        // act
+        loadTrigger.onNext(())
+
+        // assert
+        XCTAssert(useCase.getRepoListCalled)
+        XCTAssert(output.error is TestError)
+    }
+    
+    func test_selectRepoTriggerInvoked_toRepoDetail() {
+        // act
+        loadTrigger.onNext(())
+        selectRepoTrigger.onNext(IndexPath(row: 0, section: 0))
+
+        // assert
+        XCTAssert(navigator.toRepoDetailCalled)
     }
 
     ...
@@ -461,6 +602,7 @@ final class ReposViewModelTests: XCTestCase {
 
 
 ## Links
+* [Clean Architecture (Combine + SwiftUI/UIKit)](https://github.com/tuan188/CleanArchitecture)
 * [GitHub - sergdort/CleanArchitectureRxSwift: Example of Clean Architecture of iOS app using RxSwift](https://github.com/sergdort/CleanArchitectureRxSwift)
 * [Testing Your RxSwift Code | raywenderlich.com](https://www.raywenderlich.com/7408-testing-your-rxswift-code)
 * [Using Clean Architecture in Flutter - codeburst](https://codeburst.io/using-clean-architecture-in-flutter-d0437d0c7f87)
