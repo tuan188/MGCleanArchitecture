@@ -4,6 +4,7 @@ PODS:
   - Differentiator (4.0.1)
   - Dto (0.1.0):
     - ValidatedPropertyKit (~> 0.0.4)
+  - ESPullToRefresh (2.9.3)
   - MagicalRecord (2.3.0)
   - MBProgressHUD (1.2.0)
   - MGAPIService (3.0.0):
@@ -13,11 +14,10 @@ PODS:
   - MGArchitecture (2.0.1):
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
-  - MGLoadMore (2.0.0):
-    - MJRefresh (~> 3.2)
+  - MGLoadMore (3.0.0):
+    - ESPullToRefresh (~> 2.9)
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
-  - MJRefresh (3.5.0)
   - Mockingjay (2.0.1):
     - Mockingjay/Core (= 2.0.1)
     - Mockingjay/XCTest (= 2.0.1)
@@ -67,7 +67,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.2)
   - MGAPIService (~> 3.0.0)
   - MGArchitecture (~> 2.0.1)
-  - MGLoadMore (~> 2.0.0)
+  - MGLoadMore (~> 3.0.0)
   - Mockingjay (from `https://github.com/anhnc55/Mockingjay.git`, branch `swift_5`)
   - "NSObject+Rx (~> 5.1)"
   - Reusable (~> 4.1)
@@ -84,12 +84,12 @@ SPEC REPOS:
     - Alamofire
     - Differentiator
     - Dto
+    - ESPullToRefresh
     - MagicalRecord
     - MBProgressHUD
     - MGAPIService
     - MGArchitecture
     - MGLoadMore
-    - MJRefresh
     - "NSObject+Rx"
     - ObjectMapper
     - Reusable
@@ -120,12 +120,12 @@ SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Dto: a17939b7ab00e836040a531a42f517ce7fd527aa
+  ESPullToRefresh: 0d68daa602b343c81753a1b95e09fd0bfcddfd40
   MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MGAPIService: 83684387a742af98b944f5badfa566cc2e146318
   MGArchitecture: 7d586fc5fe15c3fa86dc06b0e6a06d7aafbf8051
-  MGLoadMore: 2a8732f6a0c26cfe972353a97de5afced8a55f8b
-  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
+  MGLoadMore: 263c68817bab2b022fab5cbfef2f4edc53c1e1fd
   Mockingjay: 0660815ee4907b2f0c1ac988126061bb3e19b7aa
   "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
@@ -142,6 +142,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
 
-PODFILE CHECKSUM: b1acaab20afec7a1bab032abb0d39880f952ae3d
+PODFILE CHECKSUM: 9f1f5c620ac1a647e840ea7b6b272ee2b40688b0
 
 COCOAPODS: 1.9.3

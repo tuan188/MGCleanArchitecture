@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MJRefresh
 
 final class RepoCollectionViewController: UIViewController, Bindable {
     

@@ -40,7 +40,6 @@ final class ReposViewController: UIViewController, Bindable {
             $0.rowHeight = UITableView.automaticDimension
             $0.register(cellType: RepoCell.self)
             $0.prefetchDataSource = self
-            $0.refreshHeader = RefreshAutoHeader()
         }
         
         tableView.rx
