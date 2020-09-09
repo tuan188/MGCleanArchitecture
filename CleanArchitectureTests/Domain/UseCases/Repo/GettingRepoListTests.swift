@@ -9,6 +9,8 @@
 @testable import CleanArchitecture
 import XCTest
 import RxTest
+import RxSwift
+import MGArchitecture
 
 final class GettingRepoListTests: XCTestCase, GettingRepoList {
     

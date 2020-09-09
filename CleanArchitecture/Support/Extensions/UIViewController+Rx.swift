@@ -8,6 +8,8 @@
 
 import UIKit
 import MBProgressHUD
+import RxSwift
+import RxCocoa
 
 extension Reactive where Base: UIViewController {
     var error: Binder<Error> {

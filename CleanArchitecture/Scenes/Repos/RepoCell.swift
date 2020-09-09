@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Reusable
 
 final class RepoCell: UITableViewCell, NibReusable {
     @IBOutlet weak var nameLabel: UILabel!

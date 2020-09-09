@@ -6,6 +6,8 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
+import UIKit
+
 struct ProductItemViewModel {
     let name: String
     let price: String

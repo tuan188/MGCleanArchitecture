@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import MGArchitecture
 
 protocol RepoGatewayType {
     func getRepoList(dto: GetPageDto) -> Observable<PagingInfo<Repo>>

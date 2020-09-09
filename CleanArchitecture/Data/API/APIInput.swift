@@ -7,6 +7,7 @@
 //
 
 import Alamofire
+import MGAPIService
 
 class APIInput: APIInputBase {  // swiftlint:disable:this final_class
     override init(urlString: String,

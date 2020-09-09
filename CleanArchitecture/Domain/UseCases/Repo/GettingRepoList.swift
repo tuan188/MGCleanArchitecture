@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import MGArchitecture
 
 protocol GettingRepoList {
     var repoGateway: RepoGatewayType { get }

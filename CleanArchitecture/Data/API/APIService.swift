@@ -6,6 +6,10 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
+import Foundation
+import MGAPIService
+import RxSwift
+
 final class API: APIBase {
     static var shared = API()
     

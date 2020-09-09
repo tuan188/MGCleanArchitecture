@@ -53,6 +53,7 @@ final class SectionedProductsViewModelTests: XCTestCase {
         
         // assert
         XCTAssert(useCase.getProductListCalled)
+        XCTAssertEqual(output.productSections.count, 1)
         XCTAssertEqual(output.productSections[0].productList.count, 1)
     }
 
@@ -74,6 +75,7 @@ final class SectionedProductsViewModelTests: XCTestCase {
 
         // assert
         XCTAssert(useCase.getProductListCalled)
+        XCTAssertEqual(output.productSections.count, 1)
         XCTAssertEqual(output.productSections[0].productList.count, 1)
     }
 
@@ -122,6 +124,7 @@ final class SectionedProductsViewModelTests: XCTestCase {
 
         // assert
         XCTAssert(useCase.getProductListCalled)
+        XCTAssertEqual(output.productSections.count, 1)
         XCTAssertEqual(output.productSections[0].productList.count, 2)
     }
 

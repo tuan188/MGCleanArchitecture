@@ -57,5 +57,13 @@ final class MainNavigatorMock: MainNavigatorType {
     func toLogin() {
         toLoginCalled = true
     }
+    
+    // MARK: - toSectionedProductCollection
+    
+    var toSectionedProductCollectionCalled = false
+    
+    func toSectionedProductCollection() {
+        toSectionedProductCollectionCalled = true
+    }
 
 }

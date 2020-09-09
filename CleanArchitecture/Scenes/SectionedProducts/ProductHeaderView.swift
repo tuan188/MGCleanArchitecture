@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Reusable
 
 final class ProductHeaderView: UITableViewHeaderFooterView, NibReusable {
     @IBOutlet weak var titleLabel: UILabel!

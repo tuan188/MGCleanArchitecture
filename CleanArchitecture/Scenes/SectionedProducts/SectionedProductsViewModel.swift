@@ -6,6 +6,10 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
+import RxSwift
+import RxCocoa
+import MGArchitecture
+
 struct SectionedProductsViewModel {
     let navigator: SectionedProductsNavigatorType
     let useCase: SectionedProductsUseCaseType
@@ -94,9 +98,14 @@ extension SectionedProductsViewModel: ViewModel {
         let productSections = page
             .map { $0.items }
             .map { products -> [ProductSection] in
-                let numberOfSections = Int(products.count / 10)
+                var numberOfSections = Int(products.count / 10)
+                let remain = products.count % 10
                 
-                return (0..<numberOfSections)
+                if remain > 0 {
+                    numberOfSections += 1
+                }
+                
+                return (0...(numberOfSections - 1))
                     .map { section in
                         let sectionProducts = products.filter { Int($0.product.id / 10) == section }
                         return ProductSection(header: "Section \(section + 1)", productList: sectionProducts)

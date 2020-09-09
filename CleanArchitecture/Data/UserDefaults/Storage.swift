@@ -6,6 +6,8 @@
 //  Copyright © 2019 Sun Asterisk. All rights reserved.
 //
 
+import Foundation
+
 @propertyWrapper
 struct Storage<T: Codable> {
     private let key: String

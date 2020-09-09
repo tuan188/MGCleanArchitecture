@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol UpdatingProduct {
     var productGateway: ProductGatewayType { get }

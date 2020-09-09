@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Reusable
 
 final class RepoCollectionCell: UICollectionViewCell, NibReusable {
     

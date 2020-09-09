@@ -8,6 +8,7 @@
 
 import Dto
 import ValidatedPropertyKit
+import RxSwift
 
 struct DeleteProductDto: Dto {
     @Validated(Validation.greater(0))

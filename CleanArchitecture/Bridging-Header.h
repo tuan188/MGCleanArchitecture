@@ -6,12 +6,12 @@
 //  Copyright © 2018 Framgia. All rights reserved.
 //
 
-@import MGArchitecture;
-@import MGAPIService;
-@import MGLoadMore;
-
-@import RxSwift;
-@import RxCocoa;
-@import Then;
-@import Reusable;
-@import SDWebImage;
+//@import MGArchitecture;
+//@import MGAPIService;
+//@import MGLoadMore;
+//
+//@import RxSwift;
+//@import RxCocoa;
+//@import Then;
+//@import Reusable;
+//@import SDWebImage;

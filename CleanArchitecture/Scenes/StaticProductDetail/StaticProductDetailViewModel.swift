@@ -6,6 +6,10 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
+import RxSwift
+import RxCocoa
+import MGArchitecture
+
 struct StaticProductDetailViewModel {
     let navigator: StaticProductDetailNavigatorType
     let useCase: StaticProductDetailUseCaseType

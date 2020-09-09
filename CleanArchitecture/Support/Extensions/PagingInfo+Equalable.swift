@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MGArchitecture
 
 extension PagingInfo: Equatable where T: Equatable {
     public static func == (lhs: PagingInfo<T>, rhs: PagingInfo<T>) -> Bool {

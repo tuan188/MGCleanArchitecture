@@ -6,6 +6,9 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
+import RxSwift
+import MGArchitecture
+
 protocol SectionedProductsUseCaseType {
     func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>>
 }

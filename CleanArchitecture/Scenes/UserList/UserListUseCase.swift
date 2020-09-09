@@ -6,6 +6,8 @@
 //  Copyright © 2019 Sun Asterisk. All rights reserved.
 //
 
+import RxSwift
+
 protocol UserListUseCaseType {
     func getUserList() -> Observable<[User]>
 }

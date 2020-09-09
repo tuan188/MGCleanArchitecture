@@ -9,6 +9,9 @@
 @testable import CleanArchitecture
 import XCTest
 import RxTest
+import RxSwift
+import RxCocoa
+import MGArchitecture
 
 final class GettingProductListTests: XCTestCase, GettingProductList {
     var productGateway: ProductGatewayType {

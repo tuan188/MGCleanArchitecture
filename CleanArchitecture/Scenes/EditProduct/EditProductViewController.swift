@@ -10,6 +10,9 @@ import UIKit
 import Reusable
 import Dto
 import RxViewController
+import MGArchitecture
+import RxSwift
+import RxCocoa
 
 final class EditProductViewController: UITableViewController, Bindable {
     

@@ -8,6 +8,7 @@
 
 import Dto
 import ValidatedPropertyKit
+import RxSwift
 
 protocol EditProductUseCaseType {
     func validateName(_ name: String) -> ValidationResult

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import Reusable
 
 final class EditProductNameCell: UITableViewCell, NibReusable {
     

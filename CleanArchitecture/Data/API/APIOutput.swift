@@ -7,6 +7,7 @@
 //
 
 import ObjectMapper
+import MGAPIService
 
 class APIOutput: APIOutputBase {  // swiftlint:disable:this final_class
     var message: String?

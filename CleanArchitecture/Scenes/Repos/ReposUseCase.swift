@@ -6,6 +6,9 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
+import RxSwift
+import MGArchitecture
+
 protocol ReposUseCaseType {
     func getRepoList(page: Int) -> Observable<PagingInfo<Repo>>
 }

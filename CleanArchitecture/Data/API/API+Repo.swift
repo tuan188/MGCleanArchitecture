@@ -7,6 +7,8 @@
 //
 
 import ObjectMapper
+import RxSwift
+import MGAPIService
 
 extension API {
     func getRepoList(_ input: GetRepoListInput) -> Observable<GetRepoListOutput> {

@@ -9,6 +9,7 @@
 @testable import CleanArchitecture
 import XCTest
 import RxTest
+import RxSwift
 
 final class SettingUpUserDataTests: XCTestCase, SettingUpUserData {
     var appGateway: AppGatewayType {

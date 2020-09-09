@@ -6,6 +6,10 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
+import RxSwift
+import RxCocoa
+import UIKit
+
 protocol ProductsNavigatorType {
     func toProductDetail(product: Product)
     func toEditProduct(_ product: Product) -> Driver<EditProductDelegate>

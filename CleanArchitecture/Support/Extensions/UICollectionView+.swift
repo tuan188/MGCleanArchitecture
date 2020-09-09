@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxCocoa
 
 extension UICollectionView {
     var isEmpty: Binder<Bool> {

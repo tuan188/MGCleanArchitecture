@@ -8,6 +8,7 @@
 
 @testable import CleanArchitecture
 import RxSwift
+import MGArchitecture
 
 final class ReposUseCaseMock: ReposUseCaseType {
 

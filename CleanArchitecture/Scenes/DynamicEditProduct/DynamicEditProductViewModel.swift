@@ -7,6 +7,9 @@
 //
 
 import Dto
+import RxSwift
+import RxCocoa
+import MGArchitecture
 
 struct DynamicEditProductViewModel {
     let navigator: DynamicEditProductNavigatorType

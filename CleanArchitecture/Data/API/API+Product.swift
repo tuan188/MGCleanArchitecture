@@ -7,6 +7,7 @@
 //
 
 import ObjectMapper
+import RxSwift
 
 extension API {
     func getProductList(_ input: GetProductListInput) -> Observable<[Product]> {

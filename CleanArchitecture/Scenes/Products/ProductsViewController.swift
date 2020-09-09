@@ -8,6 +8,10 @@
 
 import UIKit
 import Reusable
+import RxSwift
+import RxCocoa
+import MGArchitecture
+import MGLoadMore
 
 final class ProductsViewController: UIViewController, Bindable {
     

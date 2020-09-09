@@ -6,6 +6,8 @@
 //  Copyright © 2019 Sun Asterisk. All rights reserved.
 //
 
+import UIKit
+
 protocol UserListNavigatorType {
     func toUserDetail(user: User)
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol UserGatewayType {
     func getUsers() -> Observable<[User]>

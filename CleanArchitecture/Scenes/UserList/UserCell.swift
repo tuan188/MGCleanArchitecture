@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Reusable
 
 final class UserCell: UITableViewCell, NibReusable {
     @IBOutlet weak var nameLabel: UILabel!

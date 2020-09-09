@@ -8,6 +8,9 @@
 
 import UIKit
 import MagicalRecord
+import RxSwift
+import RxCocoa
+import SDWebImage
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {

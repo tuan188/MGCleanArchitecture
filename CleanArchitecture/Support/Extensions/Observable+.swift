@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import RxCocoa
 
 extension SharedSequenceConvertibleType where Element == Bool {
     public func not() -> SharedSequence<SharingStrategy, Bool> {

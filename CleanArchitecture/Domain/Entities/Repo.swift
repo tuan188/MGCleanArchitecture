@@ -7,6 +7,7 @@
 //
 
 import ObjectMapper
+import Then
 
 struct Repo {
     var id = 0

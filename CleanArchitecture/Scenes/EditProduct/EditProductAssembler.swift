@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import MGArchitecture
 
 protocol EditProductAssembler {
     func resolve(navigationController: UINavigationController,

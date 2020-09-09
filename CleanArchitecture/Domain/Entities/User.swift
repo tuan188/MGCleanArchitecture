@@ -6,6 +6,9 @@
 //  Copyright © 2019 Sun Asterisk. All rights reserved.
 //
 
+import Foundation
+import Then
+
 enum Gender: Int {
     case unknown = 0
     case male = 1

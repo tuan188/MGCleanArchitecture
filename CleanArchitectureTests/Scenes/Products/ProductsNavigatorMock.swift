@@ -7,6 +7,9 @@
 //
 
 @testable import CleanArchitecture
+import RxSwift
+import RxCocoa
+import Then
 
 final class ProductsNavigatorMock: ProductsNavigatorType {
     

@@ -7,6 +7,7 @@
 //
 
 import Dto
+import RxSwift
 import ValidatedPropertyKit
 
 struct AddUserDto: Dto {

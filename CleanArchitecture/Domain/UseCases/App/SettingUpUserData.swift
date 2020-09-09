@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 protocol SettingUpUserData {
     var appGateway: AppGatewayType { get }

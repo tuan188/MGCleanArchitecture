@@ -7,6 +7,7 @@
 //
 
 import MagicalRecord
+import RxSwift
 
 protocol UserRepository: CoreDataRepository {
    

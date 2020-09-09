@@ -6,6 +6,8 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
+import UIKit
+
 protocol ReposNavigatorType {
     func toRepos()
     func toRepoDetail(repo: Repo)

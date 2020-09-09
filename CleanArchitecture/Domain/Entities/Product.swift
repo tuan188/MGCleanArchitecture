@@ -7,6 +7,7 @@
 //
 
 import ObjectMapper
+import Then
 
 struct Product {
     var id = 0

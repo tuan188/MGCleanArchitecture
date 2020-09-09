@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol LoggingIn {
     

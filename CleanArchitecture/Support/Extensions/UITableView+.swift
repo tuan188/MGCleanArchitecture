@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxCocoa
 
 extension UITableView {
     var isEmpty: Binder<Bool> {

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxSwift
+import MGArchitecture
+import Then
 
 protocol ProductGatewayType {
     func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>>

@@ -8,6 +8,7 @@
 
 @testable import CleanArchitecture
 import UIKit
+import RxSwift
 
 final class UserGatewayMock: UserGatewayType {
 

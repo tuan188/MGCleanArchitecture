@@ -6,7 +6,8 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import Reusable
 
 protocol ReposAssembler {
     func resolve(navigationController: UINavigationController) -> ReposViewController

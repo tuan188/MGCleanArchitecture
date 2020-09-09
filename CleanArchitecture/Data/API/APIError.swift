@@ -6,6 +6,9 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
+import MGAPIService
+import Foundation
+
 struct APIExpiredTokenError: APIError {
     var errorDescription: String? {
         return NSLocalizedString("api.expiredTokenError",
