@@ -19,6 +19,7 @@ final class StaticProductDetailViewController: UITableViewController, Bindable {
     // MARK: - Properties
 
     var viewModel: StaticProductDetailViewModel!
+    var disposeBag = DisposeBag()
     
     // MARK: - Life Cycle
 
@@ -37,17 +38,17 @@ final class StaticProductDetailViewController: UITableViewController, Bindable {
             loadTrigger: Driver.just(())
         )
         
-        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
         output.$name
             .asDriver()
             .drive(nameLabel.rx.text)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$price
             .asDriver()
             .drive(priceLabel.rx.text)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

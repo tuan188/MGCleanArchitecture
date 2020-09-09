@@ -22,6 +22,7 @@ final class DynamicEditProductViewController: UIViewController, Bindable {
     // MARK: - Properties
     
     var viewModel: DynamicEditProductViewModel!
+    var disposeBag = DisposeBag()
     
     private weak var nameTextField: UITextField?
     private weak var priceTextField: UITextField?
@@ -73,38 +74,38 @@ final class DynamicEditProductViewController: UIViewController, Bindable {
             data: dataTrigger.asDriverOnErrorJustComplete()
         )
         
-        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
         output.$cellCollection
             .asDriver()
             .drive(cellCollectionBinder)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$nameValidation
             .asDriver()
             .drive(nameValidationBinder)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$priceValidation
             .asDriver()
             .drive(priceValidationBinder)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isUpdateEnabled
             .asDriver()
             .drive(updateButton.rx.isEnabled)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$error
             .asDriver()
             .unwrap()
             .drive(rx.error)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isLoading
             .asDriver()
             .drive(rx.isLoading)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

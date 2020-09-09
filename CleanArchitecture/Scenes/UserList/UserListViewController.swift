@@ -18,6 +18,7 @@ final class UserListViewController: UIViewController, Bindable {
     // MARK: - Properties
     
     var viewModel: UserListViewModel!
+    var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
     
@@ -43,7 +44,7 @@ final class UserListViewController: UIViewController, Bindable {
         
         tableView.rx
             .setDelegate(self)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         view.backgroundColor = ColorCompatibility.systemBackground
     }
@@ -55,7 +56,7 @@ final class UserListViewController: UIViewController, Bindable {
             selectUserTrigger: tableView.rx.itemSelected.asDriver()
         )
 
-        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
         output.$userList
             .asDriver()
@@ -67,28 +68,28 @@ final class UserListViewController: UIViewController, Bindable {
                         $0.bindViewModel(user)
                     }
             }
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$error
             .asDriver()
             .unwrap()
             .drive(rx.error)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isLoading
             .asDriver()
             .drive(rx.isLoading)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isReloading
             .asDriver()
             .drive(tableView.isRefreshing)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isEmpty
             .asDriver()
             .drive()
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

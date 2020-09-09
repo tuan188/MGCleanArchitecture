@@ -14,6 +14,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var assembler: Assembler = DefaultAssembler()
+    var disposeBag = DisposeBag()
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
         setupCoreData()
@@ -44,7 +45,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private func bindViewModel(window: UIWindow) {
         let vm: AppViewModel = assembler.resolve(window: window)
         let input = AppViewModel.Input(loadTrigger: Driver.just(()))
-        _ = vm.transform(input, disposeBag: rx.disposeBag)
+        _ = vm.transform(input, disposeBag: disposeBag)
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

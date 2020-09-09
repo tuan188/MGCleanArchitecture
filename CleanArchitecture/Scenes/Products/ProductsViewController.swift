@@ -18,6 +18,7 @@ final class ProductsViewController: UIViewController, Bindable {
     // MARK: - Properties
 
     var viewModel: ProductsViewModel!
+    var disposeBag = DisposeBag()
     
     private var editProductTrigger = PublishSubject<IndexPath>()
     private var deleteProductTrigger = PublishSubject<IndexPath>()
@@ -44,7 +45,7 @@ final class ProductsViewController: UIViewController, Bindable {
         
         tableView.rx
             .setDelegate(self)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         view.backgroundColor = ColorCompatibility.systemBackground
     }
@@ -59,7 +60,7 @@ final class ProductsViewController: UIViewController, Bindable {
             deleteProductTrigger: deleteProductTrigger.asDriverOnErrorJustComplete()
         )
         
-        let output = viewModel?.transform(input, disposeBag: rx.disposeBag)
+        let output = viewModel?.transform(input, disposeBag: disposeBag)
         
         output?.$productList
             .asDriver()
@@ -79,33 +80,33 @@ final class ProductsViewController: UIViewController, Bindable {
                         }
                     }
             }
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output?.$error
             .asDriver()
             .unwrap()
             .drive(rx.error)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output?.$isLoading
             .asDriver()
             .drive(rx.isLoading)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output?.$isReloading
             .asDriver()
             .drive(tableView.isRefreshing)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output?.$isLoadingMore
             .asDriver()
             .drive(tableView.isLoadingMore)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output?.$isEmpty
             .asDriver()
             .drive(tableView.isEmpty)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
 }

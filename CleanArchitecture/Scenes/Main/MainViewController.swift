@@ -19,6 +19,7 @@ final class MainViewController: UIViewController, Bindable {
     // MARK: - Properties
 
     var viewModel: MainViewModel!
+    var disposeBag = DisposeBag()
     
     private typealias MainMenuSectionModel = SectionModel<String, MainViewModel.Menu>
     private var dataSource: RxTableViewSectionedReloadDataSource<MainMenuSectionModel>?
@@ -59,7 +60,7 @@ final class MainViewController: UIViewController, Bindable {
             selectMenuTrigger: tableView.rx.itemSelected.asDriver()
         )
         
-        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
         let dataSource = RxTableViewSectionedReloadDataSource<MainMenuSectionModel>(
             configureCell: { (_, tableView, indexPath, menu) -> UITableViewCell in
@@ -81,7 +82,7 @@ final class MainViewController: UIViewController, Bindable {
                 }
             }
             .drive(tableView.rx.items(dataSource: dataSource))
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

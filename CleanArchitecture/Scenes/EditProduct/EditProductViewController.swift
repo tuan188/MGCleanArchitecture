@@ -25,6 +25,7 @@ final class EditProductViewController: UITableViewController, Bindable {
     // MARK: - Properties
 
     var viewModel: EditProductViewModel!
+    var disposeBag = DisposeBag()
     
     // MARK: - Life Cycle
 
@@ -51,44 +52,44 @@ final class EditProductViewController: UITableViewController, Bindable {
                 .asDriverOnErrorJustComplete()
         )
         
-        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
         output.$name
             .asDriver()
             .drive(nameTextField.rx.text)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$price
             .map { String($0) }
             .asDriverOnErrorJustComplete()
             .drive(priceTextField.rx.text)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$nameValidation
             .asDriver()
             .drive(nameValidationBinder)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$priceValidation
             .asDriver()
             .drive(priceValidationBinder)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isUpdateEnabled
             .asDriver()
             .drive(updateButton.rx.isEnabled)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$error
             .asDriver()
             .unwrap()
             .drive(rx.error)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isLoading
             .asDriver()
             .drive(rx.isLoading)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

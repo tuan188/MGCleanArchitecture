@@ -1,5 +1,4 @@
 PODS:
-  - ActionSheetPicker-3.0 (2.3.0)
   - Alamofire (5.2.2)
   - Differentiator (4.0.1)
   - Dto (0.1.0):
@@ -24,8 +23,6 @@ PODS:
   - Mockingjay/Core (2.0.1)
   - Mockingjay/XCTest (2.0.1):
     - Mockingjay/Core
-  - "NSObject+Rx (5.1.0)":
-    - RxSwift (~> 5.1)
   - ObjectMapper (4.2.0)
   - Reusable (4.1.1):
     - Reusable/Storyboard (= 4.1.1)
@@ -61,7 +58,6 @@ PODS:
   - ValidatedPropertyKit (0.0.4)
 
 DEPENDENCIES:
-  - ActionSheetPicker-3.0 (= 2.3)
   - Dto
   - MagicalRecord (= 2.3.0)
   - MBProgressHUD (~> 1.2)
@@ -69,7 +65,6 @@ DEPENDENCIES:
   - MGArchitecture (~> 2.0.1)
   - MGLoadMore (~> 3.0.0)
   - Mockingjay (from `https://github.com/anhnc55/Mockingjay.git`, branch `swift_5`)
-  - "NSObject+Rx (~> 5.1)"
   - Reusable (~> 4.1)
   - RxBlocking (~> 5.1)
   - RxDataSources (~> 4.0)
@@ -80,7 +75,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - ActionSheetPicker-3.0
     - Alamofire
     - Differentiator
     - Dto
@@ -90,7 +84,6 @@ SPEC REPOS:
     - MGAPIService
     - MGArchitecture
     - MGLoadMore
-    - "NSObject+Rx"
     - ObjectMapper
     - Reusable
     - RxAlamofire
@@ -116,7 +109,6 @@ CHECKOUT OPTIONS:
     :git: https://github.com/anhnc55/Mockingjay.git
 
 SPEC CHECKSUMS:
-  ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Dto: a17939b7ab00e836040a531a42f517ce7fd527aa
@@ -127,7 +119,6 @@ SPEC CHECKSUMS:
   MGArchitecture: 7d586fc5fe15c3fa86dc06b0e6a06d7aafbf8051
   MGLoadMore: 263c68817bab2b022fab5cbfef2f4edc53c1e1fd
   Mockingjay: 0660815ee4907b2f0c1ac988126061bb3e19b7aa
-  "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
   RxAlamofire: 0531dddf378c84270e97e897333678f1cfaec3ba
@@ -142,6 +133,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
 
-PODFILE CHECKSUM: 9f1f5c620ac1a647e840ea7b6b272ee2b40688b0
+PODFILE CHECKSUM: 91d37aa93d74bc6fab161475f0400a61ece8b3f6
 
 COCOAPODS: 1.9.3

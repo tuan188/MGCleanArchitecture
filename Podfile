@@ -8,7 +8,6 @@ def pods
     pod 'Dto'
     
     # Rx
-    pod 'NSObject+Rx', '~> 5.1'
     pod 'RxDataSources', '~> 4.0'
     pod 'RxViewController'
     
@@ -19,7 +18,6 @@ def pods
     # Others
     pod 'MagicalRecord', '2.3.0'
     pod 'MBProgressHUD', '~> 1.2'
-    pod 'ActionSheetPicker-3.0', '2.3'
     pod 'SDWebImage', '~> 5.8.3'
 end
 

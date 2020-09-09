@@ -12,7 +12,6 @@
 
 @import RxSwift;
 @import RxCocoa;
-@import NSObject_Rx;
 @import Then;
 @import Reusable;
 @import SDWebImage;

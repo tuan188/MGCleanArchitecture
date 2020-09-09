@@ -18,6 +18,7 @@ final class ProductDetailViewController: UIViewController, Bindable {
     // MARK: - Properties
 
     var viewModel: ProductDetailViewModel!
+    var disposeBag = DisposeBag()
     
     // MARK: - Life Cycle
 
@@ -44,7 +45,7 @@ final class ProductDetailViewController: UIViewController, Bindable {
     func bindViewModel() {
         let input = ProductDetailViewModel.Input(loadTrigger: Driver.just(()))
         
-        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
         output.$cells
             .asDriver()
@@ -65,7 +66,7 @@ final class ProductDetailViewController: UIViewController, Bindable {
                         }
                 }
             }
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

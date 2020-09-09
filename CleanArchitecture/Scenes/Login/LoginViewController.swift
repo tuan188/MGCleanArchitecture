@@ -21,6 +21,7 @@ final class LoginViewController: UIViewController, Bindable {
     // MARK: - Properties
     
     var viewModel: LoginViewModel!
+    var disposeBag = DisposeBag()
 
     // MARK: - Life Cycle
     
@@ -53,33 +54,33 @@ final class LoginViewController: UIViewController, Bindable {
             loginTrigger: loginButton.rx.tap.asDriver()
         )
         
-        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
         output.$usernameValidationMessage
             .observeOn(MainScheduler.instance)
             .subscribe(usernameValidationMessageBinder)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$passwordValidationMessage
             .observeOn(MainScheduler.instance)
             .subscribe(passwordValidationMessageBinder)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isLoginEnabled
             .observeOn(MainScheduler.instance)
             .subscribe(loginButton.rx.isEnabled)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isLoading
             .observeOn(MainScheduler.instance)
             .subscribe(rx.isLoading)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$error
             .observeOn(MainScheduler.instance)
             .unwrap()
             .subscribe(rx.error)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 
