@@ -42,6 +42,8 @@ extension MainViewModel: ViewModel {
                     self.navigator.toProducts()
                 case .sectionedProducts:
                     self.navigator.toSectionedProducts()
+                case .sectionedProductCollection:
+                    self.navigator.toSectionedProductCollection()
                 case .repos:
                     self.navigator.toRepos()
                 case .repoCollection:
@@ -60,7 +62,7 @@ extension MainViewModel: ViewModel {
     
     func menuSections() -> [MenuSection] {
         return [
-            MenuSection(title: "Mock Data", menus: [.products, .sectionedProducts]),
+            MenuSection(title: "Mock Data", menus: [.products, .sectionedProducts, .sectionedProductCollection]),
             MenuSection(title: "API", menus: [.repos, .repoCollection]),
             MenuSection(title: "Core Data", menus: [ .users ]),
             MenuSection(title: "", menus: [ .login ])
@@ -70,12 +72,13 @@ extension MainViewModel: ViewModel {
 
 extension MainViewModel {
     enum Menu: Int, CustomStringConvertible, CaseIterable {
-        case products = 0
-        case sectionedProducts = 1
-        case repos = 2
-        case repoCollection = 3
-        case users = 4
-        case login = 5
+        case products
+        case sectionedProducts
+        case sectionedProductCollection
+        case repos
+        case repoCollection
+        case users
+        case login
         
         var description: String {
             switch self {
@@ -83,6 +86,8 @@ extension MainViewModel {
                 return "Product list"
             case .sectionedProducts:
                 return "Sectioned product list"
+            case .sectionedProductCollection:
+                return "Sectioned product collection"
             case .repos:
                 return "Git repo list"
             case .repoCollection:

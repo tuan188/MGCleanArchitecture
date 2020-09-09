@@ -10,6 +10,7 @@ import UIKit
 
 protocol SectionedProductsAssembler {
     func resolve(navigationController: UINavigationController) -> SectionedProductsViewController
+    func resolve(navigationController: UINavigationController) -> SectionedProductCollectionViewController
     func resolve(navigationController: UINavigationController) -> SectionedProductsViewModel
     func resolve(navigationController: UINavigationController) -> SectionedProductsNavigatorType
     func resolve() -> SectionedProductsUseCaseType
@@ -18,6 +19,13 @@ protocol SectionedProductsAssembler {
 extension SectionedProductsAssembler {
     func resolve(navigationController: UINavigationController) -> SectionedProductsViewController {
         let vc = SectionedProductsViewController.instantiate()
+        let vm: SectionedProductsViewModel = resolve(navigationController: navigationController)
+        vc.bindViewModel(to: vm)
+        return vc
+    }
+    
+    func resolve(navigationController: UINavigationController) -> SectionedProductCollectionViewController {
+        let vc = SectionedProductCollectionViewController.instantiate()
         let vm: SectionedProductsViewModel = resolve(navigationController: navigationController)
         vc.bindViewModel(to: vm)
         return vc

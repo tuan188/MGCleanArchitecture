@@ -93,7 +93,15 @@ extension SectionedProductsViewModel: ViewModel {
 
         let productSections = page
             .map { $0.items }
-            .map { [ProductSection(header: "Section1", productList: $0)] }
+            .map { products -> [ProductSection] in
+                let numberOfSections = Int(products.count / 10)
+                
+                return (0..<numberOfSections)
+                    .map { section in
+                        let sectionProducts = products.filter { Int($0.product.id / 10) == section }
+                        return ProductSection(header: "Section \(section + 1)", productList: sectionProducts)
+                    }
+            }
         
         productSections
             .map {

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCollectionHeaderView" id="U6b-Vx-4bR" customClass="ProductCollectionHeaderView" customModule="CleanArchitecture" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6N-oB-aEV">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAf-Df-bog">
+                            <rect key="frame" x="143" y="14.5" width="34" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="pAf-Df-bog" firstAttribute="centerY" secondItem="t6N-oB-aEV" secondAttribute="centerY" id="0rv-fi-AjB"/>
+                        <constraint firstItem="pAf-Df-bog" firstAttribute="centerX" secondItem="t6N-oB-aEV" secondAttribute="centerX" id="Q5R-IT-TTd"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="t6N-oB-aEV" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="1Dh-Gw-4hR"/>
+                <constraint firstItem="t6N-oB-aEV" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="5nE-MM-TFE"/>
+                <constraint firstAttribute="bottom" secondItem="t6N-oB-aEV" secondAttribute="bottom" id="ffa-gD-v8n"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="t6N-oB-aEV" secondAttribute="trailing" id="hVD-T9-gQK"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="titleLabel" destination="pAf-Df-bog" id="zB4-ra-Nbh"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="152"/>
+        </collectionReusableView>
+    </objects>
+</document>

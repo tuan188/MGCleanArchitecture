@@ -19,6 +19,7 @@ final class SectionedProductsViewController: UIViewController, Bindable {
     // MARK: - Properties
     
     var viewModel: SectionedProductsViewModel!
+    var disposeBag = DisposeBag()
     
     private typealias ProductSectionModel = SectionModel<String, ProductItemViewModel>
     private var dataSource: RxTableViewSectionedReloadDataSource<ProductSectionModel>?
@@ -47,7 +48,7 @@ final class SectionedProductsViewController: UIViewController, Bindable {
         
         tableView.rx
             .setDelegate(self)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         view.backgroundColor = ColorCompatibility.systemBackground
     }
@@ -70,7 +71,7 @@ final class SectionedProductsViewController: UIViewController, Bindable {
             updatedProductTrigger: updatedProductTrigger
         )
         
-        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
         let dataSource = RxTableViewSectionedReloadDataSource<ProductSectionModel>(
             configureCell: { [weak self] (_, tableView, indexPath, product) -> UITableViewCell in
@@ -97,33 +98,33 @@ final class SectionedProductsViewController: UIViewController, Bindable {
                 }
             }
             .drive(tableView.rx.items(dataSource: dataSource))
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$error
             .asDriver()
             .unwrap()
             .drive(rx.error)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isLoading
             .asDriver()
             .drive(rx.isLoading)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isReloading
             .asDriver()
             .drive(tableView.isRefreshing)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isLoadingMore
             .asDriver()
             .drive(tableView.isLoadingMore)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isEmpty
             .asDriver()
             .drive(tableView.isEmpty)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
 }

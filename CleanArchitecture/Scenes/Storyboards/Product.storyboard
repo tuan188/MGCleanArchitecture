@@ -72,6 +72,44 @@
             </objects>
             <point key="canvasLocation" x="658" y="365"/>
         </scene>
+        <!--Sectioned Product Collection-->
+        <scene sceneID="Hug-5H-ATG">
+            <objects>
+                <viewController storyboardIdentifier="SectionedProductCollectionViewController" title="Sectioned Product Collection" id="iyg-WI-ZiM" customClass="SectionedProductCollectionViewController" customModule="CleanArchitecture" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LBP-kA-IXc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HE3-Ct-E4y" customClass="PagingCollectionView" customModule="MGLoadMore">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XO6-xN-7s0">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="7CV-Gs-Z01" firstAttribute="trailing" secondItem="HE3-Ct-E4y" secondAttribute="trailing" id="7kU-Oj-FLZ"/>
+                            <constraint firstItem="HE3-Ct-E4y" firstAttribute="top" secondItem="7CV-Gs-Z01" secondAttribute="top" id="hPJ-yp-VI3"/>
+                            <constraint firstItem="HE3-Ct-E4y" firstAttribute="leading" secondItem="7CV-Gs-Z01" secondAttribute="leading" id="olT-1n-zDS"/>
+                            <constraint firstItem="7CV-Gs-Z01" firstAttribute="bottom" secondItem="HE3-Ct-E4y" secondAttribute="bottom" id="zJz-t8-BNM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7CV-Gs-Z01"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="collectionView" destination="HE3-Ct-E4y" id="Ef9-J0-dnf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ccV-14-rib" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1334" y="365"/>
+        </scene>
         <!--Product Detail-->
         <scene sceneID="PEw-QL-IYP">
             <objects>
@@ -102,7 +140,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P6x-jN-D1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1350" y="365"/>
+            <point key="canvasLocation" x="2018" y="365"/>
         </scene>
         <!--Product Detail-->
         <scene sceneID="BNa-0T-wgu">
