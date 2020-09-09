@@ -17,6 +17,7 @@ final class RepoCollectionViewController: UIViewController, Bindable {
     // MARK: - Properties
     
     var viewModel: ReposViewModel!
+    var disposeBag = DisposeBag()
     
     private var repoList = [RepoItemViewModel]()
     
@@ -66,12 +67,10 @@ final class RepoCollectionViewController: UIViewController, Bindable {
         collectionView.do {
             $0.register(cellType: RepoCollectionCell.self)
             $0.alwaysBounceVertical = true
+            $0.delegate = self
+            $0.dataSource = self
             $0.prefetchDataSource = self
         }
-        
-        collectionView.rx
-            .setDelegate(self)
-            .disposed(by: rx.disposeBag)
         
         view.backgroundColor = ColorCompatibility.systemBackground
         collectionView.backgroundColor = ColorCompatibility.systemBackground
@@ -85,47 +84,41 @@ final class RepoCollectionViewController: UIViewController, Bindable {
             selectRepoTrigger: collectionView.rx.itemSelected.asDriver()
         )
         
-        let output = viewModel.transform(input, disposeBag: rx.disposeBag)
+        let output = viewModel.transform(input, disposeBag: disposeBag)
         
         output.$repoList
             .asDriver()
-            .do(onNext: { [unowned self] repoList in
+            .drive(onNext: { [unowned self] repoList in
                 self.repoList = repoList
+                self.collectionView.reloadData()
             })
-            .drive(collectionView.rx.items) { collectionView, index, repo in
-                return collectionView.dequeueReusableCell(for: IndexPath(row: index, section: 0),
-                                                          cellType: RepoCollectionCell.self)
-                    .then {
-                        $0.bindViewModel(repo)
-                    }
-            }
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$error
             .asDriver()
             .unwrap()
             .drive(rx.error)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isLoading
             .asDriver()
             .drive(rx.isLoading)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isReloading
             .asDriver()
             .drive(collectionView.isRefreshing)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isLoadingMore
             .asDriver()
             .drive(collectionView.isLoadingMore)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         output.$isEmpty
             .asDriver()
             .drive(collectionView.isEmpty)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -160,7 +153,22 @@ extension RepoCollectionViewController: UICollectionViewDelegate, UICollectionVi
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return layoutOptions.itemSpacing
     }
+}
+
+// MARK: - UICollectionViewDataSource
+extension RepoCollectionViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return repoList.count
+    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let repo = repoList[indexPath.row]
+        
+        return collectionView.dequeueReusableCell(for: indexPath, cellType: RepoCollectionCell.self)
+            .then {
+                $0.bindViewModel(repo)
+            }
+    }
 }
 
 // MARK: - UICollectionViewDataSourcePrefetching
