@@ -8,7 +8,6 @@ def pods
     pod 'Dto'
     
     # Rx
-    pod 'RxDataSources', '~> 4.0'
     pod 'RxViewController'
     
     # Core

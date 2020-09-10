@@ -8,7 +8,6 @@
 
 import UIKit
 import Reusable
-import RxDataSources
 import SDWebImage
 import RxSwift
 import RxCocoa
@@ -25,8 +24,7 @@ final class MainViewController: UIViewController, Bindable {
     var viewModel: MainViewModel!
     var disposeBag = DisposeBag()
     
-    private typealias MainMenuSectionModel = SectionModel<String, MainViewModel.Menu>
-    private var dataSource: RxTableViewSectionedReloadDataSource<MainMenuSectionModel>?
+    private var menuSections = [MainViewModel.MenuSection]()
     
     // MARK: - Life Cycle
     
@@ -50,9 +48,10 @@ final class MainViewController: UIViewController, Bindable {
     
     private func configView() {
         tableView.do {
-            $0.rowHeight = 60
             $0.register(cellType: MenuCell.self)
             $0.delegate = self
+            $0.dataSource = self
+            $0.rowHeight = 60
         }
         
         view.backgroundColor = ColorCompatibility.systemBackground
@@ -66,33 +65,38 @@ final class MainViewController: UIViewController, Bindable {
         
         let output = viewModel.transform(input, disposeBag: disposeBag)
         
-        let dataSource = RxTableViewSectionedReloadDataSource<MainMenuSectionModel>(
-            configureCell: { (_, tableView, indexPath, menu) -> UITableViewCell in
-                return tableView.dequeueReusableCell(for: indexPath, cellType: MenuCell.self)
-                    .then {
-                        $0.titleLabel.text = menu.description
-                    }
-            }, titleForHeaderInSection: { dataSource, section in
-                return dataSource.sectionModels[section].model
-            })
-        
-        self.dataSource = dataSource
-        
         output.$menuSections
             .asDriver()
-            .map {
-                $0.map { section in
-                    MainMenuSectionModel(model: section.title, items: section.menus)
-                }
-            }
-            .drive(tableView.rx.items(dataSource: dataSource))
+            .drive(onNext: { [unowned self] sections in
+                self.menuSections = sections
+                self.tableView.reloadData()
+            })
             .disposed(by: disposeBag)
     }
 }
 
-// MARK: - StoryboardSceneBased
-extension MainViewController: StoryboardSceneBased {
-    static var sceneStoryboard = Storyboards.main
+// MARK: - UITableViewDataSource
+extension MainViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return menuSections.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return menuSections[section].menus.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let menu = menuSections[indexPath.section].menus[indexPath.row]
+        
+        return tableView.dequeueReusableCell(for: indexPath, cellType: MenuCell.self)
+            .then {
+                $0.titleLabel.text = menu.description
+            }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return menuSections[section].title
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -102,3 +106,7 @@ extension MainViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - StoryboardSceneBased
+extension MainViewController: StoryboardSceneBased {
+    static var sceneStoryboard = Storyboards.main
+}

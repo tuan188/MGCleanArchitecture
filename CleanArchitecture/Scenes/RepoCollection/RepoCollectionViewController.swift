@@ -72,10 +72,9 @@ final class RepoCollectionViewController: UIViewController, Bindable {
     private func configView() {
         collectionView.do {
             $0.register(cellType: RepoCollectionCell.self)
-            $0.alwaysBounceVertical = true
             $0.delegate = self
-            $0.dataSource = self
             $0.prefetchDataSource = self
+            $0.alwaysBounceVertical = true
         }
         
         view.backgroundColor = ColorCompatibility.systemBackground
@@ -94,10 +93,18 @@ final class RepoCollectionViewController: UIViewController, Bindable {
         
         output.$repoList
             .asDriver()
-            .drive(onNext: { [unowned self] repoList in
+            .do(onNext: { [unowned self] repoList in
                 self.repoList = repoList
-                self.collectionView.reloadData()
             })
+            .drive(collectionView.rx.items) { collectionView, index, repo in
+                return collectionView.dequeueReusableCell(
+                    for: IndexPath(row: index, section: 0),
+                    cellType: RepoCollectionCell.self
+                )
+                .then {
+                    $0.bindViewModel(repo)
+                }
+            }
             .disposed(by: disposeBag)
         
         output.$error
@@ -158,22 +165,6 @@ extension RepoCollectionViewController: UICollectionViewDelegate, UICollectionVi
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return layoutOptions.itemSpacing
-    }
-}
-
-// MARK: - UICollectionViewDataSource
-extension RepoCollectionViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return repoList.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let repo = repoList[indexPath.row]
-        
-        return collectionView.dequeueReusableCell(for: indexPath, cellType: RepoCollectionCell.self)
-            .then {
-                $0.bindViewModel(repo)
-            }
     }
 }
 

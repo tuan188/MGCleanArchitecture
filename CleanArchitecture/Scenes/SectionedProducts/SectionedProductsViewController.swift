@@ -8,7 +8,6 @@
 
 import UIKit
 import Reusable
-import RxDataSources
 import RxSwift
 import RxCocoa
 import MGLoadMore
@@ -25,8 +24,7 @@ final class SectionedProductsViewController: UIViewController, Bindable {
     var viewModel: SectionedProductsViewModel!
     var disposeBag = DisposeBag()
     
-    private typealias ProductSectionModel = SectionModel<String, ProductItemViewModel>
-    private var dataSource: RxTableViewSectionedReloadDataSource<ProductSectionModel>?
+    private var productSections = [SectionedProductsViewModel.ProductViewModelSection]()
     private let editProductTrigger = PublishSubject<IndexPath>()
     
     // MARK: - Life Cycle
@@ -44,15 +42,13 @@ final class SectionedProductsViewController: UIViewController, Bindable {
     
     private func configView() {
         tableView.do {
-            $0.estimatedRowHeight = 550
-            $0.rowHeight = UITableView.automaticDimension
             $0.register(cellType: SectionedProductCell.self)
             $0.register(headerFooterViewType: ProductHeaderView.self)
+            $0.estimatedRowHeight = 550
+            $0.rowHeight = UITableView.automaticDimension
+            $0.delegate = self
+            $0.dataSource = self
         }
-        
-        tableView.rx
-            .setDelegate(self)
-            .disposed(by: disposeBag)
         
         view.backgroundColor = ColorCompatibility.systemBackground
     }
@@ -77,31 +73,12 @@ final class SectionedProductsViewController: UIViewController, Bindable {
         
         let output = viewModel.transform(input, disposeBag: disposeBag)
         
-        let dataSource = RxTableViewSectionedReloadDataSource<ProductSectionModel>(
-            configureCell: { [weak self] (_, tableView, indexPath, product) -> UITableViewCell in
-                return tableView.dequeueReusableCell(for: indexPath,
-                                                     cellType: SectionedProductCell.self)
-                    .then {
-                        $0.bindViewModel(product)
-                        
-                        $0.editProductAction = {
-                            self?.editProductTrigger.onNext(indexPath)
-                        }
-                    }
-            }, titleForHeaderInSection: { _, _ in
-                return ""
-            })
-        
-        self.dataSource = dataSource
-        
         output.$productSections
             .asDriver()
-            .map {
-                $0.map { section in
-                    ProductSectionModel(model: section.header, items: section.productList)
-                }
-            }
-            .drive(tableView.rx.items(dataSource: dataSource))
+            .drive(onNext: { [unowned self] sections in
+                self.productSections = sections
+                self.tableView.reloadData()
+            })
             .disposed(by: disposeBag)
         
         output.$error
@@ -133,6 +110,31 @@ final class SectionedProductsViewController: UIViewController, Bindable {
 
 }
 
+// MARK: - UITableViewDataSource
+extension SectionedProductsViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return productSections.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return productSections[section].productList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let product = productSections[indexPath.section].productList[indexPath.row]
+        
+        return tableView.dequeueReusableCell(for: indexPath,
+                                             cellType: SectionedProductCell.self)
+            .then { [weak self] in
+                $0.bindViewModel(product)
+                
+                $0.editProductAction = {
+                    self?.editProductTrigger.onNext(indexPath)
+                }
+            }
+    }
+}
+
 // MARK: - UITableViewDelegate
 extension SectionedProductsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -149,7 +151,7 @@ extension SectionedProductsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(ProductHeaderView.self)
-        header?.titleLabel.text = dataSource?.sectionModels[section].model
+        header?.titleLabel.text = productSections[section].header
         return header
     }
 }

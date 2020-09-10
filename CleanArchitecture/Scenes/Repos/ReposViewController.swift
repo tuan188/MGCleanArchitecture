@@ -42,15 +42,12 @@ final class ReposViewController: UIViewController, Bindable {
     
     private func configView() {
         tableView.do {
+            $0.register(cellType: RepoCell.self)
+            $0.delegate = self
+            $0.prefetchDataSource = self
             $0.estimatedRowHeight = 550
             $0.rowHeight = UITableView.automaticDimension
-            $0.register(cellType: RepoCell.self)
-            $0.prefetchDataSource = self
         }
-        
-        tableView.rx
-            .setDelegate(self)
-            .disposed(by: disposeBag)
         
         view.backgroundColor = ColorCompatibility.systemBackground
     }
@@ -73,10 +70,11 @@ final class ReposViewController: UIViewController, Bindable {
             .drive(tableView.rx.items) { tableView, index, repo in
                 return tableView.dequeueReusableCell(
                     for: IndexPath(row: index, section: 0),
-                    cellType: RepoCell.self)
-                    .then {
-                        $0.bindViewModel(repo)
-                    }
+                    cellType: RepoCell.self
+                )
+                .then {
+                    $0.bindViewModel(repo)
+                }
             }
             .disposed(by: disposeBag)
         

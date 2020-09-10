@@ -67,10 +67,11 @@ final class UserListViewController: UIViewController, Bindable {
             .drive(tableView.rx.items) { tableView, index, user in
                 return tableView.dequeueReusableCell(
                     for: IndexPath(row: index, section: 0),
-                    cellType: UserCell.self)
-                    .then {
-                        $0.bindViewModel(user)
-                    }
+                    cellType: UserCell.self
+                )
+                .then {
+                    $0.bindViewModel(user)
+                }
             }
             .disposed(by: disposeBag)
         
