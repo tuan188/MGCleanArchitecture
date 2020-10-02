@@ -24,7 +24,7 @@ final class ProductsUseCaseMock: ProductsUseCaseType {
         return Observable.just(page)
     }()
     
-    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>> {
+    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
         getProductListCalled = true
         return getProductListReturnValue
     }

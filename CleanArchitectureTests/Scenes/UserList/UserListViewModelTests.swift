@@ -9,7 +9,6 @@
 @testable import CleanArchitecture
 import XCTest
 import RxSwift
-import RxBlocking
 
 final class UserListViewModelTests: XCTestCase {
     private var viewModel: UserListViewModel!

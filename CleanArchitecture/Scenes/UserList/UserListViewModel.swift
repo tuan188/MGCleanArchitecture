@@ -33,11 +33,12 @@ extension UserListViewModel: ViewModel {
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
+        
         let getListInput = GetListInput(loadTrigger: input.loadTrigger,
                                         reloadTrigger: input.reloadTrigger,
                                         getItems: useCase.getUserList)
-        let getListResult = getList(input: getListInput)
         
+        let getListResult = getList(input: getListInput)
         let (userList, error, isLoading, isReloading) = getListResult.destructured
         
         error
@@ -58,8 +59,7 @@ extension UserListViewModel: ViewModel {
             .disposed(by: disposeBag)
 
         select(trigger: input.selectUserTrigger, items: userList)
-            .do(onNext: navigator.toUserDetail)
-            .drive()
+            .drive(onNext: navigator.toUserDetail)
             .disposed(by: disposeBag)
         
         checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),

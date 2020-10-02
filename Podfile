@@ -21,7 +21,6 @@ def pods
 end
 
 def test_pods
-    pod 'RxBlocking', '~> 5.1'
     pod 'RxTest', '~> 5.1'
     pod 'Mockingjay', :git => 'https://github.com/anhnc55/Mockingjay.git', :branch => 'swift_5'
 end

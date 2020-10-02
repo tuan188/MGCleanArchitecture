@@ -9,8 +9,7 @@
 @testable import CleanArchitecture
 import XCTest
 import RxSwift
-import RxBlocking
-
+    
 final class SectionedProductsViewModelTests: XCTestCase {
     private var viewModel: SectionedProductsViewModel!
     private var navigator: SectionedProductsNavigatorMock!

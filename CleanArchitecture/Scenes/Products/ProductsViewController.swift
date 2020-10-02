@@ -42,14 +42,11 @@ final class ProductsViewController: UIViewController, Bindable {
     
     private func configView() {
         tableView.do {
+            $0.register(cellType: ProductCell.self)
+            $0.delegate = self
             $0.estimatedRowHeight = 550
             $0.rowHeight = UITableView.automaticDimension
-            $0.register(cellType: ProductCell.self)
         }
-        
-        tableView.rx
-            .setDelegate(self)
-            .disposed(by: disposeBag)
         
         view.backgroundColor = ColorCompatibility.systemBackground
     }

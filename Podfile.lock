@@ -33,8 +33,6 @@ PODS:
   - RxAlamofire/Core (5.6.1):
     - Alamofire (~> 5.2)
     - RxSwift (~> 5.1)
-  - RxBlocking (5.1.1):
-    - RxSwift (~> 5)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -61,7 +59,6 @@ DEPENDENCIES:
   - MGLoadMore (~> 3.0.0)
   - Mockingjay (from `https://github.com/anhnc55/Mockingjay.git`, branch `swift_5`)
   - Reusable (~> 4.1)
-  - RxBlocking (~> 5.1)
   - RxTest (~> 5.1)
   - RxViewController
   - SDWebImage (~> 5.8.3)
@@ -80,7 +77,6 @@ SPEC REPOS:
     - ObjectMapper
     - Reusable
     - RxAlamofire
-    - RxBlocking
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -113,7 +109,6 @@ SPEC CHECKSUMS:
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
   RxAlamofire: 0531dddf378c84270e97e897333678f1cfaec3ba
-  RxBlocking: 5f700a78cad61ce253ebd37c9a39b5ccc76477b4
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
@@ -123,6 +118,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
 
-PODFILE CHECKSUM: 4dfd2a6c1c318359f6fca60db64fe8a70eaaf6be
+PODFILE CHECKSUM: fb9ea78261ce8bfc4ec71c18b6fa44bdd5381734
 
 COCOAPODS: 1.9.3

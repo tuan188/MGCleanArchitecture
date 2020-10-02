@@ -31,7 +31,7 @@ extension SectionedProductsViewModel: ViewModel {
         @Property var isLoading = false
         @Property var isReloading = false
         @Property var isLoadingMore = false
-        @Property var productSections = [ProductViewModelSection]()
+        @Property var productSections = [ProductSectionViewModel]()
         @Property var isEmpty = false
     }
 
@@ -40,7 +40,7 @@ extension SectionedProductsViewModel: ViewModel {
         let productList: [ProductModel]
     }
     
-    struct ProductViewModelSection {
+    struct ProductSectionViewModel {
         let header: String
         let productList: [ProductItemViewModel]
     }
@@ -80,8 +80,7 @@ extension SectionedProductsViewModel: ViewModel {
             reloadTrigger: input.reloadTrigger,
             loadMoreTrigger: input.loadMoreTrigger,
             getItems: { _, page in
-                let dto = GetPageDto().with { $0.page = page }
-                return self.useCase.getProductList(dto: dto)
+                return self.useCase.getProductList(page: page)
             },
             mapper: ProductModel.init(product:)
         )
@@ -115,7 +114,7 @@ extension SectionedProductsViewModel: ViewModel {
         productSections
             .map {
                 return $0.map { section in
-                    return ProductViewModelSection(header: section.header,
+                    return ProductSectionViewModel(header: section.header,
                                                    productList: section.productList.map(ProductItemViewModel.init))
                 }
             }
@@ -129,10 +128,9 @@ extension SectionedProductsViewModel: ViewModel {
             .map { indexPath, productSections -> ProductModel in
                 return productSections[indexPath.section].productList[indexPath.row]
             }
-            .do(onNext: { product in
+            .drive(onNext: { product in
                 self.navigator.toProductDetail(product: product.product)
             })
-            .drive()
             .disposed(by: disposeBag)
         
         checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
@@ -144,12 +142,11 @@ extension SectionedProductsViewModel: ViewModel {
             .withLatestFrom(productSections) { indexPath, productSections -> Product in
                 return productSections[indexPath.section].productList[indexPath.row].product
             }
-            .do(onNext: self.navigator.toEditProduct)
-            .drive()
+            .drive(onNext: self.navigator.toEditProduct)
             .disposed(by: disposeBag)
         
         input.updatedProductTrigger
-            .do(onNext: { product in
+            .drive(onNext: { product in
                 let page = pageSubject.value
                 var productList = page.items
                 let productModel = ProductModel(product: product, edited: true)
@@ -161,7 +158,6 @@ extension SectionedProductsViewModel: ViewModel {
                     updatedProductSubject.onNext(())
                 }
             })
-            .drive()
             .disposed(by: disposeBag)
 
         return output

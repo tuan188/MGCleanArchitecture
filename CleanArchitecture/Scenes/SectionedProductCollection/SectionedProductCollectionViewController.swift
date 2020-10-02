@@ -24,7 +24,7 @@ final class SectionedProductCollectionViewController: UIViewController, Bindable
     var viewModel: SectionedProductsViewModel!
     var disposeBag = DisposeBag()
     
-    private var productSections = [SectionedProductsViewModel.ProductViewModelSection]()
+    private var productSections = [SectionedProductsViewModel.ProductSectionViewModel]()
     private let editProductTrigger = PublishSubject<IndexPath>()
     
     struct LayoutOptions {

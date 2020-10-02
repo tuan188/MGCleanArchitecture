@@ -40,14 +40,27 @@ extension ReposViewModel: ViewModel {
                                         reloadTrigger: input.reloadTrigger,
                                         loadMoreTrigger: input.loadMoreTrigger,
                                         getItems: useCase.getRepoList(page:))
-        let getPageResult = getPage(input: getPageInput)
         
-        let (page, paginationError, isLoading, isReloading, isLoadingMore) = getPageResult.destructured
+        let getPageResult = getPage(input: getPageInput)
+        let (page, pagingError, isLoading, isReloading, isLoadingMore) = getPageResult.destructured
 
         let repoList = page
             .map { $0.items }
+            
+        repoList
+            .map { $0.map(RepoItemViewModel.init) }
+            .drive(output.$repoList)
+            .disposed(by: disposeBag)
+
+        select(trigger: input.selectRepoTrigger, items: repoList)
+            .drive(onNext: navigator.toRepoDetail)
+            .disposed(by: disposeBag)
         
-        paginationError
+        checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading), items: repoList)
+            .drive(output.$isEmpty)
+            .disposed(by: disposeBag)
+        
+        pagingError
             .drive(output.$error)
             .disposed(by: disposeBag)
         
@@ -61,20 +74,6 @@ extension ReposViewModel: ViewModel {
         
         isLoadingMore
             .drive(output.$isLoadingMore)
-            .disposed(by: disposeBag)
-            
-        repoList
-            .map { $0.map(RepoItemViewModel.init) }
-            .drive(output.$repoList)
-            .disposed(by: disposeBag)
-
-        select(trigger: input.selectRepoTrigger, items: repoList)
-            .do(onNext: navigator.toRepoDetail)
-            .drive()
-            .disposed(by: disposeBag)
-        
-        checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading), items: repoList)
-            .drive(output.$isEmpty)
             .disposed(by: disposeBag)
 
         return output

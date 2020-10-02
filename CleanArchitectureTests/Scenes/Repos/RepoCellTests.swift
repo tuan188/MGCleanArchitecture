@@ -6,8 +6,8 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
-import XCTest
 @testable import CleanArchitecture
+import XCTest
 
 final class RepoCellTests: XCTestCase {
     var cell: RepoCell!

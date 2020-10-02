@@ -71,8 +71,7 @@ extension ProductsViewModel: ViewModel {
             reloadTrigger: input.reloadTrigger,
             loadMoreTrigger: input.loadMoreTrigger,
             getItems: { _, page in
-                let dto = GetPageDto().with { $0.page = page }
-                return self.useCase.getProductList(dto: dto)
+                return self.useCase.getProductList(page: page)
             },
             mapper: ProductModel.init(product:)
         )
@@ -95,10 +94,9 @@ extension ProductsViewModel: ViewModel {
             .disposed(by: disposeBag)
         
         select(trigger: input.selectProductTrigger, items: productList)
-            .do(onNext: { product in
+            .drive(onNext: { product in
                 self.navigator.toProductDetail(product: product.product)
             })
-            .drive()
             .disposed(by: disposeBag)
         
         select(trigger: input.editProductTrigger, items: productList)
@@ -106,7 +104,7 @@ extension ProductsViewModel: ViewModel {
             .flatMapLatest { product -> Driver<EditProductDelegate> in
                 self.navigator.toEditProduct(product)
             }
-            .do(onNext: { delegate in
+            .drive(onNext: { delegate in
                 switch delegate {
                 case .updatedProduct(let product):
                     let page = pageSubject.value
@@ -121,7 +119,6 @@ extension ProductsViewModel: ViewModel {
                     }
                 }
             })
-            .drive()
             .disposed(by: disposeBag)
 
         checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
@@ -142,7 +139,7 @@ extension ProductsViewModel: ViewModel {
                     .map { _ in product }
                     .asDriverOnErrorJustComplete()
             }
-            .do(onNext: { product in
+            .drive(onNext: { product in
                 let page = pageSubject.value
                 
                 var productList = page.items
@@ -151,7 +148,6 @@ extension ProductsViewModel: ViewModel {
                 let updatedPage = PagingInfo(page: page.page, items: productList)
                 pageSubject.accept(updatedPage)
             })
-            .drive()
             .disposed(by: disposeBag)
         
         return output

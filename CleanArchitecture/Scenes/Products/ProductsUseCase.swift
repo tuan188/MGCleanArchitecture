@@ -10,11 +10,15 @@ import RxSwift
 import MGArchitecture
 
 protocol ProductsUseCaseType {
-    func getProductList(dto: GetPageDto) -> Observable<PagingInfo<Product>>
+    func getProductList(page: Int) -> Observable<PagingInfo<Product>>
     func deleteProduct(dto: DeleteProductDto) -> Observable<Void>
 }
 
 struct ProductsUseCase: ProductsUseCaseType, GettingProductList, DeletingProduct {
     let productGateway: ProductGatewayType
+    
+    func getProductList(page: Int) -> Observable<PagingInfo<Product>> {
+        let dto = GetPageDto(page: page, perPage: 10, usingCache: true)
+        return getProductList(dto: dto)
+    }
 }
-

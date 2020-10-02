@@ -118,6 +118,7 @@ extension ReposViewController: StoryboardSceneBased {
     static var sceneStoryboard = Storyboards.repo
 }
 
+// MARK: - UITableViewDataSourcePrefetching
 extension ReposViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         let urls = indexPaths

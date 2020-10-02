@@ -146,6 +146,7 @@ extension RepoCollectionViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Set Collection View's Estimate Size to None in Storyboard
         return layoutOptions.itemSize
     }
     
