@@ -60,29 +60,29 @@ final class LoginViewController: UIViewController, Bindable {
         let output = viewModel.transform(input, disposeBag: disposeBag)
         
         output.$usernameValidationMessage
-            .observeOn(MainScheduler.instance)
-            .subscribe(usernameValidationMessageBinder)
+            .asDriver()
+            .drive(usernameValidationMessageBinder)
             .disposed(by: disposeBag)
         
         output.$passwordValidationMessage
-            .observeOn(MainScheduler.instance)
-            .subscribe(passwordValidationMessageBinder)
+            .asDriver()
+            .drive(passwordValidationMessageBinder)
             .disposed(by: disposeBag)
         
         output.$isLoginEnabled
-            .observeOn(MainScheduler.instance)
-            .subscribe(loginButton.rx.isEnabled)
+            .asDriver()
+            .drive(loginButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
         output.$isLoading
-            .observeOn(MainScheduler.instance)
-            .subscribe(rx.isLoading)
+            .asDriver()
+            .drive(rx.isLoading)
             .disposed(by: disposeBag)
         
         output.$error
-            .observeOn(MainScheduler.instance)
+            .asDriver()
             .unwrap()
-            .subscribe(rx.error)
+            .drive(rx.error)
             .disposed(by: disposeBag)
     }
 }

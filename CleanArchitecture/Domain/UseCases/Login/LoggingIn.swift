@@ -8,6 +8,8 @@
 
 import UIKit
 import RxSwift
+import ValidatedPropertyKit
+import Dto
 
 protocol LoggingIn {
     
@@ -26,5 +28,13 @@ extension LoggingIn {
             })
             return Disposables.create()
         }
+    }
+    
+    func validateUserName(_ username: String) -> ValidationResult {
+        return LoginDto.validateUserName(username).mapToVoid()
+    }
+    
+    func validatePassword(_ password: String) -> ValidationResult {
+        return LoginDto.validatePassword(password).mapToVoid()
     }
 }

@@ -17,11 +17,5 @@ protocol LoginUseCaseType {
 }
 
 struct LoginUseCase: LoginUseCaseType, LoggingIn {
-    func validateUserName(_ username: String) -> ValidationResult {
-        return LoginDto.validateUserName(username).mapToVoid()
-    }
-    
-    func validatePassword(_ password: String) -> ValidationResult {
-        return LoginDto.validatePassword(password).mapToVoid()
-    }
+
 }
