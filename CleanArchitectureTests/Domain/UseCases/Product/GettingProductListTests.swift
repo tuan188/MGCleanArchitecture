@@ -23,14 +23,14 @@ final class GettingProductListTests: XCTestCase, GettingProductList {
     private var getProductListOutput: TestableObserver<PagingInfo<Product>>!
     private var scheduler: TestScheduler!
 
-    override func setUpWithError() throws {
-        disposeBag = DisposeBag()
+    override func setUp() {
+        super.setUp()
         productGatewayMock = ProductGatewayMock()
-        
         scheduler = TestScheduler(initialClock: 0)
+        disposeBag = DisposeBag()
         getProductListOutput = scheduler.createObserver(PagingInfo<Product>.self)
     }
-    
+
     func test_getProductList() {
         // act
         self.getProductList(dto: GetPageDto(page: 1))
@@ -39,7 +39,7 @@ final class GettingProductListTests: XCTestCase, GettingProductList {
 
         // assert
         XCTAssert(productGatewayMock.getProductListCalled)
-        XCTAssertEqual(getProductListOutput.events.first?.value.element?.items.count, 1)
+        XCTAssertEqual(getProductListOutput.firstEventElement?.items.count, 1)
     }
     
     func test_getProductList_fail() {

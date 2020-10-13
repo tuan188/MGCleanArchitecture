@@ -28,7 +28,8 @@ final class SettingUpUserDataTests: XCTestCase, SettingUpUserData {
     // Output Observers
     private var addUserDataOutput: TestableObserver<Void>!
 
-    override func setUpWithError() throws {
+    override func setUp() {
+        super.setUp()
         appGatewayMock = AppGatewayMock()
         userGatewayMock = UserGatewayMock()
         

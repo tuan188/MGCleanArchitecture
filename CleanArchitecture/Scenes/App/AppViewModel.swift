@@ -18,7 +18,7 @@ struct AppViewModel {
 // MARK: - ViewModel
 extension AppViewModel: ViewModel {
     struct Input {
-        let loadTrigger: Driver<Void>
+        let load: Driver<Void>
     }
     
     struct Output {
@@ -26,13 +26,12 @@ extension AppViewModel: ViewModel {
     }
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
-        input.loadTrigger
+        input.load
             .flatMapLatest {
                 self.useCase.addUserData()
                     .asDriverOnErrorJustComplete()
             }
-            .do(onNext: self.navigator.toMain)
-            .drive()
+            .drive(onNext: self.navigator.toMain)
             .disposed(by: disposeBag)
         
         return Output()

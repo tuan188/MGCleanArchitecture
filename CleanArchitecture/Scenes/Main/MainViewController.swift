@@ -59,8 +59,8 @@ final class MainViewController: UIViewController, Bindable {
     
     func bindViewModel() {
         let input = MainViewModel.Input(
-            loadTrigger: Driver.just(()),
-            selectMenuTrigger: tableView.rx.itemSelected.asDriver()
+            load: Driver.just(()),
+            selectMenu: tableView.rx.itemSelected.asDriver()
         )
         
         let output = viewModel.transform(input, disposeBag: disposeBag)

@@ -15,12 +15,11 @@ final class MainViewModelTests: XCTestCase {
     private var viewModel: MainViewModel!
     private var navigator: MainNavigatorMock!
     private var useCase: MainUseCaseMock!
-    
     private var input: MainViewModel.Input!
     private var output: MainViewModel.Output!
-    
     private var disposeBag: DisposeBag!
-    
+
+    // Triggers
     private let loadTrigger = PublishSubject<Void>()
     private let selectMenuTrigger = PublishSubject<IndexPath>()
     
@@ -31,8 +30,8 @@ final class MainViewModelTests: XCTestCase {
         viewModel = MainViewModel(navigator: navigator, useCase: useCase)
         
         input = MainViewModel.Input(
-            loadTrigger: loadTrigger.asDriverOnErrorJustComplete(),
-            selectMenuTrigger: selectMenuTrigger.asDriverOnErrorJustComplete()
+            load: loadTrigger.asDriverOnErrorJustComplete(),
+            selectMenu: selectMenuTrigger.asDriverOnErrorJustComplete()
         )
         
         disposeBag = DisposeBag()

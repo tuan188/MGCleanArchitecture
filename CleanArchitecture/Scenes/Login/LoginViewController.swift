@@ -52,9 +52,9 @@ final class LoginViewController: UIViewController, Bindable {
 
     func bindViewModel() {
         let input = LoginViewModel.Input(
-            usernameTrigger: usernameTextField.rx.text.orEmpty.asDriver(),
-            passwordTrigger: passwordTextField.rx.text.orEmpty.asDriver(),
-            loginTrigger: loginButton.rx.tap.asDriver()
+            username: usernameTextField.rx.text.orEmpty.asDriver(),
+            password: passwordTextField.rx.text.orEmpty.asDriver(),
+            login: loginButton.rx.tap.asDriver()
         )
         
         let output = viewModel.transform(input, disposeBag: disposeBag)

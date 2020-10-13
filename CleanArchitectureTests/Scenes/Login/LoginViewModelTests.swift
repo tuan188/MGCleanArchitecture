@@ -18,10 +18,10 @@ final class LoginViewModelTests: XCTestCase {
     private var useCase: LoginUseCaseMock!
     private var input: LoginViewModel.Input!
     private var output: LoginViewModel.Output!
-    
     private var disposeBag: DisposeBag!
     private var scheduler: TestScheduler!
     
+    // Outputs
     private var usernameValidationMessageOutput: TestableObserver<String>!
     private var passwordValidationMessageOutput: TestableObserver<String>!
     private var loginOutput: TestableObserver<Void>!
@@ -29,6 +29,7 @@ final class LoginViewModelTests: XCTestCase {
     private var isLoadingOutput: TestableObserver<Bool>!
     private var errorOutput: TestableObserver<Error>!
     
+    // Triggers
     private let usernameTrigger = PublishSubject<String>()
     private let passwordTrigger = PublishSubject<String>()
     private let loginTrigger = PublishSubject<Void>()
@@ -40,9 +41,9 @@ final class LoginViewModelTests: XCTestCase {
         viewModel = LoginViewModel(navigator: navigator, useCase: useCase)
         
         input = LoginViewModel.Input(
-            usernameTrigger: usernameTrigger.asDriverOnErrorJustComplete(),
-            passwordTrigger: passwordTrigger.asDriverOnErrorJustComplete(),
-            loginTrigger: loginTrigger.asDriverOnErrorJustComplete()
+            username: usernameTrigger.asDriverOnErrorJustComplete(),
+            password: passwordTrigger.asDriverOnErrorJustComplete(),
+            login: loginTrigger.asDriverOnErrorJustComplete()
         )
         
         disposeBag = DisposeBag()

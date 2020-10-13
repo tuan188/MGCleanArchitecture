@@ -19,9 +19,9 @@ struct LoginViewModel {
 // MARK: - ViewModel
 extension LoginViewModel: ViewModel {
     struct Input {
-        let usernameTrigger: Driver<String>
-        let passwordTrigger: Driver<String>
-        let loginTrigger: Driver<Void>
+        let username: Driver<String>
+        let password: Driver<String>
+        let login: Driver<Void>
     }
 
     struct Output {
@@ -48,7 +48,7 @@ extension LoginViewModel: ViewModel {
             .drive(output.$isLoading)
             .disposed(by: disposeBag)
         
-        let usernameValidation = Driver.combineLatest(input.usernameTrigger, input.loginTrigger)
+        let usernameValidation = Driver.combineLatest(input.username, input.login)
             .map { $0.0 }
             .map(useCase.validateUserName(_:))
         
@@ -57,7 +57,7 @@ extension LoginViewModel: ViewModel {
             .drive(output.$usernameValidationMessage)
             .disposed(by: disposeBag)
   
-        let passwordValidation = Driver.combineLatest(input.passwordTrigger, input.loginTrigger)
+        let passwordValidation = Driver.combineLatest(input.password, input.login)
             .map { $0.0 }
             .map(useCase.validatePassword(_:))
         
@@ -78,10 +78,10 @@ extension LoginViewModel: ViewModel {
             .drive(output.$isLoginEnabled)
             .disposed(by: disposeBag)
         
-        input.loginTrigger
+        input.login
             .withLatestFrom(isLoginEnabled)
             .filter { $0 }
-            .withLatestFrom(Driver.combineLatest(input.usernameTrigger, input.passwordTrigger))
+            .withLatestFrom(Driver.combineLatest(input.username, input.password))
             .flatMapLatest { username, password -> Driver<Void> in
                 self.useCase.login(dto: LoginDto(username: username, password: password))
                     .trackError(errorTracker)

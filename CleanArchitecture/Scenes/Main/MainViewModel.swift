@@ -18,8 +18,8 @@ struct MainViewModel {
 // MARK: - ViewModel
 extension MainViewModel: ViewModel {
     struct Input {
-        let loadTrigger: Driver<Void>
-        let selectMenuTrigger: Driver<IndexPath>
+        let load: Driver<Void>
+        let selectMenu: Driver<IndexPath>
     }
     
     struct Output {
@@ -29,18 +29,18 @@ extension MainViewModel: ViewModel {
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        input.loadTrigger
+        input.load
             .map {
                 self.menuSections()
             }
             .drive(output.$menuSections)
             .disposed(by: disposeBag)
         
-        input.selectMenuTrigger
+        input.selectMenu
             .map { indexPath in
                 output.menuSections[indexPath.section].menus[indexPath.row]
             }
-            .do(onNext: { menu in
+            .drive(onNext: { menu in
                 switch menu {
                 case .products:
                     self.navigator.toProducts()
@@ -58,7 +58,6 @@ extension MainViewModel: ViewModel {
                     self.navigator.toLogin()
                 }
             })
-            .drive()
             .disposed(by: disposeBag)
             
         return output

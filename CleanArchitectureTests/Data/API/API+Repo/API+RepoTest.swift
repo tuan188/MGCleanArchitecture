@@ -6,30 +6,45 @@
 //  Copyright © 2019 Sun Asterisk. All rights reserved.
 //
 
-import XCTest
-import Mockingjay
 @testable import CleanArchitecture
+import Mockingjay
+import XCTest
+import RxTest
+import RxSwift
 
 final class APIRepoTests: XCTestCase {
-    let repoURL = API.Urls.getRepoList
-    let queries = "?page=1&q=language:swift&per_page=10"
+    private let repoURL = API.Urls.getRepoList
+    private let queries = "?page=1&q=language:swift&per_page=10"
+    private var getRepoListOutput: TestableObserver<API.GetRepoListOutput>!
+    private var scheduler: TestScheduler!
+    private var disposeBag: DisposeBag!
+    
+    override func setUp() {
+        super.setUp()
+        scheduler = TestScheduler(initialClock: 0)
+        getRepoListOutput = scheduler.createObserver(API.GetRepoListOutput.self)
+        disposeBag = DisposeBag()
+    }
 
     func test_APIRepo_Success() {
         // arrange
-        var output: API.GetRepoListOutput?
         let data = loadStub(name: "repo", extension: "json")
         let stubURL = repoURL + queries
 
         // act
         self.stub(uri(stubURL), jsonData(data as Data))
         let input = API.GetRepoListInput(page: 1)
-        output = try? API.shared.getRepoList(input).toBlocking().first()
+        API.shared.getRepoList(input)
+            .subscribe(getRepoListOutput)
+            .disposed(by: disposeBag)
         
         // assert
-        XCTAssertNotNil(output?.repos)
-        XCTAssertTrue(output?.repos?.count == 10)
-        XCTAssertTrue(output?.repos?.first?.id == 21_700_699)
-        XCTAssertTrue(output?.repos?.first?.fullname == "vsouza/awesome-ios")
+        wait {
+            XCTAssertNotNil(self.getRepoListOutput.firstEventElement)
+            XCTAssertEqual(self.getRepoListOutput.firstEventElement?.repos?.count, 10)
+            XCTAssertEqual(self.getRepoListOutput.firstEventElement?.repos?.first?.id, 21_700_699)
+            XCTAssertEqual(self.getRepoListOutput.firstEventElement?.repos?.first?.fullname, "vsouza/awesome-ios")
+        }
     }
 
     func test_APIRepo_Error_404() {
@@ -40,10 +55,15 @@ final class APIRepoTests: XCTestCase {
         // act
         self.stub(uri(stubURL), failure(error))
         let input = API.GetRepoListInput(page: 1)
+        API.shared.getRepoList(input)
+            .subscribe(getRepoListOutput)
+            .disposed(by: disposeBag)
         
         // assert
         // https://github.com/ReactiveX/RxSwift/issues/1355
-        XCTAssertThrowsError(try API.shared.getRepoList(input).toBlocking().first())
+        wait {
+            XCTAssertNotNil(self.getRepoListOutput.events.first?.value.error)
+        }
     }
     
     func test_APIRepo_Error_500() {
@@ -54,9 +74,14 @@ final class APIRepoTests: XCTestCase {
         // act
         self.stub(uri(stubURL), failure(error))
         let input = API.GetRepoListInput(page: 1)
+        API.shared.getRepoList(input)
+            .subscribe(getRepoListOutput)
+            .disposed(by: disposeBag)
         
         // assert
         // https://github.com/ReactiveX/RxSwift/issues/1355
-        XCTAssertThrowsError(try API.shared.getRepoList(input).toBlocking().first())
+        wait {
+            XCTAssertNotNil(self.getRepoListOutput.events.first?.value.error)
+        }
     }
 }

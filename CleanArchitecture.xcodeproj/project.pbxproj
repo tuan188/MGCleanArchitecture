@@ -103,7 +103,11 @@
 		175472B724A5B0CA00DF48CC /* RepoGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175472B624A5B0CA00DF48CC /* RepoGateway.swift */; };
 		175472BB24A5D65B00DF48CC /* GettingRepoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175472BA24A5D65B00DF48CC /* GettingRepoListTests.swift */; };
 		175472BD24A5D6BB00DF48CC /* RepoGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175472BC24A5D6BB00DF48CC /* RepoGatewayMock.swift */; };
+		175549BD25885B4B001A4B08 /* Storyboards+Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175549BC25885B4B001A4B08 /* Storyboards+Repo.swift */; };
+		175549C125885BAE001A4B08 /* Storyboards+Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175549C025885BAE001A4B08 /* Storyboards+Product.swift */; };
+		175549E325885E00001A4B08 /* Storyboards+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175549E225885E00001A4B08 /* Storyboards+User.swift */; };
 		17609845236053EB00CBDC8D /* ColorCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17609844236053EB00CBDC8D /* ColorCompatibility.swift */; };
+		1766049B25358DD800F0900B /* XCTestCase+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1766049A25358DD800F0900B /* XCTestCase+.swift */; };
 		176C2DA324A9A482008DB836 /* GettingProductListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176C2DA224A9A482008DB836 /* GettingProductListTests.swift */; };
 		176C2DA524A9C0F8008DB836 /* ProductGatewayMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176C2DA424A9C0F8008DB836 /* ProductGatewayMock.swift */; };
 		176C2DA724A9C7DC008DB836 /* PagingInfo+Equalable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176C2DA624A9C7DC008DB836 /* PagingInfo+Equalable.swift */; };
@@ -335,7 +339,11 @@
 		175472B624A5B0CA00DF48CC /* RepoGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoGateway.swift; sourceTree = "<group>"; };
 		175472BA24A5D65B00DF48CC /* GettingRepoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingRepoListTests.swift; sourceTree = "<group>"; };
 		175472BC24A5D6BB00DF48CC /* RepoGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoGatewayMock.swift; sourceTree = "<group>"; };
+		175549BC25885B4B001A4B08 /* Storyboards+Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboards+Repo.swift"; sourceTree = "<group>"; };
+		175549C025885BAE001A4B08 /* Storyboards+Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboards+Product.swift"; sourceTree = "<group>"; };
+		175549E225885E00001A4B08 /* Storyboards+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboards+User.swift"; sourceTree = "<group>"; };
 		17609844236053EB00CBDC8D /* ColorCompatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCompatibility.swift; sourceTree = "<group>"; };
+		1766049A25358DD800F0900B /* XCTestCase+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+.swift"; sourceTree = "<group>"; };
 		176C2DA224A9A482008DB836 /* GettingProductListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingProductListTests.swift; sourceTree = "<group>"; };
 		176C2DA424A9C0F8008DB836 /* ProductGatewayMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductGatewayMock.swift; sourceTree = "<group>"; };
 		176C2DA624A9C7DC008DB836 /* PagingInfo+Equalable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PagingInfo+Equalable.swift"; sourceTree = "<group>"; };
@@ -617,12 +625,11 @@
 		172DC23C20C4DDFB009FC881 /* CleanArchitectureTests */ = {
 			isa = PBXGroup;
 			children = (
+				1766049925358DB800F0900B /* Support */,
 				17CD5FAC24A5972300BA2496 /* Data */,
 				179E425221919F36005F60D0 /* Domain */,
 				172DC28620C53E2E009FC881 /* Scenes */,
 				172DC23F20C4DDFB009FC881 /* Info.plist */,
-				172DC2E220C67C87009FC881 /* TestError.swift */,
-				176C2DCD24AB2BB1008DB836 /* TestableObserver+.swift */,
 			);
 			path = CleanArchitectureTests;
 			sourceTree = "<group>";
@@ -630,21 +637,14 @@
 		172DC27220C5333F009FC881 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				179EBBD12508B6C5007FF094 /* SectionedProductCollection */,
-				178F565F21EF0F83008D22AB /* Login */,
-				17CDA60D21EC203D0001FE4A /* UserList */,
-				173CA58421460EFC001AF22D /* DynamicEditProduct */,
-				178002FC213FB92400D20209 /* Common */,
-				17368FCC20F3373500A4A3E9 /* RepoCollection */,
-				1721727120E49234007D33A5 /* Repos */,
-				17D80D2320DF9898009E68F0 /* EditProduct */,
-				17EC214D20DCE52D00F793FE /* StaticProductDetail */,
-				177982D720CE5FCA0095CCA8 /* ProductDetail */,
-				17A4E5DD20C90AC0003DE0EA /* SectionedProducts */,
-				172DC2EE20C67ECE009FC881 /* Storyboards */,
-				172DC2A520C62975009FC881 /* Products */,
-				172DC27A20C53D74009FC881 /* Main */,
+				175549C625885D65001A4B08 /* User */,
 				172DC27320C53347009FC881 /* App */,
+				178002FC213FB92400D20209 /* Common */,
+				178F565F21EF0F83008D22AB /* Login */,
+				172DC27A20C53D74009FC881 /* Main */,
+				17554992258858CB001A4B08 /* Product */,
+				17554991258858BE001A4B08 /* Repo */,
+				172DC2EE20C67ECE009FC881 /* Storyboards */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -677,17 +677,12 @@
 		172DC28620C53E2E009FC881 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				178F566A21EF0FA9008D22AB /* Login */,
-				17CDA62021EC238D0001FE4A /* UserList */,
-				17F4CAB8214B8DF8009212A4 /* DynamicEditProduct */,
-				1721727C20E492D0007D33A5 /* Repos */,
-				1706D2AE20E213BF001798FB /* EditProduct */,
-				17D80D1420DF908B009E68F0 /* StaticProductDetail */,
-				177982E020CE6B140095CCA8 /* ProductDetail */,
-				177982C220CE1AF70095CCA8 /* SectionedProducts */,
-				172DC2C120C6701F009FC881 /* Products */,
-				172DC28820C53E38009FC881 /* Main */,
 				172DC28720C53E34009FC881 /* App */,
+				178F566A21EF0FA9008D22AB /* Login */,
+				172DC28820C53E38009FC881 /* Main */,
+				1755499425885958001A4B08 /* Product */,
+				1755499325885953001A4B08 /* Repo */,
+				175549E625885EAE001A4B08 /* User */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -756,11 +751,8 @@
 		172DC2EE20C67ECE009FC881 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				172DC29720C53FF4009FC881 /* Storyboards.swift */,
-				172DC2EC20C67EAA009FC881 /* Product.storyboard */,
 				172DC29920C5477F009FC881 /* Main.storyboard */,
-				1721728B20E49A81007D33A5 /* Repo.storyboard */,
-				17CDA62B21EC23AF0001FE4A /* User.storyboard */,
+				172DC29720C53FF4009FC881 /* Storyboards.swift */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -844,6 +836,82 @@
 				175472BA24A5D65B00DF48CC /* GettingRepoListTests.swift */,
 			);
 			path = Repo;
+			sourceTree = "<group>";
+		};
+		17554991258858BE001A4B08 /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+				1721728B20E49A81007D33A5 /* Repo.storyboard */,
+				175549BC25885B4B001A4B08 /* Storyboards+Repo.swift */,
+				17368FCC20F3373500A4A3E9 /* RepoCollection */,
+				1721727120E49234007D33A5 /* Repos */,
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
+		17554992258858CB001A4B08 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				172DC2EC20C67EAA009FC881 /* Product.storyboard */,
+				175549C025885BAE001A4B08 /* Storyboards+Product.swift */,
+				173CA58421460EFC001AF22D /* DynamicEditProduct */,
+				17D80D2320DF9898009E68F0 /* EditProduct */,
+				177982D720CE5FCA0095CCA8 /* ProductDetail */,
+				172DC2A520C62975009FC881 /* Products */,
+				179EBBD12508B6C5007FF094 /* SectionedProductCollection */,
+				17A4E5DD20C90AC0003DE0EA /* SectionedProducts */,
+				17EC214D20DCE52D00F793FE /* StaticProductDetail */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
+		1755499325885953001A4B08 /* Repo */ = {
+			isa = PBXGroup;
+			children = (
+				1721727C20E492D0007D33A5 /* Repos */,
+			);
+			path = Repo;
+			sourceTree = "<group>";
+		};
+		1755499425885958001A4B08 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				17F4CAB8214B8DF8009212A4 /* DynamicEditProduct */,
+				1706D2AE20E213BF001798FB /* EditProduct */,
+				177982E020CE6B140095CCA8 /* ProductDetail */,
+				172DC2C120C6701F009FC881 /* Products */,
+				177982C220CE1AF70095CCA8 /* SectionedProducts */,
+				17D80D1420DF908B009E68F0 /* StaticProductDetail */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
+		175549C625885D65001A4B08 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				175549E225885E00001A4B08 /* Storyboards+User.swift */,
+				17CDA62B21EC23AF0001FE4A /* User.storyboard */,
+				17CDA60D21EC203D0001FE4A /* UserList */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		175549E625885EAE001A4B08 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				17CDA62021EC238D0001FE4A /* UserList */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		1766049925358DB800F0900B /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				172DC2E220C67C87009FC881 /* TestError.swift */,
+				176C2DCD24AB2BB1008DB836 /* TestableObserver+.swift */,
+				1766049A25358DD800F0900B /* XCTestCase+.swift */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 		176C2DAA24A9D56F008DB836 /* Config */ = {
@@ -1464,6 +1532,7 @@
 				17A4E5E420C90AD4003DE0EA /* SectionedProductsNavigator.swift in Sources */,
 				178F401321FAEB94009EE0F7 /* MainNavigator.swift in Sources */,
 				17368FD120F33E4A00A4A3E9 /* RepoCollectionCell.swift in Sources */,
+				175549BD25885B4B001A4B08 /* Storyboards+Repo.swift in Sources */,
 				17CDA61421EC20500001FE4A /* UserListViewController.swift in Sources */,
 				173BC074236142A00051A4CA /* UIColor+.swift in Sources */,
 				172DC22920C4DDF9009FC881 /* AppDelegate.swift in Sources */,
@@ -1548,6 +1617,7 @@
 				172DC27F20C53DB1009FC881 /* MainViewController.swift in Sources */,
 				172172A420E4D48C007D33A5 /* APIOutput.swift in Sources */,
 				17DCDA4C20FB43CC00E2602A /* EditProductAssembler.swift in Sources */,
+				175549C125885BAE001A4B08 /* Storyboards+Product.swift in Sources */,
 				17368FCE20F33D6C00A4A3E9 /* RepoCollectionViewController.swift in Sources */,
 				174103742140FCE700267731 /* ProductItemViewModel.swift in Sources */,
 				178002FE213FB93E00D20209 /* EmptyDataView.swift in Sources */,
@@ -1583,6 +1653,7 @@
 				17CDA61721EC20500001FE4A /* UserListNavigator.swift in Sources */,
 				17CDA61621EC20500001FE4A /* UserItemViewModel.swift in Sources */,
 				1720C7B824FC8B4800D616B2 /* Validation+Collection.swift in Sources */,
+				175549E325885E00001A4B08 /* Storyboards+User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1604,6 +1675,7 @@
 				17CDA62621EC239B0001FE4A /* UserListUseCaseMock.swift in Sources */,
 				172DC28F20C53E4F009FC881 /* MainViewModelTests.swift in Sources */,
 				17D80D2220DF94A7009E68F0 /* StaticProductDetailViewControllerTests.swift in Sources */,
+				1766049B25358DD800F0900B /* XCTestCase+.swift in Sources */,
 				177982CB20CE1B830095CCA8 /* SectionedProductsNavigatorMock.swift in Sources */,
 				17EC214220DCD86600F793FE /* ProductDetailViewControllerTests.swift in Sources */,
 				1721728520E492DD007D33A5 /* ReposNavigatorMock.swift in Sources */,
@@ -1799,7 +1871,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -1813,7 +1885,7 @@
 				INFOPLIST_FILE = CleanArchitecture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 5.2.0;
+				MARKETING_VERSION = 5.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.CleanArchitecture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CleanArchitecture/Bridging-Header.h";
@@ -1829,7 +1901,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -1843,7 +1915,7 @@
 				INFOPLIST_FILE = CleanArchitecture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 5.2.0;
+				MARKETING_VERSION = 5.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.CleanArchitecture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CleanArchitecture/Bridging-Header.h";

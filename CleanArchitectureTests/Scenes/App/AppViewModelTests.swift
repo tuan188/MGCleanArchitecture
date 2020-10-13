@@ -16,14 +16,15 @@ final class AppViewModelTests: XCTestCase {
     private var viewModel: AppViewModel!
     private var navigator: AppNavigatorMock!
     private var useCase: AppUseCaseMock!
-    
     private var input: AppViewModel.Input!
     private var output: AppViewModel.Output!
-    
     private var scheduler: TestScheduler!
     private var disposeBag: DisposeBag!
+    
+    // Outputs
     private var toMainOutput: TestableObserver<Void>!
     
+    // Triggers
     private let loadTrigger = PublishSubject<Void>()
     
     override func setUp() {
@@ -33,7 +34,7 @@ final class AppViewModelTests: XCTestCase {
         viewModel = AppViewModel(navigator: navigator, useCase: useCase)
         
         input = AppViewModel.Input(
-            loadTrigger: loadTrigger.asDriverOnErrorJustComplete()
+            load: loadTrigger.asDriverOnErrorJustComplete()
         )
         
         disposeBag = DisposeBag()

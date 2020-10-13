@@ -25,7 +25,8 @@ final class GettingRepoListTests: XCTestCase, GettingRepoList {
     // Output Observers
     private var getRepoListOutput: TestableObserver<PagingInfo<Repo>>!
 
-    override func setUpWithError() throws {
+    override func setUp() {
+        super.setUp()
         repoGatewayMock = RepoGatewayMock()
         
         disposeBag = DisposeBag()
