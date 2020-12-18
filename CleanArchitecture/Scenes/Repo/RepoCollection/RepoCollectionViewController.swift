@@ -75,10 +75,10 @@ final class RepoCollectionViewController: UIViewController, Bindable {
             $0.delegate = self
             $0.prefetchDataSource = self
             $0.alwaysBounceVertical = true
+            $0.backgroundColor = ColorCompatibility.systemBackground
         }
         
         view.backgroundColor = ColorCompatibility.systemBackground
-        collectionView.backgroundColor = ColorCompatibility.systemBackground
     }
     
     func bindViewModel() {

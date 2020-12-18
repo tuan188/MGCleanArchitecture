@@ -52,6 +52,8 @@ extension MainViewModel: ViewModel {
                     self.navigator.toRepos()
                 case .repoCollection:
                     self.navigator.toRepoCollection()
+                case .repoCarousel:
+                    self.navigator.toRepoCarousel()
                 case .users:
                     self.navigator.toUsers()
                 case .login:
@@ -66,7 +68,7 @@ extension MainViewModel: ViewModel {
     func menuSections() -> [MenuSection] {
         return [
             MenuSection(title: "Mock Data", menus: [.products, .sectionedProducts, .sectionedProductCollection]),
-            MenuSection(title: "API", menus: [.repos, .repoCollection]),
+            MenuSection(title: "API", menus: [.repos, .repoCollection, .repoCarousel]),
             MenuSection(title: "Core Data", menus: [ .users ]),
             MenuSection(title: "", menus: [ .login ])
         ]
@@ -80,6 +82,7 @@ extension MainViewModel {
         case sectionedProductCollection
         case repos
         case repoCollection
+        case repoCarousel
         case users
         case login
         
@@ -95,6 +98,8 @@ extension MainViewModel {
                 return "Git repo list"
             case .repoCollection:
                 return "Git repo collection"
+            case .repoCarousel:
+                return "Git repo carousel"
             case .users:
                 return "User list"
             case .login:

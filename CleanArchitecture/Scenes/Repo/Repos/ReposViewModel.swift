@@ -26,11 +26,11 @@ extension ReposViewModel: ViewModel {
 
     struct Output {
         @Property var error: Error?
-        @Property var isLoading: Bool = false
-        @Property var isReloading: Bool = false
-        @Property var isLoadingMore: Bool = false
-        @Property var repoList: [RepoItemViewModel] = []
-        @Property var isEmpty: Bool = false
+        @Property var isLoading = false
+        @Property var isReloading = false
+        @Property var isLoadingMore = false
+        @Property var repoList = [RepoItemViewModel]()
+        @Property var isEmpty = false
     }
 
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {

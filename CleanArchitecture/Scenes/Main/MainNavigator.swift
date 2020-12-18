@@ -14,6 +14,7 @@ protocol MainNavigatorType {
     func toSectionedProductCollection()
     func toRepos()
     func toRepoCollection()
+    func toRepoCarousel()
     func toUsers()
     func toLogin()
 }
@@ -44,6 +45,11 @@ struct MainNavigator: MainNavigatorType {
     
     func toRepoCollection() {
         let vc: RepoCollectionViewController = assembler.resolve(navigationController: navigationController)
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func toRepoCarousel() {
+        let vc: RepoCarouselViewController = assembler.resolve(navigationController: navigationController)
         navigationController.pushViewController(vc, animated: true)
     }
     

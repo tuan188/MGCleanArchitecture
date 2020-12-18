@@ -7,18 +7,19 @@
 //
 
 protocol Assembler: class,
-    GatewaysAssembler,
-    MainAssembler,
-    ReposAssembler,
-    EditProductAssembler,
-    ProductsAssembler,
-    ProductDetailAssembler,
-    SectionedProductsAssembler,
-    StaticProductDetailAssembler,
-    DynamicEditProductAssembler,
-    UserListAssembler,
-    LoginAssembler,
-    AppAssembler {
+                    RepoCarouselAssembler,
+                    GatewaysAssembler,
+                    MainAssembler,
+                    ReposAssembler,
+                    EditProductAssembler,
+                    ProductsAssembler,
+                    ProductDetailAssembler,
+                    SectionedProductsAssembler,
+                    StaticProductDetailAssembler,
+                    DynamicEditProductAssembler,
+                    UserListAssembler,
+                    LoginAssembler,
+                    AppAssembler {
     
 }
 

@@ -42,6 +42,14 @@ final class MainNavigatorMock: MainNavigatorType {
         toRepoCollectionCalled = true
     }
     
+    // MARK: - toRepoCarousel
+
+    var toRepoCarouselCalled = false
+
+    func toRepoCarousel() {
+        toRepoCarouselCalled = true
+    }
+    
     // MARK: - toUsers
     
     var toUsersCalled = false

@@ -46,6 +46,7 @@ final class ProductsViewController: UIViewController, Bindable {
             $0.delegate = self
             $0.estimatedRowHeight = 550
             $0.rowHeight = UITableView.automaticDimension
+            $0.refreshHeader = RefreshHeaderAnimator(frame: .zero)
         }
         
         view.backgroundColor = ColorCompatibility.systemBackground

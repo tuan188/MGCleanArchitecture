@@ -4,7 +4,7 @@ def pods
     # Clean Architecture
     pod 'MGArchitecture', '~> 2.0.1'
     pod 'MGAPIService', '~> 3.0.0'
-    pod 'MGLoadMore', '~> 3.0.0'
+    pod 'MGLoadMore', '~> 3.0.2'
     pod 'Dto'
     
     # Rx

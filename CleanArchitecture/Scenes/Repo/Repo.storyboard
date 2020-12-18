@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,6 +22,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ETs-ff-wWi"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ETs-ff-wWi" firstAttribute="trailing" secondItem="1Uc-9D-5Op" secondAttribute="trailing" id="BMc-Pb-Kcl"/>
@@ -28,7 +30,6 @@
                             <constraint firstItem="ETs-ff-wWi" firstAttribute="bottom" secondItem="1Uc-9D-5Op" secondAttribute="bottom" id="IwM-rz-NQT"/>
                             <constraint firstItem="1Uc-9D-5Op" firstAttribute="top" secondItem="ETs-ff-wWi" secondAttribute="top" id="lvg-j9-7jL"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ETs-ff-wWi"/>
                     </view>
                     <navigationItem key="navigationItem" title="Repo List" id="ZSb-GY-TXb"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -60,6 +61,7 @@
                                 <cells/>
                             </collectionView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="xZK-lB-dBH"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="eB0-Db-WEZ" firstAttribute="top" secondItem="xZK-lB-dBH" secondAttribute="top" id="G7i-kt-vhl"/>
@@ -67,7 +69,6 @@
                             <constraint firstItem="eB0-Db-WEZ" firstAttribute="leading" secondItem="xZK-lB-dBH" secondAttribute="leading" id="clt-cT-5TL"/>
                             <constraint firstItem="xZK-lB-dBH" firstAttribute="trailing" secondItem="eB0-Db-WEZ" secondAttribute="trailing" id="eQw-UN-aot"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="xZK-lB-dBH"/>
                     </view>
                     <navigationItem key="navigationItem" id="vpZ-79-hch"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -79,5 +80,47 @@
             </objects>
             <point key="canvasLocation" x="537" y="3815"/>
         </scene>
+        <!--Repo Carousel View Controller-->
+        <scene sceneID="zfJ-R3-BiB">
+            <objects>
+                <viewController storyboardIdentifier="RepoCarouselViewController" id="bRW-nl-jDv" customClass="RepoCarouselViewController" customModule="CleanArchitecture" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rID-04-SbJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cWZ-FJ-DKG" customClass="PagingCollectionView" customModule="MGLoadMore">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TQB-47-QKU">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="51g-MF-boO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="51g-MF-boO" firstAttribute="trailing" secondItem="cWZ-FJ-DKG" secondAttribute="trailing" id="602-vR-clj"/>
+                            <constraint firstItem="cWZ-FJ-DKG" firstAttribute="top" secondItem="51g-MF-boO" secondAttribute="top" id="7g5-Se-cMJ"/>
+                            <constraint firstItem="51g-MF-boO" firstAttribute="bottom" secondItem="cWZ-FJ-DKG" secondAttribute="bottom" id="bTt-sW-VsO"/>
+                            <constraint firstItem="cWZ-FJ-DKG" firstAttribute="leading" secondItem="51g-MF-boO" secondAttribute="leading" id="weq-BS-kBD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="cWZ-FJ-DKG" id="3Xt-gD-Z0A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GLD-Vg-j7R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1276" y="3815"/>
+        </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
