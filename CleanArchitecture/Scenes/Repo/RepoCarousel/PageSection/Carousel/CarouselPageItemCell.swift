@@ -9,11 +9,26 @@
 import UIKit
 import Reusable
 
-final class CarouselPageItemCell: UICollectionViewCell {
+final class CarouselPageItemCell: PageItemCell, CarouselCellType {
+    
+    @IBOutlet weak var collectionView: CarouselCollectionView!
+    
+    var collectionViewOffset: CGFloat {
+        get { return collectionView.contentOffset.x }
+        set { collectionView.contentOffset.x = newValue }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        configView()
+    }
+    
+    private func configView() {
+        collectionView.do {
+            $0.register(cellType: CarouselPageItemChildCell.self)
+            $0.decelerationRate = UIScrollView.DecelerationRate.fast
+            ($0.collectionViewLayout as? SnappingCollectionViewLayout)?.scrollDirection = .horizontal
+        }
     }
 
 }

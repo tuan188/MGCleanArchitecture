@@ -13,6 +13,12 @@ class SectionLayout {  // swiftlint:disable:this final_class
     var sectionType: SectionType
     var layout: LayoutOptions
     var cellType: PageItemCell.Type
+    var childLayout: LayoutOptions?
+    var childCellType: PageItemCell.Type?
+    
+    var hasChild: Bool {
+        return childLayout != nil && childCellType != nil
+    }
     
     init(sectionType: SectionType,
          layout: LayoutOptions,

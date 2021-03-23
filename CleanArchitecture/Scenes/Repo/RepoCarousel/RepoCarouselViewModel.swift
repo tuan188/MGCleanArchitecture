@@ -47,7 +47,7 @@ extension RepoCarouselViewModel: ViewModel {
                     return [
                         PageSectionViewModel(
                             index: 0,
-                            type: .card,
+                            type: .carousel,
                             items: (0...6).map { index -> PageItemViewModel in
                                 return PageItemViewModel(pageItem: repos[index])
                             }

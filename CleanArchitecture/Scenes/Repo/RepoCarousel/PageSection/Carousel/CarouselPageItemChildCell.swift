@@ -11,9 +11,17 @@ import Reusable
 
 final class CarouselPageItemChildCell: PageItemCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+    override func bindViewModel(_ viewModel: PageItemViewModel) {
+        super.bindViewModel(viewModel)
+        titleLabel.text = viewModel.title
+        imageView.sd_setImage(with: viewModel.imageURL, completed: nil)
+    }
 }

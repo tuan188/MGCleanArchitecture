@@ -26,11 +26,13 @@ final class RepoCarouselViewController: UIViewController, Bindable {
     var disposeBag = DisposeBag()
     
     private var sections = [PageSectionViewModel]()
+    private var storedOffsets = [Int: CGFloat]()
     
     static let sectionLayoutDictionary: [SectionType: SectionLayout] = {
         let sectionLayouts = [
             ListSectionLayout(),
-            CardSectionLayout()
+            CardSectionLayout(),
+            CarouselSectionLayout()
         ]
         
         var sectionLayoutDictionary = [SectionType: SectionLayout]()
@@ -113,43 +115,31 @@ final class RepoCarouselViewController: UIViewController, Bindable {
     }
 }
 
-// MARK: - Public methods
+// MARK: - Layout support methods
 extension RepoCarouselViewController {
-    func registerCells(_ layout: SectionLayout) {
-        collectionView.register(cellType: layout.cellType)
-        
-//        if let childCellType = sectionInfo.childCellType {
-//            collectionView.register(cellType: childCellType)
-//        }
-    }
-    
-//    func registerHeaderInfo(_ headerInfo: BaseHeaderInfo) {
-//        collectionView.register(supplementaryViewType: headerInfo.viewType,
-//                                ofKind: UICollectionView.elementKindSectionHeader)
-//    }
-    
-    func sectionLayout(for section: Int, collectionView: UICollectionView) -> SectionLayout {
+    private func sectionLayout(for section: Int, collectionView: UICollectionView) -> SectionLayout {
         let pageSection = self.pageSection(for: section, collectionView: collectionView)
         return sectionLayout(for: pageSection.type)
     }
     
-    func sectionLayout(for type: SectionType) -> SectionLayout {
+    private func sectionLayout(for type: SectionType) -> SectionLayout {
         return RepoCarouselViewController.sectionLayoutDictionary[type]!  // swiftlint:disable:this force_unwrapping
     }
     
-//    func headerInfo(for type: PageSectionHeaderType) -> BaseHeaderInfo {
-//        return RepoCarouselViewController.headerInfoDict[type]!  // swiftlint:disable:this force_unwrapping
-//    }
-    
-    func pageSection(for section: Int, collectionView: UICollectionView) -> PageSectionViewModel {
+    private func pageSection(for section: Int, collectionView: UICollectionView) -> PageSectionViewModel {
         let sectionIndex = collectionView == self.collectionView
             ? section
             : collectionView.tag
         return sections[sectionIndex]
     }
     
-    func layoutOptions(for section: Int, collectionView: UICollectionView) -> LayoutOptions {
+    private func layoutOptions(for section: Int, collectionView: UICollectionView) -> LayoutOptions {
         let layout = self.sectionLayout(for: section, collectionView: collectionView)
+        
+        if collectionView is CarouselCollectionView {
+            return layout.childLayout!  // swiftlint:disable:this force_unwrapping
+        }
+        
         return layout.layout
     }
     
@@ -157,52 +147,57 @@ extension RepoCarouselViewController {
                                at indexPath: IndexPath,
                                with sectionInfo: SectionLayout,
                                and layout: LayoutOptions) -> CGSize {
+        if collectionView === self.collectionView && sectionInfo.hasChild {
+            return CGSize(width: layout.itemAutoWidth,
+                          height: layout.itemHeight)
+        }
+        
         return layout.itemSize
-//        return layout.items
-//        if collectionView === self.collectionView {
-//            if sectionInfo.hasChild {
-//                return CGSize(width: layout.itemAutoWidth,
-//                              height: (sections[indexPath.section].items.first?.height ?? 0.0))
-//            }
-//            if sectionInfo.sectionType == .listSquare
-//                || sectionInfo.sectionType == .list
-//                || sectionInfo.sectionType == .listLandscape
-//                || sectionInfo.sectionType == .notice {
-//                return CGSize(width: layout.itemAutoWidth,
-//                              height: sections[indexPath.section].items[indexPath.row].height ?? 0.0)
-//            }
-//            return layout.itemSize
-//        } else {
-//            return CGSize(width: sections[collectionView.tag].items.first?.width ?? 0.0,
-//                          height: sections[collectionView.tag].items.first?.height ?? 0.0)
-//        }
     }
 }
 
 // MARK: - UICollectionViewDataSource
 extension RepoCarouselViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
+        if collectionView is CarouselCollectionView {
+            return 1
+        }
+        
         return sections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sections[section].items.count
+        let pageSection = self.pageSection(for: section, collectionView: collectionView)
+        let sectionLayout = self.sectionLayout(for: pageSection.type)
+        let isChildCollectionView = !(collectionView === self.collectionView)
+        
+        if isChildCollectionView {
+            return pageSection.items.count
+        }
+        
+        return sectionLayout.hasChild ? 1 : pageSection.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let pageSection = self.pageSection(for: indexPath.section, collectionView: collectionView)
         let sectionLayout = self.sectionLayout(for: pageSection.type)
+        let isChildCollectionView = !(collectionView === self.collectionView)
         let viewModel = sections[indexPath.section].items[indexPath.row]
         
-        return collectionView.dequeueReusableCell(for: indexPath, cellType: sectionLayout.cellType).then {
+        return collectionView.dequeueReusableCell(
+            for: indexPath,
+            cellType: isChildCollectionView
+                ? sectionLayout.childCellType!  // swiftlint:disable:this force_unwrapping
+                : sectionLayout.cellType
+        )
+        .then {
             $0.bindViewModel(viewModel)
         }
     }
-    
 }
 
-// MARK: - UICollectionViewDelegate
-extension RepoCarouselViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+// MARK: - UICollectionViewDelegateFlowLayout
+extension RepoCarouselViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -217,11 +212,6 @@ extension RepoCarouselViewController: UICollectionViewDelegate, UICollectionView
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         let layout = layoutOptions(for: section, collectionView: collectionView)
-//        if collectionView === self.collectionView {
-//            let sectionInset = getSectionInset(of: section)
-//            setSectionInset(sectionInset)
-//            return sectionInset
-//        }
         return layout.sectionInsets
     }
     
@@ -240,14 +230,30 @@ extension RepoCarouselViewController: UICollectionViewDelegate, UICollectionView
     }
 }
 
+// MARK: - UICollectionViewDelegate
+extension RepoCarouselViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        if let cell = cell as? CarouselCellType {
+            cell.setCollectionViewDataSourceDelegate(self, for: indexPath.section)
+            cell.collectionViewOffset = storedOffsets[indexPath.section] ?? 0
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        didEndDisplaying cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
+        if let cell = cell as? CarouselCellType {
+            storedOffsets[indexPath.section] = cell.collectionViewOffset
+        }
+    }
+}
+
 // MARK: - UICollectionViewDataSourcePrefetching
 extension RepoCarouselViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-//        let urls = indexPaths
-//            .compactMap { items[$0.row].imageURL }
-//
-//        print("Preheat", urls)
-//        SDWebImagePrefetcher.shared.prefetchURLs(urls)
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {

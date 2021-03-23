@@ -147,6 +147,9 @@
 		17800304213FBE6C00D20209 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17800303213FBE6C00D20209 /* UICollectionView+.swift */; };
 		178ABB6823628EA90076C200 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178ABB6723628EA90076C200 /* Storage.swift */; };
 		178ABB6A236290E10076C200 /* CacheStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178ABB69236290E10076C200 /* CacheStorage.swift */; };
+		178D57CB25FF084400AA1FB9 /* CarouselCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178D57CA25FF084400AA1FB9 /* CarouselCellType.swift */; };
+		178D57CF25FF087300AA1FB9 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178D57CE25FF087300AA1FB9 /* CarouselCollectionView.swift */; };
+		178D57D325FF0B9D00AA1FB9 /* SnappingCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178D57D225FF0B9D00AA1FB9 /* SnappingCollectionViewLayout.swift */; };
 		178F401221FAEB94009EE0F7 /* MainAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F401021FAEB93009EE0F7 /* MainAssembler.swift */; };
 		178F401321FAEB94009EE0F7 /* MainNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F401121FAEB93009EE0F7 /* MainNavigator.swift */; };
 		178F566521EF0F8D008D22AB /* LoginAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F566021EF0F8C008D22AB /* LoginAssembler.swift */; };
@@ -406,6 +409,9 @@
 		17800303213FBE6C00D20209 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		178ABB6723628EA90076C200 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		178ABB69236290E10076C200 /* CacheStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheStorage.swift; sourceTree = "<group>"; };
+		178D57CA25FF084400AA1FB9 /* CarouselCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCellType.swift; sourceTree = "<group>"; };
+		178D57CE25FF087300AA1FB9 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
+		178D57D225FF0B9D00AA1FB9 /* SnappingCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnappingCollectionViewLayout.swift; sourceTree = "<group>"; };
 		178F401021FAEB93009EE0F7 /* MainAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAssembler.swift; sourceTree = "<group>"; };
 		178F401121FAEB93009EE0F7 /* MainNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigator.swift; sourceTree = "<group>"; };
 		178F566021EF0F8C008D22AB /* LoginAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAssembler.swift; sourceTree = "<group>"; };
@@ -1148,6 +1154,9 @@
 				178F59472593163F000DC95D /* CarouselPageItemCell.xib */,
 				178F594C25931749000DC95D /* CarouselPageItemChildCell.swift */,
 				178F594D25931749000DC95D /* CarouselPageItemChildCell.xib */,
+				178D57CA25FF084400AA1FB9 /* CarouselCellType.swift */,
+				178D57CE25FF087300AA1FB9 /* CarouselCollectionView.swift */,
+				178D57D225FF0B9D00AA1FB9 /* SnappingCollectionViewLayout.swift */,
 			);
 			path = Carousel;
 			sourceTree = "<group>";
@@ -1711,6 +1720,7 @@
 				17D80D2920DF98D7009E68F0 /* EditProductViewModel.swift in Sources */,
 				172DC2A120C555A1009FC881 /* MenuCell.swift in Sources */,
 				17DCDA4320FB346600E2602A /* Assembler.swift in Sources */,
+				178D57CB25FF084400AA1FB9 /* CarouselCellType.swift in Sources */,
 				17EC215420DCE58800F793FE /* StaticProductDetailViewController.swift in Sources */,
 				177A12E221E45124007F1559 /* User.swift in Sources */,
 				178F566621EF0F8D008D22AB /* LoginViewController.swift in Sources */,
@@ -1759,6 +1769,7 @@
 				175549C125885BAE001A4B08 /* Storyboards+Product.swift in Sources */,
 				17368FCE20F33D6C00A4A3E9 /* RepoCollectionViewController.swift in Sources */,
 				174103742140FCE700267731 /* ProductItemViewModel.swift in Sources */,
+				178D57CF25FF087300AA1FB9 /* CarouselCollectionView.swift in Sources */,
 				178002FE213FB93E00D20209 /* EmptyDataView.swift in Sources */,
 				170A6BA220FB5753003ECCF2 /* SectionedProductsAssembler.swift in Sources */,
 				172DC2BC20C62CFD009FC881 /* Utils.swift in Sources */,
@@ -1781,6 +1792,7 @@
 				172E24E524F6362400E62C5E /* Validation+Comparable.swift in Sources */,
 				17800302213FBA8200D20209 /* UITableView+.swift in Sources */,
 				17EF7B2C21479A3A005DFB79 /* Notifications.swift in Sources */,
+				178D57D325FF0B9D00AA1FB9 /* SnappingCollectionViewLayout.swift in Sources */,
 				174103762140FF2300267731 /* ProductModel.swift in Sources */,
 				1745F21C24A5FF4400229824 /* ProductGateway.swift in Sources */,
 				178F401221FAEB94009EE0F7 /* MainAssembler.swift in Sources */,
