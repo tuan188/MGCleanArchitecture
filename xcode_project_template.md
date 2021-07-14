@@ -2,7 +2,7 @@
 
 ## Manual
 
-Download [Xcode template files](files/xcode_project_template.zip) and unzip to folder:
+Download [Xcode project template](files/xcode_project_template.zip) and unzip to folder:
 
 ```
 $ open ~/Library/Developer/Xcode/Templates/Project\ Templates 
