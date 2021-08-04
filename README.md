@@ -670,13 +670,9 @@ final class ReposViewModelTests: XCTestCase {
 
 <img width="600" alt="Xcode templates" src="images/xcode_project_template.png">
 
-* [Tutorial - Import Clean Architecture Templates for Xcode](xcode_templates.md)
+* [Tutorial - Import Clean Architecture File Templates for Xcode](xcode_templates.md)
 
 <img width="600" alt="Xcode templates" src="images/xcode_templates.png">
-
-* [Tutorial: Creating a skeleton project](skeleton.md)
-
-<img alt="Skeleton Project" src="images/skeleton.png">
 
 
 ## Code Generator
