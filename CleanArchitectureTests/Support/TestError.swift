@@ -12,9 +12,3 @@ import ValidatedPropertyKit
 struct TestError: Error {
 
 }
-
-//struct TestValidationError: ValidationError {
-//    var message: String {
-//        return "validation error"
-//    }
-//}

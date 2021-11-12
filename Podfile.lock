@@ -16,12 +16,6 @@ PODS:
     - ESPullToRefresh (~> 2.9)
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
-  - Mockingjay (2.0.1):
-    - Mockingjay/Core (= 2.0.1)
-    - Mockingjay/XCTest (= 2.0.1)
-  - Mockingjay/Core (2.0.1)
-  - Mockingjay/XCTest (2.0.1):
-    - Mockingjay/Core
   - ObjectMapper (4.2.0)
   - Reusable (4.1.1):
     - Reusable/Storyboard (= 4.1.1)
@@ -57,7 +51,6 @@ DEPENDENCIES:
   - MGAPIService (~> 3.0.0)
   - MGArchitecture (~> 2.0.1)
   - MGLoadMore (~> 3.0.2)
-  - Mockingjay (from `https://github.com/anhnc55/Mockingjay.git`, branch `swift_5`)
   - Reusable (~> 4.1)
   - RxTest (~> 5.1)
   - RxViewController
@@ -86,16 +79,6 @@ SPEC REPOS:
     - Then
     - ValidatedPropertyKit
 
-EXTERNAL SOURCES:
-  Mockingjay:
-    :branch: swift_5
-    :git: https://github.com/anhnc55/Mockingjay.git
-
-CHECKOUT OPTIONS:
-  Mockingjay:
-    :commit: 118547353bbeff72e0348e8a2f45e5a19b4d8096
-    :git: https://github.com/anhnc55/Mockingjay.git
-
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Dto: a17939b7ab00e836040a531a42f517ce7fd527aa
@@ -105,7 +88,6 @@ SPEC CHECKSUMS:
   MGAPIService: 83684387a742af98b944f5badfa566cc2e146318
   MGArchitecture: 7d586fc5fe15c3fa86dc06b0e6a06d7aafbf8051
   MGLoadMore: c43a39da03c2ac7697f6c3fa1812681f7f751f25
-  Mockingjay: 0660815ee4907b2f0c1ac988126061bb3e19b7aa
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
   RxAlamofire: 0531dddf378c84270e97e897333678f1cfaec3ba
@@ -118,6 +100,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
 
-PODFILE CHECKSUM: 403a84c95cad407522517b559140f670581bbcfd
+PODFILE CHECKSUM: 6153a39332ca3ebd03683958f8102f3694f6d02d
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.11.2

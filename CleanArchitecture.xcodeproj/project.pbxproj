@@ -247,7 +247,6 @@
 		17F4CAC0214B8E05009212A4 /* DynamicEditProductViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CABC214B8E05009212A4 /* DynamicEditProductViewModelTests.swift */; };
 		17F4CAC2214BB3E4009212A4 /* DynamicEditProductCellsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F4CAC1214BB3E4009212A4 /* DynamicEditProductCellsTests.swift */; };
 		1B885D2522A9F14E002F4F10 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B885D2422A9F14E002F4F10 /* ServiceHelper.swift */; };
-		1B885D2822A9F247002F4F10 /* API+RepoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B885D2722A9F247002F4F10 /* API+RepoTest.swift */; };
 		1B885D2A22A9F263002F4F10 /* repo.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B885D2922A9F263002F4F10 /* repo.json */; };
 		42D2A9A6D1821A169E7783C3 /* Pods_CleanArchitectureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0C3F3F853AF2EDA6A0D1566 /* Pods_CleanArchitectureTests.framework */; };
 		DF70396247CC49A48029CA12 /* Pods_CleanArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C42628C46829552A4994964B /* Pods_CleanArchitecture.framework */; };
@@ -1544,13 +1543,11 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CleanArchitectureTests/Pods-CleanArchitectureTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Mockingjay/Mockingjay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mockingjay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1845,7 +1842,6 @@
 				176C2DA524A9C0F8008DB836 /* ProductGatewayMock.swift in Sources */,
 				172DC29420C53E5D009FC881 /* AppViewModelTests.swift in Sources */,
 				17CDA62721EC239B0001FE4A /* UserCellTests.swift in Sources */,
-				1B885D2822A9F247002F4F10 /* API+RepoTest.swift in Sources */,
 				1706D2B420E213D4001798FB /* EditProductUseCaseMock.swift in Sources */,
 				178F567221EF0FB2008D22AB /* LoginViewControllerTests.swift in Sources */,
 				178F567021EF0FB2008D22AB /* LoginNavigatorMock.swift in Sources */,
@@ -2023,7 +2019,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -2037,7 +2033,7 @@
 				INFOPLIST_FILE = CleanArchitecture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 5.5.0;
+				MARKETING_VERSION = 5.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.CleanArchitecture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CleanArchitecture/Bridging-Header.h";
@@ -2053,7 +2049,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -2067,7 +2063,7 @@
 				INFOPLIST_FILE = CleanArchitecture/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 5.5.0;
+				MARKETING_VERSION = 5.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.CleanArchitecture;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CleanArchitecture/Bridging-Header.h";

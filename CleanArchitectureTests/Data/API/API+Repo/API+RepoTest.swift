@@ -7,7 +7,7 @@
 //
 
 @testable import CleanArchitecture
-import Mockingjay
+// import Mockingjay
 import XCTest
 import RxTest
 import RxSwift

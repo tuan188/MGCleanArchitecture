@@ -51,7 +51,7 @@ extension CoreDataRepository where
             if limit > 0 {
                 request.fetchLimit = limit
             }
-            let items = EntityType.mr_executeFetchRequest(request)
+            let items = EntityType.mr_execute(request)
                 .flatMap { $0 as? [EntityType] }
                 .flatMap { entities -> [ModelType] in
                     return entities.compactMap { Self.item(from: $0) }

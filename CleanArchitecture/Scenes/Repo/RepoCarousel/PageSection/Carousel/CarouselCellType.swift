@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CarouselCellType: class {
+protocol CarouselCellType: AnyObject {
     var collectionViewOffset: CGFloat { get set }
     var collectionView: CarouselCollectionView! { get }
 }

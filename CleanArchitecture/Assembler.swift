@@ -6,7 +6,7 @@
 //  Copyright © 2018 Sun Asterisk. All rights reserved.
 //
 
-protocol Assembler: class,
+protocol Assembler: AnyObject,
                     RepoCarouselAssembler,
                     GatewaysAssembler,
                     MainAssembler,
