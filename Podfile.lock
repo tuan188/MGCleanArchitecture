@@ -9,7 +9,7 @@ PODS:
     - ObjectMapper (~> 4.2)
     - RxAlamofire (~> 5.6)
     - RxSwift (~> 5.1)
-  - MGArchitecture (2.0.1):
+  - MGArchitecture (2.0.2):
     - RxCocoa (~> 5.1)
     - RxSwift (~> 5.1)
   - MGLoadMore (3.0.2):
@@ -49,7 +49,7 @@ DEPENDENCIES:
   - MagicalRecord (= 2.3.0)
   - MBProgressHUD (~> 1.2)
   - MGAPIService (~> 3.0.0)
-  - MGArchitecture (~> 2.0.1)
+  - MGArchitecture (~> 2.0.2)
   - MGLoadMore (~> 3.0.2)
   - Reusable (~> 4.1)
   - RxTest (~> 5.1)
@@ -86,7 +86,7 @@ SPEC CHECKSUMS:
   MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MGAPIService: 83684387a742af98b944f5badfa566cc2e146318
-  MGArchitecture: 7d586fc5fe15c3fa86dc06b0e6a06d7aafbf8051
+  MGArchitecture: 122eacece9de8cbb3576af1329aa7c76118e47b7
   MGLoadMore: c43a39da03c2ac7697f6c3fa1812681f7f751f25
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
@@ -100,6 +100,6 @@ SPEC CHECKSUMS:
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   ValidatedPropertyKit: 599b32854be66b3eea55c0ad7aa22c52cba4b997
 
-PODFILE CHECKSUM: 6153a39332ca3ebd03683958f8102f3694f6d02d
+PODFILE CHECKSUM: 3d83a03fe74f3a7dd51d0c717924a147d277e008
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
