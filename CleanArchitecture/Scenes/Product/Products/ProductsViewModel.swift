@@ -9,6 +9,7 @@
 import RxSwift
 import RxCocoa
 import MGArchitecture
+import UIKit
 
 struct ProductsViewModel {
     let navigator: ProductsNavigatorType

@@ -9,6 +9,7 @@
 import RxSwift
 import RxCocoa
 import MGArchitecture
+import UIKit
 
 struct SectionedProductsViewModel {
     let navigator: SectionedProductsNavigatorType

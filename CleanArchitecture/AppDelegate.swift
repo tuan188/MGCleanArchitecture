@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MagicalRecord
+//import MagicalRecord
 import RxSwift
 import RxCocoa
 import SDWebImage
@@ -41,8 +41,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupCoreData() {
-        MagicalRecord.setupAutoMigratingCoreDataStack()
-        MagicalRecord.setLoggingLevel(MagicalRecordLoggingLevel.error)
+//        MagicalRecord.setupAutoMigratingCoreDataStack()
+//        MagicalRecord.setLoggingLevel(MagicalRecordLoggingLevel.error)
     }
 
     private func bindViewModel(window: UIWindow) {
@@ -52,7 +52,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        MagicalRecord.cleanUp()
+//        MagicalRecord.cleanUp()
     }
 }
 

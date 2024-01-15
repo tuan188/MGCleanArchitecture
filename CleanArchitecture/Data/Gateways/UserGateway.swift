@@ -14,6 +14,12 @@ protocol UserGatewayType {
     func add(dto: AddUserDto) -> Observable<Void>
 }
 
-struct UserGateway: UserGatewayType, UserRepository {
-   
+struct UserGateway: UserGatewayType {
+    func getUsers() -> Observable<[User]> {
+        .empty()
+    }
+    
+    func add(dto: AddUserDto) -> Observable<Void> {
+        .empty()
+    }
 }

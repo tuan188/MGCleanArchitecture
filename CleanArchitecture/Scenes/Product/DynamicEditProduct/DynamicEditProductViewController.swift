@@ -64,7 +64,7 @@ final class DynamicEditProductViewController: UIViewController, Bindable {
         let loadTrigger = Driver.merge(
             endEditTrigger.map { DynamicEditProductViewModel.TriggerType.endEditing }
                 .asDriverOnErrorJustComplete(),
-            rx.viewWillAppear
+            rx.sentMessage(#selector(viewWillAppear(_:)))
                 .take(1)
                 .map { _ in DynamicEditProductViewModel.TriggerType.load }
                 .asDriverOnErrorJustComplete()

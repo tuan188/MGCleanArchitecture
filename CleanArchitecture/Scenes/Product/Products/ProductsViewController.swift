@@ -24,6 +24,7 @@ final class ProductsViewController: UIViewController, Bindable {
     var viewModel: ProductsViewModel!
     var disposeBag = DisposeBag()
     
+    private var products = [ProductItemViewModel]()
     private var editProductTrigger = PublishSubject<IndexPath>()
     private var deleteProductTrigger = PublishSubject<IndexPath>()
     
@@ -44,6 +45,7 @@ final class ProductsViewController: UIViewController, Bindable {
         tableView.do {
             $0.register(cellType: ProductCell.self)
             $0.delegate = self
+            $0.dataSource = self
             $0.estimatedRowHeight = 550
             $0.rowHeight = UITableView.automaticDimension
             $0.refreshHeader = RefreshHeaderAnimator(frame: .zero)
@@ -64,24 +66,14 @@ final class ProductsViewController: UIViewController, Bindable {
         
         let output = viewModel?.transform(input, disposeBag: disposeBag)
         
+        
+        
         output?.$productList
             .asDriver()
-            .drive(tableView.rx.items) { [unowned self] tableView, index, product in
-                return tableView.dequeueReusableCell(
-                    for: IndexPath(row: index, section: 0),
-                    cellType: ProductCell.self)
-                    .then {
-                        $0.bindViewModel(product)
-                        
-                        $0.editProductAction = {
-                            self.editProductTrigger.onNext(IndexPath(row: index, section: 0))
-                        }
-                        
-                        $0.deleteProductAction = {
-                            self.deleteProductTrigger.onNext(IndexPath(row: index, section: 0))
-                        }
-                    }
-            }
+            .drive(onNext: { [unowned self] products in
+                self.products = products
+                self.tableView.reloadData()
+            })
             .disposed(by: disposeBag)
         
         output?.$error
@@ -111,6 +103,29 @@ final class ProductsViewController: UIViewController, Bindable {
             .disposed(by: disposeBag)
     }
 
+}
+
+// MARK: - UITableViewDataSource
+extension ProductsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return products.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let product = products[indexPath.row]
+        
+        return tableView.dequeueReusableCell(for: indexPath, cellType: ProductCell.self).with { [weak self] in
+            $0.bindViewModel(product)
+            
+            $0.editProductAction = {
+                self?.editProductTrigger.onNext(indexPath)
+            }
+            
+            $0.deleteProductAction = {
+                self?.deleteProductTrigger.onNext(indexPath)
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate

@@ -8,6 +8,7 @@
 
 import Dto
 import ValidatedPropertyKit
+import UIKit
 
 struct ValidationResultViewModel {
     let validationResult: ValidationResult

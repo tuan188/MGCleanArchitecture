@@ -9,6 +9,7 @@
 import MGArchitecture
 import RxSwift
 import RxCocoa
+import UIKit
 
 struct RepoCarouselViewModel {
     let navigator: RepoCarouselNavigatorType

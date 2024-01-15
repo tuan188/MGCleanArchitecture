@@ -9,7 +9,6 @@
 import UIKit
 import Reusable
 import Dto
-import RxViewController
 import MGArchitecture
 import RxSwift
 import RxCocoa
@@ -44,7 +43,10 @@ final class EditProductViewController: UITableViewController, Bindable {
 
     func bindViewModel() {
         let input = EditProductViewModel.Input(
-            load: rx.viewWillAppear.take(1).mapToVoid().asDriverOnErrorJustComplete(),
+            load: rx.sentMessage(#selector(viewWillAppear(_:)))
+                .take(1)
+                .mapToVoid()
+                .asDriverOnErrorJustComplete(),
             name: nameTextField.rx.text.orEmpty.asDriver(),
             price: priceTextField.rx.text.orEmpty.asDriver(),
             update: updateButton.rx.tap
